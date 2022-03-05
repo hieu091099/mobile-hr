@@ -1,53 +1,47 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import * as LocalAuthentication from 'expo-local-authentication';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import LoginScreen from './screen/Login/LoginScreen';
 
 export default function App() {
-  const [text, setText] = useState({
-    email: "",
-    password: ""
-  });
+  const Stack = createNativeStackNavigator();
+
+
+
+  useEffect(() => {
+    // checkDeviceForHardware();
+    // checkForFingerprints();
+  }, [])
+
+  // const checkDeviceForHardware = async () => {
+  //   let compatible = await LocalAuthentication.hasHardwareAsync();
+  //   isCompatible(compatible);
+  // }
+
+  // const checkForFingerprints = async () => {
+  //   let fingerprints = await LocalAuthentication.isEnrolledAsync();
+  //   setFingerPrints(fingerprints);
+  // };
+
+
+
   return (
-    <View style={{ display: 'flex', alignItems: 'center' }}>
-      <View style={styles.logo}>
-        <Image source={require('./screen/image/LAI_logo.png')} />
-      </View>
-      <TextInput
-        style={styles.inputlogin}
-        label="Email"
-        value={text.email}
-        onChangeText={text => setText({ ...text, email: text })}
-      />
-      <TextInput
-        style={styles.inputlogin}
-        label="Password"
-        value={text.password}
-        onChangeText={text => setText({ ...text, password: text })}
-      />
-      <Button style={styles.inputlogin} icon="login" mode="contained" onPress={() => console.log('Pressed')}>
-        Đăng Nhập
-      </Button>
-      <View style={{ width: 100, height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <TouchableOpacity onPress={() => {
-          console.log('press ');
-        }}>
-          <Ionicons name="ios-finger-print-outline" size={50} />
-        </TouchableOpacity>
-      </View>
-    </View>
+    <NavigationContainer>
+      <StatusBar hidden />
+      <Stack.Navigator screenOptions={{
+        headerShown: false,
+        animation: 'slide_from_right'
+      }}>
+        <Stack.Screen name="Login" component={LoginScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+
   );
 }
 
-const styles = StyleSheet.create({
-  logo: {
-    height: '40%',
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  inputlogin: {
-    marginVertical: 10,
-    width: '90%'
-  }
-});

@@ -7,7 +7,7 @@ import * as LocalAuthentication from 'expo-local-authentication';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from './screen/Login/LoginScreen';
+import LoginScreen from './screens/Login/LoginScreen';
 
 export default function App() {
   const Stack = createNativeStackNavigator();

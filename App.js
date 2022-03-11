@@ -5,11 +5,14 @@ import { Button, TextInput } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as LocalAuthentication from 'expo-local-authentication';
 
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from './screens/Login/LoginScreen';
+import LoginScreen from './screen/Login/LoginScreen';
+import HomeScreen from './screen/Home/HomeScreen';
 
 export default function App() {
+
   const Stack = createNativeStackNavigator();
 
 
@@ -39,6 +42,8 @@ export default function App() {
         animation: 'slide_from_right'
       }}>
         <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
 

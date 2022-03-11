@@ -1,64 +1,100 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions, ImageBackground } from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions, ImageBackground, TextInput } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import * as LocalAuthentication from 'expo-local-authentication';
+import { useFonts } from 'expo-font';
 
 export default function LoginScreen() {
+    const [compatible, isCompatible] = useState(false);
+    const [fingerPrints, setFingerPrints] = useState(false);
+
+
+    useEffect(() => {
+        checkDeviceForHardware();
+        checkForFingerprints();
+    }, [])
+
+    const checkDeviceForHardware = async () => {
+        let compatible = await LocalAuthentication.hasHardwareAsync();
+        isCompatible(compatible);
+    }
+
+    const checkForFingerprints = async () => {
+        let fingerprints = await LocalAuthentication.isEnrolledAsync();
+        setFingerPrints(fingerprints);
+    };
+    const [loaded] = useFonts({
+        Montserrat: require('../../assets/fonts/Sansita.ttf'),
+    });
     const scanFingerprint = async () => {
         await LocalAuthentication.authenticateAsync().then(res => {
-            alert('vô home');
+            console.log(res.success);
+            // alert('vô home');
         })
     };
-    // const [compatible, isCompatible] = useState(false);
-    // const [fingerPrints, setFingerPrints] = useState(false);
     const [text, setText] = useState({
         email: "",
         password: ""
     });
     return (
-        <ImageBackground source={{ uri: 'https://images.pexels.com/photos/6694577/pexels-photo-6694577.jpeg' }} resizeMode="cover" style={{ width: '100%', height: '100%' }} blurRadius={3}>
-            <View style={{ display: 'flex', alignItems: 'center' }}>
-
-                <View style={styles.logo}>
-                    <Image source={require('../image/LAI_logo.png')} />
-                </View>
-                <TextInput
-                    style={styles.inputlogin}
-                    label="Email"
-                    value={text.email}
-                    onChangeText={text => setText({ ...text, email: text })}
-                />
-                <TextInput
-                    style={styles.inputlogin}
-                    label="Password"
-                    value={text.password}
-                    onChangeText={text => setText({ ...text, password: text })}
-                />
-                <Button style={styles.inputlogin} icon="login" mode="contained" onPress={() => console.log('Pressed')}>
-                    Đăng Nhập
-                </Button>
-                <View style={{ width: 100, height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <TouchableOpacity onPress={() => {
-                        scanFingerprint()
-                    }}>
-                        <Ionicons name="ios-finger-print-outline" size={50} />
-                    </TouchableOpacity>
-                </View>
-
+        <ImageBackground source={require('../../assets/images/bg_login2.png')} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
+            <View style={styles.tieude}>
+                <Text style={[styles.td, { fontFamily: 'Montserrat' }]}>Chào mừng !</Text>
+                <Text style={[styles.td, { fontFamily: 'Montserrat' }]}>Nam đã trở lại</Text>
             </View>
-        </ImageBackground>
+            <View style={styles.form}>
+                <TextInput placeholder='Mã nhân viên' style={styles.inputlogin} />
+                <TextInput placeholder='Mật khẩu' style={[styles.inputlogin, { marginTop: 20 }]} />
+                <TouchableOpacity style={styles.btndn}><Text style={styles.textbtndn}>Đăng nhập</Text></TouchableOpacity>
+            </View>
+
+            {compatible && fingerPrints && <View style={[styles.form, { marginTop: 30, justifyContent: 'center', alignItems: 'center' }]}><Ionicons name='finger-print-outline' size={50} color='#0D4A85' onPress={() => {
+                scanFingerprint();
+            }} /></View>}
+        </ImageBackground >
     )
 }
 
 const styles = StyleSheet.create({
-    logo: {
-        height: '35%',
-        display: 'flex',
-        justifyContent: 'center',
-        marginTop: 50
+    td: {
+        color: '#2D5881',
+        fontSize: 35,
     },
-    inputlogin: {
-        marginVertical: 10,
-        width: '90%'
+    tieude: {
+        width: '100%',
+        paddingHorizontal: 20,
+        height: 200,
+        justifyContent: 'flex-end'
+    }, form: {
+        width: '100%',
+        paddingHorizontal: 20,
+        marginTop: 50
+    }, inputlogin: {
+        width: '100%',
+        height: 50,
+        backgroundColor: 'white',
+        borderRadius: 12,
+        paddingHorizontal: 20,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.27,
+        shadowRadius: 4.65,
+
+        elevation: 6,
+    }, btndn: {
+        marginTop: 30,
+        width: '100%',
+        height: 55,
+        backgroundColor: '#0D4A85',
+        borderRadius: 12,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }, textbtndn: {
+        fontSize: 18,
+        color: 'white',
+        fontWeight: 'bold'
     }
 });

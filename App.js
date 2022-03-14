@@ -10,6 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screen/Login/LoginScreen';
 import HomeScreen from './screen/Home/HomeScreen';
+import TablePaper from './screen/Home/TablePaper';
 
 export default function App() {
 
@@ -43,6 +44,7 @@ export default function App() {
       }}>
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Home" component={TablePaper} />
 
       </Stack.Navigator>
     </NavigationContainer>

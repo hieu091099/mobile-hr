@@ -3,12 +3,15 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions, ImageBackg
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as LocalAuthentication from 'expo-local-authentication';
 import { useFonts } from 'expo-font';
-import { login } from '../../connapi';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAction } from '../../redux/actions/UserAction';
 
 export default function LoginScreen() {
     const [compatible, isCompatible] = useState(false);
     const [fingerPrints, setFingerPrints] = useState(false);
-
+    const { user } = useSelector(state => state.UserReducer);
+    console.log(user);
+    const dispatch = useDispatch();
     const [loaded] = useFonts({
         Montserrat: require('../../assets/fonts/Sansita.ttf'),
     });
@@ -33,10 +36,14 @@ export default function LoginScreen() {
             // alert('vô home');
         })
     };
-    const [text, setText] = useState({
-        idnv: "",
+    const [userLogin, setUserLogin] = useState({
+        userId: "",
         password: ""
     });
+    const login = () => {
+        let action = loginAction(userLogin);
+        dispatch(action);
+    }
     return (
         <ImageBackground source={require('../../assets/images/bg_login2.png')} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
             <View style={styles.tieude}>
@@ -45,21 +52,12 @@ export default function LoginScreen() {
             </View>
             <View style={styles.form}>
                 <TextInput placeholder='Mã nhân viên' style={styles.inputlogin} onChangeText={(val) => {
-                    setText({ ...text, "idnv": val });
+                    setUserLogin({ ...userLogin, "userId": val });
                 }} />
-                <TextInput placeholder='Mật khẩu' style={[styles.inputlogin, { marginTop: 20 }]} onChangeText={(val) => {
-                    setText({ ...text, "password": val });
+                <TextInput secureTextEntry={true} placeholder='Mật khẩu' style={[styles.inputlogin, { marginTop: 20 }]} onChangeText={(val) => {
+                    setUserLogin({ ...userLogin, "password": val });
                 }} />
-                <TouchableOpacity style={styles.btndn} onPress={() => {
-                    login(text.idnv, text.password).then((val) => {
-                        console.log(val);
-                        if (!val.authenticated) {
-                            alert("o lai");
-                        } else {
-                            alert("vô home");
-                        }
-                    });
-                }}><Text style={styles.textbtndn}>Đăng nhập</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btndn} onPress={() => login()}><Text style={styles.textbtndn}>Đăng nhập</Text></TouchableOpacity>
             </View>
 
             {compatible && fingerPrints && <View style={[styles.form, { marginTop: 30, justifyContent: 'center', alignItems: 'center' }]}><Ionicons name='finger-print-outline' size={50} color='#0D4A85' onPress={() => {

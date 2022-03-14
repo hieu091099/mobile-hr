@@ -6,16 +6,19 @@ import { useFonts } from 'expo-font';
 import { login } from '../../connapi';
 
 export default function LoginScreen() {
+
+
     const [compatible, isCompatible] = useState(false);
     const [fingerPrints, setFingerPrints] = useState(false);
 
-    const [loaded] = useFonts({
-        Montserrat: require('../../assets/fonts/Sansita.ttf'),
-    });
+
     useEffect(() => {
         checkDeviceForHardware();
         checkForFingerprints();
     }, [])
+    const [loaded] = useFonts({
+        Montserrat: require('../../assets/fonts/Sansita.ttf'),
+    });
 
     const checkDeviceForHardware = async () => {
         let compatible = await LocalAuthentication.hasHardwareAsync();

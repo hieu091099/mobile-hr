@@ -13,6 +13,16 @@ export const UserReducer = (state = stateDefault, action) => {
             state.isLoggedIn = true;
             return { ...state };
         }
+        case 'LOGOUT': {
+            state.user = [];
+            state.userToken = '';
+            state.isLoggedIn = false;
+            return { ...state };
+        }
+        case 'LOGIN_FINGER': {
+            state.isLoggedIn = true;
+            return { ...state };
+        }
         default: return { ...state }
     }
 }

@@ -5,16 +5,28 @@ import * as LocalAuthentication from 'expo-local-authentication';
 import { useFonts } from 'expo-font';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../../redux/actions/UserAction';
+import { useNavigation } from '@react-navigation/native';
+import { getToken } from '../../config';
 
 export default function LoginScreen() {
     const [compatible, isCompatible] = useState(false);
     const [fingerPrints, setFingerPrints] = useState(false);
-    const { user } = useSelector(state => state.UserReducer);
-    console.log(user);
+    const [userIdFromDevice, setUserIdFromDevice] = useState("");
+    const { user, isLoggedIn } = useSelector(state => state.UserReducer);
+    console.log('isLoggedIn', isLoggedIn);
+    const navigation = useNavigation();
     const dispatch = useDispatch();
-    const [loaded] = useFonts({
-        Montserrat: require('../../assets/fonts/Sansita.ttf'),
-    });
+    let userId = '';
+    // getToken('user').then(res => {
+    //     res = JSON.parse(res);
+    //     userId = res.userId;
+    //     console.log(userId);
+    // })
+    // console.log({ userId });
+
+    // const [loaded] = useFonts({
+    //     Montserrat: require('../../assets/fonts/Sansita.ttf'),
+    // });
     useEffect(() => {
         checkDeviceForHardware();
         checkForFingerprints();
@@ -32,8 +44,14 @@ export default function LoginScreen() {
 
     const scanFingerprint = async () => {
         await LocalAuthentication.authenticateAsync().then(res => {
-            console.log(res.success);
-            // alert('vô home');
+            if (res.success) {
+                dispatch({
+                    type: 'LOGIN_FINGER'
+                })
+                navigation.navigate('Home');
+                // console.log('okokok');
+
+            }
         })
     };
     const [userLogin, setUserLogin] = useState({
@@ -41,14 +59,14 @@ export default function LoginScreen() {
         password: ""
     });
     const login = () => {
-        let action = loginAction(userLogin);
+        let action = loginAction(userLogin, navigation);
         dispatch(action);
     }
     return (
         <ImageBackground source={require('../../assets/images/bg_login2.png')} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
             <View style={styles.tieude}>
-                <Text style={[styles.td, { fontFamily: 'Montserrat' }]}>Chào mừng !</Text>
-                <Text style={[styles.td, { fontFamily: 'Montserrat' }]}>Nam đã trở lại</Text>
+                <Text style={[styles.td]}>Chào mừng !</Text>
+                <Text style={[styles.td]}>{userId ? userId : 'Bạn'} đã trở lại</Text>
             </View>
             <View style={styles.form}>
                 <TextInput placeholder='Mã nhân viên' style={styles.inputlogin} onChangeText={(val) => {
@@ -110,3 +128,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     }
 });
+
+
+/** come inside of my heart if you're looking for answer, looking the star, go a little bit faster */
+/** looking the star, go a little bit faster, come inside of my heart, come inside of my heart, go a little bit faster */
+
+/** come inside of my heart if you looking for answer */
+/** bằng lòng đi người yêu nhỏ bé, đứng trông nhau, điệu lý qua cầu */

@@ -13,15 +13,13 @@ export default function LoginScreen() {
     const [fingerPrints, setFingerPrints] = useState(false);
     const [userIdFromDevice, setUserIdFromDevice] = useState("");
     const { user, isLoggedIn } = useSelector(state => state.UserReducer);
-    console.log('isLoggedIn', isLoggedIn);
     const navigation = useNavigation();
     const dispatch = useDispatch();
-    let userId = '';
-    // getToken('user').then(res => {
-    //     res = JSON.parse(res);
-    //     userId = res.userId;
-    //     console.log(userId);
-    // })
+    getToken('user').then(res => {
+        res = JSON.parse(res);
+        setUserIdFromDevice(res.userId)
+
+    })
     // console.log({ userId });
 
     // const [loaded] = useFonts({
@@ -60,18 +58,21 @@ export default function LoginScreen() {
     });
     const login = () => {
         let action = loginAction(userLogin, navigation);
+        if (userIdFromDevice != '') {
+            action = loginAction({ userId: userIdFromDevice, password: userLogin.password }, navigation)
+        }
         dispatch(action);
     }
     return (
         <ImageBackground source={require('../../assets/images/bg_login2.png')} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
             <View style={styles.tieude}>
                 <Text style={[styles.td]}>Chào mừng !</Text>
-                <Text style={[styles.td]}>{userId ? userId : 'Bạn'} đã trở lại</Text>
+                <Text style={[styles.td]}>{userIdFromDevice ? userIdFromDevice : 'Bạn'} đã trở lại</Text>
             </View>
             <View style={styles.form}>
-                <TextInput placeholder='Mã nhân viên' style={styles.inputlogin} onChangeText={(val) => {
+                {userIdFromDevice ? <Text></Text> : <><TextInput placeholder='Mã nhân viên' style={styles.inputlogin} onChangeText={(val) => {
                     setUserLogin({ ...userLogin, "userId": val });
-                }} />
+                }} /></>}
                 <TextInput secureTextEntry={true} placeholder='Mật khẩu' style={[styles.inputlogin, { marginTop: 20 }]} onChangeText={(val) => {
                     setUserLogin({ ...userLogin, "password": val });
                 }} />

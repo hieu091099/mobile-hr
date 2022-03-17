@@ -70,16 +70,14 @@ export default function LoginScreen() {
                 <Text style={[styles.td]}>{userIdFromDevice ? userIdFromDevice : 'Bạn'} đã trở lại</Text>
             </View>
             <View style={styles.form}>
-                {userIdFromDevice ? <Text></Text> : <><TextInput placeholder='Mã nhân viên' style={styles.inputlogin} onChangeText={(val) => {
-                    setUserLogin({ ...userLogin, "userId": val });
-                }} /></>}
+                {userIdFromDevice == '' && <TextInput placeholder='Mã nhân viên' style={styles.inputlogin} onChangeText={(val) => { setUserLogin({ ...userLogin, "userId": val }); }} />}
                 <TextInput secureTextEntry={true} placeholder='Mật khẩu' style={[styles.inputlogin, { marginTop: 20 }]} onChangeText={(val) => {
                     setUserLogin({ ...userLogin, "password": val });
                 }} />
                 <TouchableOpacity style={styles.btndn} onPress={() => login()}><Text style={styles.textbtndn}>Đăng nhập</Text></TouchableOpacity>
             </View>
 
-            {compatible && fingerPrints && <View style={[styles.form, { marginTop: 30, justifyContent: 'center', alignItems: 'center' }]}><Ionicons name='finger-print-outline' size={50} color='#0D4A85' onPress={() => {
+            {userIdFromDevice != '' && compatible && fingerPrints && <View style={[styles.form, { marginTop: 30, justifyContent: 'center', alignItems: 'center' }]}><Ionicons name='finger-print-outline' size={50} color='#0D4A85' onPress={() => {
                 scanFingerprint();
             }} /></View>}
         </ImageBackground >

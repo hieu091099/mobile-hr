@@ -12,6 +12,7 @@ import LoginScreen from './screen/Login/LoginScreen';
 import HomeScreen from './screen/Home/HomeScreen';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
+import Salary from './screen/Salary/Salary';
 
 
 export default function App() {
@@ -45,8 +46,11 @@ export default function App() {
           headerShown: false,
           animation: 'slide_from_right'
         }}>
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Salary" component={Salary} />
+
           <Stack.Screen name="Home" component={HomeScreen} />
+
+          <Stack.Screen name="Login" component={LoginScreen} />
 
 
 

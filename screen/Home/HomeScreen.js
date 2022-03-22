@@ -31,7 +31,7 @@ export default function HomeScreen() {
         console.log({ res });
     })
     return (
-        <View style={{ backgroundColor: '#F2F6F9' }}>
+        <View style={{ backgroundColor: 'white' }}>
             <View style={styles.header}>
                 <Text style={{ color: '#B8BBC7' }}>Chào {User?.fullName} !</Text>
                 <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 5, color: '#2D5881' }}>LACTY COMPANY</Text>
@@ -114,18 +114,18 @@ export default function HomeScreen() {
                     </View>
                 </View>
             </ScrollView>
-            <Text style={{ paddingHorizontal: 20, marginVertical: 20, fontSize: 18, fontWeight: 'bold' }}>Cập nhật mới nhất</Text>
-            <ScrollView style={{ height: 420 }}>
+            <Text style={{ paddingHorizontal: 20, marginVertical: 20, fontSize: 22, fontWeight: 'bold' }}>Cập nhật mới nhất</Text>
+            <ScrollView style={{ height: 200, padding: 20 }}>
                 <View style={{ paddingHorizontal: 10 }}>
                     <View style={styles.tb}>
                         <Text style={styles.typetb}>Thông báo</Text>
                         <Text style={styles.titletb}>Thực đơn từ 17/03/2022 - 19/03/2022</Text>
                     </View>
-                    <View style={styles.tb}>
+                    <View style={[styles.tb, { backgroundColor: '#EFFCEF' }]}>
                         <Text style={styles.typetb}>Khảo sát</Text>
                         <Text style={styles.titletb}>Lấy ý kiến về việc abcdxyz</Text>
                     </View>
-                    <View style={styles.tb}>
+                    <View style={[styles.tb, { backgroundColor: '#FFEFE2' }]}>
                         <Text style={styles.typetb}>Thông báo</Text>
                         <Text style={styles.titletb}>Thực đơn từ 17/03/2022 - 19/03/2022</Text>
                     </View>
@@ -133,11 +133,11 @@ export default function HomeScreen() {
                         <Text style={styles.typetb}>Khảo sát</Text>
                         <Text style={styles.titletb}>Lấy ý kiến về việc abcdxyz</Text>
                     </View>
-                    <View style={styles.tb}>
+                    <View style={[styles.tb, { backgroundColor: '#EFFCEF' }]}>
                         <Text style={styles.typetb}>Thông báo</Text>
                         <Text style={styles.titletb}>Thực đơn từ 17/03/2022 - 19/03/2022</Text>
                     </View>
-                    <View style={styles.tb}>
+                    <View style={[styles.tb, { backgroundColor: '#FFEFE2' }]}>
                         <Text style={styles.typetb}>Khảo sát</Text>
                         <Text style={styles.titletb}>Lấy ý kiến về việc abcdxyz</Text>
                     </View>
@@ -145,13 +145,10 @@ export default function HomeScreen() {
                         <Text style={styles.typetb}>Thông báo</Text>
                         <Text style={styles.titletb}>Thực đơn từ 17/03/2022 - 19/03/2022</Text>
                     </View>
-                    <View style={styles.tb}>
+                    <View style={[styles.tb, { backgroundColor: '#EFFCEF' }]}>
                         <Text style={styles.typetb}>Khảo sát</Text>
                         <Text style={styles.titletb}>Lấy ý kiến về việc abcdxyz</Text>
                     </View>
-
-
-
                 </View>
             </ScrollView>
         </View >
@@ -203,15 +200,16 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap'
     },
     tb: {
-        height: 95,
-        backgroundColor: '#FFFFFF',
-        marginBottom: 30,
-        borderRadius: 15,
+        backgroundColor: '#E6F5F9',
+        marginBottom: 10,
+        borderRadius: 35,
         display: 'flex',
         justifyContent: 'center',
-        paddingLeft: 20,
-        borderWidth: 1,
-        borderColor: '#dfdfdf',
+        paddingLeft: 30,
+        paddingTop: 40,
+        paddingBottom: 40,
+        // borderWidth: 1,
+        // borderColor: '#dfdfdf',
         overflow: 'hidden'
     },
     typetb: {
@@ -231,3 +229,6 @@ const styles = StyleSheet.create({
                 color="#841584"
             />
     </View> */}
+
+
+/** gửi cho người dòng tin nhắn, nhận ra vòng tròn không thấy thay màu */

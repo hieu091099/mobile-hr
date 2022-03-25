@@ -230,5 +230,3 @@ const styles = StyleSheet.create({
             />
     </View> */}
 
-
-/** gửi cho người dòng tin nhắn, nhận ra vòng tròn không thấy thay màu */

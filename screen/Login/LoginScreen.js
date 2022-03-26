@@ -74,7 +74,7 @@ export default function LoginScreen() {
                 <TextInput secureTextEntry={true} placeholder='Mật khẩu' style={[styles.inputlogin, { marginTop: 20 }]} onChangeText={(val) => {
                     setUserLogin({ ...userLogin, "password": val });
                 }} />
-                <TouchableOpacity style={styles.btndn} onPress={() => login()}><Text style={styles.textbtndn}>Đăng nhập</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btndn} onPress={() => login()}><Text style={styles.textbtndn}>Login</Text></TouchableOpacity>
             </View>
 
             {userIdFromDevice != '' && compatible && fingerPrints && <View style={[styles.form, { marginTop: 30, justifyContent: 'center', alignItems: 'center' }]}><Ionicons name='finger-print-outline' size={50} color='#0D4A85' onPress={() => {
@@ -102,17 +102,20 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 50,
         backgroundColor: 'white',
-        borderRadius: 12,
-        paddingHorizontal: 20,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.27,
-        shadowRadius: 4.65,
+        borderRightWidth: 0,
+        borderBottomWidth: 2,
+        borderBottomColor: '#0D4A85',
+        // borderRadius: 12,
+        // paddingHorizontal: 20,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 4,
+        // },
+        // shadowOpacity: 0.27,
+        // shadowRadius: 4.65,
 
-        elevation: 6,
+        // elevation: 6,
     }, btndn: {
         marginTop: 30,
         width: '100%',
@@ -129,8 +132,3 @@ const styles = StyleSheet.create({
 });
 
 
-/** come inside of my heart if you're looking for answer, looking the star, go a little bit faster */
-/** looking the star, go a little bit faster, come inside of my heart, come inside of my heart, go a little bit faster */
-
-/** come inside of my heart if you looking for answer */
-/** bằng lòng đi người yêu nhỏ bé, đứng trông nhau, điệu lý qua cầu */

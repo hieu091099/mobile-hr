@@ -31,12 +31,12 @@ export default function HomeScreen() {
         console.log({ res });
     })
     return (
-        <View style={{ backgroundColor: 'white' }}>
+        <View style={{ backgroundColor: '#F2F6F9', height: '100%', width: '100%' }}>
             <View style={styles.header}>
                 <Text style={{ color: '#B8BBC7' }}>Chào {User?.fullName} !</Text>
                 <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 5, color: '#2D5881' }}>LACTY COMPANY</Text>
             </View>
-            <ScrollView style={styles.menu} horizontal={true} showsHorizontalScrollIndicator={false}>
+            <View style={styles.menu}>
                 <View style={styles.chuamenu}>
                     <View style={styles.boxmenu}>
                         <View style={styles.boxmenuimg}>
@@ -75,57 +75,11 @@ export default function HomeScreen() {
                         <Text style={styles.menutext}>Lương</Text>
                     </View>
                 </View>
-                <View style={styles.chuamenu}>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Lương</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Lương</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Lương</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Lương</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Lương</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Lương</Text>
-                    </View>
-                </View>
-            </ScrollView>
-            <Text style={{ paddingHorizontal: 20, marginVertical: 20, fontSize: 22, fontWeight: 'bold' }}>Cập nhật mới nhất</Text>
-            <ScrollView style={{ height: 200, padding: 20 }}>
-                <View style={{ paddingHorizontal: 10 }}>
+            </View>
+            <Text style={{ paddingHorizontal: 20, marginVertical: 10, fontSize: 18, fontWeight: 'bold' }}>Cập nhật mới nhất</Text>
+            <ScrollView style={{ height: '10%' }}>
+                <View style={{ height: '100%', paddingHorizontal: 10 }}>
                     <View style={styles.tb}>
-                        <Text style={styles.typetb}>Thông báo</Text>
-                        <Text style={styles.titletb}>Thực đơn từ 17/03/2022 - 19/03/2022</Text>
-                    </View>
-                    <View style={[styles.tb, { backgroundColor: '#EFFCEF' }]}>
-                        <Text style={styles.typetb}>Khảo sát</Text>
-                        <Text style={styles.titletb}>Lấy ý kiến về việc abcdxyz</Text>
-                    </View>
-                    <View style={[styles.tb, { backgroundColor: '#FFEFE2' }]}>
                         <Text style={styles.typetb}>Thông báo</Text>
                         <Text style={styles.titletb}>Thực đơn từ 17/03/2022 - 19/03/2022</Text>
                     </View>
@@ -133,11 +87,11 @@ export default function HomeScreen() {
                         <Text style={styles.typetb}>Khảo sát</Text>
                         <Text style={styles.titletb}>Lấy ý kiến về việc abcdxyz</Text>
                     </View>
-                    <View style={[styles.tb, { backgroundColor: '#EFFCEF' }]}>
+                    <View style={styles.tb}>
                         <Text style={styles.typetb}>Thông báo</Text>
                         <Text style={styles.titletb}>Thực đơn từ 17/03/2022 - 19/03/2022</Text>
                     </View>
-                    <View style={[styles.tb, { backgroundColor: '#FFEFE2' }]}>
+                    <View style={styles.tb}>
                         <Text style={styles.typetb}>Khảo sát</Text>
                         <Text style={styles.titletb}>Lấy ý kiến về việc abcdxyz</Text>
                     </View>
@@ -145,10 +99,21 @@ export default function HomeScreen() {
                         <Text style={styles.typetb}>Thông báo</Text>
                         <Text style={styles.titletb}>Thực đơn từ 17/03/2022 - 19/03/2022</Text>
                     </View>
-                    <View style={[styles.tb, { backgroundColor: '#EFFCEF' }]}>
+                    <View style={styles.tb}>
                         <Text style={styles.typetb}>Khảo sát</Text>
                         <Text style={styles.titletb}>Lấy ý kiến về việc abcdxyz</Text>
                     </View>
+                    <View style={styles.tb}>
+                        <Text style={styles.typetb}>Thông báo</Text>
+                        <Text style={styles.titletb}>Thực đơn từ 17/03/2022 - 19/03/2022</Text>
+                    </View>
+                    <View style={styles.tb}>
+                        <Text style={styles.typetb}>Khảo sát</Text>
+                        <Text style={styles.titletb}>Lấy ý kiến về việc abcdxyz</Text>
+                    </View>
+
+
+
                 </View>
             </ScrollView>
         </View >
@@ -158,7 +123,7 @@ export default function HomeScreen() {
 }
 const styles = StyleSheet.create({
     header: {
-        height: 120,
+        height: '10%',
         backgroundColor: 'white',
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
@@ -166,8 +131,9 @@ const styles = StyleSheet.create({
         paddingLeft: 20
     },
     menu: {
-        height: 300,
-        marginTop: 10
+        height: '30%',
+        marginTop: 10,
+        width: '100%'
     },
     menuimg: {
         width: 80,
@@ -186,9 +152,8 @@ const styles = StyleSheet.create({
         color: 'black'
     },
     boxmenu: {
-        width: 100,
+        width: '30%',
         height: 120,
-        marginHorizontal: 5,
         borderRadius: 20,
         display: 'flex',
         alignItems: 'center'
@@ -196,20 +161,19 @@ const styles = StyleSheet.create({
     chuamenu: {
         display: 'flex',
         justifyContent: 'space-around',
-        flexDirection: 'column',
+        flexDirection: 'row',
         flexWrap: 'wrap'
     },
     tb: {
-        backgroundColor: '#E6F5F9',
-        marginBottom: 10,
-        borderRadius: 35,
+        height: 95,
+        backgroundColor: '#FFFFFF',
+        marginBottom: 30,
+        borderRadius: 15,
         display: 'flex',
         justifyContent: 'center',
-        paddingLeft: 30,
-        paddingTop: 40,
-        paddingBottom: 40,
-        // borderWidth: 1,
-        // borderColor: '#dfdfdf',
+        paddingLeft: 20,
+        borderWidth: 1,
+        borderColor: '#dfdfdf',
         overflow: 'hidden'
     },
     typetb: {
@@ -229,4 +193,3 @@ const styles = StyleSheet.create({
                 color="#841584"
             />
     </View> */}
-

@@ -46,11 +46,12 @@ export default function App() {
           headerShown: false,
           animation: 'slide_from_right'
         }}>
+          <Stack.Screen name="Login" component={LoginScreen} />
+
           <Stack.Screen name="Salary" component={Salary} />
 
           <Stack.Screen name="Home" component={HomeScreen} />
 
-          <Stack.Screen name="Login" component={LoginScreen} />
 
 
 

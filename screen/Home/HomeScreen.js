@@ -39,40 +39,40 @@ export default function HomeScreen() {
             <View style={styles.menu}>
                 <View style={styles.chuamenu}>
                     <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
+                        <View style={styles.boxmenuimg} >
                             <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
                         </View>
                         <Text style={styles.menutext}>Lương</Text>
                     </View>
                     <View style={styles.boxmenu}>
                         <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
+                            <Image style={styles.menuimg} source={require('../../assets/images/menu_book.png')} />
                         </View>
-                        <Text style={styles.menutext}>Lương</Text>
+                        <Text style={styles.menutext}>Sổ tay lao động</Text>
                     </View>
                     <View style={styles.boxmenu}>
                         <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
+                            <Image style={styles.menuimg} source={require('../../assets/images/menu_chat.png')} />
                         </View>
-                        <Text style={styles.menutext}>Lương</Text>
+                        <Text style={styles.menutext}>Trò chuyện</Text>
                     </View>
                     <View style={styles.boxmenu}>
                         <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
+                            <Image style={styles.menuimg} source={require('../../assets/images/menu_feedback.png')} />
                         </View>
-                        <Text style={styles.menutext}>Lương</Text>
+                        <Text style={styles.menutext}>Góp ý</Text>
                     </View>
                     <View style={styles.boxmenu}>
                         <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
+                            <Image style={styles.menuimg} source={require('../../assets/images/menu_contact.png')} />
                         </View>
-                        <Text style={styles.menutext}>Lương</Text>
+                        <Text style={styles.menutext}>Liên hệ</Text>
                     </View>
                     <View style={styles.boxmenu}>
                         <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
+                            <Image style={styles.menuimg} source={require('../../assets/images/menu_help.png')} />
                         </View>
-                        <Text style={styles.menutext}>Lương</Text>
+                        <Text style={styles.menutext}>Trợ giúp</Text>
                     </View>
                 </View>
             </View>
@@ -142,12 +142,11 @@ const styles = StyleSheet.create({
     boxmenuimg: {
         width: 80,
         height: 80,
-        backgroundColor: 'white',
         borderRadius: 20
     },
     menutext: {
         marginTop: 8,
-        fontSize: 17,
+        fontSize: 14,
         fontWeight: 'bold',
         color: 'black'
     },

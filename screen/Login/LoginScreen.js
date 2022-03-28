@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions, ImageBackground, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions, ImageBackground } from 'react-native';
+import { TextInput } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as LocalAuthentication from 'expo-local-authentication';
 import { useFonts } from 'expo-font';
@@ -7,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../../redux/actions/UserAction';
 import { useNavigation } from '@react-navigation/native';
 import { getToken } from '../../config';
+import { Icon } from 'react-native-elements';
 
 export default function LoginScreen() {
     const [compatible, isCompatible] = useState(false);
@@ -20,11 +22,6 @@ export default function LoginScreen() {
         setUserIdFromDevice(res.userId)
 
     })
-    // console.log({ userId });
-
-    // const [loaded] = useFonts({
-    //     Montserrat: require('../../assets/fonts/Sansita.ttf'),
-    // });
     useEffect(() => {
         checkDeviceForHardware();
         checkForFingerprints();
@@ -48,7 +45,6 @@ export default function LoginScreen() {
                 })
                 navigation.navigate('Home');
                 // console.log('okokok');
-
             }
         })
     };
@@ -65,21 +61,62 @@ export default function LoginScreen() {
     }
     return (
         <ImageBackground source={require('../../assets/images/bg_login2.png')} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
+            <View>
+                <Text style={[styles.td, { marginTop: 20 }]}>
+                    LYV APP
+                </Text>
+            </View>
+            <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 10 }}>
+                <Image
+                    style={styles.tinyLogo}
+                    source={require('../../assets/images/logo_login.jpg')}
+                />
+            </View>
             <View style={styles.tieude}>
-                <Text style={[styles.td]}>Chào mừng !</Text>
-                <Text style={[styles.td]}>{userIdFromDevice ? userIdFromDevice : 'Bạn'} đã trở lại</Text>
+                <Text style={[styles.td]}>Xin chào <Text style={{ fontSize: 35 }}>{userIdFromDevice ? userIdFromDevice : 'Bạn'}!</Text></Text>
+                <Text style={{ textAlign: 'center', color: 'gray', marginTop: 10 }}>Đăng nhập dưới UserID khác?</Text>
             </View>
             <View style={styles.form}>
-                {userIdFromDevice == '' && <TextInput placeholder='Mã nhân viên' style={styles.inputlogin} onChangeText={(val) => { setUserLogin({ ...userLogin, "userId": val }); }} />}
-                <TextInput secureTextEntry={true} placeholder='Mật khẩu' style={[styles.inputlogin, { marginTop: 20 }]} onChangeText={(val) => {
+                {userIdFromDevice == '' && <TextInput theme={{ colors: { primary: '#0D4A85', underlineColor: 'transparent' } }} label="USERID" mode='outlined' placeholder='Tài khoản' style={[styles.inputlogin, { marginTop: 20 }]} onChangeText={(val) => {
+                    setUserLogin({ ...userLogin, "userId": val });
+                }} />}
+                <TextInput theme={{ colors: { primary: '#0D4A85', underlineColor: 'transparent' } }} label="PASSWORD" mode='outlined' secureTextEntry={true} placeholder='Mật khẩu' style={[styles.inputlogin, { marginTop: 20 }]} onChangeText={(val) => {
                     setUserLogin({ ...userLogin, "password": val });
                 }} />
-                <TouchableOpacity style={styles.btndn} onPress={() => login()}><Text style={styles.textbtndn}>Login</Text></TouchableOpacity>
+
+                <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                    <TouchableOpacity style={userIdFromDevice != '' && compatible && fingerPrints ? [styles.btndn] : [styles.btndn, { width: '100%', borderRadius: 5 }]} onPress={() => login()}><Text style={styles.textbtndn}>ĐĂNG NHẬP</Text></TouchableOpacity>
+                    {userIdFromDevice != '' && compatible && fingerPrints && <TouchableOpacity style={styles.btnFinger}><Ionicons name='finger-print-outline' size={35} color='white' onPress={() => {
+                        scanFingerprint();
+                    }} /></TouchableOpacity>}
+                </View>
+            </View>
+            <View style={styles.contact}>
+                <View style={styles.contactItem}>
+                    <Icon
+                        name='phone-call'
+                        type='feather'
+                        color='#517fa4'
+                        size={20}
+                    />
+                    <Text style={styles.contactText}>
+                        028 3875 4536
+                    </Text>
+                </View>
+                <View style={styles.contactItem}>
+                    <Icon
+                        name='mail'
+                        type='feather'
+                        color='#517fa4'
+                        size={20}
+                    />
+                    <Text style={styles.contactText}>
+                        lactycom@lacty.com.vn
+                    </Text>
+                </View>
             </View>
 
-            {userIdFromDevice != '' && compatible && fingerPrints && <View style={[styles.form, { marginTop: 30, justifyContent: 'center', alignItems: 'center' }]}><Ionicons name='finger-print-outline' size={50} color='#0D4A85' onPress={() => {
-                scanFingerprint();
-            }} /></View>}
+
         </ImageBackground >
     )
 }
@@ -87,46 +124,64 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
     td: {
         color: '#2D5881',
-        fontSize: 35,
+        fontSize: 25,
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    tinyLogo: {
+        width: 80,
+        height: 80
     },
     tieude: {
         width: '100%',
         paddingHorizontal: 20,
-        height: 200,
-        justifyContent: 'flex-end'
+        // height: 200,
+        justifyContent: 'flex-end',
+        textAlign: 'center'
     }, form: {
         width: '100%',
         paddingHorizontal: 20,
-        marginTop: 50
+        marginTop: 30
     }, inputlogin: {
-        width: '100%',
-        height: 50,
         backgroundColor: 'white',
-        borderRightWidth: 0,
-        borderBottomWidth: 2,
-        borderBottomColor: '#0D4A85',
-        // borderRadius: 12,
-        // paddingHorizontal: 20,
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 4,
-        // },
-        // shadowOpacity: 0.27,
-        // shadowRadius: 4.65,
-
-        // elevation: 6,
+        borderRadius: 10
     }, btndn: {
         marginTop: 30,
-        width: '100%',
+        width: '80%',
         height: 55,
         backgroundColor: '#0D4A85',
-        borderRadius: 12,
+        borderTopLeftRadius: 5,
+        borderBottomLeftRadius: 5,
         justifyContent: 'center',
         alignItems: 'center'
     }, textbtndn: {
         fontSize: 18,
         color: 'white',
+        fontWeight: 'bold'
+    },
+    btnFinger: {
+        marginTop: 30,
+        marginLeft: 2,
+        width: '20%',
+        height: 55,
+        backgroundColor: '#0D4A85',
+        borderBottomEndRadius: 5,
+        borderTopRightRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    contact: {
+        marginTop: 60,
+        alignItems: 'center'
+    },
+    contactItem: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginBottom: 20
+    },
+    contactText: {
+        marginLeft: 10,
+        color: '#0D4A85',
         fontWeight: 'bold'
     }
 });

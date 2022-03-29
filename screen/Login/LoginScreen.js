@@ -14,7 +14,9 @@ export default function LoginScreen() {
     const [compatible, isCompatible] = useState(false);
     const [fingerPrints, setFingerPrints] = useState(false);
     const [userIdFromDevice, setUserIdFromDevice] = useState("");
+
     const { user, isLoggedIn } = useSelector(state => state.UserReducer);
+
     const navigation = useNavigation();
     const dispatch = useDispatch();
     getToken('user').then(res => {

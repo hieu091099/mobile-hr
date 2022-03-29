@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions, ImageBackg
 import { TextInput } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as LocalAuthentication from 'expo-local-authentication';
-import { useFonts } from 'expo-font';
+import { PaperSelect } from 'react-native-paper-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../../redux/actions/UserAction';
 import { useNavigation } from '@react-navigation/native';
@@ -59,6 +59,21 @@ export default function LoginScreen() {
         }
         dispatch(action);
     }
+    const [factory, setFactory] = useState({
+        value: '',
+        list: [
+            { _id: '1', value: 'BLUE' },
+            { _id: '2', value: 'RED' },
+            { _id: '3', value: 'GREEN' },
+            { _id: '4', value: 'YELLOW' },
+            { _id: '5', value: 'BROWN' },
+            { _id: '6', value: 'BLACK' },
+            { _id: '7', value: 'WHITE' },
+            { _id: '8', value: 'CYAN' },
+        ],
+        selectedList: [],
+        error: '',
+    });
     return (
         <ImageBackground source={require('../../assets/images/bg_login2.png')} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
             <View>
@@ -77,18 +92,41 @@ export default function LoginScreen() {
                 <Text style={{ textAlign: 'center', color: 'gray', marginTop: 10 }}>Đăng nhập dưới UserID khác?</Text>
             </View>
             <View style={styles.form}>
-                {userIdFromDevice == '' && <TextInput theme={{ colors: { primary: '#0D4A85', underlineColor: 'transparent' } }} label="USERID" mode='outlined' placeholder='Tài khoản' style={[styles.inputlogin, { marginTop: 20 }]} onChangeText={(val) => {
+                {userIdFromDevice == '' ? <TextInput theme={{ colors: { primary: '#0D4A85', underlineColor: 'transparent' } }} label="USERID" mode='outlined' placeholder='Tài khoản' style={[styles.inputlogin, { marginTop: 20 }]} onChangeText={(val) => {
                     setUserLogin({ ...userLogin, "userId": val });
-                }} />}
+                }} /> : null}
                 <TextInput theme={{ colors: { primary: '#0D4A85', underlineColor: 'transparent' } }} label="PASSWORD" mode='outlined' secureTextEntry={true} placeholder='Mật khẩu' style={[styles.inputlogin, { marginTop: 20 }]} onChangeText={(val) => {
                     setUserLogin({ ...userLogin, "password": val });
                 }} />
+
+                {/* <PaperSelect
+                    label="Select Gender"
+                    value={factory.value}
+                    onSelection={(value) => {
+                        setFactory({
+                            ...factory,
+                            value: value.text,
+                            selectedList: value.selectedList,
+                            error: '',
+                        });
+                    }}
+                    arrayList={[...factory.list]}
+                    selectedArrayList={factory.selectedList}
+                    errorText={factory.error}
+                    multiEnable={false}
+                    dialogTitleStyle={{ color: 'red' }}
+                    checkboxColor="yellow"
+                    checkboxLabelStyle={{ color: 'red', fontWeight: '700' }}
+                    textInputBackgroundColor="yellow"
+                    textInputColor="red"
+                />; */}
+
 
                 <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
                     <TouchableOpacity style={userIdFromDevice != '' && compatible && fingerPrints ? [styles.btndn] : [styles.btndn, { width: '100%', borderRadius: 5 }]} onPress={() => login()}><Text style={styles.textbtndn}>ĐĂNG NHẬP</Text></TouchableOpacity>
                     {userIdFromDevice != '' && compatible && fingerPrints && <TouchableOpacity style={styles.btnFinger}><Ionicons name='finger-print-outline' size={35} color='white' onPress={() => {
                         scanFingerprint();
-                    }} /></TouchableOpacity>}
+                    }} /></TouchableOpacity >}
                 </View>
             </View>
             <View style={styles.contact}>

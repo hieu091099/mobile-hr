@@ -11,7 +11,7 @@ export default function HomeScreen() {
     const [User, setUser] = useState();
     const navigation = useNavigation();
 
-    console.log(isLoggedIn);
+    // console.log(isLoggedIn);
     useEffect(() => {
         // if (!isLoggedIn) {
         //     navigation.navigate('Login');
@@ -28,7 +28,7 @@ export default function HomeScreen() {
     }
     getToken('user').then((res) => {
         res = JSON.parse(res);
-        console.log({ res });
+        // console.log({ res });
     })
     return (
         <View style={{ backgroundColor: '#F2F6F9', height: '100%', width: '100%' }}>

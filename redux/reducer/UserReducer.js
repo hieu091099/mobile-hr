@@ -2,7 +2,9 @@
 const stateDefault = {
     user: [],
     userToken: '',
-    isLoggedIn: false
+    isLoggedIn: false,
+    salary: {},
+    indexScreen: ''
 }
 
 export const UserReducer = (state = stateDefault, action) => {
@@ -21,6 +23,14 @@ export const UserReducer = (state = stateDefault, action) => {
         }
         case 'LOGIN_FINGER': {
             state.isLoggedIn = true;
+            return { ...state };
+        }
+        case 'GET_SALARY': {
+            state.salary = action.salary;
+            return { ...state };
+        }
+        case 'CHANGE_SCREEN': {
+            state.indexScreen = action.indexScreen;
             return { ...state };
         }
         default: return { ...state }

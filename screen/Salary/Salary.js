@@ -1,7 +1,33 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native'
-import React from 'react'
-
+import React, { useState, useEffect } from 'react'
+import { getToken } from '../../config'
+import { useDispatch, useSelector } from 'react-redux';
+import { getSalaryAction } from '../../redux/actions/UserAction';
+import { useNavigation } from '@react-navigation/native';
 export default function Salary() {
+    const [salaryDetail, setSalaryDetail] = useState();
+    const [userIdFromDevice, setUserIdFromDevice] = useState("");
+    const [accessToken, setAccessToken] = useState("");
+    const { salary, indexScreen } = useSelector(state => state.UserReducer);
+    console.log(salary);
+    const navigation = useNavigation();
+    const dispatch = useDispatch();
+    getToken('user').then(res => {
+        res = JSON.parse(res);
+        setUserIdFromDevice(res.userId)
+
+    })
+    getToken('accessToken').then(res => {
+        res = JSON.parse(res);
+        setAccessToken(res);
+
+    })
+    useEffect(() => {
+        if (userIdFromDevice != null && accessToken != null && salary == null) {
+            dispatch(getSalaryAction(userIdFromDevice, accessToken, navigation));
+        }
+    }, [indexScreen]);
+
     return (
         <View style={{ display: 'flex', alignItems: 'center', marginTop: 20, backgroundColor: '#F7F7F7' }}>
             <View style={{ width: '93%', height: '100%' }}>

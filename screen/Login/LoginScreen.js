@@ -18,6 +18,8 @@ export default function LoginScreen() {
     /** state get userid from asyncstore */
     const [userIdFromDevice, setUserIdFromDevice] = useState('');
     const [factoryFromDevice, setFactoryFromDevice] = useState('');
+    const [cancel, setCancel] = useState(false);
+
     /** global state get user info */
     const { user, isLoggedIn } = useSelector(state => state.UserReducer);
     /** state set when user type input */
@@ -49,18 +51,19 @@ export default function LoginScreen() {
         }
     })
     const checkConditionLogin = (user) => {
+        setIsVisible(true);
         if (user.userId == "") {
-            setIsVisible(true);
+            setCancel(false);
             setDialogMessage("Vui lòng nhập số thẻ!")
             return false;
         }
         if (user.password == "") {
-            setIsVisible(true);
+            setCancel(false);
             setDialogMessage("Vui lòng nhập mật khẩu!")
             return false;
         }
         if (user.factory == "") {
-            setIsVisible(true);
+            setCancel(false);
             setDialogMessage("Vui lòng chọn nhà máy!")
             return false;
         }
@@ -118,11 +121,6 @@ export default function LoginScreen() {
         error: '',
     });
     const confirmWithCondition = () => {
-
-    }
-    const loginWithAnotherUserId = () => {
-        setIsVisible(true);
-        setDialogMessage("Bạn có chắc chắn muốn đặng nhập với số thẻ khác!");
         deleteToken('accessToken').then((res) => {
             deleteToken('user').then((ress) => {
                 setFactoryFromDevice('');
@@ -130,11 +128,15 @@ export default function LoginScreen() {
 
             })
         })
-
+    }
+    const loginWithAnotherUserId = () => {
+        setIsVisible(true);
+        setCancel(true);
+        setDialogMessage("Bạn có chắc chắn muốn đặng nhập với số thẻ khác!");
     }
     return (
         <PaperProvider>
-            <SimpleDialog visible={isVisible} setVisible={setIsVisible} message={dialogMessage} />
+            <SimpleDialog visible={isVisible} setVisible={setIsVisible} message={dialogMessage} cancel={cancel} confirmWithCondition={confirmWithCondition} />
             <ImageBackground source={require('../../assets/images/bg_login2.png')} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
                 <View>
                     {/* <Text style={[styles.td, { marginTop: 20 }]}>
@@ -149,7 +151,7 @@ export default function LoginScreen() {
                 </View>
                 <View style={styles.tieude}>
                     <Text style={[styles.td]}>Xin chào <Text style={{ fontSize: 35 }}>{userIdFromDevice ? userIdFromDevice : 'Bạn'}!</Text></Text>
-                    <Text onPress={() => loginWithAnotherUserId()} style={{ textAlign: 'center', color: 'gray', marginTop: 10 }}>Đăng nhập dưới UserID khác?</Text>
+                    {userIdFromDevice != '' && <Text onPress={() => loginWithAnotherUserId()} style={{ textAlign: 'center', color: 'gray', marginTop: 10 }}>Đăng nhập dưới UserID khác?</Text>}
                 </View>
                 <View style={styles.form}>
                     {userIdFromDevice == '' ? <TextInput theme={{ colors: { primary: '#0D4A85', underlineColor: 'transparent' } }} label="USERID" mode='outlined' placeholder='Tài khoản' style={[styles.inputlogin, { marginTop: 20 }]} onChangeText={(val) => {

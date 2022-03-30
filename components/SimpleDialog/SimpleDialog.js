@@ -7,11 +7,13 @@ import { View, Text, StyleSheet } from 'react-native';
 
 
 
-const SimpleDialog = ({ visible, setVisible, message, confirmWithCondition = () => { } }) => {
+const SimpleDialog = ({ visible, setVisible, message, confirmWithCondition = () => { }, cancel }) => {
     // const cfm = confirmWithCondition;
     const toggleDialog = () => {
         setVisible(!visible);
-        confirmWithCondition();
+        if (cancel == true) {
+            confirmWithCondition();
+        }
     };
     return (
         <View>
@@ -24,7 +26,7 @@ const SimpleDialog = ({ visible, setVisible, message, confirmWithCondition = () 
                 <View style={{ flexDirection: 'row' }} >
                     <Button
                         containerStyle={{
-                            width: '50%',
+                            width: cancel ? '50%' : '100%',
                             paddingHorizontal: 5
                             // marginHorizontal: 50,
                             // marginVertical: 10,
@@ -34,7 +36,8 @@ const SimpleDialog = ({ visible, setVisible, message, confirmWithCondition = () 
                             borderColor: 'transparent',
                             borderWidth: 0,
                         }} onPress={() => toggleDialog()} title="ĐỒNG Ý"></Button>
-                    <Button
+
+                    {cancel && <Button
                         containerStyle={{
                             width: '50%',
                             paddingHorizontal: 5
@@ -45,7 +48,7 @@ const SimpleDialog = ({ visible, setVisible, message, confirmWithCondition = () 
                             backgroundColor: '#9B100C',
                             borderColor: 'transparent',
                             borderWidth: 0,
-                        }} onPress={() => toggleDialog()} title="HỦY BỎ"></Button>
+                        }} onPress={() => setVisible(!visible)} title="HỦY BỎ"></Button>}
                 </View>
             </Dialog>
         </View>

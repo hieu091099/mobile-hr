@@ -3,7 +3,7 @@ const stateDefault = {
     user: [],
     userToken: '',
     isLoggedIn: false,
-    salary: {},
+    salary: [],
     indexScreen: ''
 }
 

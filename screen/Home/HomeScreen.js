@@ -17,7 +17,9 @@ export default function HomeScreen() {
         //     navigation.navigate('Login');
         // }
         getToken('user').then(res => {
-            setUser(JSON.parse(res))
+            if (res != "" || res != undefined) {
+                setUser(JSON.parse(res))
+            }
 
         })
     }, [isLoggedIn])
@@ -27,7 +29,9 @@ export default function HomeScreen() {
         })
     }
     getToken('user').then((res) => {
-        res = JSON.parse(res);
+        if (res != "" || res != undefined) {
+            res = JSON.parse(res);
+        }
         // console.log({ res });
     })
     return (
@@ -36,6 +40,7 @@ export default function HomeScreen() {
                 <Text style={{ color: '#B8BBC7' }}>Chào {User?.fullName} !</Text>
                 <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 5, color: '#2D5881' }}>LACTY COMPANY</Text>
             </View>
+
             <View style={styles.menu}>
                 <View style={styles.chuamenu}>
                     <View style={styles.boxmenu}>

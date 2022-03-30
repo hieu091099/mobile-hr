@@ -39,21 +39,21 @@ const MainTab = () => {
         <Tab.Screen name="Home" component={HomeScreen}
             options={{
                 tabBarIcon: () => (
-                    <Icon name="home" type='feather' color={active == 0 ? '#0D4A85' : '#ccc'} size={active == 0 ? 35 : 26} />
+                    <Icon name="home" type='feather' color={active == 0 ? '#0D4A85' : '#ccc'} size={active == 0 ? 30 : 26} />
                 ),
             }} />
         <Tab.Screen name="Salary" component={Salary} options={{
             tabBarIcon: () => (
-                <Icon name="money" type='font-awesome' color={active == 1 ? '#0D4A85' : '#ccc'} size={active == 1 ? 35 : 26} />
+                <Icon name="money" type='font-awesome' color={active == 1 ? '#0D4A85' : '#ccc'} size={active == 1 ? 30 : 26} />
             ),
         }} />
         <Tab.Screen name="Contact" component={Contact} options={{
             tabBarIcon: () => (
-                <Icon name="contacts" type='ant-design' color={active == 2 ? '#0D4A85' : '#ccc'} size={active == 2 ? 35 : 26} />
+                <Icon name="contacts" type='ant-design' color={active == 2 ? '#0D4A85' : '#ccc'} size={active == 2 ? 30 : 26} />
             ),
         }} /><Tab.Screen name="Profile" component={Profile} options={{
             tabBarIcon: () => (
-                <Icon name="user" type='ant-design' color={active == 3 ? '#0D4A85' : '#ccc'} size={active == 3 ? 35 : 26} />
+                <Icon name="user" type='ant-design' color={active == 3 ? '#0D4A85' : '#ccc'} size={active == 3 ? 30 : 26} />
             ),
         }} />
     </Tab.Navigator>

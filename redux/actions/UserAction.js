@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
-import { axiosInstance, axiosInstanceToken, setToken } from "../../config"
+import axios from "axios";
+import { axiosInstance, axiosInstanceToken, BASE_URL, setToken } from "../../config"
 
 
 export const loginAction = (userLogin, navigation) => {
@@ -27,11 +28,16 @@ export const loginAction = (userLogin, navigation) => {
     }
 }
 
-export const getSalaryAction = (personId, accessToken, navigation) => {
+export const getSalaryAction = (personId, accessToken) => {
 
     return async (dispatch) => {
+        // console.log(personId)
         try {
             let result = await axiosInstance.get(`salary/${personId}`);
+            // let result = await axios({
+            //     method: 'GET',
+            //     url: BASE_URL + 'salary/29975'
+            // })
             console.log(result.data);
 
             dispatch({

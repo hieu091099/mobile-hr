@@ -73,52 +73,69 @@ export default function Salary() {
                     </View>
                     <View style={styles.total1}>
                         <View style={styles.threecolunm}>
-                            <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 16 }}>Công TT</Text>
+                            <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 15 }}>Công TT</Text>
                                 <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>{salary?.Working_Days}</Text></View>
-                            <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 16 }}>T.Ca lũy kế</Text>
+                            <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 15 }}>T.Ca lũy kế</Text>
                                 <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>{salary?.Overtime}</Text></View>
-                            <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 16 }}>Loại bình bầu</Text>
-                                <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>{salary?.Rating_ID}</Text></View>
+                            <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 15 }}>Loại bình bầu</Text>
+                                <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>{salary?.Rating_ID.trim()}</Text></View>
                         </View>
                     </View>
-
+                    <View style={styles.total1}>
+                        <View style={styles.threecolunm}>
+                            <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 15 }}>Số phép năm</Text>
+                                <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>{salary?.Annual_Leave}</Text></View>
+                            <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 15 }}>Đã nghỉ</Text>
+                                <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>{salary?.Leave_Days}</Text></View>
+                            <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 15 }}>Còn lại</Text>
+                                <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>{salary?.Annual_Leave - salary?.Leave_Days}</Text></View>
+                        </View>
+                    </View>
                 </View>
                 <Text style={{ marginTop: 10, fontWeight: 'bold', fontSize: 20, letterSpacing: 3 }}>Chi tiết </Text>
-                <ScrollView>
-                    <View style={styles.detailSalary}>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương chính</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương cơ bản</Text><Text style={styles.rightsalary}>5.200.000 VND</Text></View>
-
+                <ScrollView stickyHeaderIndices={[0, 2]} style={styles.detailSalary}>
+                    <View style={{ backgroundColor: '#0D4A85', paddingLeft: 10, borderRadius: 5 }}>
+                        <Text style={{ paddingVertical: 10, fontWeight: 'bold', fontSize: 18, letterSpacing: 3, color: 'white' }}>KHOẢN CỘNG </Text>
+                    </View>
+                    <View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương chính</Text><Text style={styles.rightsalary}>{formatNum(salary?.Main_Salary)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>PC công việc</Text><Text style={styles.rightsalary}>{formatNum(salary?.Responsibility_Allowance + salary?.Language_Allowance)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>PC độc hại</Text><Text style={styles.rightsalary}> VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>PC VSMT</Text><Text style={styles.rightsalary}>VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>PC An toàn viên</Text><Text style={styles.rightsalary}> VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>PC PCCC</Text><Text style={styles.rightsalary}> VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương + PC</Text><Text style={styles.rightsalary}>{formatNum(salary?.Salary_And_Allowance)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương tháng</Text><Text style={styles.rightsalary}>{formatNum(salary?.Salary_Of_Month)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Tiền làm thêm</Text><Text style={styles.rightsalary}>{formatNum(salary?.Overtime_Pay)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>PC ca đêm</Text><Text style={styles.rightsalary}>{formatNum(salary?.Night_Working_Money)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Tiền ngừng việc(NV1)</Text><Text style={styles.rightsalary}> VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Tiền ngừng việc(NV2)</Text><Text style={styles.rightsalary}> VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Tiền ngừng việc(NV3)</Text><Text style={styles.rightsalary}> VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Tiền chuyên cần</Text><Text style={styles.rightsalary}>{formatNum(salary?.Hard_Working)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Phí sinh hoạt</Text><Text style={styles.rightsalary}>{formatNum(salary?.Living_Costs)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Tiền bình bầu</Text><Text style={styles.rightsalary}>{formatNum(salary?.Rating_Money)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Tiền nghỉ phép</Text><Text style={styles.rightsalary}>{formatNum(salary?.P_R_Money)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Tiền nghỉ lễ</Text><Text style={styles.rightsalary}>{formatNum(salary?.Holiday_Money)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Thưởng bình bầu năm</Text><Text style={styles.rightsalary}>{formatNum(salary?.Yearly_Rating)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Tiền SLĐ1</Text><Text style={styles.rightsalary}>{formatNum(salary?.Serving_Pay_1)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Tiền SLĐ2</Text><Text style={styles.rightsalary}>{formatNum(salary?.Serving_Pay_2)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Tiền khác</Text><Text style={styles.rightsalary}>{formatNum(salary?.Other_Pay)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Tiền hổ trợ phí SH</Text><Text style={styles.rightsalary}>{formatNum(salary?.Cost_Of_Living_Support)} VND</Text></View>
 
                     </View>
+                    <View style={{ backgroundColor: '#0D4A85', paddingLeft: 10, borderRadius: 5 }}>
+                        <Text style={{ paddingVertical: 10, fontWeight: 'bold', fontSize: 18, letterSpacing: 3, color: 'white' }}>KHOẢN TRỪ </Text>
+                    </View>
+                    <View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Tạm ứng</Text><Text style={styles.rightsalary}>{formatNum(salary?.Advance_Payment)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Tiền BHXH</Text><Text style={styles.rightsalary}>{formatNum(salary?.Social_Insurance)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Tiền BHYT</Text><Text style={styles.rightsalary}>{formatNum(salary?.Health_Insurance)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Tiền BHTN</Text><Text style={styles.rightsalary}>{formatNum(salary?.Unemployment_Insurance)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Đoàn phí</Text><Text style={styles.rightsalary}>{formatNum(salary?.Union_Pay)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>Thuế TNCN</Text><Text style={styles.rightsalary}>{formatNum(salary?.Person_Income_Tax_Money)} VND</Text></View>
+                    </View>
+
+                    {/* </View> */}
                 </ScrollView>
             </View>}
 
@@ -130,28 +147,29 @@ const styles = StyleSheet.create({
     total: {
         width: '100%',
         height: '28%',
-        backgroundColor: '#3D4675',
+        backgroundColor: '#0D4A85',
         display: 'flex',
         justifyContent: 'space-evenly',
         borderRadius: 8
     },
     total1: {
         width: '100%',
-        height: 80,
+        height: 60,
         paddingHorizontal: 10
     }, totalMonth: {
         display: 'flex'
     }, detailSalary: {
         width: '100%',
-        height: '63%',
+        height: '100%',
         backgroundColor: 'white',
-        marginTop: '5%', paddingVertical: 10, paddingHorizontal: 10
+        marginTop: '5%'
     }, rowsalary: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingVertical: 20,
+        paddingVertical: 12,
+        paddingHorizontal: 10
     }, leftsalary: {
         fontSize: 18,
         fontWeight: 'bold',

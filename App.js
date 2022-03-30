@@ -21,8 +21,12 @@ export default function App() {
 
   getToken('user').then(res => {
 
-    res = res != "" || res != undefined ? JSON.parse(res) : '';
-    setUserIdFromDevice(res.userId)
+    // res = res != "" || res != undefined ? JSON.parse(res) : '';
+    // setUserIdFromDevice(res.userId)
+    if (res != undefined) {
+      res = JSON.parse(res);
+      setUserIdFromDevice(res.userId)
+    }
 
 
 

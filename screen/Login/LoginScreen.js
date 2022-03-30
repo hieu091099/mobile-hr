@@ -15,7 +15,7 @@ export default function LoginScreen() {
     const [compatible, isCompatible] = useState(false);
     const [fingerPrints, setFingerPrints] = useState(false);
     /** state get userid from asyncstore */
-    const [userIdFromDevice, setUserIdFromDevice] = useState("");
+    const [userIdFromDevice, setUserIdFromDevice] = useState('');
     /** global state get user info */
     const { user, isLoggedIn } = useSelector(state => state.UserReducer);
     const [isLoginWithAnother, setIsLoginWithAnother] = useState(false);
@@ -23,7 +23,8 @@ export default function LoginScreen() {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     getToken('user').then(res => {
-        if (res != "" || res != undefined) {
+        if (res != undefined) {
+            // console.log(res)
             res = JSON.parse(res);
             setUserIdFromDevice(res.userId)
         }

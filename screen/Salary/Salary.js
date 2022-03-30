@@ -99,7 +99,7 @@ export default function Salary() {
                     </View>
                     <View>
                         <View style={styles.rowsalary}><Text style={styles.leftsalary}>Lương chính</Text><Text style={styles.rightsalary}>{formatNum(salary?.Main_Salary)} VND</Text></View>
-                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>PC công việc</Text><Text style={styles.rightsalary}>{formatNum(salary?.Responsibility_Allowance + salary?.Language_Allowance)} VND</Text></View>
+                        <View style={styles.rowsalary}><Text style={styles.leftsalary}>PC công việc</Text><Text style={styles.rightsalary}>{formatNum(salary?.Responsibility_Allowance + salary?.Language_Allowance + salary?.Other_Allowance)} VND</Text></View>
                         <View style={styles.rowsalary}><Text style={styles.leftsalary}>PC độc hại</Text><Text style={styles.rightsalary}> VND</Text></View>
                         <View style={styles.rowsalary}><Text style={styles.leftsalary}>PC VSMT</Text><Text style={styles.rightsalary}>VND</Text></View>
                         <View style={styles.rowsalary}><Text style={styles.leftsalary}>PC An toàn viên</Text><Text style={styles.rightsalary}> VND</Text></View>

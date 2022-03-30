@@ -7,32 +7,46 @@ import { View, Text, StyleSheet } from 'react-native';
 
 
 
-const SimpleDialog = () => {
-    const [visible, setVisible] = useState(false);
+const SimpleDialog = ({ visible, setVisible, message, confirmWithCondition = () => { } }) => {
+    // const cfm = confirmWithCondition;
     const toggleDialog = () => {
         setVisible(!visible);
+        confirmWithCondition();
     };
     return (
         <View>
-            {/* <View style={styles.buttonContainer}>
-                <Button
-                    title="Open Mutli Action Dialog"
-                    onPress={toggleDialog}
-                    buttonStyle={styles.button}
-                />
-            </View> */}
-
             <Dialog
                 isVisible={visible}
                 onBackdropPress={toggleDialog}
             >
-                <Dialog.Title title="Dialog Title" />
-                <Text>Dialog body text. Add relevant information here.</Text>
-                <Dialog.Actions>
-
-                    <Dialog.Button titleStyle={{ color: 'rgba(214, 61, 57, 1)' }} title="Cancel" onPress={() => toggleDialog()} />
-                    <Dialog.Button title="OK" onPress={() => toggleDialog()} />
-                </Dialog.Actions>
+                <Dialog.Title title="Thông Báo" />
+                <Text style={{ marginBottom: 20 }}>{message}</Text>
+                <View style={{ flexDirection: 'row' }} >
+                    <Button
+                        containerStyle={{
+                            width: '50%',
+                            paddingHorizontal: 5
+                            // marginHorizontal: 50,
+                            // marginVertical: 10,
+                        }}
+                        buttonStyle={{
+                            backgroundColor: '#0D4A85',
+                            borderColor: 'transparent',
+                            borderWidth: 0,
+                        }} onPress={() => toggleDialog()} title="ĐỒNG Ý"></Button>
+                    <Button
+                        containerStyle={{
+                            width: '50%',
+                            paddingHorizontal: 5
+                            // marginHorizontal: 50,
+                            // marginVertical: 10,
+                        }}
+                        buttonStyle={{
+                            backgroundColor: '#9B100C',
+                            borderColor: 'transparent',
+                            borderWidth: 0,
+                        }} onPress={() => toggleDialog()} title="HỦY BỎ"></Button>
+                </View>
             </Dialog>
         </View>
     );

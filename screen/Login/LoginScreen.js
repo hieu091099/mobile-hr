@@ -17,20 +17,21 @@ export default function LoginScreen() {
     const [fingerPrints, setFingerPrints] = useState(false);
     /** state get userid from asyncstore */
     const [userIdFromDevice, setUserIdFromDevice] = useState('');
+    const [factoryFromDevice, setFactoryFromDevice] = useState('');
     /** global state get user info */
     const { user, isLoggedIn } = useSelector(state => state.UserReducer);
-    const [isLoginWithAnother, setIsLoginWithAnother] = useState(false);
     /** state set when user type input */
     const [userLogin, setUserLogin] = useState({
         userId: "",
         password: "",
         factory: ""
     });
+
     /** state call dialog */
     const [isVisible, setIsVisible] = useState(false);
-    const toggleDialog = () => {
-        setIsVisible(!isVisible);
-    }
+    /** state message dialog */
+    const [dialogMessage, setDialogMessage] = useState("");
+
     const navigation = useNavigation();
     const dispatch = useDispatch();
     getToken('user').then(res => {
@@ -40,9 +41,34 @@ export default function LoginScreen() {
             setUserIdFromDevice(res.userId)
         }
     })
+    getToken('user').then(res => {
+        if (res != undefined) {
+            // console.log(res)
+            res = JSON.parse(res);
+            setFactoryFromDevice(res.factory)
+        }
+    })
+    const checkConditionLogin = (user) => {
+        if (user.userId == "") {
+            setIsVisible(true);
+            setDialogMessage("Vui lòng nhập số thẻ!")
+            return false;
+        }
+        if (user.password == "") {
+            setIsVisible(true);
+            setDialogMessage("Vui lòng nhập mật khẩu!")
+            return false;
+        }
+        if (user.factory == "") {
+            setIsVisible(true);
+            setDialogMessage("Vui lòng chọn nhà máy!")
+            return false;
+        }
+        return true;
+    }
     useEffect(() => {
         //reload component when user click "login with another userid"
-    }, [isLoginWithAnother])
+    }, [userIdFromDevice, factoryFromDevice])
     useEffect(() => {
         checkDeviceForHardware();
         checkForFingerprints();
@@ -65,20 +91,19 @@ export default function LoginScreen() {
                     type: 'LOGIN_FINGER'
                 })
                 navigation.navigate('MainTab');
-                // console.log('okokok');
             }
         })
     };
 
-    const login = () => {
-        if (userLogin.factory == "") {
-            alert('please choose factory!')
+    const login = async () => {
+        if (userIdFromDevice != '' && factoryFromDevice != '') {
+            let action = loginAction({ userId: userIdFromDevice, password: userLogin.password, factory: factoryFromDevice }, navigation)
+            dispatch(action)
         } else {
-            let action = loginAction(userLogin, navigation);
-            if (userIdFromDevice != '') {
-                action = loginAction({ userId: userIdFromDevice, password: userLogin.password }, navigation)
+            if (checkConditionLogin(userLogin)) {
+                let action = loginAction(userLogin, navigation);
+                dispatch(action);
             }
-            dispatch(action);
         }
 
     }
@@ -92,16 +117,24 @@ export default function LoginScreen() {
         selectedList: [],
         error: '',
     });
+    const confirmWithCondition = () => {
+
+    }
     const loginWithAnotherUserId = () => {
+        setIsVisible(true);
+        setDialogMessage("Bạn có chắc chắn muốn đặng nhập với số thẻ khác!");
         deleteToken('accessToken').then((res) => {
             deleteToken('user').then((ress) => {
-                setIsLoginWithAnother(true);
+                setFactoryFromDevice('');
+                setUserIdFromDevice('');
+
             })
         })
+
     }
     return (
         <PaperProvider>
-            <SimpleDialog />
+            <SimpleDialog visible={isVisible} setVisible={setIsVisible} message={dialogMessage} />
             <ImageBackground source={require('../../assets/images/bg_login2.png')} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
                 <View>
                     {/* <Text style={[styles.td, { marginTop: 20 }]}>
@@ -126,7 +159,7 @@ export default function LoginScreen() {
                         setUserLogin({ ...userLogin, "password": val });
                     }} />
 
-                    <PaperSelect
+                    {factoryFromDevice == "" ? <PaperSelect
                         label="FACTORY"
                         value={factory.value}
                         outlineColor="gray"
@@ -153,7 +186,7 @@ export default function LoginScreen() {
                         checkboxLabelStyle={{ color: '#0D4A85', fontWeight: '700' }}
                         textInputBackgroundColor="white"
                         textInputColor="#0D4A85"
-                    />
+                    /> : null}
 
                     <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
                         <TouchableOpacity style={userIdFromDevice != '' && compatible && fingerPrints ? [styles.btndn] : [styles.btndn, { width: '100%', borderRadius: 5 }]} onPress={() => login()}><Text style={styles.textbtndn}>ĐĂNG NHẬP</Text></TouchableOpacity>
@@ -216,7 +249,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 10
     }, btndn: {
-        marginTop: 30,
+        marginTop: 10,
         width: '80%',
         height: 55,
         backgroundColor: '#0D4A85',

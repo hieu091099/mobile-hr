@@ -10,8 +10,6 @@ export default function Salary() {
     const [userIdFromDevice, setUserIdFromDevice] = useState("");
     const [accessToken, setAccessToken] = useState("");
     const { salary, indexScreen } = useSelector(state => state.UserReducer);
-    const [salaryTest, setSalaryTest] = useState([]);
-    console.log(salary.Final_Salary);
     const navigation = useNavigation();
     const dispatch = useDispatch();
     getToken('user').then(res => {

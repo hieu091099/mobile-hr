@@ -10,15 +10,27 @@ import { loginAction } from '../../redux/actions/UserAction';
 import { useNavigation } from '@react-navigation/native';
 import { deleteToken, getToken } from '../../config';
 import { Icon } from 'react-native-elements';
+import SimpleDialog from '../../components/SimpleDialog/SimpleDialog';
 
 export default function LoginScreen() {
     const [compatible, isCompatible] = useState(false);
     const [fingerPrints, setFingerPrints] = useState(false);
     /** state get userid from asyncstore */
     const [userIdFromDevice, setUserIdFromDevice] = useState('');
+    const [factoryFromDevice, setFactoryFromDevice] = useState('');
     /** global state get user info */
     const { user, isLoggedIn } = useSelector(state => state.UserReducer);
-    const [isLoginWithAnother, setIsLoginWithAnother] = useState(false);
+    /** state set when user type input */
+    const [userLogin, setUserLogin] = useState({
+        userId: "",
+        password: "",
+        factory: ""
+    });
+
+    /** state call dialog */
+    const [isVisible, setIsVisible] = useState(false);
+    /** state message dialog */
+    const [dialogMessage, setDialogMessage] = useState("");
 
     const navigation = useNavigation();
     const dispatch = useDispatch();
@@ -29,9 +41,34 @@ export default function LoginScreen() {
             setUserIdFromDevice(res.userId)
         }
     })
+    getToken('user').then(res => {
+        if (res != undefined) {
+            // console.log(res)
+            res = JSON.parse(res);
+            setFactoryFromDevice(res.factory)
+        }
+    })
+    const checkConditionLogin = (user) => {
+        if (user.userId == "") {
+            setIsVisible(true);
+            setDialogMessage("Vui lòng nhập số thẻ!")
+            return false;
+        }
+        if (user.password == "") {
+            setIsVisible(true);
+            setDialogMessage("Vui lòng nhập mật khẩu!")
+            return false;
+        }
+        if (user.factory == "") {
+            setIsVisible(true);
+            setDialogMessage("Vui lòng chọn nhà máy!")
+            return false;
+        }
+        return true;
+    }
     useEffect(() => {
         //reload component when user click "login with another userid"
-    }, [isLoginWithAnother])
+    }, [userIdFromDevice, factoryFromDevice])
     useEffect(() => {
         checkDeviceForHardware();
         checkForFingerprints();
@@ -53,21 +90,22 @@ export default function LoginScreen() {
                 dispatch({
                     type: 'LOGIN_FINGER'
                 })
-                navigation.navigate('Home');
-                // console.log('okokok');
+                navigation.navigate('MainTab');
             }
         })
     };
-    const [userLogin, setUserLogin] = useState({
-        userId: "",
-        password: ""
-    });
-    const login = () => {
-        let action = loginAction(userLogin, navigation);
-        if (userIdFromDevice != '') {
-            action = loginAction({ userId: userIdFromDevice, password: userLogin.password }, navigation)
+
+    const login = async () => {
+        if (userIdFromDevice != '' && factoryFromDevice != '') {
+            let action = loginAction({ userId: userIdFromDevice, password: userLogin.password, factory: factoryFromDevice }, navigation)
+            dispatch(action)
+        } else {
+            if (checkConditionLogin(userLogin)) {
+                let action = loginAction(userLogin, navigation);
+                dispatch(action);
+            }
         }
-        dispatch(action);
+
     }
     const [factory, setFactory] = useState({
         value: '',
@@ -79,20 +117,29 @@ export default function LoginScreen() {
         selectedList: [],
         error: '',
     });
+    const confirmWithCondition = () => {
+
+    }
     const loginWithAnotherUserId = () => {
+        setIsVisible(true);
+        setDialogMessage("Bạn có chắc chắn muốn đặng nhập với số thẻ khác!");
         deleteToken('accessToken').then((res) => {
             deleteToken('user').then((ress) => {
-                setIsLoginWithAnother(true);
+                setFactoryFromDevice('');
+                setUserIdFromDevice('');
+
             })
         })
+
     }
     return (
         <PaperProvider>
+            <SimpleDialog visible={isVisible} setVisible={setIsVisible} message={dialogMessage} />
             <ImageBackground source={require('../../assets/images/bg_login2.png')} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
                 <View>
-                    <Text style={[styles.td, { marginTop: 20 }]}>
+                    {/* <Text style={[styles.td, { marginTop: 20 }]}>
                         LYV APP
-                    </Text>
+                    </Text> */}
                 </View>
                 <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 10 }}>
                     <Image
@@ -112,7 +159,7 @@ export default function LoginScreen() {
                         setUserLogin({ ...userLogin, "password": val });
                     }} />
 
-                    <PaperSelect
+                    {factoryFromDevice == "" ? <PaperSelect
                         label="FACTORY"
                         value={factory.value}
                         outlineColor="gray"
@@ -125,6 +172,10 @@ export default function LoginScreen() {
                                 selectedList: value.selectedList,
                                 error: '',
                             });
+                            setUserLogin({
+                                ...userLogin,
+                                factory: value.text
+                            })
                         }}
                         arrayList={[...factory.list]}
                         selectedArrayList={factory.selectedList}
@@ -135,7 +186,7 @@ export default function LoginScreen() {
                         checkboxLabelStyle={{ color: '#0D4A85', fontWeight: '700' }}
                         textInputBackgroundColor="white"
                         textInputColor="#0D4A85"
-                    />
+                    /> : null}
 
                     <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
                         <TouchableOpacity style={userIdFromDevice != '' && compatible && fingerPrints ? [styles.btndn] : [styles.btndn, { width: '100%', borderRadius: 5 }]} onPress={() => login()}><Text style={styles.textbtndn}>ĐĂNG NHẬP</Text></TouchableOpacity>
@@ -168,8 +219,6 @@ export default function LoginScreen() {
                         </Text>
                     </View>
                 </View>
-
-
             </ImageBackground >
         </PaperProvider>
     )
@@ -200,7 +249,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 10
     }, btndn: {
-        marginTop: 30,
+        marginTop: 10,
         width: '80%',
         height: 55,
         backgroundColor: '#0D4A85',

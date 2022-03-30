@@ -10,8 +10,6 @@ export default function Salary() {
     const [userIdFromDevice, setUserIdFromDevice] = useState("");
     const [accessToken, setAccessToken] = useState("");
     const { salary, indexScreen } = useSelector(state => state.UserReducer);
-    const [salaryTest, setSalaryTest] = useState([]);
-    console.log(salary.Final_Salary);
     const navigation = useNavigation();
     const dispatch = useDispatch();
     getToken('user').then(res => {
@@ -29,17 +27,6 @@ export default function Salary() {
     })
     const formatNum = (num) => {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
-    }
-    const getSalary = async () => {
-        try {
-            let result = await axios({
-                method: 'GET',
-                url: BASE_URL + 'salary/29975'
-            })
-            setSalaryTest(result.data);
-        } catch (e) {
-            console.log(e)
-        }
     }
     useEffect(() => {
         if (salary == "") {

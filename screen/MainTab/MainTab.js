@@ -36,7 +36,7 @@ const MainTab = () => {
             setactive(e.data.state.index);
         },
     }}>
-        <Tab.Screen name="Home" component={HomeScreen}
+        <Tab.Screen name="HomeScreen" component={HomeScreen}
             options={{
                 tabBarIcon: () => (
                     <Icon name="home" type='feather' color={active == 0 ? '#0D4A85' : '#ccc'} size={active == 0 ? 30 : 26} />

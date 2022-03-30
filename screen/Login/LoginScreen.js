@@ -10,6 +10,7 @@ import { loginAction } from '../../redux/actions/UserAction';
 import { useNavigation } from '@react-navigation/native';
 import { deleteToken, getToken } from '../../config';
 import { Icon } from 'react-native-elements';
+import SimpleDialog from '../../components/SimpleDialog/SimpleDialog';
 
 export default function LoginScreen() {
     const [compatible, isCompatible] = useState(false);
@@ -19,7 +20,17 @@ export default function LoginScreen() {
     /** global state get user info */
     const { user, isLoggedIn } = useSelector(state => state.UserReducer);
     const [isLoginWithAnother, setIsLoginWithAnother] = useState(false);
-
+    /** state set when user type input */
+    const [userLogin, setUserLogin] = useState({
+        userId: "",
+        password: "",
+        factory: ""
+    });
+    /** state call dialog */
+    const [isVisible, setIsVisible] = useState(false);
+    const toggleDialog = () => {
+        setIsVisible(!isVisible);
+    }
     const navigation = useNavigation();
     const dispatch = useDispatch();
     getToken('user').then(res => {
@@ -53,21 +64,23 @@ export default function LoginScreen() {
                 dispatch({
                     type: 'LOGIN_FINGER'
                 })
-                navigation.navigate('Home');
+                navigation.navigate('MainTab');
                 // console.log('okokok');
             }
         })
     };
-    const [userLogin, setUserLogin] = useState({
-        userId: "",
-        password: ""
-    });
+
     const login = () => {
-        let action = loginAction(userLogin, navigation);
-        if (userIdFromDevice != '') {
-            action = loginAction({ userId: userIdFromDevice, password: userLogin.password }, navigation)
+        if (userLogin.factory == "") {
+            alert('please choose factory!')
+        } else {
+            let action = loginAction(userLogin, navigation);
+            if (userIdFromDevice != '') {
+                action = loginAction({ userId: userIdFromDevice, password: userLogin.password }, navigation)
+            }
+            dispatch(action);
         }
-        dispatch(action);
+
     }
     const [factory, setFactory] = useState({
         value: '',
@@ -88,11 +101,12 @@ export default function LoginScreen() {
     }
     return (
         <PaperProvider>
+            <SimpleDialog />
             <ImageBackground source={require('../../assets/images/bg_login2.png')} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
                 <View>
-                    <Text style={[styles.td, { marginTop: 20 }]}>
+                    {/* <Text style={[styles.td, { marginTop: 20 }]}>
                         LYV APP
-                    </Text>
+                    </Text> */}
                 </View>
                 <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 10 }}>
                     <Image
@@ -125,6 +139,10 @@ export default function LoginScreen() {
                                 selectedList: value.selectedList,
                                 error: '',
                             });
+                            setUserLogin({
+                                ...userLogin,
+                                factory: value.text
+                            })
                         }}
                         arrayList={[...factory.list]}
                         selectedArrayList={factory.selectedList}
@@ -168,8 +186,6 @@ export default function LoginScreen() {
                         </Text>
                     </View>
                 </View>
-
-
             </ImageBackground >
         </PaperProvider>
     )

@@ -30,17 +30,6 @@ export default function Salary() {
     const formatNum = (num) => {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
     }
-    const getSalary = async () => {
-        try {
-            let result = await axios({
-                method: 'GET',
-                url: BASE_URL + 'salary/29975'
-            })
-            setSalaryTest(result.data);
-        } catch (e) {
-            console.log(e)
-        }
-    }
     useEffect(() => {
         if (salary == "") {
             getToken('user').then(res => {

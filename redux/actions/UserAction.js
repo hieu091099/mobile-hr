@@ -17,7 +17,7 @@ export const loginAction = (userLogin, navigation) => {
                     user: result.data.user,
                     userToken: result.data.accessToken
                 })
-                navigation.navigate('Home');
+                navigation.navigate('MainTab');
             } else {
                 console.log(result.data.message);
             }

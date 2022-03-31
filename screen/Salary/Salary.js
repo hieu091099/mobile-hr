@@ -5,12 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSalaryAction } from '../../redux/actions/UserAction';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import { Icon, ListItem } from 'react-native-elements';
 export default function Salary() {
     const [salaryDetail, setSalaryDetail] = useState();
     const [userIdFromDevice, setUserIdFromDevice] = useState("");
     const [accessToken, setAccessToken] = useState("");
     const { salary, indexScreen } = useSelector(state => state.UserReducer);
     const navigation = useNavigation();
+    const [expandedPlus, setExpandedPlus] = useState(true);
+    const [expandedMinus, setExpandedMinus] = useState(true);
     const dispatch = useDispatch();
     getToken('user').then(res => {
         if (res != "" || res != undefined) {
@@ -45,17 +48,16 @@ export default function Salary() {
             })
         }
     }, []);
-
     return (
-        <View style={{ display: 'flex', alignItems: 'center', marginTop: 20, backgroundColor: '#F7F7F7' }}>
-            {salary == "" ? <ActivityIndicator size="large" /> : <View style={{ width: '93%', height: '100%' }}>
+        <View style={{ alignItems: 'center', marginTop: 20, backgroundColor: '#F7F7F7' }}>
+            {salary == "" ? <View style={{ height: '100%', width: '100%', backgroundColor: 'white' }}><ActivityIndicator style={{ marginTop: '25%' }} size={65} color="#0D4A85" /></View> : <View style={{ width: '93%', height: '100%' }}>
                 <View style={styles.total}>
                     <View style={styles.total1}>
                         <View style={styles.totalMonth}>
                             <Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 16 }}>Tổng lương nhận tháng này</Text>
 
-                            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 35 }}>{salary?.Final_Salary != "" ? formatNum(salary.Final_Salary) : ''} VNĐ</Text>
-                            {/* <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 35 }}>1.000.000.000 VNĐ</Text> */}
+                            {/* <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 35 }}>{salary?.Final_Salary != "" ? formatNum(salary.Final_Salary) : ''} VNĐ</Text> */}
+                            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 35 }}>1.000.000.000 VNĐ</Text>
                         </View>
                     </View>
                     <View style={styles.total1}>
@@ -79,8 +81,8 @@ export default function Salary() {
                         </View>
                     </View>
                 </View>
-                <Text style={{ marginTop: 10, fontWeight: 'bold', fontSize: 20, letterSpacing: 3 }}>Chi tiết </Text>
-                <ScrollView stickyHeaderIndices={[0, 2]} style={styles.detailSalary}>
+                <Text style={{ marginTop: 10, fontWeight: 'bold', fontSize: 20, letterSpacing: 1 }}>Chi tiết </Text>
+                {/* <ScrollView stickyHeaderIndices={[0, 2]} style={styles.detailSalary}>
                     <View style={{ backgroundColor: '#0D4A85', paddingLeft: 10, borderRadius: 5 }}>
                         <Text style={{ paddingVertical: 10, fontWeight: 'bold', fontSize: 18, letterSpacing: 3, color: 'white' }}>KHOẢN CỘNG </Text>
                     </View>
@@ -122,8 +124,218 @@ export default function Salary() {
                         <View style={styles.rowsalary}><Text style={styles.leftsalary}>Thuế TNCN</Text><Text style={styles.rightsalary}>{formatNum(salary?.Person_Income_Tax_Money)} VND</Text></View>
                     </View>
 
-                    {/* </View> */}
-                </ScrollView>
+                </ScrollView> */}
+
+                <ListItem.Accordion
+                    style={{ backgroundColor: 'blue', color: 'bue' }}
+                    content={
+                        <>
+                            <ListItem.Content>
+                                <ListItem.Title>KHOẢN CỘNG</ListItem.Title>
+                            </ListItem.Content>
+                        </>
+                    }
+                    isExpanded={expandedPlus}
+                    onPress={() => {
+                        setExpandedPlus(!expandedPlus);
+                    }}
+                >
+                    <ScrollView>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Lương chính </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Main_Salary)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > PC công việc </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Responsibility_Allowance + salary?.Language_Allowance + salary?.Other_Allowance)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > PC độc hại </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > PC VSMT </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > PC An toàn viên </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > PC PCCC </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Lương + PC </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Salary_And_Allowance)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Lương tháng </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Salary_Of_Month)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Tiền làm thêm </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Overtime_Pay)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > PC ca đêm </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Night_Working_Money)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Tiền ngừng việc(NV1) </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Tiền ngừng việc(NV2) </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Tiền ngừng việc(NV3) </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Tiền chuyên cần </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Hard_Working)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Phí sinh hoạt </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Living_Costs)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Tiền bình bầu </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Rating_Money)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Tiền nghỉ phép </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.P_R_Money)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Tiền nghỉ lễ </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Holiday_Money)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Thưởng bình bầu năm </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Yearly_Rating)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Tiền SLĐ1 </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Serving_Pay_1)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Tiền SLĐ2 </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Serving_Pay_2)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Tiền khác </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Other_Pay)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Tiền hổ trợ phí SH </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Serving_Pay_1)} VND</ListItem.Title>
+                        </ListItem>
+                    </ScrollView>
+                </ListItem.Accordion>
+                <ListItem.Accordion
+                    content={
+                        <>
+                            {/* <Icon name="place" size={30} /> */}
+                            <ListItem.Content>
+                                <ListItem.Title>KHOẢN TRỪ</ListItem.Title>
+                            </ListItem.Content>
+                        </>
+                    }
+                    isExpanded={expandedMinus}
+                    onPress={() => {
+                        setExpandedMinus(!expandedMinus);
+                    }}
+                >
+                    <ScrollView>
+
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Tạm ứng </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Advance_Payment)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Tiền BHXH </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Social_Insurance)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Tiền BHYT </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Health_Insurance)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Tiền BHTN </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Unemployment_Insurance)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Đoàn phí </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Union_Pay)} VND</ListItem.Title>
+                        </ListItem>
+                        <ListItem bottomDivider>
+                            <ListItem.Content>
+                                <ListItem.Title > Thuế TNCN </ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Title>{formatNum(salary?.Person_Income_Tax_Money)} VND</ListItem.Title>
+                        </ListItem>
+                    </ScrollView>
+                </ListItem.Accordion>
+
             </View>}
 
         </View>
@@ -135,7 +347,6 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '28%',
         backgroundColor: '#0D4A85',
-        display: 'flex',
         justifyContent: 'space-evenly',
         borderRadius: 8
     },
@@ -144,14 +355,13 @@ const styles = StyleSheet.create({
         height: 60,
         paddingHorizontal: 10
     }, totalMonth: {
-        display: 'flex'
+
     }, detailSalary: {
         width: '100%',
         height: '100%',
         backgroundColor: 'white',
         marginTop: '5%'
     }, rowsalary: {
-        display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -166,17 +376,14 @@ const styles = StyleSheet.create({
         color: '#2C3667'
     },
     threecolunm: {
-        display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         height: '100%'
 
     }, colunm: {
         width: '30%',
-        display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
     }
 });
-
 

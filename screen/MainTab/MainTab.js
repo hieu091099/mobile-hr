@@ -20,7 +20,7 @@ const Profile = () => {
     </View>
 }
 const MainTab = () => {
-    const [active, setactive] = useState();
+    const [active, setActive] = useState();
     const dispatch = useDispatch();
     return <Tab.Navigator screenOptions={{
         headerShown: false,
@@ -33,18 +33,18 @@ const MainTab = () => {
                 type: 'CHANGE_SCREEN',
                 indexScreen: e.data.state.index
             })
-            setactive(e.data.state.index);
+            setActive(e.data.state.index);
         },
     }}>
         <Tab.Screen name="HomeScreen" component={HomeScreen}
             options={{
                 tabBarIcon: () => (
-                    <Icon name="home" type='feather' color={active == 0 ? '#0D4A85' : '#ccc'} size={active == 0 ? 30 : 26} />
+                    <Icon name="home" type='ant-design' color={active == 0 ? '#0D4A85' : '#ccc'} size={active == 0 ? 30 : 26} />
                 ),
             }} />
         <Tab.Screen name="Salary" component={Salary} options={{
             tabBarIcon: () => (
-                <Icon name="money" type='font-awesome' color={active == 1 ? '#0D4A85' : '#ccc'} size={active == 1 ? 30 : 26} />
+                <Icon name="wallet" type='ant-design' color={active == 1 ? '#0D4A85' : '#ccc'} size={active == 1 ? 30 : 26} />
             ),
         }} />
         <Tab.Screen name="Contact" component={Contact} options={{

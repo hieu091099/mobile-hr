@@ -19,9 +19,8 @@ export default function LoginScreen() {
     const [userIdFromDevice, setUserIdFromDevice] = useState('');
     const [factoryFromDevice, setFactoryFromDevice] = useState('');
     const [cancel, setCancel] = useState(false);
-
     /** global state get user info */
-    const { user, isLoggedIn } = useSelector(state => state.UserReducer);
+    const { user, isLoggedIn, isVisibleLogin, messageLoginResponse } = useSelector(state => state.UserReducer);
     /** state set when user type input */
     const [userLogin, setUserLogin] = useState({
         userId: "",
@@ -38,44 +37,46 @@ export default function LoginScreen() {
     const dispatch = useDispatch();
     getToken('user').then(res => {
         if (res != undefined) {
-            // console.log(res)
             res = JSON.parse(res);
             setUserIdFromDevice(res.userId)
         }
     })
     getToken('user').then(res => {
         if (res != undefined) {
-            // console.log(res)
             res = JSON.parse(res);
             setFactoryFromDevice(res.factory)
         }
     })
+    const setVisibleDispatch = () => {
+        dispatch({
+            type: 'CLOSE_DIALOG_LOGIN',
+        })
+    }
     const checkConditionLogin = (user) => {
-        setIsVisible(true);
+        setCancel(false);
         if (user.userId == "") {
-            setCancel(false);
+            setIsVisible(true);
             setDialogMessage("Vui lòng nhập số thẻ!")
             return false;
         }
         if (user.password == "") {
-            setCancel(false);
+            setIsVisible(true);
             setDialogMessage("Vui lòng nhập mật khẩu!")
             return false;
         }
         if (user.factory == "") {
-            setCancel(false);
+            setIsVisible(true);
             setDialogMessage("Vui lòng chọn nhà máy!")
             return false;
         }
         return true;
     }
-    useEffect(() => {
-        //reload component when user click "login with another userid"
-    }, [userIdFromDevice, factoryFromDevice])
+
+
     useEffect(() => {
         checkDeviceForHardware();
         checkForFingerprints();
-    }, [])
+    }, [userIdFromDevice, factoryFromDevice, userLogin])
 
     const checkDeviceForHardware = async () => {
         let compatible = await LocalAuthentication.hasHardwareAsync();
@@ -104,7 +105,7 @@ export default function LoginScreen() {
             dispatch(action)
         } else {
             if (checkConditionLogin(userLogin)) {
-                let action = loginAction(userLogin, navigation);
+                let action = loginAction(userLogin, navigation, setIsVisible, setDialogMessage);
                 dispatch(action);
             }
         }
@@ -125,7 +126,6 @@ export default function LoginScreen() {
             deleteToken('user').then((ress) => {
                 setFactoryFromDevice('');
                 setUserIdFromDevice('');
-
             })
         })
     }
@@ -137,6 +137,8 @@ export default function LoginScreen() {
     return (
         <PaperProvider>
             <SimpleDialog visible={isVisible} setVisible={setIsVisible} message={dialogMessage} cancel={cancel} confirmWithCondition={confirmWithCondition} />
+            {/* dialog for login response error */}
+            <SimpleDialog visible={isVisibleLogin} setVisible={setVisibleDispatch} message={messageLoginResponse} />
             <ImageBackground source={require('../../assets/images/bg_login2.png')} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
                 <View>
                     {/* <Text style={[styles.td, { marginTop: 20 }]}>

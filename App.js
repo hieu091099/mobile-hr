@@ -47,6 +47,7 @@ export default function App() {
             headerShown: false,
             animation: 'slide_from_right'
           }} >
+
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="MainTab" component={MainTab} />
           </Stack.Navigator>
@@ -56,4 +57,3 @@ export default function App() {
 
   );
 }
-

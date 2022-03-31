@@ -20,6 +20,11 @@ export const loginAction = (userLogin, navigation) => {
                 navigation.navigate('MainTab');
             } else {
                 console.log(result.data.message);
+                dispatch({
+                    type: 'LOGIN_FAIL',
+                    messageLoginResponse: result.data.message
+                })
+
             }
         } catch (e) {
             console.log(e)

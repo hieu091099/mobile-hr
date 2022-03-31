@@ -4,7 +4,9 @@ const stateDefault = {
     userToken: '',
     isLoggedIn: false,
     salary: [],
-    indexScreen: ''
+    indexScreen: '',
+    isVisibleLogin: false,
+    messageLoginResponse: '',
 }
 
 export const UserReducer = (state = stateDefault, action) => {
@@ -13,6 +15,15 @@ export const UserReducer = (state = stateDefault, action) => {
             state.user = action.user;
             state.userToken = action.userToken;
             state.isLoggedIn = true;
+            return { ...state };
+        }
+        case 'LOGIN_FAIL': {
+            state.isVisibleLogin = true;
+            state.messageLoginResponse = action.messageLoginResponse;
+            return { ...state };
+        }
+        case 'CLOSE_DIALOG_LOGIN': {
+            state.isVisibleLogin = false;
             return { ...state };
         }
         case 'LOGOUT': {

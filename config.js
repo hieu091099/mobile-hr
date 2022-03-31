@@ -1,13 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-
+import * as SecureStore from 'expo-secure-store';
 
 export const BASE_URL = "http://192.168.18.172:8000/";
 
 
 export const getToken = async (key) => {
     try {
-        const value = await AsyncStorage.getItem(key);
+        const value = await SecureStore.getItemAsync(key);
         if (value !== null) {
             return value;
         }
@@ -18,7 +18,7 @@ export const getToken = async (key) => {
 
 export const setToken = async (key, value) => {
     try {
-        await AsyncStorage.setItem(key, value);
+        await SecureStore.setItemAsync(key, value);
     } catch (e) {
         console.log(e);
     }
@@ -26,7 +26,7 @@ export const setToken = async (key, value) => {
 
 export const deleteToken = async (key) => {
     try {
-        const value = await AsyncStorage.removeItem(key);
+        const value = await SecureStore.deleteItemAsync(key);
         if (value !== null) {
             return value;
         }

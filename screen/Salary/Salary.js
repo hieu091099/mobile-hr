@@ -140,7 +140,7 @@ export default function Salary() {
                         setExpandedPlus(!expandedPlus);
                     }}
                 >
-                    <ScrollView>
+                    <ScrollView style={{ height: '60%' }}>
                         <ListItem bottomDivider>
                             <ListItem.Content>
                                 <ListItem.Title > Lương chính </ListItem.Title>

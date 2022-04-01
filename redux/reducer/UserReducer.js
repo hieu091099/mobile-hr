@@ -1,3 +1,4 @@
+import { getToken } from "../../config";
 
 const stateDefault = {
     user: [],
@@ -33,6 +34,15 @@ export const UserReducer = (state = stateDefault, action) => {
             return { ...state };
         }
         case 'LOGIN_FINGER': {
+            let user = [];
+            getToken('user').then((res) => {
+                if (res != null) {
+                    console.log('test', res)
+                    res = JSON.parse(res);
+                    user.push(res);
+                }
+            })
+            state.user = user;
             state.isLoggedIn = true;
             return { ...state };
         }
@@ -42,6 +52,11 @@ export const UserReducer = (state = stateDefault, action) => {
         }
         case 'CHANGE_SCREEN': {
             state.indexScreen = action.indexScreen;
+            return { ...state };
+        }
+        case 'LOGOUT': {
+            state.user = [];
+            state.isLoggedIn = false;
             return { ...state };
         }
         default: return { ...state }

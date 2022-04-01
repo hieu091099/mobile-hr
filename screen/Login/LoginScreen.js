@@ -78,6 +78,11 @@ export default function LoginScreen() {
         checkForFingerprints();
     }, [userIdFromDevice, factoryFromDevice, userLogin])
 
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigation.navigate('MainTab');
+        }
+    }, [isLoggedIn])
     const checkDeviceForHardware = async () => {
         let compatible = await LocalAuthentication.hasHardwareAsync();
         isCompatible(compatible);

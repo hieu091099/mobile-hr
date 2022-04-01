@@ -3,31 +3,34 @@ import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screen/Login/LoginScreen';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { store } from './redux/store';
 import { getToken } from './config';
 import MainTab from './screen/MainTab/MainTab';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import DrawerContent from './screen/Drawer/Drawer';
 
 
 export default function App() {
 
   const Stack = createNativeStackNavigator();
+  const Drawer = createDrawerNavigator();
   const [userIdFromDevice, setUserIdFromDevice] = useState("");
+  const { user } = useSelector(state => state.UserReducer);
+  // console.log({ user });
   useEffect(() => {
     // checkDeviceForHardware();
-    // checkForFingerprints();
-  }, [])
+    // checkForFingerprints();.
+    // getToken('user').then(res => {
+    //   if (res != undefined) {
+    //     res = JSON.parse(res);
+    //     setUserIdFromDevice(res.userId)
+    //   }
+    // })
+  }, [user])
 
-  getToken('user').then(res => {
 
-    // res = res != "" || res != undefined ? JSON.parse(res) : '';
-    // setUserIdFromDevice(res.userId)
-    if (res != undefined) {
-      res = JSON.parse(res);
-      setUserIdFromDevice(res.userId)
-    }
-  })
   const theme = {
     ...DefaultTheme,
     roundness: 2,
@@ -39,21 +42,27 @@ export default function App() {
   };
 
   return (
-    <Provider store={store}>
-      <PaperProvider theme={theme}>
-        <NavigationContainer>
-          <StatusBar hidden />
+    <PaperProvider theme={theme}>
+      <NavigationContainer>
+        <StatusBar hidden />
+        {user != "" ?
+          <Drawer.Navigator screenOptions={{
+            headerShown: false,
+            animation: 'slide_from_right'
+          }} drawerContent={props => <DrawerContent {...props} />}>
+            <Drawer.Screen name="MainTab" component={MainTab} />
+          </Drawer.Navigator> :
           <Stack.Navigator screenOptions={{
             headerShown: false,
             animation: 'slide_from_right'
           }} >
-
             <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="MainTab" component={MainTab} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </PaperProvider>
-    </Provider>
+          </Stack.Navigator>}
+
+
+      </NavigationContainer>
+    </PaperProvider>
+
 
   );
 }

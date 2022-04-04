@@ -71,15 +71,13 @@ export default function LoginScreen() {
         }
         return true;
     }
-
-
     useEffect(() => {
         checkDeviceForHardware();
         checkForFingerprints();
-        return () => {
-            setFingerPrints(false);
-            isCompatible(false)
-        }
+        // return () => {
+        //     setFingerPrints(false);
+        //     isCompatible(false)
+        // }
     }, [])
 
     useEffect(() => {

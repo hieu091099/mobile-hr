@@ -10,7 +10,7 @@ export default function Salary() {
     const [salaryDetail, setSalaryDetail] = useState();
     const [userIdFromDevice, setUserIdFromDevice] = useState("");
     const [accessToken, setAccessToken] = useState("");
-    const { salary, indexScreen } = useSelector(state => state.UserReducer);
+    const { salary } = useSelector(state => state.UserReducer);
     const navigation = useNavigation();
     const [expandedPlus, setExpandedPlus] = useState(true);
     const [expandedMinus, setExpandedMinus] = useState(true);

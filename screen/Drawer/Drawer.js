@@ -2,15 +2,18 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import React from 'react'
 import { Drawer } from 'react-native-paper';
-import { Icon } from 'react-native-elements';
+// import { Icon } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 export default function DrawerContent(props) {
     const dispatch = useDispatch();
-    const logout = () => {
+    const logout = (props) => {
         dispatch({
             type: 'LOGOUT',
         })
+        props.navigation.closeDrawer()
     }
     return (
         <ScrollView>
@@ -21,14 +24,14 @@ export default function DrawerContent(props) {
                 <Drawer.Section >
                     <DrawerItem
                         icon={({ color, size }) => (
-                            <Icon
-                                name="exit-to-app"
-                                color="blue"
-                                size={26}
+                            <Ionicons
+                                name="log-out-outline"
+                                color={color}
+                                size={size}
                             />
                         )}
                         label="Đăng Xuất"
-                        onPress={() => { logout() }}
+                        onPress={() => { logout(props) }}
                     />
                 </Drawer.Section>
             </SafeAreaView>

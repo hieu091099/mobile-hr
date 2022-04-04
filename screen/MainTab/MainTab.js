@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../Home/HomeScreen';
 import Salary from '../Salary/Salary';
-import { Icon } from 'react-native-elements';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import HeaderHomeScreen from '../../components/HeaderHomeScreen/HeaderHomeScreen';
 // import { Icon } from 'react-native-vector-icons/Icon';
 const Tab = createBottomTabNavigator();
 
@@ -20,54 +20,76 @@ const Profile = () => {
         <Text>Profile</Text>
     </View>
 }
+const optionsHeader = {
+    headerStyle: { height: 65, borderBottomLeftRadius: 10, borderBottomRightRadius: 10 },
+    headerLeft: () => {
+        return <TouchableOpacity
+            onPress={() => alert('Co gi dau ma click, qua ngu ngok haiz!')}
+            style={{
+                marginLeft: 20,
+                // padding: 6,
+                // backgroundColor: '#F5F5F5',
+                // borderRadius: 10
+            }}>
+            <Ionicons name='chevron-back-outline' size={30} />
+        </TouchableOpacity>
+    },
+    headerRight: () => {
+        return <TouchableOpacity
+            onPress={() => alert('Co gi dau ma click, qua ngu ngok haiz!')}
+            style={{
+                marginRight: 20,
+                padding: 6,
+                backgroundColor: '#F5F5F5',
+                borderRadius: 10
+            }}>
+            <Ionicons name='person-circle' size={30} />
+        </TouchableOpacity>
+    },
+    headerTitleAlign: 'center'
+}
 const MainTab = () => {
     const [active, setActive] = useState();
     const dispatch = useDispatch();
     return <Tab.Navigator screenOptions={({ route }) => ({
-        tabBarShowLabel: false,
-        // tabBarActiveBackgroundColor: '#0D4A85',
-        // tabBarActiveTintColor: 'white',
-        headerShown: false,
+        tabBarActiveTintColor: 'black',
+        // tabBarLabelStyle: { color: 'black' },
         animation: 'slide_from_right',
         labelStyle: {
             fontSize: 12,
         },
-        style: {
-            backgroundColor: 'blue',
+        tabBarStyle: {
+            borderTopLeftRadius: 10,
+            borderTopRightRadius: 10,
+            paddingBottom: 5,
+            paddingTop: 5
         },
         tabBarIcon: ({ focused, color, size }) => {
             let iconName;
-            // console.log({ focused })
-            size = focused ? size + 4 : size;
+            color = focused ? 'black' : 'gray';
             if (route.name === 'HomeScreen') {
                 iconName = focused
                     ? 'home'
                     : 'home-outline';
-
             } else if (route.name === 'Salary') {
-                iconName = focused ? 'flashlight' : 'flashlight-outline';
+                iconName = focused ? 'wallet-sharp' : 'wallet-outline';
             } else if (route.name === 'Contact') {
                 iconName = focused ? 'easel' : 'easel-outline';
             } else if (route.name === 'Profile') {
                 iconName = focused ? 'earth-sharp' : 'earth-outline';
             }
-            return <Ionicons name={iconName} size={size} color="#0D4A85" />;
+            return <Ionicons name={iconName} size={size} color={color} />;
         }
     })} screenListeners={{
         state: (e) => {
-            // Do something with the state
-            // console.log('state changed', e.data.state.index);
-            dispatch({
-                type: 'CHANGE_SCREEN',
-                indexScreen: e.data.state.index
-            })
-            setActive(e.data.state.index);
+            // console.log(e.data.state)
+            // setActive(e.data.state.index);
         },
     }} >
-        <Tab.Screen name="HomeScreen" component={HomeScreen} />
-        <Tab.Screen name="Salary" component={Salary} />
-        <Tab.Screen name="Contact" component={Contact} />
-        <Tab.Screen name="Profile" component={Profile} />
+        <Tab.Screen name="HomeScreen" component={HomeScreen} options={{ tabBarLabel: 'Home', header: () => (<HeaderHomeScreen />) }} />
+        <Tab.Screen name="Salary" component={Salary} options={optionsHeader} />
+        <Tab.Screen name="Contact" component={Contact} options={optionsHeader} />
+        <Tab.Screen name="Profile" component={Profile} options={optionsHeader} />
     </Tab.Navigator>
 }
 export default MainTab;

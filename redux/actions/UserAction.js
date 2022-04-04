@@ -17,14 +17,12 @@ export const loginAction = (userLogin, navigation) => {
                     user: result.data.user,
                     userToken: result.data.accessToken
                 })
-
             } else {
                 console.log(result.data.message);
                 dispatch({
                     type: 'LOGIN_FAIL',
                     messageLoginResponse: result.data.message
                 })
-
             }
         } catch (e) {
             console.log(e)
@@ -34,7 +32,6 @@ export const loginAction = (userLogin, navigation) => {
 }
 
 export const getSalaryAction = (personId, accessToken) => {
-
     return async (dispatch) => {
         // console.log(personId)
         try {
@@ -44,12 +41,10 @@ export const getSalaryAction = (personId, accessToken) => {
             //     url: BASE_URL + 'salary/29975'
             // })
             console.log(result.data);
-
             dispatch({
                 type: 'GET_SALARY',
                 salary: result.data
             })
-
         } catch (e) {
             console.log(e)
         }

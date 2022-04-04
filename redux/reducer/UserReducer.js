@@ -5,7 +5,7 @@ const stateDefault = {
     userToken: '',
     isLoggedIn: false,
     salary: [],
-    indexScreen: '',
+    // indexScreen: '',
     isVisibleLogin: false,
     messageLoginResponse: '',
 }
@@ -42,15 +42,10 @@ export const UserReducer = (state = stateDefault, action) => {
             state.salary = action.salary;
             return { ...state };
         }
-        case 'CHANGE_SCREEN': {
-            state.indexScreen = action.indexScreen;
-            return { ...state };
-        }
-        case 'LOGOUT': {
-            state.user = [];
-            state.isLoggedIn = false;
-            return { ...state };
-        }
+        // case 'CHANGE_SCREEN': {
+        //     state.indexScreen = action.indexScreen;
+        //     return { ...state };
+        // }
         default: return { ...state }
     }
 }

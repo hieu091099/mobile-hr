@@ -3,13 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screen/Login/LoginScreen';
-import { Provider, useSelector } from 'react-redux';
-import { store } from './redux/store';
-import { getToken } from './config';
+import { useSelector } from 'react-redux';
 import MainTab from './screen/MainTab/MainTab';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import DrawerContent from './screen/Drawer/Drawer';
+import { View, TouchableOpacity, Text } from 'react-native';
+import HeaderHomeScreen from './components/HeaderHomeScreen/HeaderHomeScreen';
 
 
 export default function App() {

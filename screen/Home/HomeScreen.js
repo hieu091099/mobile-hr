@@ -1,4 +1,4 @@
-import { View, Text, Button, ScrollView, StyleSheet, Image } from 'react-native'
+import { View, Text, Button, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native';
@@ -36,19 +36,19 @@ export default function HomeScreen() {
     })
     return (
         <View style={{ backgroundColor: '#F2F6F9', height: '100%', width: '100%' }}>
-            <View style={styles.header}>
+            {/* <View style={styles.header}>
                 <Text style={{ color: '#B8BBC7' }}>Chào {User?.fullName} !</Text>
                 <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 5, color: '#2D5881' }}>LACTY COMPANY</Text>
-            </View>
+            </View> */}
 
             <View style={styles.menu}>
                 <View style={styles.chuamenu}>
-                    <View style={styles.boxmenu}>
+                    <TouchableOpacity onPress={() => navigation.navigate("Salary")} style={styles.boxmenu}>
                         <View style={styles.boxmenuimg} >
                             <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
                         </View>
                         <Text style={styles.menutext}>Lương</Text>
-                    </View>
+                    </TouchableOpacity>
                     <View style={styles.boxmenu}>
                         <View style={styles.boxmenuimg}>
                             <Image style={styles.menuimg} source={require('../../assets/images/menu_book.png')} />
@@ -81,50 +81,8 @@ export default function HomeScreen() {
                     </View>
                 </View>
             </View>
-            <Text style={{ paddingHorizontal: 20, marginVertical: 10, fontSize: 18, fontWeight: 'bold' }}>Cập nhật mới nhất</Text>
-            <ScrollView style={{ height: '10%' }}>
-                <View style={{ height: '100%', paddingHorizontal: 10 }}>
-                    <View style={styles.tb}>
-                        <Text style={styles.typetb}>Thông báo</Text>
-                        <Text style={styles.titletb}>Thực đơn từ 17/03/2022 - 19/03/2022</Text>
-                    </View>
-                    <View style={styles.tb}>
-                        <Text style={styles.typetb}>Khảo sát</Text>
-                        <Text style={styles.titletb}>Lấy ý kiến về việc abcdxyz</Text>
-                    </View>
-                    <View style={styles.tb}>
-                        <Text style={styles.typetb}>Thông báo</Text>
-                        <Text style={styles.titletb}>Thực đơn từ 17/03/2022 - 19/03/2022</Text>
-                    </View>
-                    <View style={styles.tb}>
-                        <Text style={styles.typetb}>Khảo sát</Text>
-                        <Text style={styles.titletb}>Lấy ý kiến về việc abcdxyz</Text>
-                    </View>
-                    <View style={styles.tb}>
-                        <Text style={styles.typetb}>Thông báo</Text>
-                        <Text style={styles.titletb}>Thực đơn từ 17/03/2022 - 19/03/2022</Text>
-                    </View>
-                    <View style={styles.tb}>
-                        <Text style={styles.typetb}>Khảo sát</Text>
-                        <Text style={styles.titletb}>Lấy ý kiến về việc abcdxyz</Text>
-                    </View>
-                    <View style={styles.tb}>
-                        <Text style={styles.typetb}>Thông báo</Text>
-                        <Text style={styles.titletb}>Thực đơn từ 17/03/2022 - 19/03/2022</Text>
-                    </View>
-                    <View style={styles.tb}>
-                        <Text style={styles.typetb}>Khảo sát</Text>
-                        <Text style={styles.titletb}>Lấy ý kiến về việc abcdxyz</Text>
-                    </View>
-
-
-
-                </View>
-            </ScrollView>
         </View >
     )
-
-
 }
 const styles = StyleSheet.create({
     header: {

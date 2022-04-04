@@ -17,7 +17,7 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   const Drawer = createDrawerNavigator();
   const [userIdFromDevice, setUserIdFromDevice] = useState("");
-  const { user } = useSelector(state => state.UserReducer);
+  const { user, isLoggedIn } = useSelector(state => state.UserReducer);
   // console.log({ user });
   useEffect(() => {
     // checkDeviceForHardware();
@@ -28,7 +28,7 @@ export default function App() {
     //     setUserIdFromDevice(res.userId)
     //   }
     // })
-  }, [user])
+  }, [isLoggedIn])
 
 
   const theme = {
@@ -45,7 +45,7 @@ export default function App() {
     <PaperProvider theme={theme}>
       <NavigationContainer>
         <StatusBar hidden />
-        {user != "" ?
+        {isLoggedIn ?
           <Drawer.Navigator screenOptions={{
             headerShown: false,
             animation: 'slide_from_right'

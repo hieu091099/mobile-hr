@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import { axiosInstance, axiosInstanceToken, BASE_URL, setToken } from "../../config"
+import { axiosInstance, axiosInstanceToken, BASE_URL, getToken, setToken } from "../../config"
 
 
 export const loginAction = (userLogin, navigation) => {
@@ -53,7 +53,21 @@ export const getSalaryAction = (personId, accessToken) => {
         } catch (e) {
             console.log(e)
         }
+    }
+}
 
+export const loginFingerAction = () => {
+    return async (dispatch) => {
+        try {
+            let user = await getToken("user");
+            user = JSON.parse(user);
+            dispatch({
+                type: 'LOGIN_FINGER',
+                user: user
+            })
+        } catch (e) {
+            console.log(e)
+        }
     }
 }
 /** một chiều cuối thu, nghe nắng trong tâm hồn, một hình bóng ai kia gọi mời, một trái tim vừa mở mời, lại gần anh hơn nữa, nhẹ hôn lên tóc em môi kề môi, những ánh mắt trao nhau ngại ngần, bao dấu yêu đã bao lần, Em, anh chỉ cần mỗi em mà thôi. có chi đâu xa xôi, muốn em hôn lên môi, Em, em vờ như không biết tình anh, là những mong manh, là áng mây xanh, nói anh nghe. Có em bên đời bỗng vui, có thêm đôi tình nhân, có thêm đôi bàn tay ân cần, có em bên đời bỗng vui, về đêm nghe tim mình chợt thao thức nhớ em, nhớ đôi vai gầy, nhớ thân thương này, em hỡi */

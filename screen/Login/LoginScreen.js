@@ -6,7 +6,7 @@ import * as LocalAuthentication from 'expo-local-authentication';
 import { PaperSelect } from 'react-native-paper-select';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginAction } from '../../redux/actions/UserAction';
+import { loginAction, loginFingerAction } from '../../redux/actions/UserAction';
 import { useNavigation } from '@react-navigation/native';
 import { deleteToken, getToken } from '../../config';
 import { Icon } from 'react-native-elements';
@@ -23,9 +23,9 @@ export default function LoginScreen() {
     const { user, isLoggedIn, isVisibleLogin, messageLoginResponse } = useSelector(state => state.UserReducer);
     /** state set when user type input */
     const [userLogin, setUserLogin] = useState({
-        userId: "",
-        password: "",
-        factory: ""
+        userId: "30730",
+        password: "050420010115",
+        factory: "LYV"
     });
 
     /** state call dialog */
@@ -76,7 +76,11 @@ export default function LoginScreen() {
     useEffect(() => {
         checkDeviceForHardware();
         checkForFingerprints();
-    }, [userIdFromDevice, factoryFromDevice, userLogin])
+        return () => {
+            setFingerPrints(false);
+            isCompatible(false)
+        }
+    }, [])
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -96,10 +100,9 @@ export default function LoginScreen() {
     const scanFingerprint = async () => {
         await LocalAuthentication.authenticateAsync().then(res => {
             if (res.success) {
-                dispatch({
-                    type: 'LOGIN_FINGER'
-                })
-                navigation.navigate('MainTab');
+                let action = loginFingerAction();
+                dispatch(action);
+
             }
         })
     };
@@ -161,10 +164,10 @@ export default function LoginScreen() {
                     {userIdFromDevice != '' && <Text onPress={() => loginWithAnotherUserId()} style={{ textAlign: 'center', color: 'gray', marginTop: 10 }}>Đăng nhập dưới UserID khác?</Text>}
                 </View>
                 <View style={styles.form}>
-                    {userIdFromDevice == '' ? <TextInput theme={{ colors: { primary: '#0D4A85', underlineColor: 'transparent' } }} label="USERID" mode='outlined' placeholder='Tài khoản' style={[styles.inputlogin, { marginTop: 20 }]} onChangeText={(val) => {
+                    {userIdFromDevice == '' ? <TextInput theme={{ colors: { primary: '#0D4A85', underlineColor: 'transparent' } }} value={userLogin.userId} label="USERID" mode='outlined' placeholder='Tài khoản' style={[styles.inputlogin, { marginTop: 20 }]} onChangeText={(val) => {
                         setUserLogin({ ...userLogin, "userId": val });
                     }} /> : null}
-                    <TextInput theme={{ colors: { primary: '#0D4A85', underlineColor: 'transparent' } }} label="PASSWORD" mode='outlined' secureTextEntry={true} placeholder='Mật khẩu' style={[styles.inputlogin]} onChangeText={(val) => {
+                    <TextInput theme={{ colors: { primary: '#0D4A85', underlineColor: 'transparent' } }} value={userLogin.password} label="PASSWORD" mode='outlined' secureTextEntry={true} placeholder='Mật khẩu' style={[styles.inputlogin]} onChangeText={(val) => {
                         setUserLogin({ ...userLogin, "password": val });
                     }} />
 

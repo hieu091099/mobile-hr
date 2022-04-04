@@ -34,15 +34,7 @@ export const UserReducer = (state = stateDefault, action) => {
             return { ...state };
         }
         case 'LOGIN_FINGER': {
-            let user = [];
-            getToken('user').then((res) => {
-                if (res != null) {
-                    console.log('test', res)
-                    res = JSON.parse(res);
-                    user.push(res);
-                }
-            })
-            state.user = user;
+            state.user = action.user;
             state.isLoggedIn = true;
             return { ...state };
         }

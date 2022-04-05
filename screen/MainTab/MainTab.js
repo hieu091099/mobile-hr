@@ -9,6 +9,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import HeaderHomeScreen from '../../components/HeaderHomeScreen/HeaderHomeScreen';
 import { useNavigation } from '@react-navigation/native';
 
+
 const Tab = createBottomTabNavigator();
 
 const Contact = () => {
@@ -17,12 +18,19 @@ const Contact = () => {
     </View>
 }
 const Profile = () => {
+    const navigation = useNavigation();
     return <View>
-        <Text></Text>
+
     </View>
 }
 const optionsHeader = {
-    headerStyle: { height: 65, borderBottomLeftRadius: 10, borderBottomRightRadius: 10 },
+    headerStyle: {
+        height: 65,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        // borderWidth: 1,
+        // borderColor: 'black'
+    },
     headerLeft: () => {
         const navigation = useNavigation();
         return <TouchableOpacity
@@ -84,7 +92,6 @@ const MainTab = () => {
             } else if (route.name === 'Setting') {
                 // iconName = focused ? 'earth-sharp' : 'earth-outline';
                 iconName = focused ? 'settings' : 'settings-outline';
-
             }
             return <Ionicons name={iconName} size={size} color={color} />;
         }

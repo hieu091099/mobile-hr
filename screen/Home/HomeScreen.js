@@ -3,14 +3,20 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native';
 import { getToken } from '../../config';
+<<<<<<< HEAD
 import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 import { useFonts } from 'expo-font';
 
+=======
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+>>>>>>> 7a09638cc51529052f291f259a4d5c45714f66e3
 export default function HomeScreen() {
     const dispatch = useDispatch();
     const { user, isLoggedIn } = useSelector(state => state.UserReducer);
     const [User, setUser] = useState();
     const navigation = useNavigation();
+<<<<<<< HEAD
  
     // console.log(isLoggedIn);
 
@@ -19,11 +25,15 @@ export default function HomeScreen() {
         // if (!isLoggedIn) {
         //     navigation.navigate('Login');
         // }
+=======
+    let arrName = user?.fullName.split(" ");
+    let firstName = `${arrName[arrName.length - 2]} ${arrName[arrName.length - 1]}`;
+    useEffect(() => {
+>>>>>>> 7a09638cc51529052f291f259a4d5c45714f66e3
         getToken('user').then(res => {
             if (res != "" || res != undefined) {
                 setUser(JSON.parse(res))
             }
-
         })
     }, [isLoggedIn])
     const logout = () => {
@@ -38,72 +48,267 @@ export default function HomeScreen() {
         // console.log({ res });
     })
     return (
+<<<<<<< HEAD
       <View style={{ backgroundColor: '#F2F6F9', height: '100%', width: '100%' }}>
           <Text style={{fontFamily:'PlayBold'}}>Play font</Text>
          
+=======
+        <View style={styles.home}>
+            {/* <View style={styles.menu}>
+                <View style={styles.chuamenu}>
+                    <TouchableOpacity onPress={() => navigation.navigate("Salary")} style={styles.boxmenu}>
+                        <View style={styles.boxmenuimg} >
+                            <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
+                        </View>
+                        <Text style={styles.menutext}>Lương</Text>
+                    </TouchableOpacity>
+                    <View style={styles.boxmenu}>
+                        <View style={styles.boxmenuimg}>
+                            <Image style={styles.menuimg} source={require('../../assets/images/menu_book.png')} />
+                        </View>
+                        <Text style={styles.menutext}>Sổ tay lao động</Text>
+                    </View>
+                    <View style={styles.boxmenu}>
+                        <View style={styles.boxmenuimg}>
+                            <Image style={styles.menuimg} source={require('../../assets/images/menu_chat.png')} />
+                        </View>
+                        <Text style={styles.menutext}>Trò chuyện</Text>
+                    </View>
+                    <View style={styles.boxmenu}>
+                        <View style={styles.boxmenuimg}>
+                            <Image style={styles.menuimg} source={require('../../assets/images/menu_feedback.png')} />
+                        </View>
+                        <Text style={styles.menutext}>Góp ý</Text>
+                    </View>
+                    <View style={styles.boxmenu}>
+                        <View style={styles.boxmenuimg}>
+                            <Image style={styles.menuimg} source={require('../../assets/images/menu_contact.png')} />
+                        </View>
+                        <Text style={styles.menutext}>Liên hệ</Text>
+                    </View>
+                    <View style={styles.boxmenu}>
+                        <View style={styles.boxmenuimg}>
+                            <Image style={styles.menuimg} source={require('../../assets/images/menu_help.png')} />
+                        </View>
+                        <Text style={styles.menutext}>Trợ giúp</Text>
+                    </View>
+                </View>
+            </View> */}
+            <View style={styles.titleHome}>
+                <View>
+                    <Text style={styles.titleName}>Hello {firstName},</Text>
+                    <Text style={styles.titleBack}>Welcome back !</Text>
+                </View>
+                <View>
+                    <Ionicons name="options" size={26} />
+                </View>
+            </View>
+            <View style={styles.mainMenu}>
+                <View>
+                    <Text style={styles.titleMenu}>
+                        Your Functional
+                    </Text>
+                </View>
+                <View style={styles.menuWrapper}>
+                    <View style={styles.menuItem}>
+                        <View style={styles.menuItemBox}>
+                            <View style={styles.menuIcon}>
+                                <Fontisto name="mastercard" color="#0D4A85" size={40} />
+                            </View>
+                            <Text style={styles.titleItem}>Salary</Text>
+                            <Text style={styles.titleDetail}>View your salary</Text>
+                        </View>
+                    </View>
+                    <View style={styles.menuItem}>
+                        <View style={styles.menuItemBox}>
+                            <View style={styles.menuIcon}>
+                                <Ionicons name="logo-github" color="#0D4A85" size={40} />
+                            </View>
+                            <Text style={styles.titleItem}>Github</Text>
+                            <Text style={styles.titleDetail}>View your salary</Text>
+                        </View>
+                    </View>
+                    <View style={styles.menuItem}>
+                        <View style={styles.menuItemBox}>
+                            <View style={styles.menuIcon}>
+                                <Ionicons name="logo-electron" color="#0D4A85" size={40} />
+
+                            </View>
+                            <Text style={styles.titleItem}>Electron</Text>
+                            <Text style={styles.titleDetail}>View your salary</Text>
+                        </View>
+                    </View>
+                    <View style={styles.menuItem}>
+                        <View style={styles.menuItemBox}>
+                            <View style={styles.menuIcon}>
+                                <Ionicons name="logo-instagram" color="#0D4A85" size={40} />
+
+                            </View>
+                            <Text style={styles.titleItem}>Instagram</Text>
+                            <Text style={styles.titleDetail}>View your salary</Text>
+                        </View>
+                    </View>
+                </View>
+            </View>
+            <View style={styles.menuProg}>
+                <View>
+                    <Text style={[styles.titleMenu, { marginTop: 10 }]}>
+                        Your Programs
+                    </Text>
+                </View>
+                <View style={styles.menuWrapperProg}>
+                    <ScrollView style={{ height: '62%' }}>
+                        <View style={styles.menuContainItem}>
+                            <View style={styles.menuContainItemLeft}>
+                                <View style={styles.boxIcon}>
+                                    <Ionicons name="logo-electron" color="#0D4A85" size={30} />
+                                </View>
+                                <View >
+                                    <Text style={styles.contentItem}>
+                                        Sale
+                                    </Text>
+                                    <Text style={styles.titleDetail}>
+                                        View details
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={{ marginRight: 5 }}>
+                                <Ionicons name="ios-chevron-forward" color="#0D4A85" size={30} />
+                            </View>
+                        </View>
+                        <View style={styles.menuContainItem}>
+                            <View style={styles.menuContainItemLeft}>
+                                <View style={styles.boxIcon}>
+                                    <Ionicons name="logo-electron" color="#0D4A85" size={30} />
+                                </View>
+                                <View >
+                                    <Text style={styles.contentItem}>
+                                        Sale
+                                    </Text>
+                                    <Text style={styles.titleDetail}>
+                                        View details
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={{ marginRight: 5 }}>
+                                <Ionicons name="ios-chevron-forward" color="#0D4A85" size={30} />
+                            </View>
+                        </View>
+                        <View style={styles.menuContainItem}>
+                            <View style={styles.menuContainItemLeft}>
+                                <View style={styles.boxIcon}>
+                                    <Ionicons name="logo-electron" color="#0D4A85" size={30} />
+                                </View>
+                                <View >
+                                    <Text style={styles.contentItem}>
+                                        Sale
+                                    </Text>
+                                    <Text style={styles.titleDetail}>
+                                        View details
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={{ marginRight: 5 }}>
+                                <Ionicons name="ios-chevron-forward" color="#0D4A85" size={30} />
+                            </View>
+                        </View>
+                    </ScrollView>
+                </View>
+            </View>
+>>>>>>> 7a09638cc51529052f291f259a4d5c45714f66e3
         </View >
     )
 }
 const styles = StyleSheet.create({
-    header: {
-        height: '10%',
+    home: {
         backgroundColor: 'white',
-        borderBottomLeftRadius: 30,
-        borderBottomRightRadius: 30,
-        justifyContent: 'center',
-        paddingLeft: 20
+        height: '100%',
+        width: '100%',
+        paddingHorizontal: 20,
+        paddingVertical: 20
     },
-    menu: {
-        height: '30%',
-        marginTop: 10,
-        width: '100%'
+    titleHome: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
-    menuimg: {
-        width: 80,
-        height: 80
-    },
-    boxmenuimg: {
-        width: 80,
-        height: 80,
-        borderRadius: 20
-    },
-    menutext: {
-        marginTop: 8,
-        fontSize: 14,
+    titleName: {
+        fontSize: 25,
         fontWeight: 'bold',
-        color: 'black'
+        // color: 'black'
+        color: '#0D4A85'
     },
-    boxmenu: {
-        width: '30%',
-        height: 120,
-        borderRadius: 20,
-        display: 'flex',
-        alignItems: 'center'
+    titleBack: {
+        fontSize: 13,
+        letterSpacing: 1,
+        color: 'gray',
+        fontWeight: 'bold'
     },
-    chuamenu: {
-        display: 'flex',
-        justifyContent: 'space-around',
+    mainMenu: {
+        marginTop: 20
+    },
+    titleMenu: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#5C5C5C'
+    },
+    menuWrapper: {
+        marginTop: 10,
         flexDirection: 'row',
         flexWrap: 'wrap'
     },
-    tb: {
-        height: 95,
-        backgroundColor: '#FFFFFF',
-        marginBottom: 30,
-        borderRadius: 15,
-        display: 'flex',
+    menuItem: {
+        flexBasis: '50%',
+        paddingVertical: 6,
+        paddingHorizontal: 6
+    },
+    menuItemBox: {
+        height: 120,
         justifyContent: 'center',
-        paddingLeft: 20,
+        alignItems: 'center',
+        backgroundColor: '#ebf7fa',
+        borderRadius: 10,
+        padding: 10
+    },
+    containIcon: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    titleItem: {
+        marginTop: 5,
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#0D4A85'
+    },
+    titleDetail: {
+        fontSize: 12,
+        fontWeight: 'bold',
+        color: '#69737a'
+    },
+    menuWrapperProg: {
+        paddingHorizontal: 10
+    },
+    menuContainItem: {
+        marginTop: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         borderWidth: 1,
-        borderColor: '#dfdfdf',
-        overflow: 'hidden'
+        paddingVertical: 8,
+        borderRadius: 20,
+        borderColor: '#EEEEEE'
     },
-    typetb: {
-        fontSize: 18,
-        fontWeight: 'bold'
+    menuContainItemLeft: {
+        flexDirection: 'row'
     },
-    titletb: {
-        fontSize: 16,
-        marginTop: 5
+    boxIcon: {
+        padding: 8,
+        marginRight: 20,
+        marginLeft: 15,
+        backgroundColor: '#ebf7fa',
+        borderRadius: 50
+    },
+    contentItem: {
+        fontWeight: 'bold',
+        fontSize: 18
     }
 });

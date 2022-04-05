@@ -147,9 +147,6 @@ export default function LoginScreen() {
             <SimpleDialog visible={isVisibleLogin} setVisible={setVisibleDispatch} message={messageLoginResponse} />
             <ImageBackground source={require('../../assets/images/bg_login2.png')} resizeMode="cover" style={{ width: '100%', height: '100%' }}>
                 <View>
-                    {/* <Text style={[styles.td, { marginTop: 20 }]}>
-                        LYV APP
-                    </Text> */}
                 </View>
                 <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 10 }}>
                     <Image

@@ -36,11 +36,6 @@ export default function HomeScreen() {
     })
     return (
         <View style={{ backgroundColor: '#F2F6F9', height: '100%', width: '100%' }}>
-            {/* <View style={styles.header}>
-                <Text style={{ color: '#B8BBC7' }}>Chào {User?.fullName} !</Text>
-                <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 5, color: '#2D5881' }}>LACTY COMPANY</Text>
-            </View> */}
-
             {/* <View style={styles.menu}>
                 <View style={styles.chuamenu}>
                     <TouchableOpacity onPress={() => navigation.navigate("Salary")} style={styles.boxmenu}>
@@ -147,11 +142,3 @@ const styles = StyleSheet.create({
         marginTop: 5
     }
 });
-{/* <View>
-            <Text>Hello {user.userId} </Text>
-            <Button
-                onPress={() => logout()}
-                title="Logout"
-                color="#841584"
-            />
-    </View> */}

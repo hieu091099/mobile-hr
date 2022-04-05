@@ -32,7 +32,6 @@ export default function Salary() {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
     }
     useEffect(() => {
-        // if (salary == "") {
         getToken('user').then(res => {
             if (res != "" || res != undefined) {
                 res = JSON.parse(res);
@@ -46,7 +45,6 @@ export default function Salary() {
                 })
             }
         })
-        // }
     }, []);
     return (
         <View style={{ alignItems: 'center', marginTop: 20, backgroundColor: '#F7F7F7' }}>
@@ -56,8 +54,8 @@ export default function Salary() {
                         <View style={styles.totalMonth}>
                             <Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 16 }}>Tổng lương nhận tháng này</Text>
 
-                            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 35 }}>{salary?.Final_Salary != "" ? formatNum(salary.Final_Salary) : ''} VNĐ</Text>
-                            {/* <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 35 }}>1.000.000.000 VNĐ</Text> */}
+                            {/* <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 35 }}>{salary?.Final_Salary != "" ? formatNum(salary.Final_Salary) : ''} VNĐ</Text> */}
+                            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 35 }}>1.000.000.000 VNĐ</Text>
                         </View>
                     </View>
                     <View style={styles.total1}>

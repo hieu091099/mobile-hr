@@ -10,7 +10,7 @@ export default function HeaderHomeScreen() {
     return (
         <View style={styles.header}>
             <TouchableOpacity onPress={() => { navigation.toggleDrawer() }} style={styles.leftItem}>
-                <Ionicons name='md-reorder-four' size={30} />
+                <Ionicons name='menu' size={30} />
             </TouchableOpacity>
             <View style={styles.rightItem}>
                 <View style={styles.iconRight}>

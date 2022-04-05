@@ -10,10 +10,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 export default function DrawerContent(props) {
     const dispatch = useDispatch();
     const logout = (props) => {
+        props.navigation.closeDrawer()
         dispatch({
             type: 'LOGOUT',
         })
-        props.navigation.closeDrawer()
+
     }
     return (
         <ScrollView>

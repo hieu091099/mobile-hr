@@ -3,24 +3,20 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native';
 import { getToken } from '../../config';
-import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 export default function HomeScreen() {
     const dispatch = useDispatch();
     const { user, isLoggedIn } = useSelector(state => state.UserReducer);
     const [User, setUser] = useState();
     const navigation = useNavigation();
-
-    // console.log(isLoggedIn);
+    let arrName = user?.fullName.split(" ");
+    let firstName = `${arrName[arrName.length - 2]} ${arrName[arrName.length - 1]}`;
     useEffect(() => {
-        // if (!isLoggedIn) {
-        //     navigation.navigate('Login');
-        // }
         getToken('user').then(res => {
             if (res != "" || res != undefined) {
                 setUser(JSON.parse(res))
             }
-
         })
     }, [isLoggedIn])
     const logout = () => {
@@ -35,7 +31,7 @@ export default function HomeScreen() {
         // console.log({ res });
     })
     return (
-        <View style={{ backgroundColor: '#F2F6F9', height: '100%', width: '100%' }}>
+        <View style={styles.home}>
             {/* <View style={styles.menu}>
                 <View style={styles.chuamenu}>
                     <TouchableOpacity onPress={() => navigation.navigate("Salary")} style={styles.boxmenu}>
@@ -76,6 +72,62 @@ export default function HomeScreen() {
                     </View>
                 </View>
             </View> */}
+            <View style={styles.titleHome}>
+                <View>
+                    <Text style={styles.titleName}>Hello {firstName},</Text>
+                    <Text style={styles.titleBack}>Welcome back !</Text>
+                </View>
+                <View>
+                    <Ionicons name="options" size={26} />
+                </View>
+            </View>
+            <View style={styles.mainMenu}>
+                <View>
+                    <Text style={styles.titleMenu}>
+                        Your Functional
+                    </Text>
+                </View>
+                <View style={styles.menuWrapper}>
+                    <View style={styles.menuItem}>
+                        <View style={styles.menuItemBox}>
+                            <View style={styles.menuIcon}>
+                                <Fontisto name="mastercard" color="#0D4A85" size={40} />
+                            </View>
+                            <Text style={styles.titleItem}>Salary</Text>
+                            <Text style={styles.titleDetail}>View your salary</Text>
+                        </View>
+                    </View>
+                    <View style={styles.menuItem}>
+                        <View style={styles.menuItemBox}>
+                            <View style={styles.menuIcon}>
+                                <Ionicons name="logo-github" color="#0D4A85" size={40} />
+                            </View>
+                            <Text style={styles.titleItem}>Github</Text>
+                            <Text style={styles.titleDetail}>View your salary</Text>
+                        </View>
+                    </View>
+                    <View style={styles.menuItem}>
+                        <View style={styles.menuItemBox}>
+                            <View style={styles.menuIcon}>
+                                <Ionicons name="logo-electron" color="#0D4A85" size={40} />
+
+                            </View>
+                            <Text style={styles.titleItem}>Electron</Text>
+                            <Text style={styles.titleDetail}>View your salary</Text>
+                        </View>
+                    </View>
+                    <View style={styles.menuItem}>
+                        <View style={styles.menuItemBox}>
+                            <View style={styles.menuIcon}>
+                                <Ionicons name="logo-instagram" color="#0D4A85" size={40} />
+
+                            </View>
+                            <Text style={styles.titleItem}>Instagram</Text>
+                            <Text style={styles.titleDetail}>View your salary</Text>
+                        </View>
+                    </View>
+                </View>
+            </View>
         </View >
     )
 }
@@ -88,57 +140,71 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: 20
     },
-    menu: {
-        height: '30%',
-        marginTop: 10,
-        width: '100%'
+    home: {
+        backgroundColor: 'white',
+        height: '100%',
+        width: '100%',
+        paddingHorizontal: 20,
+        paddingVertical: 20
     },
-    menuimg: {
-        width: 80,
-        height: 80
+    titleHome: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
-    boxmenuimg: {
-        width: 80,
-        height: 80,
-        borderRadius: 20
-    },
-    menutext: {
-        marginTop: 8,
-        fontSize: 14,
+    titleName: {
+        fontSize: 25,
         fontWeight: 'bold',
-        color: 'black'
+        // color: 'black'
+        color: '#0D4A85'
     },
-    boxmenu: {
-        width: '30%',
-        height: 120,
-        borderRadius: 20,
-        display: 'flex',
-        alignItems: 'center'
+    titleBack: {
+        fontSize: 13,
+        letterSpacing: 1,
+        color: 'gray',
+        fontWeight: 'bold'
     },
-    chuamenu: {
-        display: 'flex',
-        justifyContent: 'space-around',
+    mainMenu: {
+        marginTop: 30
+    },
+    titleMenu: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#5C5C5C'
+    },
+    menuWrapper: {
+        marginTop: 10,
         flexDirection: 'row',
         flexWrap: 'wrap'
     },
-    tb: {
-        height: 95,
-        backgroundColor: '#FFFFFF',
-        marginBottom: 30,
-        borderRadius: 15,
-        display: 'flex',
+    menuItem: {
+        flexBasis: '50%',
+        paddingVertical: 6,
+        paddingHorizontal: 6
+    },
+    menuItemBox: {
+        height: 150,
         justifyContent: 'center',
-        paddingLeft: 20,
-        borderWidth: 1,
-        borderColor: '#dfdfdf',
-        overflow: 'hidden'
+        alignItems: 'center',
+        // backgroundColor: '#cde2eb',
+        backgroundColor: '#ebf7fa',
+        // borderColor: '#afe0f5',
+        // borderWidth: 1,
+        borderRadius: 10,
+        padding: 10
     },
-    typetb: {
-        fontSize: 18,
-        fontWeight: 'bold'
+    containIcon: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
-    titletb: {
-        fontSize: 16,
-        marginTop: 5
+    titleItem: {
+        marginTop: 5,
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#0D4A85'
+    },
+    titleDetail: {
+        fontSize: 12,
+        fontWeight: 'bold',
+        color: '#69737a'
     }
 });

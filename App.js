@@ -9,6 +9,7 @@ import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import DrawerContent from './screen/Drawer/Drawer';
 import { useFonts } from 'expo-font';
+
 // import AppLoading from 'expo-app-loading';
 
 
@@ -55,7 +56,5 @@ export default function App() {
           </Stack.Navigator>}
       </NavigationContainer>
     </PaperProvider>
-
-
   );
 }

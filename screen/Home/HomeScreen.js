@@ -4,15 +4,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native';
 import { getToken } from '../../config';
 import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
+import { useFonts } from 'expo-font';
 
 export default function HomeScreen() {
     const dispatch = useDispatch();
     const { user, isLoggedIn } = useSelector(state => state.UserReducer);
     const [User, setUser] = useState();
     const navigation = useNavigation();
-
+ 
     // console.log(isLoggedIn);
+
     useEffect(() => {
+      
         // if (!isLoggedIn) {
         //     navigation.navigate('Login');
         // }
@@ -35,47 +38,9 @@ export default function HomeScreen() {
         // console.log({ res });
     })
     return (
-        <View style={{ backgroundColor: '#F2F6F9', height: '100%', width: '100%' }}>
-            {/* <View style={styles.menu}>
-                <View style={styles.chuamenu}>
-                    <TouchableOpacity onPress={() => navigation.navigate("Salary")} style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg} >
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Lương</Text>
-                    </TouchableOpacity>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_book.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Sổ tay lao động</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_chat.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Trò chuyện</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_feedback.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Góp ý</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_contact.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Liên hệ</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_help.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Trợ giúp</Text>
-                    </View>
-                </View>
-            </View> */}
+      <View style={{ backgroundColor: '#F2F6F9', height: '100%', width: '100%' }}>
+          <Text style={{fontFamily:'PlayBold'}}>Play font</Text>
+         
         </View >
     )
 }

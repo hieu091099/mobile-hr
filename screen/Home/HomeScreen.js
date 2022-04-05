@@ -128,18 +128,75 @@ export default function HomeScreen() {
                     </View>
                 </View>
             </View>
+            <View style={styles.menuProg}>
+                <View>
+                    <Text style={[styles.titleMenu, { marginTop: 10 }]}>
+                        Your Programs
+                    </Text>
+                </View>
+                <View style={styles.menuWrapperProg}>
+                    <ScrollView style={{ height: '62%' }}>
+                        <View style={styles.menuContainItem}>
+                            <View style={styles.menuContainItemLeft}>
+                                <View style={styles.boxIcon}>
+                                    <Ionicons name="logo-electron" color="#0D4A85" size={30} />
+                                </View>
+                                <View >
+                                    <Text style={styles.contentItem}>
+                                        Sale
+                                    </Text>
+                                    <Text style={styles.titleDetail}>
+                                        View details
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={{ marginRight: 5 }}>
+                                <Ionicons name="ios-chevron-forward" color="#0D4A85" size={30} />
+                            </View>
+                        </View>
+                        <View style={styles.menuContainItem}>
+                            <View style={styles.menuContainItemLeft}>
+                                <View style={styles.boxIcon}>
+                                    <Ionicons name="logo-electron" color="#0D4A85" size={30} />
+                                </View>
+                                <View >
+                                    <Text style={styles.contentItem}>
+                                        Sale
+                                    </Text>
+                                    <Text style={styles.titleDetail}>
+                                        View details
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={{ marginRight: 5 }}>
+                                <Ionicons name="ios-chevron-forward" color="#0D4A85" size={30} />
+                            </View>
+                        </View>
+                        <View style={styles.menuContainItem}>
+                            <View style={styles.menuContainItemLeft}>
+                                <View style={styles.boxIcon}>
+                                    <Ionicons name="logo-electron" color="#0D4A85" size={30} />
+                                </View>
+                                <View >
+                                    <Text style={styles.contentItem}>
+                                        Sale
+                                    </Text>
+                                    <Text style={styles.titleDetail}>
+                                        View details
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={{ marginRight: 5 }}>
+                                <Ionicons name="ios-chevron-forward" color="#0D4A85" size={30} />
+                            </View>
+                        </View>
+                    </ScrollView>
+                </View>
+            </View>
         </View >
     )
 }
 const styles = StyleSheet.create({
-    header: {
-        height: '10%',
-        backgroundColor: 'white',
-        borderBottomLeftRadius: 30,
-        borderBottomRightRadius: 30,
-        justifyContent: 'center',
-        paddingLeft: 20
-    },
     home: {
         backgroundColor: 'white',
         height: '100%',
@@ -164,7 +221,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     mainMenu: {
-        marginTop: 30
+        marginTop: 20
     },
     titleMenu: {
         fontSize: 20,
@@ -182,13 +239,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 6
     },
     menuItemBox: {
-        height: 150,
+        height: 120,
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: '#cde2eb',
         backgroundColor: '#ebf7fa',
-        // borderColor: '#afe0f5',
-        // borderWidth: 1,
         borderRadius: 10,
         padding: 10
     },
@@ -206,5 +260,32 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: 'bold',
         color: '#69737a'
+    },
+    menuWrapperProg: {
+        paddingHorizontal: 10
+    },
+    menuContainItem: {
+        marginTop: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderWidth: 1,
+        paddingVertical: 8,
+        borderRadius: 20,
+        borderColor: '#EEEEEE'
+    },
+    menuContainItemLeft: {
+        flexDirection: 'row'
+    },
+    boxIcon: {
+        padding: 8,
+        marginRight: 20,
+        marginLeft: 15,
+        backgroundColor: '#ebf7fa',
+        borderRadius: 50
+    },
+    contentItem: {
+        fontWeight: 'bold',
+        fontSize: 18
     }
 });

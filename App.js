@@ -8,28 +8,23 @@ import MainTab from './screen/MainTab/MainTab';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import DrawerContent from './screen/Drawer/Drawer';
-import { View, TouchableOpacity, Text } from 'react-native';
-import HeaderHomeScreen from './components/HeaderHomeScreen/HeaderHomeScreen';
+import { useFonts } from 'expo-font';
+// import AppLoading from 'expo-app-loading';
 
 
 export default function App() {
 
   const Stack = createNativeStackNavigator();
   const Drawer = createDrawerNavigator();
-  const [userIdFromDevice, setUserIdFromDevice] = useState("");
-  const { user, isLoggedIn } = useSelector(state => state.UserReducer);
-  // console.log({ user });
-  useEffect(() => {
-    // checkDeviceForHardware();
-    // checkForFingerprints();.
-    // getToken('user').then(res => {
-    //   if (res != undefined) {
-    //     res = JSON.parse(res);
-    //     setUserIdFromDevice(res.userId)
-    //   }
-    // })
-  }, [isLoggedIn])
+  const { isLoggedIn } = useSelector(state => state.UserReducer);
 
+  // let [fontsLoaded] = useFonts({
+  //   'Sansita': require('./assets/fonts/Sansita.ttf'),
+  // });
+
+  // if (!fontsLoaded) {
+  //   return <AppLoading />;
+  // }
 
   const theme = {
     ...DefaultTheme,
@@ -58,8 +53,6 @@ export default function App() {
           }} >
             <Stack.Screen name="Login" component={LoginScreen} />
           </Stack.Navigator>}
-
-
       </NavigationContainer>
     </PaperProvider>
 

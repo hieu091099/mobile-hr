@@ -41,7 +41,7 @@ export default function HomeScreen() {
                 <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 5, color: '#2D5881' }}>LACTY COMPANY</Text>
             </View> */}
 
-            <View style={styles.menu}>
+            {/* <View style={styles.menu}>
                 <View style={styles.chuamenu}>
                     <TouchableOpacity onPress={() => navigation.navigate("Salary")} style={styles.boxmenu}>
                         <View style={styles.boxmenuimg} >
@@ -80,7 +80,7 @@ export default function HomeScreen() {
                         <Text style={styles.menutext}>Trợ giúp</Text>
                     </View>
                 </View>
-            </View>
+            </View> */}
         </View >
     )
 }

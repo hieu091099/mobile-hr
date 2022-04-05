@@ -37,7 +37,11 @@ const styles = StyleSheet.create({
         paddingVertical: 10
     },
     leftItem: {
-
+        padding: 6,
+        // backgroundColor: '#F5F5F5',
+        borderRadius: 10,
+        borderColor: '#EEEEEE',
+        borderWidth: 1
     },
     rightItem: {
         flexDirection: 'row',
@@ -45,7 +49,9 @@ const styles = StyleSheet.create({
     iconRight: {
         marginLeft: 10,
         padding: 6,
-        backgroundColor: '#F5F5F5',
-        borderRadius: 10
+        // backgroundColor: '#F5F5F5',
+        borderRadius: 10,
+        borderColor: '#EEEEEE',
+        borderWidth: 1
     }
 })

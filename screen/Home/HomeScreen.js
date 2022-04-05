@@ -3,33 +3,16 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native';
 import { getToken } from '../../config';
-<<<<<<< HEAD
-import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
-import { useFonts } from 'expo-font';
-
-=======
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
->>>>>>> 7a09638cc51529052f291f259a4d5c45714f66e3
 export default function HomeScreen() {
     const dispatch = useDispatch();
     const { user, isLoggedIn } = useSelector(state => state.UserReducer);
     const [User, setUser] = useState();
     const navigation = useNavigation();
-<<<<<<< HEAD
- 
-    // console.log(isLoggedIn);
-
-    useEffect(() => {
-      
-        // if (!isLoggedIn) {
-        //     navigation.navigate('Login');
-        // }
-=======
     let arrName = user?.fullName.split(" ");
     let firstName = `${arrName[arrName.length - 2]} ${arrName[arrName.length - 1]}`;
     useEffect(() => {
->>>>>>> 7a09638cc51529052f291f259a4d5c45714f66e3
         getToken('user').then(res => {
             if (res != "" || res != undefined) {
                 setUser(JSON.parse(res))
@@ -48,11 +31,6 @@ export default function HomeScreen() {
         // console.log({ res });
     })
     return (
-<<<<<<< HEAD
-      <View style={{ backgroundColor: '#F2F6F9', height: '100%', width: '100%' }}>
-          <Text style={{fontFamily:'PlayBold'}}>Play font</Text>
-         
-=======
         <View style={styles.home}>
             {/* <View style={styles.menu}>
                 <View style={styles.chuamenu}>
@@ -215,7 +193,6 @@ export default function HomeScreen() {
                     </ScrollView>
                 </View>
             </View>
->>>>>>> 7a09638cc51529052f291f259a4d5c45714f66e3
         </View >
     )
 }

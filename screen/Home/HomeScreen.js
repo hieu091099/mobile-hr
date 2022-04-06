@@ -1,5 +1,5 @@
-import { View, Text, Button, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, Button, ScrollView, StyleSheet, Image, TouchableOpacity, Animated } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native';
 import { getToken } from '../../config';
@@ -28,59 +28,37 @@ export default function HomeScreen() {
         if (res != "" || res != undefined) {
             res = JSON.parse(res);
         }
-        // console.log({ res });
     })
+    const fadeAnim = useRef(new Animated.Value(0)).current;
+
+    const fadeIn = () => {
+        // Will change fadeAnim value to 1 in 5 seconds
+        Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 1000,
+            useNativeDriver: true
+        }).start();
+    };
+
+    const fadeOut = () => {
+        // Will change fadeAnim value to 0 in 3 seconds
+        Animated.timing(fadeAnim, {
+            toValue: 0,
+            duration: 1000,
+            useNativeDriver: true
+        }).start();
+    };
     return (
         <View style={styles.home}>
-            {/* <View style={styles.menu}>
-                <View style={styles.chuamenu}>
-                    <TouchableOpacity onPress={() => navigation.navigate("Salary")} style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg} >
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Lương</Text>
-                    </TouchableOpacity>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_book.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Sổ tay lao động</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_chat.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Trò chuyện</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_feedback.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Góp ý</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_contact.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Liên hệ</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_help.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Trợ giúp</Text>
-                    </View>
-                </View>
-            </View> */}
-            <View style={styles.titleHome}>
-                <View>
+            <Animated.View style={[styles.titleHome, { opacity: fadeAnim }]}>
+                <View >
                     <Text style={styles.titleName}>Hello {firstName},</Text>
                     <Text style={styles.titleBack}>Welcome back !</Text>
                 </View>
                 <View>
                     <Ionicons name="options" size={26} />
                 </View>
-            </View>
+            </Animated.View>
             <View style={styles.mainMenu}>
                 <View>
                     <Text style={styles.titleMenu}>
@@ -88,7 +66,7 @@ export default function HomeScreen() {
                     </Text>
                 </View>
                 <View style={styles.menuWrapper}>
-                    <View style={styles.menuItem}>
+                    <TouchableOpacity onPress={fadeIn} style={styles.menuItem}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Fontisto name="mastercard" color="#0D4A85" size={40} />
@@ -96,8 +74,8 @@ export default function HomeScreen() {
                             <Text style={styles.titleItem}>Salary</Text>
                             <Text style={styles.titleDetail}>View your salary</Text>
                         </View>
-                    </View>
-                    <View style={styles.menuItem}>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={fadeOut} style={styles.menuItem}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Ionicons name="logo-github" color="#0D4A85" size={40} />
@@ -105,7 +83,7 @@ export default function HomeScreen() {
                             <Text style={styles.titleItem}>Github</Text>
                             <Text style={styles.titleDetail}>View your salary</Text>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                     <View style={styles.menuItem}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>

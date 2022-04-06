@@ -100,7 +100,6 @@ export default function LoginScreen() {
             if (res.success) {
                 let action = loginFingerAction();
                 dispatch(action);
-
             }
         })
     };

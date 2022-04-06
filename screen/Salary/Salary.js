@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Animated } from 'react-native'
+import React, { useState, useEffect, useRef } from 'react'
 import { BASE_URL, getToken } from '../../config'
 import { useDispatch, useSelector } from 'react-redux';
 import { getSalaryAction } from '../../redux/actions/UserAction';
@@ -7,27 +7,13 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { Icon, ListItem } from 'react-native-elements';
 export default function Salary() {
-    const [salaryDetail, setSalaryDetail] = useState();
-    const [userIdFromDevice, setUserIdFromDevice] = useState("");
-    const [accessToken, setAccessToken] = useState("");
+
     const { salary } = useSelector(state => state.UserReducer);
     const navigation = useNavigation();
     const [expandedPlus, setExpandedPlus] = useState(true);
     const [expandedMinus, setExpandedMinus] = useState(true);
     const dispatch = useDispatch();
-    getToken('user').then(res => {
-        if (res != "" || res != undefined) {
-            res = JSON.parse(res);
-            setUserIdFromDevice(res.userId)
-        }
-    })
-    getToken('accessToken').then(res => {
-        if (res != "" || res != undefined) {
-            res = JSON.parse(res);
-            setAccessToken(res);
-        }
 
-    })
     const formatNum = (num) => {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
     }
@@ -54,8 +40,8 @@ export default function Salary() {
                         <View style={styles.totalMonth}>
                             <Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 16 }}>Tổng lương nhận tháng này</Text>
 
-                            {/* <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 35 }}>{salary?.Final_Salary != "" ? formatNum(salary.Final_Salary) : ''} VNĐ</Text> */}
-                            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 35 }}>1.000.000.000 VNĐ</Text>
+                            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 35 }}>{salary?.Final_Salary != "" ? formatNum(salary.Final_Salary) : ''} VNĐ</Text>
+                            {/* <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 35 }}>1.000.000.000 VNĐ</Text> */}
                         </View>
                     </View>
                     <View style={styles.total1}>

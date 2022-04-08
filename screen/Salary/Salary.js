@@ -70,7 +70,7 @@ export default function Salary() {
                     content={
                         <>
                             <ListItem.Content>
-                                <ListItem.Title>KHOẢN CỘNG</ListItem.Title>
+                                <ListItem.Title style={styles.font}>KHOẢN CỘNG</ListItem.Title>
                             </ListItem.Content>
                         </>
                     }
@@ -82,141 +82,141 @@ export default function Salary() {
                     <ScrollView style={{ height: '58%' }}>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Lương chính </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Lương chính </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Main_Salary)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Main_Salary)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > PC công việc </ListItem.Title>
+                                <ListItem.Title style={styles.font} > PC công việc </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Responsibility_Allowance + salary?.Language_Allowance + salary?.Other_Allowance)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Responsibility_Allowance + salary?.Language_Allowance + salary?.Other_Allowance)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > PC độc hại </ListItem.Title>
+                                <ListItem.Title style={styles.font} > PC độc hại </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > PC VSMT </ListItem.Title>
+                                <ListItem.Title style={styles.font} > PC VSMT </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > PC An toàn viên </ListItem.Title>
+                                <ListItem.Title style={styles.font} > PC An toàn viên </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > PC PCCC </ListItem.Title>
+                                <ListItem.Title style={styles.font} > PC PCCC </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Lương + PC </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Lương + PC </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Salary_And_Allowance)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Salary_And_Allowance)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Lương tháng </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Lương tháng </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Salary_Of_Month)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Salary_Of_Month)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Tiền làm thêm </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Tiền làm thêm </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Overtime_Pay)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Overtime_Pay)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > PC ca đêm </ListItem.Title>
+                                <ListItem.Title style={styles.font} > PC ca đêm </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Night_Working_Money)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Night_Working_Money)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Tiền ngừng việc(NV1) </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Tiền ngừng việc(NV1) </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Tiền ngừng việc(NV2) </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Tiền ngừng việc(NV2) </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Tiền ngừng việc(NV3) </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Tiền ngừng việc(NV3) </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Tiền chuyên cần </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Tiền chuyên cần </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Hard_Working)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Hard_Working)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Phí sinh hoạt </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Phí sinh hoạt </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Living_Costs)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Living_Costs)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Tiền bình bầu </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Tiền bình bầu </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Rating_Money)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Rating_Money)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Tiền nghỉ phép </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Tiền nghỉ phép </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.P_R_Money)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.P_R_Money)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Tiền nghỉ lễ </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Tiền nghỉ lễ </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Holiday_Money)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Holiday_Money)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Thưởng bình bầu năm </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Thưởng bình bầu năm </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Yearly_Rating)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Yearly_Rating)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Tiền SLĐ1 </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Tiền SLĐ1 </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Serving_Pay_1)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Serving_Pay_1)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Tiền SLĐ2 </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Tiền SLĐ2 </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Serving_Pay_2)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Serving_Pay_2)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Tiền khác </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Tiền khác </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Other_Pay)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Other_Pay)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Tiền hổ trợ phí SH </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Tiền hổ trợ phí SH </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Serving_Pay_1)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Serving_Pay_1)} VND</ListItem.Title>
                         </ListItem>
                     </ScrollView>
                 </ListItem.Accordion>
@@ -225,7 +225,7 @@ export default function Salary() {
                         <>
                             {/* <Icon name="place" size={30} /> */}
                             <ListItem.Content>
-                                <ListItem.Title>KHOẢN TRỪ</ListItem.Title>
+                                <ListItem.Title style={styles.font}>KHOẢN TRỪ</ListItem.Title>
                             </ListItem.Content>
                         </>
                     }
@@ -238,39 +238,39 @@ export default function Salary() {
 
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Tạm ứng </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Tạm ứng </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Advance_Payment)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Advance_Payment)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Tiền BHXH </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Tiền BHXH </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Social_Insurance)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Social_Insurance)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Tiền BHYT </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Tiền BHYT </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Health_Insurance)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Health_Insurance)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Tiền BHTN </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Tiền BHTN </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Unemployment_Insurance)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Unemployment_Insurance)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Đoàn phí </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Đoàn phí </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Union_Pay)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Union_Pay)} VND</ListItem.Title>
                         </ListItem>
                         <ListItem bottomDivider>
                             <ListItem.Content>
-                                <ListItem.Title > Thuế TNCN </ListItem.Title>
+                                <ListItem.Title style={styles.font} > Thuế TNCN </ListItem.Title>
                             </ListItem.Content>
-                            <ListItem.Title>{formatNum(salary?.Person_Income_Tax_Money)} VND</ListItem.Title>
+                            <ListItem.Title style={styles.font}>{formatNum(salary?.Person_Income_Tax_Money)} VND</ListItem.Title>
                         </ListItem>
                     </ScrollView>
                 </ListItem.Accordion>
@@ -323,6 +323,9 @@ const styles = StyleSheet.create({
         width: '30%',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    font: {
+        fontFamily: 'Monda'
     }
 });
 

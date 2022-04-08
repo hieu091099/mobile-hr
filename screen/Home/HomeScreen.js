@@ -31,7 +31,7 @@ export default function HomeScreen() {
             res = JSON.parse(res);
         }
     })
-    const fadeAnim = useRef(new Animated.Value(0)).current;
+    const fadeAnim = useRef(new Animated.Value(1)).current;
 
     const fadeIn = () => {
         // Will change fadeAnim value to 1 in 5 seconds
@@ -68,7 +68,7 @@ export default function HomeScreen() {
                     </Text>
                 </View>
                 <View style={styles.menuWrapper}>
-                    <TouchableOpacity onPress={fadeIn} style={styles.menuItem}>
+                    <TouchableOpacity style={styles.menuItem}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Fontisto name="mastercard" color="#0D4A85" size={40} />
@@ -86,9 +86,7 @@ export default function HomeScreen() {
                             <Text style={styles.titleDetail}>View your salary</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem} onPress={()=>{
-                        navigation.navigate('Sotaylaodong')
-                    }}>
+                    <TouchableOpacity style={styles.menuItem} onPress={fadeIn}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Ionicons name="logo-electron" color="#0D4A85" size={40} />

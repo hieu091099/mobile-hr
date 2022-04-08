@@ -31,6 +31,10 @@ const optionsHeader = {
         // borderWidth: 1,
         // borderColor: 'black'
     },
+    // headerTitleStyle: {
+    //     fontWeight: '900',
+    //     fontFaminly: 'Monda'
+    // },
     headerLeft: () => {
         const navigation = useNavigation();
         return <TouchableOpacity
@@ -39,7 +43,7 @@ const optionsHeader = {
                 marginLeft: 20,
                 // padding: 6,
                 // // backgroundColor: '#F5F5F5',
-                // borderRadius: 10,
+                // borderRadius: 10,r
                 // borderColor: '#EEEEEE',
                 // borderWidth: 1
             }}>
@@ -60,7 +64,8 @@ const optionsHeader = {
             <Ionicons name='person-circle' size={30} />
         </TouchableOpacity>
     },
-    headerTitleAlign: 'center'
+    headerTitleAlign: 'center',
+
 }
 const MainTab = () => {
     return <Tab.Navigator screenOptions={({ route }) => ({

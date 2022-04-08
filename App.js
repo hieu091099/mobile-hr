@@ -22,24 +22,21 @@ import LoginRoot from './screen/RootStackScreen/LoginRoot';
 
 export default function App() {
   // let [fontsLoaded] = useFonts({
-   
+
   // });
   // console.log(fontsLoaded);
 
 
-  
+
   useEffect(() => {
     const loadFonts = async () => {
       await Font.loadAsync({
-        'PlayBold': require('./assets/fonts/GrapeNutsRegular.ttf'),
-        'RobotoBold': require('./assets/fonts/Roboto-Bold.ttf'),
-        'RobotoLight': require('./assets/fonts/Roboto-Light.ttf'),
-        'SpaceMonoB': require('./assets/fonts/Monda-Bold.ttf'),
-        'SpaceMonoL': require('./assets/fonts/Monda-Regular.ttf'),
+        'MondaBold': require('./assets/fonts/Monda-Bold.ttf'),
+        'Monda': require('./assets/fonts/Monda-Regular.ttf'),
       });
-      await setCustomText( {
+      await setCustomText({
         style: {
-          fontFamily:'SpaceMonoL'
+          fontFamily: 'Monda'
           // fontSize: 60,
           // color: 'black'
         }
@@ -47,7 +44,7 @@ export default function App() {
     };
     loadFonts();
   }, [])
-  
+
   const Stack = createNativeStackNavigator();
   const Drawer = createDrawerNavigator();
   const { isLoggedIn } = useSelector(state => state.UserReducer);
@@ -80,7 +77,7 @@ export default function App() {
             animation: 'slide_from_right'
           }} drawerContent={props => <DrawerContent {...props} />}>
             <Drawer.Screen name="MainTab" component={MainTab} />
-           <Stack.Screen name="Sotaylaodong" component={SoTayLaoDong} />
+            <Stack.Screen name="Sotaylaodong" component={SoTayLaoDong} />
 
           </Drawer.Navigator> :
           <LoginRoot />}

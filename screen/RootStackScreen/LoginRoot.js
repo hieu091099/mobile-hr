@@ -32,7 +32,6 @@ export default function LoginRoot() {
                 <Stack.Screen name="Login" component={LoginScreen} />
                 :
                 <Stack.Screen name="Login" component={LoginFingerPrint} />}
-
         </Stack.Navigator>
     )
 }

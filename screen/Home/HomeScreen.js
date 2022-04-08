@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import { getToken } from '../../config';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import { useFonts } from 'expo-font';
+import { color } from 'react-native-reanimated';
 export default function HomeScreen() {
     const dispatch = useDispatch();
     const { user, isLoggedIn } = useSelector(state => state.UserReducer);
@@ -32,46 +34,6 @@ export default function HomeScreen() {
     })
     return (
         <View style={styles.home}>
-            {/* <View style={styles.menu}>
-                <View style={styles.chuamenu}>
-                    <TouchableOpacity onPress={() => navigation.navigate("Salary")} style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg} >
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_salary.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Lương</Text>
-                    </TouchableOpacity>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_book.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Sổ tay lao động</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_chat.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Trò chuyện</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_feedback.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Góp ý</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_contact.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Liên hệ</Text>
-                    </View>
-                    <View style={styles.boxmenu}>
-                        <View style={styles.boxmenuimg}>
-                            <Image style={styles.menuimg} source={require('../../assets/images/menu_help.png')} />
-                        </View>
-                        <Text style={styles.menutext}>Trợ giúp</Text>
-                    </View>
-                </View>
-            </View> */}
             <View style={styles.titleHome}>
                 <View>
                     <Text style={styles.titleName}>Hello {firstName},</Text>
@@ -98,13 +60,13 @@ export default function HomeScreen() {
                         </View>
                     </View>
                     <View style={styles.menuItem}>
-                        <View style={styles.menuItemBox}>
+                        <TouchableOpacity style={styles.menuItemBox} onPress={()=>{navigation.navigate('Sotaylaodong')}}>
                             <View style={styles.menuIcon}>
                                 <Ionicons name="logo-github" color="#0D4A85" size={40} />
                             </View>
-                            <Text style={styles.titleItem}>Github</Text>
-                            <Text style={styles.titleDetail}>View your salary</Text>
-                        </View>
+                            <Text style={styles.titleItem}>Note Book</Text>
+                            <Text style={styles.titleDetail}>View detail</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.menuItem}>
                         <View style={styles.menuItemBox}>

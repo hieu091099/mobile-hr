@@ -19,10 +19,11 @@ export default function DrawerContent(props) {
     return (
         <ScrollView>
             <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
-                <DrawerContentScrollView {...props}>
+                <Text>123</Text>
+                {/* <DrawerContentScrollView {...props}>
                     <Text></Text>
-                </DrawerContentScrollView>
-                <Drawer.Section >
+                </DrawerContentScrollView> */}
+                {/* <Drawer.Section >
                     <DrawerItem
                         icon={({ color, size }) => (
                             <Ionicons
@@ -34,7 +35,7 @@ export default function DrawerContent(props) {
                         label="Đăng Xuất"
                         onPress={() => { logout(props) }}
                     />
-                </Drawer.Section>
+                </Drawer.Section> */}
             </SafeAreaView>
         </ScrollView>
     )

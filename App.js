@@ -9,6 +9,11 @@ import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import DrawerContent from './screen/Drawer/Drawer';
 import { useFonts } from 'expo-font';
+import * as Font from 'expo-font';
+import {
+  setCustomText,
+} from 'react-native-global-props';
+import SoTayLaoDong from './screen/soTayLaoDong/SoTayLaoDong';
 import LoginFingerPrint from './screen/LoginFinger/LoginFingerPrint';
 import LoginRoot from './screen/RootStackScreen/LoginRoot';
 
@@ -16,7 +21,33 @@ import LoginRoot from './screen/RootStackScreen/LoginRoot';
 
 
 export default function App() {
+  // let [fontsLoaded] = useFonts({
+   
+  // });
+  // console.log(fontsLoaded);
 
+
+  
+  useEffect(() => {
+    const loadFonts = async () => {
+      await Font.loadAsync({
+        'PlayBold': require('./assets/fonts/GrapeNutsRegular.ttf'),
+        'RobotoBold': require('./assets/fonts/Roboto-Bold.ttf'),
+        'RobotoLight': require('./assets/fonts/Roboto-Light.ttf'),
+        'SpaceMonoB': require('./assets/fonts/Monda-Bold.ttf'),
+        'SpaceMonoL': require('./assets/fonts/Monda-Regular.ttf'),
+      });
+      await setCustomText( {
+        style: {
+          fontFamily:'SpaceMonoL'
+          // fontSize: 60,
+          // color: 'black'
+        }
+      });
+    };
+    loadFonts();
+  }, [])
+  
   const Stack = createNativeStackNavigator();
   const Drawer = createDrawerNavigator();
   const { isLoggedIn } = useSelector(state => state.UserReducer);
@@ -49,6 +80,8 @@ export default function App() {
             animation: 'slide_from_right'
           }} drawerContent={props => <DrawerContent {...props} />}>
             <Drawer.Screen name="MainTab" component={MainTab} />
+           <Stack.Screen name="Sotaylaodong" component={SoTayLaoDong} />
+
           </Drawer.Navigator> :
           <LoginRoot />}
       </NavigationContainer>

@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import { getToken } from '../../config';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import { useFonts } from 'expo-font';
+import { color } from 'react-native-reanimated';
 export default function HomeScreen() {
     const dispatch = useDispatch();
     const { user, isLoggedIn } = useSelector(state => state.UserReducer);
@@ -84,7 +86,9 @@ export default function HomeScreen() {
                             <Text style={styles.titleDetail}>View your salary</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity style={styles.menuItem} onPress={()=>{
+                        navigation.navigate('Sotaylaodong')
+                    }}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Ionicons name="logo-electron" color="#0D4A85" size={40} />

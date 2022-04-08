@@ -21,9 +21,9 @@ export default function LoginScreen() {
     const { user, isLoggedIn, isVisibleLogin, messageLoginResponse } = useSelector(state => state.UserReducer);
     /** state set when user type input */
     const [userLogin, setUserLogin] = useState({
-        userId: "30730",
-        password: "050420010115",
-        factory: "LYV"
+        userId: "",
+        password: "",
+        factory: ""
     });
 
     /** state call dialog */
@@ -109,7 +109,7 @@ export default function LoginScreen() {
                     />
                 </View>
                 <View style={styles.tieude}>
-                    <Text style={[styles.td]}>Xin chào <Text style={{ fontSize: 35 }}>Bạn!</Text></Text>
+                    <Text style={[styles.td]}>Xin chào <Text style={{ fontSize: 35 }}>Bạn!!</Text></Text>
                 </View>
                 <View style={styles.form}>
                     <TextInput theme={{ colors: { primary: '#0D4A85', underlineColor: 'transparent' } }} value={userLogin.userId} label="USERID" mode='outlined' placeholder='Tài khoản' style={[styles.inputlogin, { marginTop: 20 }]} onChangeText={(val) => {

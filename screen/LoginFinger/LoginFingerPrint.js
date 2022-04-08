@@ -22,9 +22,9 @@ export default function LoginFingerPrint() {
     const { isLoggedIn, isVisibleLogin, messageLoginResponse } = useSelector(state => state.UserReducer);
     /** state set when user type input */
     const [userLogin, setUserLogin] = useState({
-        userId: "30730",
-        password: "050420010115",
-        factory: "LYV"
+        userId: "",
+        password: "",
+        factory: ""
     });
     console.log({ userIdFromDevice })
 

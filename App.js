@@ -32,10 +32,14 @@ export default function App() {
     const loadFonts = async () => {
       await Font.loadAsync({
         'PlayBold': require('./assets/fonts/GrapeNutsRegular.ttf'),
+        'RobotoBold': require('./assets/fonts/Roboto-Bold.ttf'),
+        'RobotoLight': require('./assets/fonts/Roboto-Light.ttf'),
+        'SpaceMonoB': require('./assets/fonts/Monda-Bold.ttf'),
+        'SpaceMonoL': require('./assets/fonts/Monda-Regular.ttf'),
       });
       await setCustomText( {
         style: {
-          fontFamily:'PlayBold'
+          fontFamily:'SpaceMonoL'
           // fontSize: 60,
           // color: 'black'
         }

@@ -86,7 +86,9 @@ export default function HomeScreen() {
                             <Text style={styles.titleDetail}>View your salary</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity style={styles.menuItem} onPress={()=>{
+                        navigation.navigate('Sotaylaodong')
+                    }}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Ionicons name="logo-electron" color="#0D4A85" size={40} />

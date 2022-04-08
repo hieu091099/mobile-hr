@@ -37,13 +37,13 @@ const optionsHeader = {
             onPress={() => navigation.goBack()}
             style={{
                 marginLeft: 20,
-                padding: 6,
-                // backgroundColor: '#F5F5F5',
-                borderRadius: 10,
-                borderColor: '#EEEEEE',
-                borderWidth: 1
+                // padding: 6,
+                // // backgroundColor: '#F5F5F5',
+                // borderRadius: 10,
+                // borderColor: '#EEEEEE',
+                // borderWidth: 1
             }}>
-            <Ionicons name='chevron-back-outline' size={30} />
+            <Ionicons name='arrow-back' size={30} />
         </TouchableOpacity>
     },
     headerRight: () => {
@@ -63,10 +63,8 @@ const optionsHeader = {
     headerTitleAlign: 'center'
 }
 const MainTab = () => {
-    const [active, setActive] = useState();
-    const dispatch = useDispatch();
     return <Tab.Navigator screenOptions={({ route }) => ({
-        tabBarActiveTintColor: 'black',
+        tabBarActiveTintColor: '#0D4A85',
         // tabBarLabelStyle: { color: 'black' },
         animation: 'slide_from_right',
         labelStyle: {
@@ -80,7 +78,7 @@ const MainTab = () => {
         },
         tabBarIcon: ({ focused, color, size }) => {
             let iconName;
-            color = focused ? 'black' : 'gray';
+            color = focused ? '#0D4A85' : 'gray';
             if (route.name === 'HomeScreen') {
                 iconName = focused
                     ? 'home'
@@ -98,7 +96,7 @@ const MainTab = () => {
     })} screenListeners={{
         state: (e) => {
             // console.log(e.data.state)
-            // setActive(e.data.state.index);
+
         },
     }} >
         <Tab.Screen name="HomeScreen" component={HomeScreen} options={{ tabBarLabel: 'Home', header: () => (<HeaderHomeScreen />) }} />

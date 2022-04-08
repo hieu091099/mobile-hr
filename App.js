@@ -9,6 +9,8 @@ import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import DrawerContent from './screen/Drawer/Drawer';
 import { useFonts } from 'expo-font';
+import LoginFingerPrint from './screen/LoginFinger/LoginFingerPrint';
+import LoginRoot from './screen/RootStackScreen/LoginRoot';
 
 // import AppLoading from 'expo-app-loading';
 
@@ -48,12 +50,7 @@ export default function App() {
           }} drawerContent={props => <DrawerContent {...props} />}>
             <Drawer.Screen name="MainTab" component={MainTab} />
           </Drawer.Navigator> :
-          <Stack.Navigator screenOptions={{
-            headerShown: false,
-            animation: 'slide_from_right'
-          }} >
-            <Stack.Screen name="Login" component={LoginScreen} />
-          </Stack.Navigator>}
+          <LoginRoot />}
       </NavigationContainer>
     </PaperProvider>
   );

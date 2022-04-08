@@ -1,5 +1,5 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import jwt_decode from 'jwt-decode';
 import * as SecureStore from 'expo-secure-store';
 
 export const BASE_URL = "http://192.168.18.172:8000/";
@@ -44,7 +44,7 @@ export const axiosInstanceToken = async (method, url, accessToken, data) => {
     let refreshToken = await getToken("refreshToken");
 
     if (accessToken) {
-        const decoded = jwtDecode(accessToken);
+        const decoded = jwt_decode(accessToken);
         const current_time = new Date().getTime() / 1000;
 
         if (current_time >= decoded.exp) {

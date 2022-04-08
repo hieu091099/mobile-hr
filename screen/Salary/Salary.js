@@ -25,8 +25,7 @@ export default function Salary() {
                 getToken('accessToken').then(res => {
                     if (res != "" || res != undefined) {
                         res = JSON.parse(res);
-                        let accessToken = res.accessToken;
-                        dispatch(getSalaryAction(personId, accessToken));
+                        dispatch(getSalaryAction(personId, res));
                     }
                 })
             }
@@ -40,32 +39,32 @@ export default function Salary() {
                         <View style={styles.totalMonth}>
                             <Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 16 }}>Tổng lương nhận tháng này</Text>
 
-                            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 35 }}>{salary?.Final_Salary != "" ? formatNum(salary.Final_Salary) : ''} VNĐ</Text>
-                            {/* <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 35 }}>1.000.000.000 VNĐ</Text> */}
+                            {/* <Text style={{ color: 'white', fontWeight: '900', fontSize: 35 }}>{salary?.Final_Salary != "" ? formatNum(salary.Final_Salary) : ''} VNĐ</Text> */}
+                            <Text style={{ color: 'white', fontWeight: '900', fontSize: 35 }}>1.000.000.000 VNĐ</Text>
                         </View>
                     </View>
                     <View style={styles.total1}>
                         <View style={styles.threecolunm}>
                             <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 15 }}>Công TT</Text>
-                                <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>{salary?.Working_Days}</Text></View>
+                                <Text style={{ color: 'white', fontWeight: '900', fontSize: 16 }}>{salary?.Working_Days}</Text></View>
                             <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 15 }}>T.Ca lũy kế</Text>
-                                <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>{salary?.Overtime}</Text></View>
+                                <Text style={{ color: 'white', fontWeight: '900', fontSize: 16 }}>{salary?.Overtime}</Text></View>
                             <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 15 }}>Loại bình bầu</Text>
-                                <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>{salary?.Rating_ID.trim()}</Text></View>
+                                <Text style={{ color: 'white', fontWeight: '900', fontSize: 16 }}>{salary?.Rating_ID.trim()}</Text></View>
                         </View>
                     </View>
                     <View style={styles.total1}>
                         <View style={styles.threecolunm}>
                             <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 15 }}>Số phép năm</Text>
-                                <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>{salary?.Annual_Leave}</Text></View>
+                                <Text style={{ color: 'white', fontWeight: '900', fontSize: 16 }}>{salary?.Annual_Leave}</Text></View>
                             <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 15 }}>Đã nghỉ</Text>
-                                <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>{salary?.Leave_Days}</Text></View>
+                                <Text style={{ color: 'white', fontWeight: '900', fontSize: 16 }}>{salary?.Leave_Days}</Text></View>
                             <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 15 }}>Còn lại</Text>
-                                <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>{salary?.Annual_Leave - salary?.Leave_Days}</Text></View>
+                                <Text style={{ color: 'white', fontWeight: '900', fontSize: 16 }}>{salary?.Annual_Leave - salary?.Leave_Days}</Text></View>
                         </View>
                     </View>
                 </View>
-                <Text style={{ marginTop: 10, fontWeight: 'bold', fontSize: 20, letterSpacing: 1 }}>Chi tiết </Text>
+                <Text style={{ marginTop: 10, marginLeft: 10, marginBottom: 10, fontWeight: '900', fontSize: 20, letterSpacing: 1 }}>Lương chi tiết </Text>
                 <ListItem.Accordion
                     style={{ backgroundColor: 'blue', color: 'bue' }}
                     content={
@@ -80,7 +79,7 @@ export default function Salary() {
                         setExpandedPlus(!expandedPlus);
                     }}
                 >
-                    <ScrollView style={{ height: '60%' }}>
+                    <ScrollView style={{ height: '59%' }}>
                         <ListItem bottomDivider>
                             <ListItem.Content>
                                 <ListItem.Title > Lương chính </ListItem.Title>
@@ -309,7 +308,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     }, leftsalary: {
         fontSize: 18,
-        fontWeight: 'bold',
+        fontWeight: '900',
         color: '#333333'
     }, rightsalary: {
         fontSize: 20,

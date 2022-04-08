@@ -84,7 +84,7 @@ export default function HomeScreen() {
                             <Text style={styles.titleDetail}>View your salary</Text>
                         </View>
                     </TouchableOpacity>
-                    <View style={styles.menuItem}>
+                    <TouchableOpacity style={styles.menuItem}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Ionicons name="logo-electron" color="#0D4A85" size={40} />
@@ -93,8 +93,8 @@ export default function HomeScreen() {
                             <Text style={styles.titleItem}>Electron</Text>
                             <Text style={styles.titleDetail}>View your salary</Text>
                         </View>
-                    </View>
-                    <View style={styles.menuItem}>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.menuItem}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Ionicons name="logo-instagram" color="#0D4A85" size={40} />
@@ -103,7 +103,7 @@ export default function HomeScreen() {
                             <Text style={styles.titleItem}>Instagram</Text>
                             <Text style={styles.titleDetail}>View your salary</Text>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.menuProg}>
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     },
     titleName: {
         fontSize: 25,
-        fontWeight: 'bold',
+        fontWeight: '900',
         // color: 'black'
         color: '#0D4A85'
     },
@@ -196,14 +196,14 @@ const styles = StyleSheet.create({
         fontSize: 13,
         letterSpacing: 1,
         color: 'gray',
-        fontWeight: 'bold'
+        fontWeight: '900'
     },
     mainMenu: {
         marginTop: 20
     },
     titleMenu: {
         fontSize: 20,
-        fontWeight: 'bold',
+        fontWeight: '900',
         color: '#5C5C5C'
     },
     menuWrapper: {
@@ -231,12 +231,12 @@ const styles = StyleSheet.create({
     titleItem: {
         marginTop: 5,
         fontSize: 20,
-        fontWeight: 'bold',
+        fontWeight: '900',
         color: '#0D4A85'
     },
     titleDetail: {
         fontSize: 12,
-        fontWeight: 'bold',
+        fontWeight: '900',
         color: '#69737a'
     },
     menuWrapperProg: {
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
         borderRadius: 50
     },
     contentItem: {
-        fontWeight: 'bold',
+        fontWeight: '900',
         fontSize: 18
     }
 });

@@ -1,5 +1,5 @@
-import { View, Text, Button, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, Button, ScrollView, StyleSheet, Image, TouchableOpacity, Animated } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native';
 import { getToken } from '../../config';
@@ -30,19 +30,37 @@ export default function HomeScreen() {
         if (res != "" || res != undefined) {
             res = JSON.parse(res);
         }
-        // console.log({ res });
     })
+    const fadeAnim = useRef(new Animated.Value(0)).current;
+
+    const fadeIn = () => {
+        // Will change fadeAnim value to 1 in 5 seconds
+        Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 1000,
+            useNativeDriver: true
+        }).start();
+    };
+
+    const fadeOut = () => {
+        // Will change fadeAnim value to 0 in 3 seconds
+        Animated.timing(fadeAnim, {
+            toValue: 0,
+            duration: 1000,
+            useNativeDriver: true
+        }).start();
+    };
     return (
         <View style={styles.home}>
-            <View style={styles.titleHome}>
-                <View>
+            <Animated.View style={[styles.titleHome, { opacity: fadeAnim }]}>
+                <View >
                     <Text style={styles.titleName}>Hello {firstName},</Text>
                     <Text style={styles.titleBack}>Welcome back !</Text>
                 </View>
                 <View>
                     <Ionicons name="options" size={26} />
                 </View>
-            </View>
+            </Animated.View>
             <View style={styles.mainMenu}>
                 <View>
                     <Text style={styles.titleMenu}>
@@ -50,7 +68,7 @@ export default function HomeScreen() {
                     </Text>
                 </View>
                 <View style={styles.menuWrapper}>
-                    <View style={styles.menuItem}>
+                    <TouchableOpacity onPress={fadeIn} style={styles.menuItem}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Fontisto name="mastercard" color="#0D4A85" size={40} />
@@ -58,17 +76,17 @@ export default function HomeScreen() {
                             <Text style={styles.titleItem}>Salary</Text>
                             <Text style={styles.titleDetail}>View your salary</Text>
                         </View>
-                    </View>
-                    <View style={styles.menuItem}>
-                        <TouchableOpacity style={styles.menuItemBox} onPress={()=>{navigation.navigate('Sotaylaodong')}}>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={fadeOut} style={styles.menuItem}>
+                        <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Ionicons name="logo-github" color="#0D4A85" size={40} />
                             </View>
-                            <Text style={styles.titleItem}>Note Book</Text>
-                            <Text style={styles.titleDetail}>View detail</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.menuItem}>
+                            <Text style={styles.titleItem}>Github</Text>
+                            <Text style={styles.titleDetail}>View your salary</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.menuItem}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Ionicons name="logo-electron" color="#0D4A85" size={40} />
@@ -77,8 +95,8 @@ export default function HomeScreen() {
                             <Text style={styles.titleItem}>Electron</Text>
                             <Text style={styles.titleDetail}>View your salary</Text>
                         </View>
-                    </View>
-                    <View style={styles.menuItem}>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.menuItem}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Ionicons name="logo-instagram" color="#0D4A85" size={40} />
@@ -87,7 +105,7 @@ export default function HomeScreen() {
                             <Text style={styles.titleItem}>Instagram</Text>
                             <Text style={styles.titleDetail}>View your salary</Text>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.menuProg}>
@@ -172,7 +190,7 @@ const styles = StyleSheet.create({
     },
     titleName: {
         fontSize: 25,
-        fontWeight: 'bold',
+        fontWeight: '900',
         // color: 'black'
         color: '#0D4A85'
     },
@@ -180,14 +198,14 @@ const styles = StyleSheet.create({
         fontSize: 13,
         letterSpacing: 1,
         color: 'gray',
-        fontWeight: 'bold'
+        fontWeight: '900'
     },
     mainMenu: {
         marginTop: 20
     },
     titleMenu: {
         fontSize: 20,
-        fontWeight: 'bold',
+        fontWeight: '900',
         color: '#5C5C5C'
     },
     menuWrapper: {
@@ -215,12 +233,12 @@ const styles = StyleSheet.create({
     titleItem: {
         marginTop: 5,
         fontSize: 20,
-        fontWeight: 'bold',
+        fontWeight: '900',
         color: '#0D4A85'
     },
     titleDetail: {
         fontSize: 12,
-        fontWeight: 'bold',
+        fontWeight: '900',
         color: '#69737a'
     },
     menuWrapperProg: {
@@ -247,7 +265,7 @@ const styles = StyleSheet.create({
         borderRadius: 50
     },
     contentItem: {
-        fontWeight: 'bold',
+        fontWeight: '900',
         fontSize: 18
     }
 });

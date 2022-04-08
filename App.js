@@ -14,6 +14,8 @@ import {
   setCustomText,
 } from 'react-native-global-props';
 import SoTayLaoDong from './screen/soTayLaoDong/SoTayLaoDong';
+import LoginFingerPrint from './screen/LoginFinger/LoginFingerPrint';
+import LoginRoot from './screen/RootStackScreen/LoginRoot';
 
 // import AppLoading from 'expo-app-loading';
 
@@ -77,13 +79,7 @@ export default function App() {
            <Stack.Screen name="Sotaylaodong" component={SoTayLaoDong} />
 
           </Drawer.Navigator> :
-          <Stack.Navigator screenOptions={{
-            headerShown: false,
-            animation: 'slide_from_right'
-          }} >
-           <Stack.Screen name="Login" component={LoginScreen} />
-           
-          </Stack.Navigator>}
+          <LoginRoot />}
       </NavigationContainer>
     </PaperProvider>
   );

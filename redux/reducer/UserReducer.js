@@ -8,6 +8,7 @@ const stateDefault = {
     // indexScreen: '',
     isVisibleLogin: false,
     messageLoginResponse: '',
+    checkIsChoose: 0,
 }
 
 export const UserReducer = (state = stateDefault, action) => {
@@ -42,6 +43,12 @@ export const UserReducer = (state = stateDefault, action) => {
             state.salary = action.salary;
             return { ...state };
         }
+        case 'LOGIN_ANOTHER_USERID': {
+            state.isLoggedIn = false;
+            state.checkIsChoose++;
+            return { ...state };
+        }
+
         // case 'CHANGE_SCREEN': {
         //     state.indexScreen = action.indexScreen;
         //     return { ...state };

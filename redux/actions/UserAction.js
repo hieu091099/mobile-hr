@@ -18,7 +18,6 @@ export const loginAction = (userLogin, navigation) => {
                     userToken: result.data.accessToken
                 })
             } else {
-                console.log(result.data.message);
                 dispatch({
                     type: 'LOGIN_FAIL',
                     messageLoginResponse: result.data.message
@@ -33,14 +32,8 @@ export const loginAction = (userLogin, navigation) => {
 
 export const getSalaryAction = (personId, accessToken) => {
     return async (dispatch) => {
-        // console.log(personId)
         try {
-            let result = await axiosInstance.get(`salary/${personId}`);
-            // let result = await axios({
-            //     method: 'GET',
-            //     url: BASE_URL + 'salary/29975'
-            // })
-            console.log(result.data);
+            let result = await axiosInstanceToken('GET', `salary/${personId}`, accessToken);
             dispatch({
                 type: 'GET_SALARY',
                 salary: result.data

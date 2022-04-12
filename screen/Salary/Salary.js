@@ -22,7 +22,12 @@ export default function Salary() {
 
     // console.log(Date.now());
     const formatNum = (num) => {
+        if(typeof num == 'number'){
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+        }else{
+            return num;
+        }
+        
     }
     useEffect(() => {
         // console.log(new Date().getMonth());
@@ -66,11 +71,13 @@ export default function Salary() {
         setDateSele(selectedDate);
         // new Date().getFullYear()
         // new Date().getMonth()
-        if(selectedDate.split(" ")[0]>new Date().getFullYear() || selectedDate.split(" ")[1]>new Date().getMonth()){
+        console.log(selectedDate);
+
+        if(selectedDate.split(" ")[0] > new Date().getFullYear() || (selectedDate.split(" ")[1] > new Date().getMonth() && selectedDate.split(" ")[0] == new Date().getFullYear())){
+            // 
             setNodata(true);
         }else{
             setNodata(false);
-        // console.log(selectedDate.split(" ")[0]);
         getToken('user').then(res => {
             if (res != "" || res != undefined) {
                 res = JSON.parse(res);

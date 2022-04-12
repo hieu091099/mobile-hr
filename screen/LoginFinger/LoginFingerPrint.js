@@ -26,7 +26,7 @@ export default function LoginFingerPrint() {
         password: "",
         factory: ""
     });
-    console.log({ userIdFromDevice })
+
 
     /** state call dialog */
     const [isVisible, setIsVisible] = useState(false);

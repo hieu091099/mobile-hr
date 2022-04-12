@@ -31,10 +31,7 @@ const optionsHeader = {
         // borderWidth: 1,
         // borderColor: 'black'
     },
-    // headerTitleStyle: {
-    //     fontWeight: '900',
-    //     fontFaminly: 'Monda'
-    // },
+
     headerLeft: () => {
         const navigation = useNavigation();
         return <TouchableOpacity

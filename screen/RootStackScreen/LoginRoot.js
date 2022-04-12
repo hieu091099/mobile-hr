@@ -10,9 +10,9 @@ export default function LoginRoot() {
     const Stack = createNativeStackNavigator();
     const [userIdFromDevice, setUserIdFromDevice] = useState('');
 
-    console.log(userIdFromDevice);
+
     const { checkIsChoose } = useSelector(state => state.UserReducer);
-    console.log({ checkIsChoose })
+
     useEffect(() => {
         getToken('user').then(res => {
             if (res != undefined) {

@@ -16,6 +16,7 @@ import {
 import SoTayLaoDong from './screen/soTayLaoDong/SoTayLaoDong';
 import LoginFingerPrint from './screen/LoginFinger/LoginFingerPrint';
 import LoginRoot from './screen/RootStackScreen/LoginRoot';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // import AppLoading from 'expo-app-loading';
 
@@ -49,13 +50,7 @@ export default function App() {
   const Drawer = createDrawerNavigator();
   const { isLoggedIn } = useSelector(state => state.UserReducer);
 
-  // let [fontsLoaded] = useFonts({
-  //   'Sansita': require('./assets/fonts/Sansita.ttf'),
-  // });
 
-  // if (!fontsLoaded) {
-  //   return <AppLoading />;
-  // }
 
   const theme = {
     ...DefaultTheme,
@@ -68,20 +63,22 @@ export default function App() {
   };
 
   return (
-    <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <StatusBar hidden />
-        {isLoggedIn ?
-          <Drawer.Navigator screenOptions={{
-            headerShown: false,
-            animation: 'slide_from_right'
-          }} drawerContent={props => <DrawerContent {...props} />}>
-            <Drawer.Screen name="MainTab" component={MainTab} />
-            <Stack.Screen name="Sotaylaodong" component={SoTayLaoDong} />
+    <SafeAreaProvider>
+      <PaperProvider theme={theme}>
+        <NavigationContainer>
+          <StatusBar hidden />
+          {isLoggedIn ?
+            <Drawer.Navigator screenOptions={{
+              headerShown: false,
+              animation: 'slide_from_right'
+            }} drawerContent={props => <DrawerContent {...props} />}>
+              <Drawer.Screen name="MainTab" component={MainTab} />
+              <Stack.Screen name="Sotaylaodong" component={SoTayLaoDong} />
 
-          </Drawer.Navigator> :
-          <LoginRoot />}
-      </NavigationContainer>
-    </PaperProvider>
+            </Drawer.Navigator> :
+            <LoginRoot />}
+        </NavigationContainer>
+      </PaperProvider>
+    </SafeAreaProvider>
   );
 }

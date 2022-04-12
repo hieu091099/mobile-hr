@@ -30,10 +30,11 @@ export const loginAction = (userLogin, navigation) => {
     }
 }
 
-export const getSalaryAction = (personId, accessToken) => {
+export const getSalaryAction = (accessToken,data) => {
     return async (dispatch) => {
         try {
-            let result = await axiosInstanceToken('GET', `salary/${personId}`, accessToken);
+            let result = await axiosInstanceToken('POST', `salary/`, accessToken,data);
+            // console.log(result);
             dispatch({
                 type: 'GET_SALARY',
                 salary: result.data

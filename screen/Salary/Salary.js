@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Animated } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Animated, Modal, Pressable, TouchableWithoutFeedback,TouchableOpacity, Image } from 'react-native'
 import React, { useState, useEffect, useRef } from 'react'
 import { BASE_URL, getToken } from '../../config'
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,6 +6,9 @@ import { getSalaryAction } from '../../redux/actions/UserAction';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { Icon, ListItem } from 'react-native-elements';
+import DatePicker from 'react-native-modern-datepicker';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
 export default function Salary() {
 
     const { salary } = useSelector(state => state.UserReducer);
@@ -13,11 +16,18 @@ export default function Salary() {
     const [expandedPlus, setExpandedPlus] = useState(true);
     const [expandedMinus, setExpandedMinus] = useState(true);
     const dispatch = useDispatch();
+    const [modalVisible, setModalVisible] = useState(false);
+    const [DateSele, setDateSele] = useState('');
+    const [noData, setNodata] = useState(false);
 
+    // console.log(Date.now());
     const formatNum = (num) => {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
     }
     useEffect(() => {
+        // console.log(new Date().getMonth());
+        // console.log(new Date().getFullYear()+'-'+new Date().getMonth());
+        setDateSele(new Date().getFullYear()+' '+(new Date().getMonth()))
         getToken('user').then(res => {
             if (res != "" || res != undefined) {
                 res = JSON.parse(res);
@@ -25,25 +35,80 @@ export default function Salary() {
                 getToken('accessToken').then(res => {
                     if (res != "" || res != undefined) {
                         res = JSON.parse(res);
-                        dispatch(getSalaryAction(personId, res));
+                        dispatch(getSalaryAction(res,{"personId":personId,"monthYear":new Date().getFullYear()+'-'+(new Date().getMonth())}));
                     }
                 })
             }
         })
     }, []);
     return (
-        <View style={{ alignItems: 'center', marginTop: 20, backgroundColor: '#F7F7F7' }}>
+        <View style={{ alignItems: 'center', marginTop: 20, backgroundColor: '#F7F7F7',flex:1 }}>
+            {/* <View style={{flex:1,justifyContent: 'center', alignItems: 'center',height:100,width:100}}> */}
+         
+              <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}
+        >
+      <Pressable  style={{justifyContent:'center',alignItems:'center',flex:1,backgroundColor:'#00000078'}} onPress={()=>{setModalVisible(false);}}>
+        <DatePicker 
+             options={{
+                selectedTextColor: 'white',
+                mainColor: '#0D4A85'
+              }}
+      mode="monthYear"
+      onMonthYearChange={(selectedDate) => {
+        setModalVisible(false)
+        setDateSele(selectedDate);
+        // new Date().getFullYear()
+        // new Date().getMonth()
+        if(selectedDate.split(" ")[0]>new Date().getFullYear() || selectedDate.split(" ")[1]>new Date().getMonth()){
+            setNodata(true);
+        }else{
+            setNodata(false);
+        // console.log(selectedDate.split(" ")[0]);
+        getToken('user').then(res => {
+            if (res != "" || res != undefined) {
+                res = JSON.parse(res);
+                let personId = res.userId;
+                getToken('accessToken').then(res => {
+                    if (res != "" || res != undefined) {
+                        res = JSON.parse(res);
+                        dispatch(getSalaryAction(res,{"personId":personId,"monthYear":selectedDate.split(" ")[0]+'-'+selectedDate.split(" ")[1]}));
+                    }
+                })
+            }
+        })
+        }}
+    }
+      current="2022-05-22"
+        selected="2022-05-22"
+    />
+      </Pressable >
+      </Modal>
             {salary == "" ? <View style={{ height: '100%', width: '100%', backgroundColor: 'white' }}><ActivityIndicator style={{ marginTop: '25%' }} size={65} color="#0D4A85" /></View> : <View style={{ width: '93%', height: '100%' }}>
                 <View style={styles.total}>
-                    <View style={styles.total1}>
+
+                  {!noData && <View style={styles.total1}>
                         <View style={styles.totalMonth}>
-                            <Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 16 }}>Tổng lương nhận tháng này</Text>
+                            <Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 16 }}>Tổng lương nhận tháng  <Text onStartShouldSetResponder={() => setModalVisible(true)} style={{textDecorationLine:'underline',color:'white'}}>{DateSele.split(' ')[1]} - {DateSele.split(' ')[0]}</Text></Text>
 
                             <Text style={{ color: 'white', fontWeight: '900', fontSize: 35 }}>{salary?.Final_Salary != "" ? formatNum(salary.Final_Salary) : ''} VNĐ</Text>
-                            {/* <Text style={{ color: 'white', fontWeight: '900', fontSize: 35 }}>100.000.000 VNĐ</Text> */}
+                            {/* <Text style={{ color: 'white', fontWeight: '900', fontSize: 35 }}>100.000.000 VNĐ</Text>  */}
                         </View>
-                    </View>
-                    <View style={styles.total1}>
+                    </View>}
+                    {noData ? <View style={{justifyContent:'center',alignItems:'center'}}>
+                <AntDesign name='calendar' size={40} color='white' style={{position:'absolute',right: 10,top:-40,elevation:1}} onPress={() => setModalVisible(true)}/>
+                    <Image 
+        style={{width:80,height:80}}
+        source={require('../../assets/images/nodata_white.png')}
+      />
+      <Text style={{color:'white'}}>No data</Text>
+      </View> : <><View style={styles.total1}>
                         <View style={styles.threecolunm}>
                             <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 15 }}>Công TT</Text>
                                 <Text style={{ color: 'white', fontWeight: '900', fontSize: 16 }}>{salary?.Working_Days}</Text></View>
@@ -62,10 +127,16 @@ export default function Salary() {
                             <View style={styles.colunm}><Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 15 }}>Còn lại</Text>
                                 <Text style={{ color: 'white', fontWeight: '900', fontSize: 16 }}>{salary?.Annual_Leave - salary?.Leave_Days}</Text></View>
                         </View>
-                    </View>
+                    </View></> }
                 </View>
                 <Text style={{ marginTop: 10, marginLeft: 10, marginBottom: 10, fontWeight: '900', fontSize: 20, letterSpacing: 1 }}>Lương chi tiết </Text>
-                <ListItem.Accordion
+                {noData ? <View style={{justifyContent:'center',alignItems:'center'}}>
+                    <Image 
+        style={{width:80,height:80,marginTop:50}}
+        source={require('../../assets/images/nodata.png')}
+      />
+      <Text>No data</Text>
+      </View> : <><ListItem.Accordion
                     style={{ backgroundColor: 'blue', color: 'bue' }}
                     content={
                         <>
@@ -273,7 +344,7 @@ export default function Salary() {
                             <ListItem.Title style={styles.font}>{formatNum(salary?.Person_Income_Tax_Money)} VND</ListItem.Title>
                         </ListItem>
                     </ScrollView>
-                </ListItem.Accordion>
+                </ListItem.Accordion></> }
 
             </View>}
 
@@ -287,7 +358,8 @@ const styles = StyleSheet.create({
         height: '28%',
         backgroundColor: '#0D4A85',
         justifyContent: 'space-evenly',
-        borderRadius: 8
+        borderRadius: 8,
+        position:'relative'
     },
     total1: {
         width: '100%',

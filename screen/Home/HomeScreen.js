@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import { useFonts } from 'expo-font';
 import { color } from 'react-native-reanimated';
+
 export default function HomeScreen() {
     const dispatch = useDispatch();
     const { user, isLoggedIn } = useSelector(state => state.UserReducer);
@@ -52,6 +53,7 @@ export default function HomeScreen() {
     };
     return (
         <View style={styles.home}>
+      
             <Animated.View style={[styles.titleHome, { opacity: fadeAnim }]}>
                 <View >
                     <Text style={styles.titleName}>Hello {firstName},</Text>

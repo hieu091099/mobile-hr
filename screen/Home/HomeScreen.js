@@ -22,11 +22,6 @@ export default function HomeScreen() {
             }
         })
     }, [isLoggedIn])
-    const logout = () => {
-        dispatch({
-            type: 'LOGOUT',
-        })
-    }
     getToken('user').then((res) => {
         if (res != "" || res != undefined) {
             res = JSON.parse(res);
@@ -53,7 +48,7 @@ export default function HomeScreen() {
     };
     return (
         <View style={styles.home}>
-      
+
             <Animated.View style={[styles.titleHome, { opacity: fadeAnim }]}>
                 <View >
                     <Text style={styles.titleName}>Hello {firstName},</Text>
@@ -70,7 +65,7 @@ export default function HomeScreen() {
                     </Text>
                 </View>
                 <View style={styles.menuWrapper}>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("Salary")}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Fontisto name="mastercard" color="#0D4A85" size={40} />
@@ -92,7 +87,6 @@ export default function HomeScreen() {
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Ionicons name="logo-electron" color="#0D4A85" size={40} />
-
                             </View>
                             <Text style={styles.titleItem}>Electron</Text>
                             <Text style={styles.titleDetail}>View your salary</Text>
@@ -102,7 +96,6 @@ export default function HomeScreen() {
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Ionicons name="logo-instagram" color="#0D4A85" size={40} />
-
                             </View>
                             <Text style={styles.titleItem}>Instagram</Text>
                             <Text style={styles.titleDetail}>View your salary</Text>

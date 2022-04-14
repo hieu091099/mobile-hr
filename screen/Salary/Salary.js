@@ -35,7 +35,6 @@ export default function Salary() {
                 let personId = res.userId;
                 getToken('accessToken').then(res => {
                     if (res != "" || res != undefined) {
-                        res = JSON.parse(res);
                         dispatch(getSalaryAction(res, { "personId": personId, "monthYear": new Date().getFullYear() + '-' + (new Date().getMonth()) }));
                     }
                 })

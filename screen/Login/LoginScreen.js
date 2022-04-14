@@ -77,7 +77,6 @@ export default function LoginScreen() {
 
 
     const login = async () => {
-
         if (checkConditionLogin(userLogin)) {
             let action = loginAction(userLogin, navigation, setIsVisible, setDialogMessage);
             dispatch(action);

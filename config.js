@@ -2,8 +2,8 @@ import axios from "axios";
 import jwt_decode from 'jwt-decode';
 import * as SecureStore from 'expo-secure-store';
 
-export const BASE_URL = "http://erp.lacty.com.vn:8000/";
-// export const BASE_URL = "http://192.168.18.172:8000/";
+// export const BASE_URL = "http://erp.lacty.com.vn:8000/";
+export const BASE_URL = "http://192.168.18.172:8000/";
 
 
 
@@ -45,35 +45,37 @@ export const axiosInstanceToken = async (method, url, accessToken, data) => {
     let isExp = false;
     let refreshToken = await getToken("refreshToken");
 
-    if (accessToken) {
-        const decoded = jwt_decode(accessToken);
-        const current_time = new Date().getTime() / 1000;
+    // if (accessToken) {
+    //     const decoded = jwt_decode(accessToken);
+    //     const current_time = new Date().getTime() / 1000;
 
-        if (current_time >= decoded.exp) {
-            try {
-                const body = {
-                    accessToken,
-                    refreshToken: refreshToken,
-                };
-                const res = await axios({
-                    method: "POST",
-                    url: `${BASE_URL}auth/refresh`,
-                    data: body,
-                });
-                await setToken("accessToken", res.data.accessToken);
-                isExp = true;
-            } catch (e) {
-                console.log(e);
-            }
-        }
-    }
+    //     if (current_time >= decoded.exp) {
+    //         try {
+    //             const body = {
+    //                 accessToken,
+    //                 refreshToken: refreshToken,
+    //             };
+    //             const res = await axios({
+    //                 method: "POST",
+    //                 url: `${BASE_URL}auth/refresh`,
+    //                 data: body,
+    //             });
+    //             await setToken("accessToken", res.data.accessToken);
+    //             isExp = true;
+    //         } catch (e) {
+    //             console.log(e);
+    //         }
+    //     }
+    // }
 
-    let accessTokenFromDevice = await getToken("accessToken");
+    // let accessTokenFromDevice = await getToken("accessToken");
     const instance = axios.create({
         baseURL: BASE_URL,
         timeout: 5000,
         headers: {
-            "x-access-token": !isExp ? accessToken : accessTokenFromDevice,
+            // "x-access-token": !isExp ? accessToken : accessTokenFromDevice,
+            "x-access-token": accessToken,
+
         },
     });
 
@@ -108,4 +110,41 @@ export const axiosInstanceToken = async (method, url, accessToken, data) => {
     }
 };
 
+export const checkLoginFinger = async () => {
+    let accessToken = await getToken("accessToken");
+    let refreshToken = await getToken("refreshToken");
 
+    if (accessToken) {
+        const decoded = jwt_decode(accessToken);
+        const current_time = new Date().getTime() / 1000;
+
+
+        if (current_time >= decoded.exp) {
+            try {
+                const body = {
+                    accessToken,
+                    refreshToken,
+                };
+                const res = await axios({
+                    method: "POST",
+                    url: `${BASE_URL}auth/refresh`,
+                    data: body,
+                });
+                if (res.data.authenticated == false) {
+                    if (res.data.key == 1) {
+                        return { status: false, msg: 'Đăng nhập vân tay chỉ có thể sử dụng trong 7 ngày kể từ ngày đăng nhập bằng mật khẩu!\n Vui lòng đăng nhập bằng mật khẩu để tái kích hoạt chức năng' }
+                    } else {
+                        return { status: false, msg: 'Tài khoản đã được đăng nhập từ 1 thiết bị khác!\n Vui lòng đăng nhập lại để tái kích hoạt chức năng' }
+                    }
+                } else {
+                    await setToken("accessToken", res.data.accessToken);
+                    return { status: true };
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        } else {
+            return { status: true };
+        }
+    }
+}

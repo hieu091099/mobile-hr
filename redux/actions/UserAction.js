@@ -1,6 +1,5 @@
-import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
-import { axiosInstance, axiosInstanceToken, BASE_URL, getToken, setToken } from "../../config"
+
+import { axiosInstance, axiosInstanceToken, BASE_URL, checkLoginFinger, getToken, setToken } from "../../config"
 
 
 export const loginAction = (userLogin, navigation) => {
@@ -9,7 +8,9 @@ export const loginAction = (userLogin, navigation) => {
         try {
             let result = await axiosInstance.post('user/login', userLogin);
             if (result.data.authenticated == true) {
-                await setToken("accessToken", JSON.stringify(result.data.accessToken));
+
+                await setToken("accessToken", result.data.accessToken);
+                await setToken("refreshToken", result.data.refreshToken);
                 await setToken("user", JSON.stringify(result.data.user));
 
                 dispatch({
@@ -30,10 +31,10 @@ export const loginAction = (userLogin, navigation) => {
     }
 }
 
-export const getSalaryAction = (accessToken,data) => {
+export const getSalaryAction = (accessToken, data) => {
     return async (dispatch) => {
         try {
-            let result = await axiosInstanceToken('POST', `salary/`, accessToken,data);
+            let result = await axiosInstanceToken('POST', `salary/`, accessToken, data);
             // console.log(result);
             dispatch({
                 type: 'GET_SALARY',
@@ -48,12 +49,23 @@ export const getSalaryAction = (accessToken,data) => {
 export const loginFingerAction = () => {
     return async (dispatch) => {
         try {
-            let user = await getToken("user");
-            user = JSON.parse(user);
-            dispatch({
-                type: 'LOGIN_FINGER',
-                user: user
-            })
+            let checkLogin = await checkLoginFinger();
+            console.log({ checkLogin })
+            if (checkLogin.status == true) {
+                let user = await getToken("user");
+                user = JSON.parse(user);
+                dispatch({
+                    type: 'LOGIN_FINGER',
+                    user: user
+                })
+            } else {
+                dispatch({
+                    type: 'LOGIN_FAIL',
+                    messageLoginResponse: checkLogin.msg
+                })
+            }
+
+
         } catch (e) {
             console.log(e)
         }

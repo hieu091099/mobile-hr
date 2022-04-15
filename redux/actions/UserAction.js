@@ -35,10 +35,18 @@ export const getSalaryAction = (accessToken, data) => {
     return async (dispatch) => {
         try {
             let result = await axiosInstanceToken('POST', `salary/`, accessToken, data);
-            dispatch({
-                type: 'GET_SALARY',
-                salary: result.data
-            })
+            if (result.data != "") {
+                dispatch({
+                    type: 'GET_SALARY',
+                    salary: result.data
+                })
+            } else {
+                dispatch({
+                    type: 'GET_SALARY',
+                    salary: { "Salary": null }
+                })
+            }
+
         } catch (e) {
             console.log(e)
         }

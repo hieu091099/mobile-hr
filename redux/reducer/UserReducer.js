@@ -4,6 +4,7 @@ const stateDefault = {
     user: [],
     userToken: '',
     isLoggedIn: false,
+    checkUndefined: true,
     salary: [],
     // indexScreen: '',
     isVisibleLogin: false,
@@ -41,6 +42,7 @@ export const UserReducer = (state = stateDefault, action) => {
         }
         case 'GET_SALARY': {
             state.salary = action.salary;
+            state.checkUndefined = false;
             return { ...state };
         }
         case 'LOGIN_ANOTHER_USERID': {

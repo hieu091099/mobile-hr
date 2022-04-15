@@ -15,8 +15,6 @@ export default function Salary() {
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
     const [selectDate, setSelectDate] = useState(new Date().getFullYear() + ' ' + (new Date().getMonth()));
-    const [noData, setNoData] = useState(false);
-    const [date, setDate] = useState();
 
     const formatNum = (num) => {
         if (typeof num == 'number') {
@@ -24,6 +22,12 @@ export default function Salary() {
         } else {
             return num;
         }
+    }
+    const addZeroNumber = (num) => {
+        if (num.length == 1) {
+            return `0${num}`;
+        }
+        return num;
     }
     useEffect(() => {
         getToken('user').then(res => {
@@ -41,7 +45,6 @@ export default function Salary() {
     return (
         <View style={{ alignItems: 'center', marginTop: 20, backgroundColor: '#F7F7F7', flex: 1 }}>
             {/* <View style={{flex:1,justifyContent: 'center', alignItems: 'center',height:100,width:100}}> */}
-
             <Modal
                 animationType="fade"
                 transparent={true}
@@ -61,11 +64,6 @@ export default function Salary() {
                         mode="monthYear"
                         onMonthYearChange={(selectedDate) => {
                             setSelectDate(selectedDate);
-                            if (selectedDate.split(" ")[0] > new Date().getFullYear() || (selectedDate.split(" ")[1] > new Date().getMonth() && selectedDate.split(" ")[0] == new Date().getFullYear())) {
-                                setNoData(true);
-                            } else {
-                                setNoData(false);
-                            }
                             setModalVisible(false)
                         }
                         }
@@ -77,15 +75,15 @@ export default function Salary() {
             {salary == "" ? <View style={{ height: '100%', width: '100%', backgroundColor: 'white' }}><ActivityIndicator style={{ marginTop: '25%' }} size={65} color="#0D4A85" /></View> : <View style={{ width: '93%', height: '100%' }}>
                 <View style={styles.total}>
 
-                    {!noData && <View style={styles.total1}>
+                    {salary.Final_Salary != undefined ? <View style={styles.total1}>
                         <View style={styles.totalMonth}>
-                            <Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 16, marginBottom: -8, marginTop: 5, marginLeft: 10 }}>Tổng lương nhận tháng  <Text onStartShouldSetResponder={() => setModalVisible(true)} style={{ textDecorationLine: 'underline', color: 'white' }}>{selectDate.split(' ')[1]} - {selectDate.split(' ')[0]}</Text></Text>
+                            <Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 16, marginBottom: -8, marginTop: 5, marginLeft: 10 }}>Tổng lương nhận tháng  <Text onStartShouldSetResponder={() => setModalVisible(true)} style={{ textDecorationLine: 'underline', color: 'white' }}>{addZeroNumber(selectDate.split(' ')[1])} - {selectDate.split(' ')[0]}</Text></Text>
 
-                            <Text style={{ color: 'white', fontWeight: '900', fontSize: 35 }}>{salary?.Final_Salary != "" ? formatNum(salary.Final_Salary) : ''} VNĐ</Text>
-                            {/* <Text style={{ color: 'white', fontWeight: '900', fontSize: 35, marginLeft: 5 }}>100.000.000 VNĐ</Text> */}
+                            {/* <Text style={{ color: 'white', fontWeight: '900', fontSize: 35 }}>{salary?.Final_Salary != "" ? formatNum(salary.Final_Salary) : ''} VNĐ</Text> */}
+                            <Text style={{ color: 'white', fontWeight: '900', fontSize: 35, marginLeft: 5 }}>100.000.000 VNĐ</Text>
                         </View>
-                    </View>}
-                    {noData ? <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    </View> : <></>}
+                    {salary.Final_Salary == undefined ? <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <AntDesign name='calendar' size={40} color='white' style={{ position: 'absolute', right: 10, top: -40, elevation: 1 }} onPress={() => setModalVisible(true)} />
                         <Image
                             style={{ width: 80, height: 80 }}
@@ -114,7 +112,7 @@ export default function Salary() {
                         </View></>}
                 </View>
                 <Text style={{ marginTop: 10, marginLeft: 10, marginBottom: 10, fontWeight: '900', fontSize: 20, letterSpacing: 1 }}>Lương chi tiết </Text>
-                {noData ? <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                {salary && salary.Final_Salary == undefined ? <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <Image
                         style={{ width: 80, height: 80, marginTop: 50 }}
                         source={require('../../assets/images/nodata.png')}

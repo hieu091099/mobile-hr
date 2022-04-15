@@ -129,12 +129,12 @@ export const checkLoginFinger = async () => {
           if (res.data.key == 1) {
             return {
               status: false,
-              msg: "Đăng nhập vân tay chỉ có thể sử dụng trong 7 ngày kể từ ngày đăng nhập bằng mật khẩu!\n Vui lòng đăng nhập bằng mật khẩu để tái kích hoạt chức năng",
+              msg: "Đăng nhập vân tay chỉ có thể sử dụng trong 7 ngày kể từ ngày đăng nhập bằng mật khẩu!\nVui lòng đăng nhập bằng mật khẩu để tái kích hoạt chức năng!",
             };
           } else {
             return {
               status: false,
-              msg: "Tài khoản đã được đăng nhập từ 1 thiết bị khác!\n Vui lòng đăng nhập lại để tái kích hoạt chức năng",
+              msg: "Tài khoản đã được đăng nhập từ 1 thiết bị khác!\nVui lòng đăng nhập lại để tái kích hoạt chức năng!",
             };
           }
         } else {

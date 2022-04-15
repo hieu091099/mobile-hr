@@ -25,7 +25,13 @@ export default function Salary() {
     new Date().getFullYear() + " " + new Date().getMonth()
   );
   // console.log({ salary })
-
+  const formatNum = (num) => {
+    if (typeof num == "number") {
+      return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+    } else {
+      return num;
+    }
+  };
   const addZeroNumber = (num) => {
     if (num.length == 1) {
       return `0${num}`;
@@ -118,8 +124,13 @@ export default function Salary() {
                     </Text>
                   </Text>
 
-                  {/* <Text style={styles.textSalary}>{salary?.Final_Salary != "" ? formatNum(salary.Final_Salary) : ''} VNĐ</Text> */}
-                  <Text style={styles.textSalary}>100.000.000 VNĐ</Text>
+                  <Text style={styles.textSalary}>
+                    {salary?.Final_Salary != ""
+                      ? formatNum(salary.Final_Salary)
+                      : ""}{" "}
+                    VNĐ
+                  </Text>
+                  {/* <Text style={styles.textSalary}>100.000.000 VNĐ</Text> */}
                 </View>
               </View>
             ) : (

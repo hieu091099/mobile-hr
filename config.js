@@ -138,13 +138,13 @@ export const checkLoginFinger = async () => {
                     }
                 } else {
                     await setToken("accessToken", res.data.accessToken);
-                    return { status: true };
+                    return { status: true, accessToken: res.data.accessToken };
                 }
             } catch (e) {
                 console.log(e);
             }
         } else {
-            return { status: true };
+            return { status: true, accessToken: accessToken };
         }
     }
 }

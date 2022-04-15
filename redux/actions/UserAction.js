@@ -35,7 +35,6 @@ export const getSalaryAction = (accessToken, data) => {
     return async (dispatch) => {
         try {
             let result = await axiosInstanceToken('POST', `salary/`, accessToken, data);
-            // console.log(result);
             dispatch({
                 type: 'GET_SALARY',
                 salary: result.data
@@ -50,13 +49,13 @@ export const loginFingerAction = () => {
     return async (dispatch) => {
         try {
             let checkLogin = await checkLoginFinger();
-            console.log({ checkLogin })
             if (checkLogin.status == true) {
                 let user = await getToken("user");
                 user = JSON.parse(user);
                 dispatch({
                     type: 'LOGIN_FINGER',
-                    user: user
+                    user: user,
+                    userToken: checkLogin.accessToken
                 })
             } else {
                 dispatch({

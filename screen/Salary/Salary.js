@@ -15,11 +15,9 @@ export default function Salary() {
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
     const [selectDate, setSelectDate] = useState(new Date().getFullYear() + ' ' + (new Date().getMonth()));
-    const [noData, setNodata] = useState(false);
+    const [noData, setNoData] = useState(false);
     const [date, setDate] = useState();
 
-
-    // console.log(Date.now());
     const formatNum = (num) => {
         if (typeof num == 'number') {
             return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
@@ -28,19 +26,18 @@ export default function Salary() {
         }
     }
     useEffect(() => {
-        // setSelectDate(new Date().getFullYear() + ' ' + (new Date().getMonth()))
         getToken('user').then(res => {
             if (res != "" || res != undefined) {
                 res = JSON.parse(res);
                 let personId = res.userId;
                 getToken('accessToken').then(res => {
                     if (res != "" || res != undefined) {
-                        dispatch(getSalaryAction(res, { "personId": personId, "monthYear": new Date().getFullYear() + '-' + (new Date().getMonth()) }));
+                        dispatch(getSalaryAction(res, { "personId": personId, "monthYear": selectDate.replace(" ", "-") }));
                     }
                 })
             }
         })
-    }, []);
+    }, [selectDate]);
     return (
         <View style={{ alignItems: 'center', marginTop: 20, backgroundColor: '#F7F7F7', flex: 1 }}>
             {/* <View style={{flex:1,justifyContent: 'center', alignItems: 'center',height:100,width:100}}> */}
@@ -63,25 +60,11 @@ export default function Salary() {
                         selected={selectDate}
                         mode="monthYear"
                         onMonthYearChange={(selectedDate) => {
-
                             setSelectDate(selectedDate);
-
                             if (selectedDate.split(" ")[0] > new Date().getFullYear() || (selectedDate.split(" ")[1] > new Date().getMonth() && selectedDate.split(" ")[0] == new Date().getFullYear())) {
-                                setNodata(true);
+                                setNoData(true);
                             } else {
-                                setNodata(false);
-                                getToken('user').then(res => {
-                                    if (res != "" || res != undefined) {
-                                        res = JSON.parse(res);
-                                        let personId = res.userId;
-                                        getToken('accessToken').then(res => {
-                                            if (res != "" || res != undefined) {
-                                                res = JSON.parse(res);
-                                                dispatch(getSalaryAction(res, { "personId": personId, "monthYear": selectedDate.split(" ")[0] + '-' + selectedDate.split(" ")[1] }));
-                                            }
-                                        })
-                                    }
-                                })
+                                setNoData(false);
                             }
                             setModalVisible(false)
                         }
@@ -98,8 +81,8 @@ export default function Salary() {
                         <View style={styles.totalMonth}>
                             <Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 16, marginBottom: -8, marginTop: 5, marginLeft: 10 }}>Tổng lương nhận tháng  <Text onStartShouldSetResponder={() => setModalVisible(true)} style={{ textDecorationLine: 'underline', color: 'white' }}>{selectDate.split(' ')[1]} - {selectDate.split(' ')[0]}</Text></Text>
 
-                            {/* <Text style={{ color: 'white', fontWeight: '900', fontSize: 35 }}>{salary?.Final_Salary != "" ? formatNum(salary.Final_Salary) : ''} VNĐ</Text> */}
-                            <Text style={{ color: 'white', fontWeight: '900', fontSize: 35, marginLeft: 5 }}>100.000.000 VNĐ</Text>
+                            <Text style={{ color: 'white', fontWeight: '900', fontSize: 35 }}>{salary?.Final_Salary != "" ? formatNum(salary.Final_Salary) : ''} VNĐ</Text>
+                            {/* <Text style={{ color: 'white', fontWeight: '900', fontSize: 35, marginLeft: 5 }}>100.000.000 VNĐ</Text> */}
                         </View>
                     </View>}
                     {noData ? <View style={{ justifyContent: 'center', alignItems: 'center' }}>

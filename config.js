@@ -117,8 +117,6 @@ export const checkLoginFinger = async () => {
     if (accessToken) {
         const decoded = jwt_decode(accessToken);
         const current_time = new Date().getTime() / 1000;
-
-
         if (current_time >= decoded.exp) {
             try {
                 const body = {
@@ -147,4 +145,19 @@ export const checkLoginFinger = async () => {
             return { status: true, accessToken: accessToken };
         }
     }
+}
+
+export const checkTokenExpired = async () => {
+    let accessToken = await getToken("accessToken");
+    if (accessToken) {
+        const decoded = jwt_decode(accessToken);
+        const current_time = new Date().getTime() / 1000;
+        if (current_time >= decoded.exp) {
+            return false
+        } else {
+            return true;
+        }
+
+    }
+    return false;
 }

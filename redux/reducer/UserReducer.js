@@ -8,7 +8,9 @@ const stateDefault = {
     salary: [],
     // indexScreen: '',
     isVisibleLogin: false,
+    isVisibleExpired: false,
     messageLoginResponse: '',
+    messageExpiredToken: '',
     checkIsChoose: 0,
 }
 
@@ -27,6 +29,15 @@ export const UserReducer = (state = stateDefault, action) => {
         }
         case 'CLOSE_DIALOG_LOGIN': {
             state.isVisibleLogin = false;
+            return { ...state };
+        }
+        case 'EXPIRED_TOKEN': {
+            state.isVisibleExpired = true;
+            state.messageExpiredToken = action.message;
+            return { ...state };
+        }
+        case 'CLOSE_DIALOG_EXPIRED': {
+            state.isVisibleExpired = false;
             return { ...state };
         }
         case 'LOGOUT': {

@@ -79,8 +79,8 @@ export default function Salary() {
                         <View style={styles.totalMonth}>
                             <Text style={{ color: '#B5B9CA', fontWeight: '300', fontSize: 16, marginBottom: -8, marginTop: 5, marginLeft: 10 }}>Tổng lương nhận tháng  <Text onStartShouldSetResponder={() => setModalVisible(true)} style={{ textDecorationLine: 'underline', color: 'white' }}>{addZeroNumber(selectDate.split(' ')[1])} - {selectDate.split(' ')[0]}</Text></Text>
 
-                            {/* <Text style={{ color: 'white', fontWeight: '900', fontSize: 35 }}>{salary?.Final_Salary != "" ? formatNum(salary.Final_Salary) : ''} VNĐ</Text> */}
-                            <Text style={{ color: 'white', fontWeight: '900', fontSize: 35, marginLeft: 5 }}>100.000.000 VNĐ</Text>
+                            <Text style={{ color: 'white', fontWeight: '900', fontSize: 35 }}>{salary?.Final_Salary != "" ? formatNum(salary.Final_Salary) : ''} VNĐ</Text>
+                            {/* <Text style={{ color: 'white', fontWeight: '900', fontSize: 35, marginLeft: 5 }}>100.000.000 VNĐ</Text> */}
                         </View>
                     </View> : <></>}
                     {salary.Final_Salary == undefined ? <View style={{ justifyContent: 'center', alignItems: 'center' }}>

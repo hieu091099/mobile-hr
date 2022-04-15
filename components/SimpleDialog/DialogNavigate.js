@@ -4,28 +4,31 @@ import {
     Dialog,
 } from 'react-native-elements';
 import { View, Text, StyleSheet } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 
-const SimpleDialog = ({ visible, setVisible, message, confirmWithCondition = () => { }, cancel }) => {
-    // const cfm = confirmWithCondition;
+
+const DialogNavigate = ({ visible, message }) => {
+    const dispatch = useDispatch();
     const toggleDialog = () => {
-        setVisible(!visible);
-        if (cancel == true) {
-            confirmWithCondition();
-        }
+        dispatch({
+            type: 'CLOSE_DIALOG_EXPIRED',
+        })
+        dispatch({
+            type: 'LOGOUT',
+        })
     };
     return (
         <View>
             <Dialog
                 isVisible={visible}
-            // onBackdropPress={toggleDialog}
             >
                 <Dialog.Title title="Thông Báo" />
                 <Text style={{ marginBottom: 20 }}>{message}</Text>
                 <View style={{ flexDirection: 'row' }} >
                     <Button
                         containerStyle={{
-                            width: cancel ? '50%' : '100%',
+                            width: '100%',
                             paddingHorizontal: 5
                             // marginHorizontal: 50,
                             // marginVertical: 10,
@@ -36,18 +39,7 @@ const SimpleDialog = ({ visible, setVisible, message, confirmWithCondition = () 
                             borderWidth: 0,
                         }} onPress={() => toggleDialog()} title="ĐỒNG Ý"></Button>
 
-                    {cancel && <Button
-                        containerStyle={{
-                            width: '50%',
-                            paddingHorizontal: 5
-                            // marginHorizontal: 50,
-                            // marginVertical: 10,
-                        }}
-                        buttonStyle={{
-                            backgroundColor: '#9B100C',
-                            borderColor: 'transparent',
-                            borderWidth: 0,
-                        }} onPress={() => setVisible(!visible)} title="HỦY BỎ"></Button>}
+
                 </View>
             </Dialog>
         </View>
@@ -67,4 +59,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SimpleDialog;
+export default DialogNavigate;

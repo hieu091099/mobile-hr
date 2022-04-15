@@ -1,71 +1,72 @@
 import { getToken } from "../../config";
 
 const stateDefault = {
-    user: [],
-    userToken: '',
-    isLoggedIn: false,
-    checkUndefined: true,
-    salary: [],
-    // indexScreen: '',
-    isVisibleLogin: false,
-    isVisibleExpired: false,
-    messageLoginResponse: '',
-    messageExpiredToken: '',
-    checkIsChoose: 0,
-}
+  user: [],
+  userToken: "",
+  isLoggedIn: false,
+  checkUndefined: true,
+  salary: [],
+  // indexScreen: '',
+  isVisibleLogin: false,
+  isVisibleExpired: false,
+  messageLoginResponse: "",
+  messageExpiredToken: "",
+  checkIsChoose: 0,
+};
 
 export const UserReducer = (state = stateDefault, action) => {
-    switch (action.type) {
-        case 'LOGIN': {
-            state.user = action.user;
-            state.userToken = action.userToken;
-            state.isLoggedIn = true;
-            return { ...state };
-        }
-        case 'LOGIN_FAIL': {
-            state.isVisibleLogin = true;
-            state.messageLoginResponse = action.messageLoginResponse;
-            return { ...state };
-        }
-        case 'CLOSE_DIALOG_LOGIN': {
-            state.isVisibleLogin = false;
-            return { ...state };
-        }
-        case 'EXPIRED_TOKEN': {
-            state.isVisibleExpired = true;
-            state.messageExpiredToken = action.message;
-            return { ...state };
-        }
-        case 'CLOSE_DIALOG_EXPIRED': {
-            state.isVisibleExpired = false;
-            return { ...state };
-        }
-        case 'LOGOUT': {
-            state.user = [];
-            state.userToken = '';
-            state.isLoggedIn = false;
-            return { ...state };
-        }
-        case 'LOGIN_FINGER': {
-            state.user = action.user;
-            state.isLoggedIn = true;
-            return { ...state };
-        }
-        case 'GET_SALARY': {
-            state.salary = action.salary;
-            state.checkUndefined = false;
-            return { ...state };
-        }
-        case 'LOGIN_ANOTHER_USERID': {
-            state.isLoggedIn = false;
-            state.checkIsChoose++;
-            return { ...state };
-        }
-
-        // case 'CHANGE_SCREEN': {
-        //     state.indexScreen = action.indexScreen;
-        //     return { ...state };
-        // }
-        default: return { ...state }
+  switch (action.type) {
+    case "LOGIN": {
+      state.user = action.user;
+      state.userToken = action.userToken;
+      state.isLoggedIn = true;
+      return { ...state };
     }
-}
+    case "LOGIN_FAIL": {
+      state.isVisibleLogin = true;
+      state.messageLoginResponse = action.messageLoginResponse;
+      return { ...state };
+    }
+    case "CLOSE_DIALOG_LOGIN": {
+      state.isVisibleLogin = false;
+      return { ...state };
+    }
+    case "EXPIRED_TOKEN": {
+      state.isVisibleExpired = true;
+      state.messageExpiredToken = action.message;
+      return { ...state };
+    }
+    case "CLOSE_DIALOG_EXPIRED": {
+      state.isVisibleExpired = false;
+      return { ...state };
+    }
+    case "LOGOUT": {
+      state.user = [];
+      state.userToken = "";
+      state.isLoggedIn = false;
+      return { ...state };
+    }
+    case "LOGIN_FINGER": {
+      state.user = action.user;
+      state.isLoggedIn = true;
+      return { ...state };
+    }
+    case "GET_SALARY": {
+      state.salary = action.salary;
+      state.checkUndefined = false;
+      return { ...state };
+    }
+    case "LOGIN_ANOTHER_USERID": {
+      state.isLoggedIn = false;
+      state.checkIsChoose++;
+      return { ...state };
+    }
+
+    // case 'CHANGE_SCREEN': {
+    //     state.indexScreen = action.indexScreen;
+    //     return { ...state };
+    // }
+    default:
+      return { ...state };
+  }
+};

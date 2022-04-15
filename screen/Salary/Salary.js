@@ -127,8 +127,10 @@ export default function Salary() {
             )}
             {salary.Final_Salary == undefined ? (
               <View>
-                <Text style={[styles.textTitle, { marginBottom: 120 }]}>
-                  Tổng lương nhận tháng
+                <Text
+                  style={[styles.textTitle, { marginTop: -22, marginLeft: 20 }]}
+                >
+                  Tổng lương nhận tháng{" "}
                   <Text
                     onStartShouldSetResponder={() => setModalVisible(true)}
                     style={{ textDecorationLine: "underline", color: "white" }}
@@ -137,7 +139,7 @@ export default function Salary() {
                     {selectDate.split(" ")[0]}
                   </Text>
                 </Text>
-                <View style={{ alignItems: "center", marginTop: -100 }}>
+                <View style={{ alignItems: "center", marginTop: 30 }}>
                   <Image
                     style={{ width: 80, height: 80 }}
                     source={require("../../assets/images/nodata_white.png")}

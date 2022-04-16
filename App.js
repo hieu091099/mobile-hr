@@ -56,6 +56,7 @@ export default function App() {
               drawerContent={(props) => <DrawerContent {...props} />}
             >
               <Drawer.Screen name="MainTab" component={MainTab} />
+              
             </Drawer.Navigator>
           ) : (
             <LoginRoot />

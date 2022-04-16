@@ -74,7 +74,7 @@ export default function HomeScreen() {
                             <Text style={styles.titleDetail}>View your salary</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={fadeOut} style={styles.menuItem}>
+                    <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("OnLeave")}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Ionicons name="logo-github" color="#0D4A85" size={40} />

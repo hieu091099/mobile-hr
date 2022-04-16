@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HeaderHomeScreen from '../../components/HeaderHomeScreen/HeaderHomeScreen';
 import { useNavigation } from '@react-navigation/native';
+import OnLeave from '../OnLeave/OnLeave';
 
 
 const Tab = createBottomTabNavigator();
@@ -23,7 +24,7 @@ const Profile = () => {
 
     </View>
 }
-const optionsHeader = {
+export const optionsHeader = {
     headerStyle: {
         height: 65,
         borderBottomLeftRadius: 10,
@@ -105,6 +106,9 @@ const MainTab = () => {
         <Tab.Screen name="Salary" component={Salary} options={optionsHeader} />
         <Tab.Screen name="Contact" component={Contact} options={optionsHeader} />
         <Tab.Screen name="Setting" component={Profile} options={optionsHeader} />
+        <Tab.Screen name="OnLeave" component={OnLeave} options={optionsHeader} />
+
+
     </Tab.Navigator>
 }
 export default MainTab;

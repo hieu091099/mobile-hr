@@ -77,10 +77,10 @@ export default function HomeScreen() {
                     <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("OnLeave")}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
-                                <Ionicons name="logo-github" color="#0D4A85" size={40} />
+                                <Fontisto name="holiday-village" color="#0D4A85" size={40} />
                             </View>
-                            <Text style={styles.titleItem}>Github</Text>
-                            <Text style={styles.titleDetail}>View your salary</Text>
+                            <Text style={styles.titleItem}>Ngày nghỉ</Text>
+                            <Text style={styles.titleDetail}>Chi tiết ngày nghỉ</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuItem} onPress={fadeIn}>

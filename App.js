@@ -11,6 +11,7 @@ import * as Font from "expo-font";
 import { setCustomText } from "react-native-global-props";
 import LoginRoot from "./screen/RootStackScreen/LoginRoot";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import OnLeave from "./screen/OnLeave/OnLeave";
 
 export default function App() {
   useEffect(() => {
@@ -56,6 +57,7 @@ export default function App() {
               drawerContent={(props) => <DrawerContent {...props} />}
             >
               <Drawer.Screen name="MainTab" component={MainTab} />
+        <Drawer.Screen name="OnLeave" component={OnLeave} />
               
             </Drawer.Navigator>
           ) : (

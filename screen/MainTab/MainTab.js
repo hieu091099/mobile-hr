@@ -7,7 +7,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HeaderHomeScreen from '../../components/HeaderHomeScreen/HeaderHomeScreen';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import OnLeave from '../OnLeave/OnLeave';
 
 
@@ -66,7 +66,7 @@ export const optionsHeader = {
 
 }
 const MainTab = () => {
-    return <Tab.Navigator screenOptions={({ route }) => ({
+    return  <Tab.Navigator screenOptions={({ route }) => ({
         tabBarActiveTintColor: '#0D4A85',
         // tabBarLabelStyle: { color: 'black' },
         animation: 'slide_from_right',
@@ -106,7 +106,6 @@ const MainTab = () => {
         <Tab.Screen name="Salary" component={Salary} options={optionsHeader} />
         <Tab.Screen name="Contact" component={Contact} options={optionsHeader} />
         <Tab.Screen name="Setting" component={Profile} options={optionsHeader} />
-        <Tab.Screen name="OnLeave" component={OnLeave} options={optionsHeader} />
 
 
     </Tab.Navigator>

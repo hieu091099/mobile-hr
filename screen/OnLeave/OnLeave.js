@@ -19,8 +19,9 @@ export default function OnLeave() {
               <ListItem.Title
                 style={[styles.font, { color: "#0D4A85", fontWeight: "bold" }]}
               >
-                KHOẢN CỘNG
+                01/04/2022
               </ListItem.Title>
+              
             </ListItem.Content>
           </>
         }
@@ -28,7 +29,64 @@ export default function OnLeave() {
         onPress={() => {
           setExpandedPlus(!expandedPlus);
         }}
-      ></ListItem.Accordion>
+      >
+      <ListItem bottomDivider>
+            <ListItem.Content>
+              <ListItem.Title style={styles.font}>Loại nghỉ </ListItem.Title>
+            </ListItem.Content>
+            <ListItem.Title style={styles.font}>
+          Phép năm
+            </ListItem.Title>
+          </ListItem>
+          <ListItem bottomDivider>
+            <ListItem.Content>
+              <ListItem.Title style={styles.font}>Thời gian nghỉ </ListItem.Title>
+            </ListItem.Content>
+            <ListItem.Title style={styles.font}>
+              1 ngày
+            </ListItem.Title>
+          </ListItem>
+
+
+      </ListItem.Accordion>
+      <ListItem.Accordion
+        style={{ backgroundColor: "blue", color: "bue" }}
+        content={
+          <>
+            <ListItem.Content>
+              <ListItem.Title
+                style={[styles.font, { color: "#0D4A85", fontWeight: "bold" }]}
+              >
+                01/04/2022
+              </ListItem.Title>
+              
+            </ListItem.Content>
+          </>
+        }
+        isExpanded={expandedPlus}
+        onPress={() => {
+          setExpandedPlus(!expandedPlus);
+        }}
+      >
+      <ListItem bottomDivider>
+            <ListItem.Content>
+              <ListItem.Title style={styles.font}>Loại nghỉ </ListItem.Title>
+            </ListItem.Content>
+            <ListItem.Title style={styles.font}>
+          Ro (việc riêng)
+            </ListItem.Title>
+          </ListItem>
+          <ListItem bottomDivider>
+            <ListItem.Content>
+              <ListItem.Title style={styles.font}>Thời gian nghỉ </ListItem.Title>
+            </ListItem.Content>
+            <ListItem.Title style={styles.font}>
+              4 tiếng
+            </ListItem.Title>
+          </ListItem>
+
+
+      </ListItem.Accordion>
     </View>
   )
 }

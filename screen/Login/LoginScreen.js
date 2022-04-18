@@ -30,9 +30,9 @@ export default function LoginScreen() {
         useSelector((state) => state.UserReducer)
     /** state set when user type input */
     const [userLogin, setUserLogin] = useState({
-        userId: "30018",
-        password: "090219974407",
-        factory: "LYV",
+        userId: "",
+        password: "",
+        factory: "",
     })
 
     /** state call dialog */

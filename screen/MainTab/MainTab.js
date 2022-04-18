@@ -7,10 +7,12 @@ import { useDispatch } from "react-redux"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import HeaderHomeScreen from "../../components/HeaderHomeScreen/HeaderHomeScreen"
 import { useNavigation } from "@react-navigation/native"
-import { createStackNavigator } from "@react-navigation/stack"
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
+
+import OnLeave from "../OnLeave/OnLeave"
 const Tab = createBottomTabNavigator()
 
-const Stack = createStackNavigator()
+const Stack = createNativeStackNavigator()
 const Contact = () => {
     return (
         <View>
@@ -22,7 +24,7 @@ const Profile = () => {
     const navigation = useNavigation()
     return <View></View>
 }
-const optionsHeader = {
+export const optionsHeader = {
     headerStyle: {
         height: 65,
         borderBottomLeftRadius: 10,
@@ -69,10 +71,20 @@ const optionsHeader = {
 const HomeStackScreen = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="OnLeave" component={Home} />
-            <Stack.Screen name="Notifications" component={Notifications} />
-            <Stack.Screen name="Profile" component={Profile} />
-            <Stack.Screen name="Settings" component={Settings} />
+            <Stack.Screen
+                name="HomeScreen"
+                component={HomeScreen}
+                options={{
+                    tabBarLabel: "Home",
+                    // headerShown: false,
+                    header: () => <HeaderHomeScreen />,
+                }}
+            />
+
+            <Stack.Screen name="OnLeave" component={OnLeave} />
+            {/* <Stack.Screen name="Notifications" component={Notifications} /> */}
+            {/* <Stack.Screen name="Profile" component={Profile} /> */}
+            {/* <Stack.Screen name="Settings" component={Settings} /> */}
         </Stack.Navigator>
     )
 }
@@ -117,10 +129,9 @@ const MainTab = () => {
             }}>
             <Tab.Screen
                 name="HomeScreen"
-                component={HomeScreen}
+                component={HomeStackScreen}
                 options={{
-                    tabBarLabel: "Home",
-                    header: () => <HeaderHomeScreen />,
+                    headerShown: false,
                 }}
             />
             <Tab.Screen

@@ -7,12 +7,11 @@ import { useDispatch } from "react-redux"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import HeaderHomeScreen from "../../components/HeaderHomeScreen/HeaderHomeScreen"
 import { useNavigation } from "@react-navigation/native"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import OnLeave from "../OnLeave/OnLeave"
+import HomeStackScreen from "../RootStackScreen/HomeRoot"
 const Tab = createBottomTabNavigator()
 
-const Stack = createNativeStackNavigator()
 const Contact = () => {
     return (
         <View>
@@ -68,26 +67,7 @@ export const optionsHeader = {
     },
     headerTitleAlign: "center",
 }
-const HomeStackScreen = () => {
-    return (
-        <Stack.Navigator>
-            <Stack.Screen
-                name="HomeScreen"
-                component={HomeScreen}
-                options={{
-                    tabBarLabel: "Home",
-                    // headerShown: false,
-                    header: () => <HeaderHomeScreen />,
-                }}
-            />
 
-            <Stack.Screen name="OnLeave" component={OnLeave} />
-            {/* <Stack.Screen name="Notifications" component={Notifications} /> */}
-            {/* <Stack.Screen name="Profile" component={Profile} /> */}
-            {/* <Stack.Screen name="Settings" component={Settings} /> */}
-        </Stack.Navigator>
-    )
-}
 const MainTab = () => {
     return (
         <Tab.Navigator

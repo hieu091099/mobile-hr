@@ -6,7 +6,7 @@ import {
     ActivityIndicator,
     Modal,
     Pressable,
-    Image
+    Image,
 } from "react-native"
 import React, { useState, useEffect, useRef } from "react"
 import { getToken } from "../../config"
@@ -22,7 +22,7 @@ export default function Salary() {
     const dispatch = useDispatch()
     const [modalVisible, setModalVisible] = useState(false)
     const [selectDate, setSelectDate] = useState(
-        new Date().getFullYear() + " " + new Date().getMonth()
+        new Date().getFullYear() + " " + new Date().getMonth(),
     )
     // console.log({ salary })
     const formatNum = (num) => {
@@ -32,12 +32,13 @@ export default function Salary() {
             return num
         }
     }
-    const addZeroNumber = (num) => {
-        if (num.length == 1) {
-            return `0${num}`
-        }
-        return num
-    }
+    // const addZeroNumber = (num) => {
+    //     if (num.length == 1) {
+    //         return `0${num}`
+    //     }
+    //     return num
+    // }
+    const pad = (num) => (num.length == 1 ? "0" : "") + num
     useEffect(() => {
         getToken("user").then((res) => {
             if (res != "" || res != undefined) {
@@ -48,8 +49,8 @@ export default function Salary() {
                         dispatch(
                             getSalaryAction(res, {
                                 personId: personId,
-                                monthYear: selectDate.replace(" ", "-")
-                            })
+                                monthYear: selectDate.replace(" ", "-"),
+                            }),
                         )
                     }
                 })
@@ -73,7 +74,7 @@ export default function Salary() {
                         justifyContent: "center",
                         alignItems: "center",
                         flex: 1,
-                        backgroundColor: "#00000078"
+                        backgroundColor: "#00000078",
                     }}
                     onPress={() => {
                         setModalVisible(false)
@@ -81,7 +82,7 @@ export default function Salary() {
                     <DatePicker
                         options={{
                             selectedTextColor: "white",
-                            mainColor: "#0D4A85"
+                            mainColor: "#0D4A85",
                         }}
                         selected={selectDate}
                         mode="monthYear"
@@ -116,12 +117,10 @@ export default function Salary() {
                                             }
                                             style={{
                                                 textDecorationLine: "underline",
-                                                color: "white"
+                                                color: "white",
                                             }}>
-                                            {addZeroNumber(
-                                                selectDate.split(" ")[1]
-                                            )}{" "}
-                                            - {selectDate.split(" ")[0]}
+                                            {pad(selectDate.split(" ")[1])} -{" "}
+                                            {selectDate.split(" ")[0]}
                                         </Text>
                                     </Text>
 
@@ -144,7 +143,7 @@ export default function Salary() {
                                 <Text
                                     style={[
                                         styles.textTitle,
-                                        { marginTop: -22, marginLeft: 20 }
+                                        { marginTop: -22, marginLeft: 20 },
                                     ]}>
                                     Tổng lương nhận tháng{" "}
                                     <Text
@@ -153,18 +152,16 @@ export default function Salary() {
                                         }
                                         style={{
                                             textDecorationLine: "underline",
-                                            color: "white"
+                                            color: "white",
                                         }}>
-                                        {addZeroNumber(
-                                            selectDate.split(" ")[1]
-                                        )}{" "}
-                                        - {selectDate.split(" ")[0]}
+                                        {pad(selectDate.split(" ")[1])} -{" "}
+                                        {selectDate.split(" ")[0]}
                                     </Text>
                                 </Text>
                                 <View
                                     style={{
                                         alignItems: "center",
-                                        marginTop: 30
+                                        marginTop: 30,
                                     }}>
                                     <Image
                                         style={{ width: 80, height: 80 }}
@@ -244,7 +241,7 @@ export default function Salary() {
                         <View
                             style={{
                                 justifyContent: "center",
-                                alignItems: "center"
+                                alignItems: "center",
                             }}>
                             <Image
                                 style={{ width: 80, height: 80, marginTop: 50 }}
@@ -268,23 +265,23 @@ const styles = StyleSheet.create({
         backgroundColor: "#0D4A85",
         justifyContent: "space-evenly",
         borderRadius: 8,
-        position: "relative"
+        position: "relative",
     },
     total1: {
         width: "100%",
         height: 60,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
     },
     wrapper: {
         alignItems: "center",
         marginTop: 20,
         backgroundColor: "#F7F7F7",
-        flex: 1
+        flex: 1,
     },
     wrapperLoading: {
         height: "100%",
         width: "100%",
-        backgroundColor: "white"
+        backgroundColor: "white",
     },
     textTitle: {
         color: "#B5B9CA",
@@ -292,18 +289,18 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: -8,
         marginTop: 5,
-        marginLeft: 10
+        marginLeft: 10,
     },
     textSalary: {
         color: "white",
         fontWeight: "900",
         fontSize: 35,
-        marginLeft: 5
+        marginLeft: 5,
     },
     titleText: {
         color: "white",
         fontWeight: "900",
-        fontSize: 16
+        fontSize: 16,
     },
     titleSalaryDetail: {
         marginTop: 10,
@@ -311,30 +308,30 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         fontWeight: "900",
         fontSize: 20,
-        letterSpacing: 0.5
+        letterSpacing: 0.5,
     },
     contentText: {
         color: "#B5B9CA",
         fontWeight: "300",
-        fontSize: 15
+        fontSize: 15,
     },
     iconSelectMonth: {
         position: "absolute",
         right: 10,
         top: -40,
-        elevation: 1
+        elevation: 1,
     },
     threeColumn: {
         flexDirection: "row",
         justifyContent: "space-between",
-        height: "100%"
+        height: "100%",
     },
     colunm: {
         width: "30%",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
     },
     font: {
-        fontFamily: "Monda"
-    }
+        fontFamily: "Monda",
+    },
 })

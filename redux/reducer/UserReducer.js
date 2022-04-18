@@ -12,6 +12,7 @@ const stateDefault = {
   messageLoginResponse: "",
   messageExpiredToken: "",
   checkIsChoose: 0,
+  listOnLeave:[]
 };
 
 export const UserReducer = (state = stateDefault, action) => {
@@ -59,6 +60,10 @@ export const UserReducer = (state = stateDefault, action) => {
     case "LOGIN_ANOTHER_USERID": {
       state.isLoggedIn = false;
       state.checkIsChoose++;
+      return { ...state };
+    }
+    case "GET_ONLEAVE": {
+      state.listOnLeave = action.onLeave;
       return { ...state };
     }
 

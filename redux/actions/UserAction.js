@@ -59,6 +59,25 @@ export const getSalaryAction = (accessToken, data) => {
     }
   };
 };
+export const getOnLeave = (accessToken,userId) => {
+  return async (dispatch) => {
+    try {
+      let result = await axiosInstanceToken(
+        "GET",
+        `user/onLeave/${userId}`,
+        accessToken
+      );
+      if (result.data != "") {
+        dispatch({
+          type: "GET_ONLEAVE",
+          onLeave: result.data,
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
 
 export const loginFingerAction = () => {
   return async (dispatch) => {

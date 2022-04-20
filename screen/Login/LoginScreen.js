@@ -9,8 +9,6 @@ import {
     ImageBackground,
 } from "react-native"
 import { TextInput } from "react-native-paper"
-import Ionicons from "react-native-vector-icons/Ionicons"
-import * as LocalAuthentication from "expo-local-authentication"
 import { PaperSelect } from "react-native-paper-select"
 import { Provider as PaperProvider } from "react-native-paper"
 import { useDispatch, useSelector } from "react-redux"
@@ -180,7 +178,10 @@ export default function LoginScreen() {
                         value={factory.value}
                         outlineColor="gray"
                         activeOutlineColor="#0D4A85"
-                        dialogButtonLabelStyle={{ color: "#0D4A85" }}
+                        dialogButtonLabelStyle={{
+                            color: "#0D4A85",
+                            // backgroundColor: "red",
+                        }}
                         onSelection={(value) => {
                             setFactory({
                                 ...factory,

@@ -157,9 +157,11 @@ export const checkTokenExpired = async () => {
         const current_time = new Date().getTime() / 1000
         // console.log(current_time, decoded.exp)
         if (current_time >= decoded.exp) {
-            return false
+            return 0
         } else {
-            return true
+            return 1
         }
+    } else {
+        return -1
     }
 }

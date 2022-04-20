@@ -23,7 +23,7 @@ export default function DrawerContent(props) {
     useEffect(() => {
         setInterval(() => {
             checkTokenExpired().then((res) => {
-                if (res === false) {
+                if (res === 0) {
                     dispatch({
                         type: "EXPIRED_TOKEN",
                         message:

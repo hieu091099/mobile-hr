@@ -4,13 +4,17 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import HeaderHomeScreen from "../../components/HeaderHomeScreen/HeaderHomeScreen"
 import HomeScreen from "../Home/HomeScreen"
 import OnLeave from "../OnLeave/OnLeave"
+import Salary from "../Salary/Salary"
 
 const Stack = createNativeStackNavigator()
 const HomeStackScreen = () => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator
+            screenOptions={{
+                animation: "slide_from_right",
+            }}>
             <Stack.Screen
-                name="HomeScreen"
+                name="Home"
                 component={HomeScreen}
                 options={{
                     tabBarLabel: "Home",

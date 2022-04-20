@@ -28,8 +28,6 @@ export const optionsHeader = {
         height: 65,
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
-        // borderWidth: 1,
-        // borderColor: 'black'
     },
 
     headerLeft: () => {

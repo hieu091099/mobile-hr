@@ -33,7 +33,7 @@ export default function LoginFingerPrint() {
     /** state set when user type input */
     const [userLogin, setUserLogin] = useState({
         userId: "",
-        password: "090219974407",
+        password: "",
         factory: "",
     })
 

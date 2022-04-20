@@ -122,73 +122,91 @@ export default function Salary() {
                                 </Text>
                             </Text>
                         </View>
-                        <View style={{ marginLeft: 10 }}>
-                            {/* <Text style={styles.textSalary}>
+                        {salary?.Final_Salary != undefined ? (
+                            <View>
+                                <View style={{ marginLeft: 10 }}>
+                                    {/* <Text style={styles.textSalary}>
                                     {salary?.Final_Salary != ""
                                         ? formatNum(salary.Final_Salary)
                                         : ""}{" "}
                                     VNĐ
                                 </Text> */}
-                            <Text style={styles.textSalary}>
-                                100.000.000 VNĐ
-                            </Text>
-                        </View>
-                        <View>
-                            <View style={styles.row}>
-                                <View style={styles.column}>
-                                    <Text style={styles.titleText}>
-                                        Công TT
-                                    </Text>
-                                    <Text style={styles.contentText}>
-                                        {salary?.Working_Days}
+
+                                    <Text style={styles.textSalary}>
+                                        100.000.000 VNĐ
                                     </Text>
                                 </View>
-                                <View style={styles.column}>
-                                    <Text style={styles.titleText}>
-                                        T.Ca lũy kế
-                                    </Text>
-                                    <Text style={styles.contentText}>
-                                        {salary?.Overtime}
-                                    </Text>
-                                </View>
-                                <View style={styles.column}>
-                                    <Text style={styles.titleText}>
-                                        Loại bình bầu
-                                    </Text>
-                                    <Text style={styles.contentText}>
-                                        {salary?.Rating_ID.trim()}
-                                    </Text>
+                                <View>
+                                    <View style={styles.row}>
+                                        <View style={styles.column}>
+                                            <Text style={styles.titleText}>
+                                                Công TT
+                                            </Text>
+                                            <Text style={styles.contentText}>
+                                                {salary?.Working_Days}
+                                            </Text>
+                                        </View>
+                                        <View style={styles.column}>
+                                            <Text style={styles.titleText}>
+                                                T.Ca lũy kế
+                                            </Text>
+                                            <Text style={styles.contentText}>
+                                                {salary?.Overtime}
+                                            </Text>
+                                        </View>
+                                        <View style={styles.column}>
+                                            <Text style={styles.titleText}>
+                                                Loại bình bầu
+                                            </Text>
+                                            <Text style={styles.contentText}>
+                                                {salary?.Rating_ID.trim()}
+                                            </Text>
+                                        </View>
+                                    </View>
+                                    <View style={styles.row}>
+                                        <View style={styles.column}>
+                                            <Text style={styles.titleText}>
+                                                Số phép năm
+                                            </Text>
+                                            <Text style={styles.contentText}>
+                                                {salary?.Annual_Leave}
+                                            </Text>
+                                        </View>
+                                        <View style={styles.column}>
+                                            <Text style={styles.titleText}>
+                                                Đã nghỉ
+                                            </Text>
+                                            <Text style={styles.contentText}>
+                                                {salary?.Leave_Days}
+                                            </Text>
+                                        </View>
+                                        <View style={styles.column}>
+                                            <Text style={styles.titleText}>
+                                                Còn lại
+                                            </Text>
+                                            <Text style={styles.contentText}>
+                                                {salary?.Annual_Leave -
+                                                    salary?.Leave_Days}
+                                            </Text>
+                                        </View>
+                                    </View>
                                 </View>
                             </View>
-                            <View style={styles.row}>
-                                <View style={styles.column}>
-                                    <Text style={styles.titleText}>
-                                        Số phép năm
-                                    </Text>
-                                    <Text style={styles.contentText}>
-                                        {salary?.Annual_Leave}
-                                    </Text>
-                                </View>
-                                <View style={styles.column}>
-                                    <Text style={styles.titleText}>
-                                        Đã nghỉ
-                                    </Text>
-                                    <Text style={styles.contentText}>
-                                        {salary?.Leave_Days}
-                                    </Text>
-                                </View>
-                                <View style={styles.column}>
-                                    <Text style={styles.titleText}>
-                                        Còn lại
-                                    </Text>
-                                    <Text style={styles.contentText}>
-                                        {salary?.Annual_Leave -
-                                            salary?.Leave_Days}
-                                    </Text>
-                                </View>
+                        ) : (
+                            <View
+                                style={{
+                                    alignItems: "center",
+                                    marginTop: 30,
+                                }}>
+                                <Image
+                                    style={{ width: 80, height: 80 }}
+                                    source={require("../../assets/images/nodata_white.png")}
+                                />
+                                <Text style={{ color: "white" }}>No data</Text>
                             </View>
-                        </View>
+                        )}
                     </View>
+
                     <Text style={styles.titleSalaryDetail}>
                         Lương chi tiết{" "}
                     </Text>

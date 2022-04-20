@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable } from "react-native"
 import React, { useEffect, useState } from "react"
 import { ListItem } from "react-native-elements"
 import Accordion from "react-native-collapsible/Accordion"
@@ -8,9 +8,14 @@ import { useDispatch, useSelector } from "react-redux"
 import { getToken } from "../../config"
 import { getOnLeave } from "../../redux/actions/UserAction"
 import moment from 'moment';
+import DatePicker from "react-native-modern-datepicker"
 export default function OnLeave() {
     const [activeSections, setActiveSections] = useState([])
     const { listOnLeave } = useSelector((state) => state.UserReducer)
+    const [modalVisible, setModalVisible] = useState(true)
+    const [selectDate, setSelectDate] = useState(
+        new Date().getFullYear() + " " + new Date().getMonth(),
+    )
     const dispatch = useDispatch()
     // console.log(listOnLeave);
     useEffect(() => {
@@ -25,6 +30,7 @@ export default function OnLeave() {
             }
         })
     }, [])
+    console.log(listOnLeave);
     const setSections = (sections) => {
         //setting up a active section state
         setActiveSections(sections.includes(undefined) ? [] : sections)
@@ -99,7 +105,7 @@ export default function OnLeave() {
     }
     return (
         <View>
-            <Text style={styles.titleSalaryDetail}>Ngày Phép tháng 04</Text>
+            <Text style={styles.titleSalaryDetail}>Ngày Phép Năm <TouchableOpacity onPress={()=>{setModalVisible(true)}}><Text>2022</Text></TouchableOpacity></Text>
             <ScrollView style={{ height: "92%" }}>
                 <Accordion
                     activeSections={activeSections}
@@ -112,6 +118,40 @@ export default function OnLeave() {
                     onChange={setSections}
                 />
             </ScrollView>
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    Alert.alert("Modal has been closed.")
+                    setModalVisible(!modalVisible)
+                }}>
+                <Pressable
+                    style={{
+                        justifyContent: "center",
+                        alignItems: "center",
+                        flex: 1,
+                        backgroundColor: "#00000078",
+                    }}
+                    onPress={() => {
+                        setModalVisible(false)
+                    }}>
+                    <DatePicker
+                        options={{
+                            selectedTextColor: "white",
+                            mainColor: "#0D4A85",
+                        }}
+                        selected={selectDate}
+                        mode="monthYear"
+                        onMonthYearChange={(selectedDate) => {
+                            setSelectDate(selectedDate)
+                            setModalVisible(false)
+                        }}
+                        current={selectDate}
+                        style={{ borderRadius: 10 }}
+                    />
+                </Pressable>
+            </Modal>
         </View>
     )
 }

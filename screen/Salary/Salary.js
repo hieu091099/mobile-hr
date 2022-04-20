@@ -105,134 +105,89 @@ export default function Salary() {
                 </View>
             ) : (
                 <View style={{ width: "93%", height: "100%" }}>
-                    <View style={styles.total}>
-                        {salary.Final_Salary != undefined ? (
-                            <View style={styles.total1}>
-                                <View style={styles.totalMonth}>
-                                    <Text style={styles.textTitle}>
-                                        Tổng lương nhận tháng{" "}
-                                        <Text
-                                            onStartShouldSetResponder={() =>
-                                                setModalVisible(true)
-                                            }
-                                            style={{
-                                                textDecorationLine: "underline",
-                                                color: "white",
-                                            }}>
-                                            {pad(selectDate.split(" ")[1])} -{" "}
-                                            {selectDate.split(" ")[0]}
-                                        </Text>
-                                    </Text>
-
-                                    <Text style={styles.textSalary}>
-                                        {salary?.Final_Salary != ""
-                                            ? formatNum(salary.Final_Salary)
-                                            : ""}{" "}
-                                        VNĐ
-                                    </Text>
-                                    {/* <Text style={styles.textSalary}>
-                                        100.000.000 VNĐ
-                                    </Text> */}
-                                </View>
-                            </View>
-                        ) : (
-                            <></>
-                        )}
-                        {salary.Final_Salary == undefined ? (
-                            <View>
+                    <View style={styles.summary}>
+                        <View style={{ marginLeft: 10 }}>
+                            <Text style={styles.textTitle}>
+                                Tổng lương nhận tháng{" "}
                                 <Text
-                                    style={[
-                                        styles.textTitle,
-                                        { marginTop: -22, marginLeft: 20 },
-                                    ]}>
-                                    Tổng lương nhận tháng{" "}
-                                    <Text
-                                        onStartShouldSetResponder={() =>
-                                            setModalVisible(true)
-                                        }
-                                        style={{
-                                            textDecorationLine: "underline",
-                                            color: "white",
-                                        }}>
-                                        {pad(selectDate.split(" ")[1])} -{" "}
-                                        {selectDate.split(" ")[0]}
-                                    </Text>
-                                </Text>
-                                <View
+                                    onStartShouldSetResponder={() =>
+                                        setModalVisible(true)
+                                    }
                                     style={{
-                                        alignItems: "center",
-                                        marginTop: 30,
+                                        textDecorationLine: "underline",
+                                        color: "white",
                                     }}>
-                                    <Image
-                                        style={{ width: 80, height: 80 }}
-                                        source={require("../../assets/images/nodata_white.png")}
-                                    />
-                                    <Text style={{ color: "white" }}>
-                                        No data
+                                    {pad(selectDate.split(" ")[1])} -{" "}
+                                    {selectDate.split(" ")[0]}
+                                </Text>
+                            </Text>
+                        </View>
+                        <View style={{ marginLeft: 10 }}>
+                            {/* <Text style={styles.textSalary}>
+                                    {salary?.Final_Salary != ""
+                                        ? formatNum(salary.Final_Salary)
+                                        : ""}{" "}
+                                    VNĐ
+                                </Text> */}
+                            <Text style={styles.textSalary}>
+                                100.000.000 VNĐ
+                            </Text>
+                        </View>
+                        <View>
+                            <View style={styles.row}>
+                                <View style={styles.column}>
+                                    <Text style={styles.titleText}>
+                                        Công TT
+                                    </Text>
+                                    <Text style={styles.contentText}>
+                                        {salary?.Working_Days}
+                                    </Text>
+                                </View>
+                                <View style={styles.column}>
+                                    <Text style={styles.titleText}>
+                                        T.Ca lũy kế
+                                    </Text>
+                                    <Text style={styles.contentText}>
+                                        {salary?.Overtime}
+                                    </Text>
+                                </View>
+                                <View style={styles.column}>
+                                    <Text style={styles.titleText}>
+                                        Loại bình bầu
+                                    </Text>
+                                    <Text style={styles.contentText}>
+                                        {salary?.Rating_ID.trim()}
                                     </Text>
                                 </View>
                             </View>
-                        ) : (
-                            <>
-                                <View style={styles.total1}>
-                                    <View style={styles.threeColumn}>
-                                        <View style={styles.colunm}>
-                                            <Text style={styles.contentText}>
-                                                Công TT
-                                            </Text>
-                                            <Text style={styles.titleText}>
-                                                {salary?.Working_Days}
-                                            </Text>
-                                        </View>
-                                        <View style={styles.colunm}>
-                                            <Text style={styles.contentText}>
-                                                T.Ca lũy kế
-                                            </Text>
-                                            <Text style={styles.titleText}>
-                                                {salary?.Overtime}
-                                            </Text>
-                                        </View>
-                                        <View style={styles.colunm}>
-                                            <Text style={styles.contentText}>
-                                                Loại bình bầu
-                                            </Text>
-                                            <Text style={styles.titleText}>
-                                                {salary?.Rating_ID.trim()}
-                                            </Text>
-                                        </View>
-                                    </View>
+                            <View style={styles.row}>
+                                <View style={styles.column}>
+                                    <Text style={styles.titleText}>
+                                        Số phép năm
+                                    </Text>
+                                    <Text style={styles.contentText}>
+                                        {salary?.Annual_Leave}
+                                    </Text>
                                 </View>
-                                <View style={styles.total1}>
-                                    <View style={styles.threeColumn}>
-                                        <View style={styles.colunm}>
-                                            <Text style={styles.contentText}>
-                                                Số phép năm
-                                            </Text>
-                                            <Text style={styles.titleText}>
-                                                {salary?.Annual_Leave}
-                                            </Text>
-                                        </View>
-                                        <View style={styles.colunm}>
-                                            <Text style={styles.contentText}>
-                                                Đã nghỉ
-                                            </Text>
-                                            <Text style={styles.titleText}>
-                                                {salary?.Leave_Days}
-                                            </Text>
-                                        </View>
-                                        <View style={styles.colunm}>
-                                            <Text style={styles.contentText}>
-                                                Còn lại
-                                            </Text>
-                                            <Text style={styles.titleText}>
-                                                {salary?.Annual_Leave -
-                                                    salary?.Leave_Days}
-                                            </Text>
-                                        </View>
-                                    </View>
+                                <View style={styles.column}>
+                                    <Text style={styles.titleText}>
+                                        Đã nghỉ
+                                    </Text>
+                                    <Text style={styles.contentText}>
+                                        {salary?.Leave_Days}
+                                    </Text>
                                 </View>
-                            </>
-                        )}
+                                <View style={styles.column}>
+                                    <Text style={styles.titleText}>
+                                        Còn lại
+                                    </Text>
+                                    <Text style={styles.contentText}>
+                                        {salary?.Annual_Leave -
+                                            salary?.Leave_Days}
+                                    </Text>
+                                </View>
+                            </View>
+                        </View>
                     </View>
                     <Text style={styles.titleSalaryDetail}>
                         Lương chi tiết{" "}
@@ -259,18 +214,18 @@ export default function Salary() {
 }
 
 const styles = StyleSheet.create({
-    total: {
+    summary: {
         width: "100%",
-        height: "28%",
         backgroundColor: "#0D4A85",
-        justifyContent: "space-evenly",
         borderRadius: 8,
-        position: "relative",
+        paddingVertical: 10,
     },
-    total1: {
-        width: "100%",
-        height: 60,
-        paddingHorizontal: 10,
+    row: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+    },
+    column: {
+        width: "30%",
     },
     wrapper: {
         alignItems: "center",
@@ -287,20 +242,17 @@ const styles = StyleSheet.create({
         color: "#B5B9CA",
         fontWeight: "300",
         fontSize: 16,
-        marginBottom: -8,
-        marginTop: 5,
-        marginLeft: 10,
     },
     textSalary: {
         color: "white",
         fontWeight: "900",
         fontSize: 35,
-        marginLeft: 5,
     },
     titleText: {
-        color: "white",
-        fontWeight: "900",
-        fontSize: 16,
+        textAlign: "center",
+        color: "#B5B9CA",
+        fontWeight: "300",
+        fontSize: 15,
     },
     titleSalaryDetail: {
         marginTop: 10,
@@ -311,25 +263,10 @@ const styles = StyleSheet.create({
         letterSpacing: 0.5,
     },
     contentText: {
-        color: "#B5B9CA",
-        fontWeight: "300",
-        fontSize: 15,
-    },
-    iconSelectMonth: {
-        position: "absolute",
-        right: 10,
-        top: -40,
-        elevation: 1,
-    },
-    threeColumn: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        height: "100%",
-    },
-    colunm: {
-        width: "30%",
-        alignItems: "center",
-        justifyContent: "center",
+        textAlign: "center",
+        color: "white",
+        fontWeight: "900",
+        fontSize: 16,
     },
     font: {
         fontFamily: "Monda",

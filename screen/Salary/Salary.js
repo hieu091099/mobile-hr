@@ -124,15 +124,15 @@ export default function Salary() {
                                         </Text>
                                     </Text>
 
-                                    <Text style={styles.textSalary}>
+                                    {/* <Text style={styles.textSalary}>
                                         {salary?.Final_Salary != ""
                                             ? formatNum(salary.Final_Salary)
                                             : ""}{" "}
                                         VNĐ
-                                    </Text>
-                                    {/* <Text style={styles.textSalary}>
-                                        100.000.000 VNĐ
                                     </Text> */}
+                                    <Text style={styles.textSalary}>
+                                        100.000.000 VNĐ
+                                    </Text>
                                 </View>
                             </View>
                         ) : (

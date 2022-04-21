@@ -12,7 +12,9 @@ const stateDefault = {
   messageLoginResponse: "",
   messageExpiredToken: "",
   checkIsChoose: 0,
-  listOnLeave:[]
+  listOnLeave:[],
+  setShowYearPicker: false,
+
 };
 
 export const UserReducer = (state = stateDefault, action) => {
@@ -64,6 +66,10 @@ export const UserReducer = (state = stateDefault, action) => {
     }
     case "GET_ONLEAVE": {
       state.listOnLeave = action.onLeave;
+      return { ...state };
+    }
+    case "SET_SHOW_YEAR_PICKER": {
+      state.setShowYearPicker = !state.setShowYearPicker;
       return { ...state };
     }
 

@@ -1,13 +1,18 @@
-import { View, Text } from "react-native"
-import React from "react"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import HeaderHomeScreen from "../../components/HeaderHomeScreen/HeaderHomeScreen"
-import HomeScreen from "../Home/HomeScreen"
-import OnLeave from "../OnLeave/OnLeave"
-import Salary from "../Salary/Salary"
+import { View, Text } from "react-native";
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HeaderHomeScreen from "../../components/HeaderHomeScreen/HeaderHomeScreen";
+import HomeScreen from "../Home/HomeScreen";
+import OnLeave from "../OnLeave/OnLeave";
+import Salary from "../Salary/Salary";
+import IconAnt from "react-native-vector-icons/AntDesign";
+import { useDispatch } from "react-redux";
 
-const Stack = createNativeStackNavigator()
+// calendar
+
+const Stack = createNativeStackNavigator();
 const HomeStackScreen = () => {
+    const dispatch = useDispatch();
     return (
         <Stack.Navigator
             screenOptions={{
@@ -23,12 +28,30 @@ const HomeStackScreen = () => {
                 }}
             />
 
-            <Stack.Screen name="OnLeave" component={OnLeave} />
+            <Stack.Screen
+                name="OnLeave"
+                component={OnLeave}
+                options={{
+                    headerRight: () => {
+                        return (
+                            <IconAnt
+                                name="calendar"
+                                size={30}
+                                onPress={() => {
+                                    dispatch({
+                                        type: "SET_SHOW_YEAR_PICKER",
+                                    });
+                                }}
+                            />
+                        );
+                    },
+                }}
+            />
             {/* <Stack.Screen name="Notifications" component={Notifications} /> */}
             {/* <Stack.Screen name="Profile" component={Profile} /> */}
             {/* <Stack.Screen name="Settings" component={Settings} /> */}
         </Stack.Navigator>
-    )
-}
+    );
+};
 
-export default HomeStackScreen
+export default HomeStackScreen;

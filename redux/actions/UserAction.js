@@ -33,14 +33,13 @@ export const loginAction = (userLogin, navigation) => {
     };
 };
 
-export const getSalaryAction = (accessToken, data) => {
+export const getSalaryAction = (accessToken, personId, monthYear) => {
     return async (dispatch) => {
         try {
             let result = await axiosInstanceToken(
                 "POST",
-                `salary/`,
+                `salary/${personId}/${monthYear}`,
                 accessToken,
-                data,
             );
             // console.log(result.data);
             if (result.data != "") {

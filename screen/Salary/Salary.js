@@ -47,10 +47,11 @@ export default function Salary() {
                 getToken("accessToken").then((res) => {
                     if (res != "" || res != undefined) {
                         dispatch(
-                            getSalaryAction(res, {
-                                personId: personId,
-                                monthYear: selectDate.replace(" ", "-"),
-                            }),
+                            getSalaryAction(
+                                res,
+                                personId,
+                                selectDate.replace(" ", "-"),
+                            ),
                         );
                     }
                 });

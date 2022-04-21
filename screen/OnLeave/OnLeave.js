@@ -82,16 +82,16 @@ export default function OnLeave() {
             }
         });
         return (
-            <View
+            <Text
                 style={{
                     backgroundColor: objectColor.backgroundColor,
                     paddingHorizontal: 5,
                     borderRadius: 4,
+                    color: objectColor.color,
+                    fontWeight: "bold",
                 }}>
-                <Text style={{ color: objectColor.color, fontWeight: "bold" }}>
-                    {item}
-                </Text>
-            </View>
+                {item}
+            </Text>
         );
     };
     return (

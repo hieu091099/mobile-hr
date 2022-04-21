@@ -9,8 +9,9 @@ import { getToken } from "../../config"
 import { getOnLeave } from "../../redux/actions/UserAction"
 import moment from 'moment';
 import DatePicker from "react-native-modern-datepicker"
-import Carousel from 'react-native-reanimated-carousel';
+import Carousel from 'react-native-snap-carousel';
 import { Dimensions } from 'react-native';
+import { DataTable } from 'react-native-paper';
 export default function OnLeave() {
     const [activeSections, setActiveSections] = useState([])
     const { listOnLeave } = useSelector((state) => state.UserReducer)
@@ -21,109 +22,24 @@ export default function OnLeave() {
         new Date().getFullYear() + " " + new Date().getMonth(),
     )
     const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-    const dispatch = useDispatch()
-    
-    // console.log(listOnLeave);
-    useEffect(() => {
-        // getToken("user").then((res) => {
-        //     if (res != "" || res != undefined) {
-        //         res = JSON.parse(res);
-        //         let personId = res.userId
-        //         getToken("accessToken").then((res) => {
-        //           console.log(res);
-        //             dispatch(getOnLeave(res, personId));
-        //         })
-        //     }
-        // })
-    }, [])
-    // console.log(listOnLeave);
-    // const setSections = (sections) => {
-    //     //setting up a active section state
-    //     setActiveSections(sections.includes(undefined) ? [] : sections)
-    // }
-    // const renderHeader = (section, _, isActive) => {
-    //     //Accordion Header view
-    //     return (
-    //         <View
-    //             style={{
-    //                 backgroundColor: "red",
-    //                 height: 55,
-    //                 alignItems: "center",
-    //                 backgroundColor: isActive ? "#0D4A85" : "white",
-    //                 flexDirection: "row",
-    //                 justifyContent: "space-between",
-    //             }}>
-    //             <Text
-    //                 style={[
-    //                     styles.font,
-    //                     {
-    //                         color: isActive ? "white" : "#0D4A85",
-    //                         fontWeight: "bold",
-    //                         fontSize: 18,
-    //                         paddingLeft: 20,
-    //                     },
-    //                 ]}>
-    //                 {moment(section?.Vacation_From_Date_C).format("DD/MM/YYYY")} -  {section?.Vacation_ID}
-    //             </Text>
-    //             <Text
-    //                 style={[
-    //                     styles.font,
-    //                     {
-    //                         color: isActive ? "white" : "#0D4A85",
-    //                         fontWeight: "bold",
-    //                         fontSize: 18,
-    //                         paddingRight: 20,
-    //                     },
-    //                 ]}>
-    //                 <Anticons name={isActive ? "up" : "down"} size={20} />
-    //             </Text>
-    //             {/* down */}
-    //         </View>
-    //     )
-    // }
 
-    // const renderContent = (section, _, isActive) => {
-    //     //Accordion Content view
-    //     return (
-    //         <>
-    //             <ListItem bottomDivider>
-    //                 <ListItem.Content>
-    //                     <ListItem.Title style={styles.font}>
-    //                         Thời gian nghỉ{" "}
-    //                     </ListItem.Title>
-    //                 </ListItem.Content>
-    //                 <ListItem.Title style={styles.font}>
-    //                     {section?.Vacation_Hour == 0 ?section?.Vacation_Day+ ' ngày':Math.round(section?.Vacation_Hour) + ' tiếng'} 
-    //                 </ListItem.Title>
-    //             </ListItem>
-    //             <ListItem bottomDivider>
-    //                 <ListItem.Content>
-    //                     <ListItem.Title style={styles.font}>
-    //                         Ghi chú{" "}
-    //                     </ListItem.Title>
-    //                 </ListItem.Content>
-    //                 <ListItem.Title style={styles.font}>
-    //                     {section?.Vacation_Detail_Note}
-    //                 </ListItem.Title>
-    //             </ListItem>
-    //         </>
-    //     )
-    // }
+    useEffect(() => {
+        // 0D4A85
+    
+    }, [])
+   
     const render = (item) =>{
-        console.log(focusMonth);
-        return <>{(focusMonth+1) == item ? <View style={{alignItems:'center',justifyContent:'center',backgroundColor:'red',heigh:'100%',width: '100%',paddingHorizontal:20,paddingVertical:10,borderRadius:20}}>
-             <Text style={{fontSize:18,color:'#0D4A85'}}>Tháng {item}</Text>  
-            </View>: <View style={{alignItems:'center',justifyContent:'center',heigh:'100%',width: '100%',paddingHorizontal:20,paddingVertical:10,borderRadius:20}}>
-             <Text style={{fontSize:18,color:'#0D4A85'}}>Tháng {item}</Text>  
-            </View>}</>
+
+        return <View style={{alignItems:'center',justifyContent:'center',backgroundColor:'#0D4A85',paddingHorizontal:20,paddingVertical:10,borderRadius:20}}>
+             <Text style={{fontSize:18,color:'white'}}>{item.item == 0 ? 'Tất cả' : `Tháng ${item.item}`}</Text>  
+            </View>
     }
     return (
-        <>
-        <Carousel
+        <View style={styles.container}>
+        {/* <Carousel
     width={130}
-    height={70}
-    loop={false}
+    height={50}
+    loop={true}
     onSnapToItem={(index)=>{setFocusMonth(index)}}
     style={{
         width: windowWidth,
@@ -131,17 +47,146 @@ const windowHeight = Dimensions.get('window').height;
         justifyContent: 'center',
         alignItems: 'center'
     }}
-    data={['1','2','3','4', '5','6','7','8', '9','10','11', '12']}
+    data={['0','1','2','3','4', '5','6','7','8', '9','10','11', '12']}
     renderItem={({ item }) => render(item)}
     panGestureHandlerProps={{
         activeOffsetX: [-10, 10],
       }}
-        />
-        </>
+        /> */}
+         <Carousel
+                  layout={"default"}
+                  data={['0','1','2','3','4', '5','6','7','8', '9','10','11', '12']}
+                  sliderWidth={windowWidth}
+                  loop={true}
+                  itemWidth={120}
+                  renderItem={render}
+                  onSnapToItem = { index => setFocusMonth(index) } 
+           
+            />
+         <DataTable>
+      <DataTable.Header>
+        <DataTable.Title  style={{flex:1.5}}>Ngày</DataTable.Title>
+        <DataTable.Title  style={{flex:4}}>Loại nghỉ</DataTable.Title>
+        <DataTable.Title  style={{flex:2}}>Giờ nghỉ</DataTable.Title>
+        <DataTable.Title  style={{flex:3}}>Ghi chú</DataTable.Title>
+      </DataTable.Header>
+      <ScrollView style={{height:'85%'}}>
+      <DataTable.Row>
+        <DataTable.Cell style={{flex:1.5}}>05</DataTable.Cell>
+        <DataTable.Cell style={{flex:4}}>Phép năm (P)</DataTable.Cell>
+        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
+        <DataTable.Cell style={{flex:3}}>Ra 11h30 </DataTable.Cell>
+      </DataTable.Row>
+      
+      <DataTable.Row>
+        <DataTable.Cell style={{flex:1.5}}>04</DataTable.Cell>
+        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
+        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
+        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
+      </DataTable.Row>
+      <DataTable.Row>
+        <DataTable.Cell style={{flex:1.5}}>05</DataTable.Cell>
+        <DataTable.Cell style={{flex:4}}>Phép năm (P)</DataTable.Cell>
+        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
+        <DataTable.Cell style={{flex:3}}>Ra 11h30 </DataTable.Cell>
+      </DataTable.Row>
+      
+      <DataTable.Row>
+        <DataTable.Cell style={{flex:1.5}}>04</DataTable.Cell>
+        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
+        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
+        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
+      </DataTable.Row>
+      <DataTable.Row>
+        <DataTable.Cell style={{flex:1.5}}>05</DataTable.Cell>
+        <DataTable.Cell style={{flex:4}}>Phép năm (P)</DataTable.Cell>
+        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
+        <DataTable.Cell style={{flex:3}}>Ra 11h30 </DataTable.Cell>
+      </DataTable.Row>
+      
+      <DataTable.Row>
+        <DataTable.Cell style={{flex:1.5}}>04</DataTable.Cell>
+        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
+        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
+        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
+      </DataTable.Row>
+      <DataTable.Row>
+        <DataTable.Cell style={{flex:1.5}}>05</DataTable.Cell>
+        <DataTable.Cell style={{flex:4}}>Phép năm (P)</DataTable.Cell>
+        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
+        <DataTable.Cell style={{flex:3}}>Ra 11h30 </DataTable.Cell>
+      </DataTable.Row>
+      
+      <DataTable.Row>
+        <DataTable.Cell style={{flex:1.5}}>04</DataTable.Cell>
+        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
+        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
+        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
+      </DataTable.Row>
+      <DataTable.Row>
+        <DataTable.Cell style={{flex:1.5}}>05</DataTable.Cell>
+        <DataTable.Cell style={{flex:4}}>Phép năm (P)</DataTable.Cell>
+        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
+        <DataTable.Cell style={{flex:3}}>Ra 11h30 </DataTable.Cell>
+      </DataTable.Row>
+      
+      <DataTable.Row>
+        <DataTable.Cell style={{flex:1.5}}>04</DataTable.Cell>
+        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
+        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
+        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
+      </DataTable.Row>
+      <DataTable.Row>
+        <DataTable.Cell style={{flex:1.5}}>04</DataTable.Cell>
+        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
+        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
+        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
+      </DataTable.Row>
+      <DataTable.Row>
+        <DataTable.Cell style={{flex:1.5}}>05</DataTable.Cell>
+        <DataTable.Cell style={{flex:4}}>Phép năm (P)</DataTable.Cell>
+        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
+        <DataTable.Cell style={{flex:3}}>Ra 11h30 </DataTable.Cell>
+      </DataTable.Row>
+      
+      <DataTable.Row>
+        <DataTable.Cell style={{flex:1.5}}>04</DataTable.Cell>
+        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
+        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
+        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
+      </DataTable.Row>
+      <DataTable.Row>
+        <DataTable.Cell style={{flex:1.5}}>04</DataTable.Cell>
+        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
+        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
+        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
+      </DataTable.Row>
+      <DataTable.Row>
+        <DataTable.Cell style={{flex:1.5}}>05</DataTable.Cell>
+        <DataTable.Cell style={{flex:4}}>Phép năm (P)</DataTable.Cell>
+        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
+        <DataTable.Cell style={{flex:3}}>Ra 11h30 </DataTable.Cell>
+      </DataTable.Row>
+      
+      <DataTable.Row>
+        <DataTable.Cell style={{flex:1.5}}>cuối</DataTable.Cell>
+        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
+        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
+        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
+      </DataTable.Row>
+      </ScrollView>
+    </DataTable>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        backgroundColor: 'white',
+        height: '100%',
+        width: '100%',
+        paddingTop:20
+    },
     font: {
         fontFamily: "Monda",
     },
@@ -154,94 +199,3 @@ const styles = StyleSheet.create({
         letterSpacing: 0.5,
     },
 })
-// {listOnLeave?.map((value, index, array) => {
-//   setMuti('drop'+index,false);
-//   return <ListItem.Accordion key={index}
-//   style={{ backgroundColor: "blue", color: "bue" }}
-//   content={
-//       <ListItem.Content>
-//         <ListItem.Title
-//           style={[styles.font, { color: "#0D4A85", fontWeight: "bold" }]}
-//         >
-//           {value}
-//         </ListItem.Title>
-
-//       </ListItem.Content>
-//   }
-//   isExpanded={mutiDrop['drop'+index]}
-//   onPress={() => {
-//     // setMutiDrop(!mutiDrop['drop'+index]);
-//     console.log(mutiDrop['drop'+index] == true);
-//     setMuti('drop'+index,!mutiDrop['drop'+index]);
-//     // setReload(true);
-//   }}
-// >
-// <ListItem bottomDivider>
-//       <ListItem.Content>
-//         <ListItem.Title style={styles.font}>Loại nghỉ </ListItem.Title>
-//       </ListItem.Content>
-//       <ListItem.Title style={styles.font}>
-//     Phép năm
-//       </ListItem.Title>
-//     </ListItem>
-//     <ListItem bottomDivider>
-//       <ListItem.Content>
-//         <ListItem.Title style={styles.font}>Thời gian nghỉ </ListItem.Title>
-//       </ListItem.Content>
-//       <ListItem.Title style={styles.font}>
-//         1 ngày
-//       </ListItem.Title>
-//     </ListItem>
-
-// </ListItem.Accordion>
-// })}
-// --------------------------------
-{/* <View>
-            <Text style={styles.titleSalaryDetail}>Ngày Phép Năm <TouchableOpacity onPress={()=>{setModalVisible(false)}}><Text>2022</Text></TouchableOpacity></Text>
-            <ScrollView style={{ height: "92%" }}>
-                <Accordion
-                    activeSections={activeSections}
-                    sections={listOnLeave}
-                    touchableComponent={TouchableOpacity}
-                    expandMultiple={true}
-                    renderHeader={renderHeader}
-                    renderContent={renderContent}
-                    duration={400}
-                    onChange={setSections}
-                />
-            </ScrollView>
-            <Modal
-                animationType="fade"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                    Alert.alert("Modal has been closed.")
-                    setModalVisible(!modalVisible)
-                }}>
-                <Pressable
-                    style={{
-                        justifyContent: "center",
-                        alignItems: "center",
-                        flex: 1,
-                        backgroundColor: "#00000078",
-                    }}
-                    onPress={() => {
-                        setModalVisible(false)
-                    }}>
-                    <DatePicker
-                        options={{
-                            selectedTextColor: "white",
-                            mainColor: "#0D4A85",
-                        }}
-                        selected={selectDate}
-                        mode="monthYear"
-                        onMonthYearChange={(selectedDate) => {
-                            setSelectDate(selectedDate)
-                            setModalVisible(false)
-                        }}
-                        current={selectDate}
-                        style={{ borderRadius: 10 }}
-                    />
-                </Pressable>
-            </Modal>
-        </View> */}

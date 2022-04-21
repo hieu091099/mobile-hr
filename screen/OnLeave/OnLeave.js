@@ -18,11 +18,12 @@ import moment from "moment";
 
 export default function OnLeave() {
     const [activeSections, setActiveSections] = useState([]);
-    const { listOnLeave } = useSelector((state) => state.UserReducer);
+    const { listOnLeave,setShowYearPicker } = useSelector((state) => state.UserReducer);
     const [modalVisible, setModalVisible] = useState(false);
     const [focusMonth, setFocusMonth] = useState(0);
     const dispatch = useDispatch();
     console.log({ listOnLeave });
+    console.log('cehck',setShowYearPicker);
     const [selectDate, setSelectDate] = useState(
         new Date().getFullYear() + " " + new Date().getMonth(),
     );
@@ -53,7 +54,8 @@ export default function OnLeave() {
                     borderRadius: 20,
                 }}>
                 <Text style={{ fontSize: 18, color: "white" }}>
-                    {item.item == 0 ? "Tất cả" : `Tháng ${item.item}`}
+                    Tháng {item.item}
+                    {/* {item.item == 0 ? "Tất cả" : `Tháng ${item.item}`} */}
                 </Text>
             </View>
         );
@@ -82,16 +84,17 @@ export default function OnLeave() {
             }
         });
         return (
-            <View
-                style={{
-                    backgroundColor: objectColor.backgroundColor,
-                    paddingHorizontal: 5,
-                    borderRadius: 4,
-                }}>
-                <Text style={{ color: objectColor.color, fontWeight: "bold" }}>
+           
+                <Text
+                    style={{
+                        backgroundColor: objectColor.backgroundColor,
+                        borderRadius: 4,
+                        color: objectColor.color,
+                        fontWeight: "bold",
+                    }}>
                     {item}
                 </Text>
-            </View>
+           
         );
     };
     return (
@@ -99,7 +102,6 @@ export default function OnLeave() {
             <Carousel
                 layout={"default"}
                 data={[
-                    "0",
                     "1",
                     "2",
                     "3",
@@ -117,7 +119,7 @@ export default function OnLeave() {
                 loop={true}
                 itemWidth={120}
                 renderItem={render}
-                onSnapToItem={(index) => setFocusMonth(index)}
+                onSnapToItem={(index) => setFocusMonth(index + 1)}
             />
             <DataTable style={{ marginTop: 10 }}>
                 <DataTable.Header style={{ backgroundColor: "#FCF9FC" }}>

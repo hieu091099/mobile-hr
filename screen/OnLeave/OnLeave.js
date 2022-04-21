@@ -17,6 +17,7 @@ export default function OnLeave() {
     const { listOnLeave } = useSelector((state) => state.UserReducer)
     const [modalVisible, setModalVisible] = useState(false)
     const [focusMonth, setFocusMonth] = useState(0);
+    const dispatch = useDispatch()
     
     const [selectDate, setSelectDate] = useState(
         new Date().getFullYear() + " " + new Date().getMonth(),
@@ -24,10 +25,19 @@ export default function OnLeave() {
     const windowWidth = Dimensions.get('window').width;
 
     useEffect(() => {
-        // 0D4A85
+     getToken("user").then((res) => {
+            if (res != "" || res != undefined) {
+                res = JSON.parse(res);
+                let personId = res.userId
+                getToken("accessToken").then((res) => {
+                  console.log(res);
+                    dispatch(getOnLeave(res, personId));
+                })
+            }
+        })
     
     }, [])
-   
+   console.log(listOnLeave[0]);
     const render = (item) =>{
 
         return <View style={{alignItems:'center',justifyContent:'center',backgroundColor:'#0D4A85',paddingHorizontal:20,paddingVertical:10,borderRadius:20}}>
@@ -36,23 +46,6 @@ export default function OnLeave() {
     }
     return (
         <View style={styles.container}>
-        {/* <Carousel
-    width={130}
-    height={50}
-    loop={true}
-    onSnapToItem={(index)=>{setFocusMonth(index)}}
-    style={{
-        width: windowWidth,
-        height: 90,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }}
-    data={['0','1','2','3','4', '5','6','7','8', '9','10','11', '12']}
-    renderItem={({ item }) => render(item)}
-    panGestureHandlerProps={{
-        activeOffsetX: [-10, 10],
-      }}
-        /> */}
          <Carousel
                   layout={"default"}
                   data={['0','1','2','3','4', '5','6','7','8', '9','10','11', '12']}
@@ -71,109 +64,15 @@ export default function OnLeave() {
         <DataTable.Title  style={{flex:3}}>Ghi chú</DataTable.Title>
       </DataTable.Header>
       <ScrollView style={{height:'85%'}}>
-      <DataTable.Row>
-        <DataTable.Cell style={{flex:1.5}}>05</DataTable.Cell>
-        <DataTable.Cell style={{flex:4}}>Phép năm (P)</DataTable.Cell>
-        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
-        <DataTable.Cell style={{flex:3}}>Ra 11h30 </DataTable.Cell>
-      </DataTable.Row>
-      
-      <DataTable.Row>
-        <DataTable.Cell style={{flex:1.5}}>04</DataTable.Cell>
-        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
-        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
-        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
-      </DataTable.Row>
-      <DataTable.Row>
-        <DataTable.Cell style={{flex:1.5}}>05</DataTable.Cell>
-        <DataTable.Cell style={{flex:4}}>Phép năm (P)</DataTable.Cell>
-        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
-        <DataTable.Cell style={{flex:3}}>Ra 11h30 </DataTable.Cell>
-      </DataTable.Row>
-      
-      <DataTable.Row>
-        <DataTable.Cell style={{flex:1.5}}>04</DataTable.Cell>
-        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
-        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
-        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
-      </DataTable.Row>
-      <DataTable.Row>
-        <DataTable.Cell style={{flex:1.5}}>05</DataTable.Cell>
-        <DataTable.Cell style={{flex:4}}>Phép năm (P)</DataTable.Cell>
-        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
-        <DataTable.Cell style={{flex:3}}>Ra 11h30 </DataTable.Cell>
-      </DataTable.Row>
-      
-      <DataTable.Row>
-        <DataTable.Cell style={{flex:1.5}}>04</DataTable.Cell>
-        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
-        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
-        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
-      </DataTable.Row>
-      <DataTable.Row>
-        <DataTable.Cell style={{flex:1.5}}>05</DataTable.Cell>
-        <DataTable.Cell style={{flex:4}}>Phép năm (P)</DataTable.Cell>
-        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
-        <DataTable.Cell style={{flex:3}}>Ra 11h30 </DataTable.Cell>
-      </DataTable.Row>
-      
-      <DataTable.Row>
-        <DataTable.Cell style={{flex:1.5}}>04</DataTable.Cell>
-        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
-        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
-        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
-      </DataTable.Row>
-      <DataTable.Row>
-        <DataTable.Cell style={{flex:1.5}}>05</DataTable.Cell>
-        <DataTable.Cell style={{flex:4}}>Phép năm (P)</DataTable.Cell>
-        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
-        <DataTable.Cell style={{flex:3}}>Ra 11h30 </DataTable.Cell>
-      </DataTable.Row>
-      
-      <DataTable.Row>
-        <DataTable.Cell style={{flex:1.5}}>04</DataTable.Cell>
-        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
-        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
-        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
-      </DataTable.Row>
-      <DataTable.Row>
-        <DataTable.Cell style={{flex:1.5}}>04</DataTable.Cell>
-        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
-        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
-        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
-      </DataTable.Row>
-      <DataTable.Row>
-        <DataTable.Cell style={{flex:1.5}}>05</DataTable.Cell>
-        <DataTable.Cell style={{flex:4}}>Phép năm (P)</DataTable.Cell>
-        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
-        <DataTable.Cell style={{flex:3}}>Ra 11h30 </DataTable.Cell>
-      </DataTable.Row>
-      
-      <DataTable.Row>
-        <DataTable.Cell style={{flex:1.5}}>04</DataTable.Cell>
-        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
-        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
-        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
-      </DataTable.Row>
-      <DataTable.Row>
-        <DataTable.Cell style={{flex:1.5}}>04</DataTable.Cell>
-        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
-        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
-        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
-      </DataTable.Row>
-      <DataTable.Row>
-        <DataTable.Cell style={{flex:1.5}}>05</DataTable.Cell>
-        <DataTable.Cell style={{flex:4}}>Phép năm (P)</DataTable.Cell>
-        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
-        <DataTable.Cell style={{flex:3}}>Ra 11h30 </DataTable.Cell>
-      </DataTable.Row>
-      
-      <DataTable.Row>
-        <DataTable.Cell style={{flex:1.5}}>cuối</DataTable.Cell>
-        <DataTable.Cell style={{flex:4}}>Phép việc riêng (RO)</DataTable.Cell>
-        <DataTable.Cell style={{flex:2}}>4</DataTable.Cell>
-        <DataTable.Cell style={{flex:3}}>Ra 11h30</DataTable.Cell>
-      </DataTable.Row>
+          {listOnLeave?.map((value, index, array) => {
+                return <DataTable.Row>
+                  <DataTable.Cell style={{flex:1.5}}>{moment(value?.Vacation_From_Date_C).format("DD")}</DataTable.Cell>
+                  <DataTable.Cell style={{flex:4}}>{value?.Vacation_ID}</DataTable.Cell>
+                  <DataTable.Cell style={{flex:2}}>{value?.Vacation_Hour == 0 ?value?.Vacation_Day+ ' ngày':Math.round(value?.Vacation_Hour) + ' tiếng'}</DataTable.Cell>
+                  <DataTable.Cell style={{flex:3}}>{value?.Vacation_Detail_Note} </DataTable.Cell>
+                </DataTable.Row>
+
+          })}
       </ScrollView>
     </DataTable>
         </View>

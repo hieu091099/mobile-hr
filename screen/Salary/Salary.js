@@ -7,43 +7,43 @@ import {
     Modal,
     Pressable,
     Image,
-} from "react-native"
-import React, { useState, useEffect, useRef } from "react"
-import { getToken } from "../../config"
-import { useDispatch, useSelector } from "react-redux"
-import { getSalaryAction } from "../../redux/actions/UserAction"
-import DatePicker from "react-native-modern-datepicker"
-import AntDesign from "react-native-vector-icons/AntDesign"
-import SalaryDetail from "../../components/SalaryDetail/SalaryDetail"
+} from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { getToken } from "../../config";
+import { useDispatch, useSelector } from "react-redux";
+import { getSalaryAction } from "../../redux/actions/UserAction";
+import DatePicker from "react-native-modern-datepicker";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import SalaryDetail from "../../components/SalaryDetail/SalaryDetail";
 
 export default function Salary() {
-    const { salary } = useSelector((state) => state.UserReducer)
+    const { salary } = useSelector((state) => state.UserReducer);
 
-    const dispatch = useDispatch()
-    const [modalVisible, setModalVisible] = useState(false)
+    const dispatch = useDispatch();
+    const [modalVisible, setModalVisible] = useState(false);
     const [selectDate, setSelectDate] = useState(
         new Date().getFullYear() + " " + new Date().getMonth(),
-    )
+    );
     // console.log({ salary })
     const formatNum = (num) => {
         if (typeof num == "number") {
-            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
         } else {
-            return num
+            return num;
         }
-    }
+    };
     // const addZeroNumber = (num) => {
     //     if (num.length == 1) {
     //         return `0${num}`
     //     }
     //     return num
     // }
-    const pad = (num) => (num.length == 1 ? "0" : "") + num
+    const pad = (num) => (num.length == 1 ? "0" : "") + num;
     useEffect(() => {
         getToken("user").then((res) => {
             if (res != "" || res != undefined) {
-                res = JSON.parse(res)
-                let personId = res.userId
+                res = JSON.parse(res);
+                let personId = res.userId;
                 getToken("accessToken").then((res) => {
                     if (res != "" || res != undefined) {
                         dispatch(
@@ -51,12 +51,12 @@ export default function Salary() {
                                 personId: personId,
                                 monthYear: selectDate.replace(" ", "-"),
                             }),
-                        )
+                        );
                     }
-                })
+                });
             }
-        })
-    }, [selectDate])
+        });
+    }, [selectDate]);
 
     return (
         <View style={styles.wrapper}>
@@ -66,8 +66,8 @@ export default function Salary() {
                 transparent={true}
                 visible={modalVisible}
                 onRequestClose={() => {
-                    Alert.alert("Modal has been closed.")
-                    setModalVisible(!modalVisible)
+                    Alert.alert("Modal has been closed.");
+                    setModalVisible(!modalVisible);
                 }}>
                 <Pressable
                     style={{
@@ -77,7 +77,7 @@ export default function Salary() {
                         backgroundColor: "#00000078",
                     }}
                     onPress={() => {
-                        setModalVisible(false)
+                        setModalVisible(false);
                     }}>
                     <DatePicker
                         options={{
@@ -87,8 +87,8 @@ export default function Salary() {
                         selected={selectDate}
                         mode="monthYear"
                         onMonthYearChange={(selectedDate) => {
-                            setSelectDate(selectedDate)
-                            setModalVisible(false)
+                            setSelectDate(selectedDate);
+                            setModalVisible(false);
                         }}
                         current={selectDate}
                         style={{ borderRadius: 10 }}
@@ -126,11 +126,11 @@ export default function Salary() {
                             <View>
                                 <View style={{ marginLeft: 10 }}>
                                     <Text style={styles.textSalary}>
-                                    {salary?.Final_Salary != ""
-                                        ? formatNum(salary.Final_Salary)
-                                        : ""}{" "}
-                                    VNĐ
-                                </Text>
+                                        {salary?.Final_Salary != ""
+                                            ? formatNum(salary.Final_Salary)
+                                            : ""}{" "}
+                                        VNĐ
+                                    </Text>
 
                                     {/* <Text style={styles.textSalary}>
                                         100.000.000 VNĐ
@@ -228,7 +228,7 @@ export default function Salary() {
                 </View>
             )}
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -289,4 +289,4 @@ const styles = StyleSheet.create({
     font: {
         fontFamily: "Monda",
     },
-})
+});

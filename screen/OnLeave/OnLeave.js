@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     Modal,
     Pressable,
+    Image,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
@@ -24,8 +25,8 @@ export default function OnLeave() {
     const [modalVisible, setModalVisible] = useState(false);
     const [focusMonth, setFocusMonth] = useState(0);
     const dispatch = useDispatch();
-    console.log({ listOnLeave });
-    console.log("cehck", setShowYearPicker);
+    console.log(listOnLeave.length);
+    // console.log("cehck", setShowYearPicker);
     const [selectDate, setSelectDate] = useState(
         new Date().getFullYear() + " " + new Date().getMonth(),
     );
@@ -136,7 +137,18 @@ export default function OnLeave() {
                     </DataTable.Title>
                 </DataTable.Header>
                 <ScrollView style={{ height: "85%" }}>
-                    {listOnLeave?.map((value, index, array) => {
+                    
+                    {listOnLeave?.length == 0 ?  <View
+                                style={{
+                                    alignItems: "center",
+                                    marginTop: 30,
+                                }}>
+                                <Image
+                                    style={{ width: 80, height: 80 }}
+                                    source={require("../../assets/images/nodata.png")}
+                                />
+                                <Text style={{ color: "black" }}>No data</Text>
+                            </View> : listOnLeave?.map((value, index, array) => {
                         return (
                             <DataTable.Row key={index}>
                                 <DataTable.Cell

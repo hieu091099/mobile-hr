@@ -67,12 +67,12 @@ export const getOnLeave = (accessToken, userId, monthYear) => {
                 accessToken,
             );
             console.log("tene", result.data);
-            if (result.data != "") {
+            // if (result.data != "") {
                 dispatch({
                     type: "GET_ONLEAVE",
                     onLeave: result.data,
                 });
-            }
+            // }
         } catch (e) {
             console.log(e);
         }

@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     Modal,
     Pressable,
+    Image,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
@@ -24,8 +25,8 @@ export default function OnLeave() {
     const [modalVisible, setModalVisible] = useState(false);
     const [focusMonth, setFocusMonth] = useState(0);
     const dispatch = useDispatch();
-    console.log({ listOnLeave });
-    console.log("check", setShowYearPicker);
+    console.log(listOnLeave.length);
+    // console.log("cehck", setShowYearPicker);
     const [selectDate, setSelectDate] = useState(
         new Date().getFullYear() + " " + new Date().getMonth(),
     );
@@ -136,55 +137,69 @@ export default function OnLeave() {
                     </DataTable.Title>
                 </DataTable.Header>
                 <ScrollView style={{ height: "85%" }}>
-                    {listOnLeave?.map((value, index, array) => {
-                        return (
-                            <DataTable.Row key={index}>
-                                <DataTable.Cell
-                                    style={{ flex: 2, paddingVertical: 5 }}>
-                                    <View
-                                        style={{
-                                            borderWidth: 1,
-                                            backgroundColor: "#F7F7F7",
-                                            borderColor: "#F2F2F2",
-                                            borderRadius: 6,
-                                            padding: 10,
-                                            alignItems: "center",
-                                        }}>
-                                        <Text
+                    {listOnLeave?.length == 0 ? (
+                        <View
+                            style={{
+                                alignItems: "center",
+                                marginTop: 30,
+                            }}>
+                            <Image
+                                style={{ width: 80, height: 80 }}
+                                source={require("../../assets/images/nodata.png")}
+                            />
+                            <Text style={{ color: "black" }}>No data</Text>
+                        </View>
+                    ) : (
+                        listOnLeave?.map((value, index, array) => {
+                            return (
+                                <DataTable.Row key={index}>
+                                    <DataTable.Cell
+                                        style={{ flex: 2, paddingVertical: 5 }}>
+                                        <View
                                             style={{
-                                                fontWeight: "bold",
-                                                fontSize: 18,
+                                                borderWidth: 1,
+                                                backgroundColor: "#F7F7F7",
+                                                borderColor: "#F2F2F2",
+                                                borderRadius: 6,
+                                                padding: 10,
+                                                alignItems: "center",
                                             }}>
-                                            {moment(
-                                                value?.Vacation_From_Date,
-                                            ).format("DD")}
-                                        </Text>
-                                        <Text>
-                                            T
-                                            {moment(
-                                                value?.Vacation_From_Date,
-                                            ).format("MM")}
-                                        </Text>
-                                    </View>
-                                </DataTable.Cell>
-                                <DataTable.Cell
-                                    style={{
-                                        flex: 3,
-                                    }}>
-                                    {renderTypeLeave(value?.Vacation_ID)}
-                                </DataTable.Cell>
-                                <DataTable.Cell style={{ flex: 2 }}>
-                                    {value?.Vacation_Hour == 0
-                                        ? value?.Vacation_Day + " ngày"
-                                        : Math.round(value?.Vacation_Hour) +
-                                          " tiếng"}
-                                </DataTable.Cell>
-                                <DataTable.Cell style={{ flex: 3 }}>
-                                    {value?.Vacation_Detail_Note}{" "}
-                                </DataTable.Cell>
-                            </DataTable.Row>
-                        );
-                    })}
+                                            <Text
+                                                style={{
+                                                    fontWeight: "bold",
+                                                    fontSize: 18,
+                                                }}>
+                                                {moment(
+                                                    value?.Vacation_From_Date,
+                                                ).format("DD")}
+                                            </Text>
+                                            <Text>
+                                                T
+                                                {moment(
+                                                    value?.Vacation_From_Date,
+                                                ).format("MM")}
+                                            </Text>
+                                        </View>
+                                    </DataTable.Cell>
+                                    <DataTable.Cell
+                                        style={{
+                                            flex: 3,
+                                        }}>
+                                        {renderTypeLeave(value?.Vacation_ID)}
+                                    </DataTable.Cell>
+                                    <DataTable.Cell style={{ flex: 2 }}>
+                                        {value?.Vacation_Hour == 0
+                                            ? value?.Vacation_Day + " ngày"
+                                            : Math.round(value?.Vacation_Hour) +
+                                              " tiếng"}
+                                    </DataTable.Cell>
+                                    <DataTable.Cell style={{ flex: 3 }}>
+                                        {value?.Vacation_Detail_Note}{" "}
+                                    </DataTable.Cell>
+                                </DataTable.Row>
+                            );
+                        })
+                    )}
                 </ScrollView>
             </DataTable>
         </View>

@@ -25,7 +25,7 @@ export default function OnLeave() {
     const [focusMonth, setFocusMonth] = useState(0);
     const dispatch = useDispatch();
     console.log({ listOnLeave });
-    console.log("cehck", setShowYearPicker);
+    console.log("check", setShowYearPicker);
     const [selectDate, setSelectDate] = useState(
         new Date().getFullYear() + " " + new Date().getMonth(),
     );

@@ -1,19 +1,21 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, Text, View,Image } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import React, { useEffect, useState } from "react";
 import { Drawer } from "react-native-paper";
 // import { Icon } from 'react-native-elements';
 import { useDispatch, useSelector } from "react-redux";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import AntIcon from "react-native-vector-icons/AntDesign";
 import { checkTokenExpired } from "../../config";
 import DialogNavigate from "../../components/SimpleDialog/DialogNavigate";
 
 export default function DrawerContent(props) {
     const dispatch = useDispatch();
 
-    const { isVisibleExpired, messageExpiredToken } = useSelector(
+    const { isVisibleExpired, messageExpiredToken,user } = useSelector(
         (state) => state.UserReducer,
     );
+    let arrName = user?.fullName.split(" ");
+    let firstName = `${arrName[arrName.length - 2]} ${arrName[arrName.length - 1]}`;
     const logout = async (props) => {
         await props.navigation.closeDrawer();
         dispatch({
@@ -43,10 +45,132 @@ export default function DrawerContent(props) {
                     message={messageExpiredToken}
                 />
                 <DrawerContentScrollView {...props}>
-                    <Text></Text>
+                   <View style={styles.avatar}>
+                        <View style={{width:100,height:100,borderRadius:50,borderWidth:4,borderColor:'#084594',overflow:'hidden',justifyContent:'center',alignItems:'center'}}>
+                        <Image
+        style={{width:90,height:90}}
+        source={{
+          uri: 'https://cdn3d.iconscout.com/3d/premium/thumb/male-avatar-5250586-4385765.png',
+        }}
+      />
+                        </View>
+                        <Text style={styles.nameUser}>{firstName}</Text>
+                   </View>
+
+                   <View style={styles.detailRow}>
+                       <View style={styles.colDetail}>
+                           <Text style={styles.detailNumber}>27</Text>
+                           <Text style={styles.detailText}>Employee</Text>
+                       </View>
+                       <View style={styles.colDetail}>
+                       <Text style={styles.detailNumber}>12</Text>
+                           <Text style={styles.detailText}>Client</Text>
+                       </View>
+                       <View style={styles.colDetail}>
+                       <Text style={styles.detailNumber}>50</Text>
+                           <Text style={styles.detailText}>Total File</Text>
+                       </View>
+                   </View>
+                   <View style={styles.menuRow}>
+                        <View style={styles.menuList}>
+                            <View style={styles.iconMenu}>
+                            <AntIcon name="setting" size={25} color="#494949"/>
+                            </View>       
+                            <View style={styles.textMenuBox}>
+                                <Text style={styles.textMenu}>Setting</Text>
+                            </View>
+                            <View style={styles.iconMenu}>
+                            <AntIcon name="right" size={20} color="#494949"/>
+                                
+                            </View>
+                        </View>
+                        <View style={styles.menuList}>
+                            <View style={styles.iconMenu}>
+                            <AntIcon name="link" size={25} color="#494949"/>
+                            </View>       
+                            <View style={styles.textMenuBox}>
+                                <Text style={styles.textMenu}>Premium</Text>
+                            </View>
+                            <View style={styles.iconMenu}>
+                            <AntIcon name="right" size={20} color="#494949"/>
+                                
+                            </View>
+                        </View>
+                        <View style={styles.menuList}>
+                            <View style={styles.iconMenu}>
+                            <AntIcon name="areachart" size={25} color="#494949"/>
+                            </View>       
+                            <View style={styles.textMenuBox}>
+                                <Text style={styles.textMenu}>Holiday</Text>
+                            </View>
+                            <View style={styles.iconMenu}>
+                            <AntIcon name="right" size={20} color="#494949"/>
+                                
+                            </View>
+                        </View>
+                        <View style={styles.menuList}>
+                            <View style={styles.iconMenu}>
+                            <AntIcon name="staro" size={25} color="#494949"/>
+                            </View>       
+                            <View style={styles.textMenuBox}>
+                                <Text style={styles.textMenu}>AppLock</Text>
+                            </View>
+                            <View style={styles.iconMenu}>
+                            <AntIcon name="switch" size={20} color="#494949"/>
+                                
+                            </View>
+                        </View>
+                        <View style={styles.menuList}>
+                            <View style={styles.iconMenu}>
+                            <AntIcon name="setting" size={25} color="#494949"/>
+                            </View>       
+                            <View style={styles.textMenuBox}>
+                                <Text style={styles.textMenu}>Share With Friends</Text>
+                            </View>
+                            <View style={styles.iconMenu}>
+                            <AntIcon name="right" size={20} color="#494949"/>
+                                
+                            </View>
+                        </View>
+                        <View style={styles.menuList}>
+                            <View style={styles.iconMenu}>
+                            <AntIcon name="link" size={25} color="#494949"/>
+                            </View>       
+                            <View style={styles.textMenuBox}>
+                                <Text style={styles.textMenu}>Terms of Services</Text>
+                            </View>
+                            <View style={styles.iconMenu}>
+                            <AntIcon name="right" size={20} color="#494949"/>
+                                
+                            </View>
+                        </View>
+                        <View style={styles.menuList}>
+                            <View style={styles.iconMenu}>
+                            <AntIcon name="areachart" size={25} color="#494949"/>
+                            </View>       
+                            <View style={styles.textMenuBox}>
+                                <Text style={styles.textMenu}>Privacy Policy</Text>
+                            </View>
+                            <View style={styles.iconMenu}>
+                            <AntIcon name="right" size={20} color="#494949"/>
+                                
+                            </View>
+                        </View>
+                        <View style={styles.menuList}  onStartShouldSetResponder={() =>{
+                            logout(props);
+                        }}>
+                            <View style={styles.iconMenu}>
+                            <AntIcon name="logout" size={25} color="#494949"/>
+                            </View>       
+                            <View style={styles.textMenuBox}>
+                                <Text style={styles.textMenu}>Log Out</Text>
+                            </View>
+                        </View>
+                   </View>
+
                 </DrawerContentScrollView>
                 <Drawer.Section>
-                    <DrawerItem
+                    {/* <DrawerItem
                         icon={({ color, size }) => (
                             <Ionicons
                                 name="log-out-outline"
@@ -58,7 +182,7 @@ export default function DrawerContent(props) {
                         onPress={() => {
                             logout(props);
                         }}
-                    />
+                    /> */}
                 </Drawer.Section>
             </SafeAreaView>
         </ScrollView>
@@ -68,5 +192,75 @@ export default function DrawerContent(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor:'#084594'
     },
+    avatar:{
+        width:'100%',
+        height:200,
+        backgroundColor:'white',
+        // borderRadius:20
+        borderBottomLeftRadius:40,
+        borderBottomRightRadius:40,
+        justifyContent:'center',
+        alignItems:'center'
+
+    },
+    detailRow:{
+        width:'100%',
+        height:90,
+        flexDirection:'row',
+        justifyContent:'space-around'
+    },
+    menuRow:{
+        height:530,
+        backgroundColor:'white',
+    },
+    nameUser:{
+        fontSize:22,
+        marginTop:10,
+        fontWeight:"bold",
+        color:'#21497D'
+    },
+    colDetail:{
+        width:'30%',
+        height:'100%',
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    detailNumber:{
+        fontSize:22,
+        fontWeight:'bold',
+        color:'white'
+    },
+    detailText:{
+        fontSize:14,
+        color:'#DBDBDB'
+    },
+    menuList:{
+        width:'100%',
+        height:50,
+        // backgroundColor:'red',
+        marginVertical:5,
+        flexDirection:'row',
+        paddingLeft:10
+    },
+    iconMenu:{
+        width:'15%',
+        // backgroundColor:'blue',
+        height:'100%',
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    textMenuBox:{
+        width:'70%',
+        height:'100%',
+        // backgroundColor:'aqua',
+        justifyContent:'center',
+        paddingLeft:10
+    },
+    textMenu:{
+        fontSize:18,
+        fontWeight:'700',
+        color:"#494949"
+    }
 });

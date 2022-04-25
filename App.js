@@ -11,6 +11,8 @@ import * as Font from "expo-font"
 import { setCustomText } from "react-native-global-props"
 import LoginRoot from "./screen/RootStackScreen/LoginRoot"
 import { SafeAreaProvider } from "react-native-safe-area-context"
+import ChangePassword from "./screen/ChangePassword/ChangePassword"
+import SuccessChangePass from "./screen/ChangePassword/SuccessChangePass"
 // import OnLeave from "./screen/OnLeave/OnLeave"
 
 export default function App() {
@@ -49,6 +51,7 @@ export default function App() {
                 <NavigationContainer>
                     <StatusBar hidden />
                     {isLoggedIn ? (
+                        <>
                         <Drawer.Navigator
                             screenOptions={{
                                 headerShown: false,
@@ -58,8 +61,12 @@ export default function App() {
                                 <DrawerContent {...props} />
                             )}>
                             <Drawer.Screen name="MainTab" component={MainTab} />
-                            {/* <Drawer.Screen name="OnLeave" component={OnLeave} /> */}
+                        <Stack.Screen name="ChangePassword" component={ChangePassword}  screenOptions={{ headerShown: true}}/>
+                        <Stack.Screen name="SuccessChangePass" component={SuccessChangePass}  screenOptions={{ headerShown: true}}/>
+
+                           
                         </Drawer.Navigator>
+                        </>
                     ) : (
                         <LoginRoot />
                     )}

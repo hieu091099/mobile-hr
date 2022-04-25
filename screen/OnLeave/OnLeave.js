@@ -38,7 +38,7 @@ export default function OnLeave() {
                 res = JSON.parse(res);
                 let personId = res.userId;
                 getToken("accessToken").then((res) => {
-                    dispatch(getOnLeave(res, personId, `2021-${focusMonth}`));
+                    dispatch(getOnLeave(res, personId, `2022-${focusMonth}`));
                 });
             }
         });

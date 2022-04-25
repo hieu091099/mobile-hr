@@ -5,11 +5,14 @@ import { Drawer } from "react-native-paper";
 // import { Icon } from 'react-native-elements';
 import { useDispatch, useSelector } from "react-redux";
 import AntIcon from "react-native-vector-icons/AntDesign";
+import EntypoIcon from "react-native-vector-icons/Entypo";
 import { checkTokenExpired } from "../../config";
 import DialogNavigate from "../../components/SimpleDialog/DialogNavigate";
+import { useNavigation } from "@react-navigation/native";
 
 export default function DrawerContent(props) {
     const dispatch = useDispatch();
+    const navigation = useNavigation();
 
     const { isVisibleExpired, messageExpiredToken,user } = useSelector(
         (state) => state.UserReducer,
@@ -72,8 +75,10 @@ export default function DrawerContent(props) {
                        </View>
                    </View>
                    <View style={styles.menuRow}>
-                        <View style={styles.menuList}>
-                            <View style={styles.iconMenu}>
+                        <View style={styles.menuList} onStartShouldSetResponder={() =>{
+                            navigation.navigate('ChangePassword');
+                        }}>
+                            <View style={styles.iconMenu} >
                             <AntIcon name="setting" size={25} color="#494949"/>
                             </View>       
                             <View style={styles.textMenuBox}>
@@ -84,7 +89,9 @@ export default function DrawerContent(props) {
                                 
                             </View>
                         </View>
-                        <View style={styles.menuList}>
+                        <View style={styles.menuList} onStartShouldSetResponder={() =>{
+                            navigation.navigate('SuccessChangePass');
+                        }}>
                             <View style={styles.iconMenu}>
                             <AntIcon name="link" size={25} color="#494949"/>
                             </View>       
@@ -116,7 +123,7 @@ export default function DrawerContent(props) {
                                 <Text style={styles.textMenu}>AppLock</Text>
                             </View>
                             <View style={styles.iconMenu}>
-                            <AntIcon name="switch" size={20} color="#494949"/>
+                            <EntypoIcon name="switch" size={20} color="#494949"/>
                                 
                             </View>
                         </View>

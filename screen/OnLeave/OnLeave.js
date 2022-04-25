@@ -1,6 +1,5 @@
 import {
     View,
-    Text,
     StyleSheet,
     TouchableOpacity,
     Modal,
@@ -11,22 +10,23 @@ import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "react-native-snap-carousel";
+import DatePicker from "react-native-modern-datepicker";
 import { Dimensions } from "react-native";
 import { DataTable } from "react-native-paper";
 import { getToken } from "../../config";
 import { getOnLeave } from "../../redux/actions/UserAction";
 import moment from "moment";
-
+import { Tab, Text, TabView } from "@rneui/themed";
+import Ionicons from "react-native-vector-icons/Ionicons";
 export default function OnLeave() {
     const [activeSections, setActiveSections] = useState([]);
     const { listOnLeave, setShowYearPicker } = useSelector(
         (state) => state.UserReducer,
     );
+    const [date, setDate] = useState("");
     const [modalVisible, setModalVisible] = useState(false);
     const [focusMonth, setFocusMonth] = useState(0);
     const dispatch = useDispatch();
-    console.log(listOnLeave.length);
-    // console.log("cehck", setShowYearPicker);
     const [selectDate, setSelectDate] = useState(
         new Date().getFullYear() + " " + new Date().getMonth(),
     );
@@ -38,13 +38,12 @@ export default function OnLeave() {
                 res = JSON.parse(res);
                 let personId = res.userId;
                 getToken("accessToken").then((res) => {
-                    dispatch(getOnLeave(res, personId, `2021-${focusMonth}`));
+                    dispatch(getOnLeave(res, personId, `2021`));
                 });
             }
         });
     }, [focusMonth]);
-    // console.log(listOnLeave[0]);
-
+    const [index, setIndex] = React.useState(0);
     const render = (item) => {
         return (
             <View
@@ -101,7 +100,7 @@ export default function OnLeave() {
     };
     return (
         <View style={styles.container}>
-            <Carousel
+            {/* <Carousel
                 layout={"default"}
                 data={[
                     "1",
@@ -122,8 +121,101 @@ export default function OnLeave() {
                 itemWidth={120}
                 renderItem={render}
                 onSnapToItem={(index) => setFocusMonth(index + 1)}
-            />
-            <DataTable style={{ marginTop: 10 }}>
+            /> */}
+            <Tab
+                value={index}
+                onChange={(e) => setIndex(e)}
+                indicatorStyle={{
+                    backgroundColor: "white",
+                    height: 3,
+                }}
+                variant="primary"
+                containerStyle={{ backgroundColor: "#0D4A85" }}>
+                <Tab.Item
+                    title="Tất Cả"
+                    titleStyle={{ fontSize: 12 }}
+                    icon={{ name: "timer", type: "ionicon", color: "white" }}
+                />
+                <Tab.Item
+                    title="P"
+                    titleStyle={{ fontSize: 12 }}
+                    icon={{ name: "heart", type: "ionicon", color: "white" }}
+                />
+                <Tab.Item
+                    title="RO"
+                    titleStyle={{ fontSize: 12 }}
+                    icon={{ name: "cart", type: "ionicon", color: "white" }}
+                />
+            </Tab>
+
+            <TabView value={index} onChange={setIndex} animationType="spring">
+                <TabView.Item
+                    style={{
+                        backgroundColor: "white",
+                        width: "100%",
+                    }}>
+                    <ScrollView style={styles.leaveContainer}>
+                        {listOnLeave?.length == 0 ? (
+                            <View
+                                style={{
+                                    alignItems: "center",
+                                    marginTop: 30,
+                                }}>
+                                <Image
+                                    style={{ width: 80, height: 80 }}
+                                    source={require("../../assets/images/nodata.png")}
+                                />
+                                <Text style={{ color: "black" }}>No data</Text>
+                            </View>
+                        ) : (
+                            listOnLeave?.map((item, index) => {
+                                return (
+                                    <View style={styles.leaveItem} key={index}>
+                                        <View>
+                                            <Text
+                                                style={styles.leaveTitle}
+                                                numberOfLines={1}
+                                                ellipsizeMode="end">
+                                                {item.Vacation_ID}
+                                            </Text>
+                                            <Text style={styles.leaveDate}>
+                                                Web, 16 Dec
+                                            </Text>
+                                            <Text>
+                                                {item.Vacation_Detail_Note}
+                                            </Text>
+                                        </View>
+                                        <View>
+                                            {/* <View>
+                                                <Text style={styles.leaveNote}>
+                                                    Awaiting
+                                                </Text>
+                                            </View> */}
+                                            {renderTypeLeave(item.Vacation_ID)}
+                                            <View>
+                                                <Ionicons
+                                                    name="podium-outline"
+                                                    size={26}
+                                                />
+                                            </View>
+                                        </View>
+                                    </View>
+                                );
+                            })
+                        )}
+                    </ScrollView>
+                </TabView.Item>
+                <TabView.Item
+                    style={{ backgroundColor: "white", width: "100%" }}>
+                    <Text h1>Favorite</Text>
+                </TabView.Item>
+                <TabView.Item
+                    style={{ backgroundColor: "white", width: "100%" }}>
+                    <Text h1>Cart</Text>
+                </TabView.Item>
+            </TabView>
+
+            {/* <DataTable style={{ marginTop: 10 }}>
                 <DataTable.Header style={{ backgroundColor: "#FCF9FC" }}>
                     <DataTable.Title style={{ flex: 2 }}>Ngày</DataTable.Title>
                     <DataTable.Title style={{ flex: 3 }}>
@@ -202,6 +294,7 @@ export default function OnLeave() {
                     )}
                 </ScrollView>
             </DataTable>
+             */}
         </View>
     );
 }
@@ -213,6 +306,27 @@ const styles = StyleSheet.create({
         width: "100%",
         paddingTop: 20,
     },
+    leaveContainer: {
+        padding: 10,
+    },
+    leaveItem: {
+        padding: 10,
+        borderWidth: 1,
+        borderColor: "#ccc",
+        borderRadius: 10,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginBottom: 10,
+    },
+    leaveTitle: {
+        color: "gray",
+        fontWeight: "bold",
+    },
+    leaveDate: {
+        fontSize: 24,
+        fontWeight: "bold",
+    },
+    leaveNote: {},
     font: {
         fontFamily: "Monda",
     },

@@ -63,15 +63,15 @@ export const getOnLeave = (accessToken, userId, monthYear) => {
         try {
             let result = await axiosInstanceToken(
                 "GET",
-                `user/onLeaveMonth/${userId}/${monthYear}`,
+                `user/onLeave/${userId}/${monthYear}`,
                 accessToken,
             );
             console.log("tene", result.data);
             // if (result.data != "") {
-                dispatch({
-                    type: "GET_ONLEAVE",
-                    onLeave: result.data,
-                });
+            dispatch({
+                type: "GET_ONLEAVE",
+                onLeave: result.data,
+            });
             // }
         } catch (e) {
             console.log(e);

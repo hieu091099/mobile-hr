@@ -2,8 +2,8 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import * as SecureStore from "expo-secure-store";
 
-export const BASE_URL = "http://erp.lacty.com.vn:8000/";
-// export const BASE_URL = "http://192.168.18.172:8000/";
+// export const BASE_URL = "http://erp.lacty.com.vn:8000/";
+export const BASE_URL = "http://192.168.18.172:8000/";
 
 export const getToken = async (key) => {
     try {

@@ -90,11 +90,12 @@ export default function OnLeave() {
                 style={{
                     backgroundColor: objectColor.backgroundColor,
                     paddingHorizontal: 5,
+                    alignSelf: "center",
                     borderRadius: 4,
                     color: objectColor.color,
                     fontWeight: "bold",
                 }}>
-                {item}
+                {arrP[0]}
             </Text>
         );
     };
@@ -126,7 +127,7 @@ export default function OnLeave() {
                 value={index}
                 onChange={(e) => setIndex(e)}
                 indicatorStyle={{
-                    backgroundColor: "white",
+                    backgroundColor: "#F7F8FA",
                     height: 3,
                 }}
                 variant="primary"
@@ -171,31 +172,39 @@ export default function OnLeave() {
                             listOnLeave?.map((item, index) => {
                                 return (
                                     <View style={styles.leaveItem} key={index}>
-                                        <View>
+                                        <View style={styles.itemLeft}>
                                             <Text
                                                 style={styles.leaveTitle}
-                                                numberOfLines={1}
-                                                ellipsizeMode="end">
+                                                numberOfLines={1}>
                                                 {item.Vacation_ID}
                                             </Text>
                                             <Text style={styles.leaveDate}>
-                                                Web, 16 Dec
+                                                {`${moment(
+                                                    item?.Vacation_From_Date,
+                                                ).format("DD/MM/YYYY")}`}
+
+                                                {item.Vacation_From_Date !=
+                                                item.Vacation_To_Date
+                                                    ? `  ${moment(
+                                                          item?.Vacation_To_Date,
+                                                      ).format("DD/MM/YYYY")}`
+                                                    : ""}
                                             </Text>
                                             <Text>
                                                 {item.Vacation_Detail_Note}
                                             </Text>
                                         </View>
-                                        <View>
-                                            {/* <View>
-                                                <Text style={styles.leaveNote}>
-                                                    Awaiting
-                                                </Text>
-                                            </View> */}
+                                        <View style={{ maxWidth: "30%" }}>
                                             {renderTypeLeave(item.Vacation_ID)}
-                                            <View>
+                                            <View
+                                                style={{
+                                                    alignSelf: "flex-end",
+                                                    marginTop: 10,
+                                                }}>
                                                 <Ionicons
-                                                    name="podium-outline"
+                                                    name="bookmark-outline"
                                                     size={26}
+                                                    color="gray"
                                                 />
                                             </View>
                                         </View>
@@ -310,13 +319,27 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     leaveItem: {
-        padding: 10,
-        borderWidth: 1,
-        borderColor: "#ccc",
+        backgroundColor: "white",
+        paddingVertical: 20,
+        paddingHorizontal: 10,
+        borderWidth: 2,
+        borderColor: "#F1F1F3",
         borderRadius: 10,
         flexDirection: "row",
         justifyContent: "space-between",
-        marginBottom: 10,
+        marginBottom: 20,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 4,
+        // },
+        // shadowOpacity: 0.32,
+        // shadowRadius: 5.46,
+
+        // elevation: 6,
+    },
+    itemLeft: {
+        maxWidth: "70%",
     },
     leaveTitle: {
         color: "gray",

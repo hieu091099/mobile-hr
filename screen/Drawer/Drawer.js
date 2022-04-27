@@ -53,7 +53,7 @@ export default function DrawerContent(props) {
                         <Image
         style={{width:90,height:90}}
         source={{
-          uri: 'https://cdn3d.iconscout.com/3d/premium/thumb/male-avatar-5250586-4385765.png',
+          uri: 'https://cdn3d.iconscout.com/3d/premium/thumb/male-avatar-5200586-4385765.png',
         }}
       />
                         </View>
@@ -67,7 +67,7 @@ export default function DrawerContent(props) {
                        </View>
                        <View style={styles.colDetail}>
                        <Text style={styles.detailNumber}>12</Text>
-                           <Text style={styles.detailText}>Client</Text>
+<Text style={styles.detailText}>Client</Text>
                        </View>
                        <View style={styles.colDetail}>
                        <Text style={styles.detailNumber}>50</Text>
@@ -79,13 +79,13 @@ export default function DrawerContent(props) {
                             navigation.navigate('ChangePassword');
                         }}>
                             <View style={styles.iconMenu} >
-                            <AntIcon name="setting" size={25} color="#494949"/>
+                            <AntIcon name="setting" size={20} color="#5C5C5C"/>
                             </View>       
                             <View style={styles.textMenuBox}>
                                 <Text style={styles.textMenu}>Setting</Text>
                             </View>
                             <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={20} color="#494949"/>
+                            <AntIcon name="right" size={16} color="#5C5C5C"/>
                                 
                             </View>
                         </View>
@@ -93,73 +93,73 @@ export default function DrawerContent(props) {
                             navigation.navigate('SuccessChangePass');
                         }}>
                             <View style={styles.iconMenu}>
-                            <AntIcon name="link" size={25} color="#494949"/>
+                            <AntIcon name="link" size={20} color="#5C5C5C"/>
                             </View>       
                             <View style={styles.textMenuBox}>
                                 <Text style={styles.textMenu}>Premium</Text>
                             </View>
                             <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={20} color="#494949"/>
+                            <AntIcon name="right" size={16} color="#5C5C5C"/>
                                 
                             </View>
                         </View>
                         <View style={styles.menuList}>
                             <View style={styles.iconMenu}>
-                            <AntIcon name="areachart" size={25} color="#494949"/>
+                            <AntIcon name="areachart" size={20} color="#5C5C5C"/>
                             </View>       
                             <View style={styles.textMenuBox}>
                                 <Text style={styles.textMenu}>Holiday</Text>
                             </View>
                             <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={20} color="#494949"/>
+                            <AntIcon name="right" size={16} color="#5C5C5C"/>
                                 
                             </View>
                         </View>
                         <View style={styles.menuList}>
                             <View style={styles.iconMenu}>
-                            <AntIcon name="staro" size={25} color="#494949"/>
+                            <AntIcon name="staro" size={20} color="#5C5C5C"/>
                             </View>       
                             <View style={styles.textMenuBox}>
                                 <Text style={styles.textMenu}>AppLock</Text>
-                            </View>
+</View>
                             <View style={styles.iconMenu}>
-                            <EntypoIcon name="switch" size={20} color="#494949"/>
+                            <EntypoIcon name="switch" size={16} color="#5C5C5C"/>
                                 
                             </View>
                         </View>
                         <View style={styles.menuList}>
                             <View style={styles.iconMenu}>
-                            <AntIcon name="setting" size={25} color="#494949"/>
+                            <AntIcon name="setting" size={20} color="#5C5C5C"/>
                             </View>       
                             <View style={styles.textMenuBox}>
                                 <Text style={styles.textMenu}>Share With Friends</Text>
                             </View>
                             <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={20} color="#494949"/>
+                            <AntIcon name="right" size={16} color="#5C5C5C"/>
                                 
                             </View>
                         </View>
                         <View style={styles.menuList}>
                             <View style={styles.iconMenu}>
-                            <AntIcon name="link" size={25} color="#494949"/>
+                            <AntIcon name="link" size={20} color="#5C5C5C"/>
                             </View>       
                             <View style={styles.textMenuBox}>
                                 <Text style={styles.textMenu}>Terms of Services</Text>
                             </View>
                             <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={20} color="#494949"/>
+                            <AntIcon name="right" size={16} color="#5C5C5C"/>
                                 
                             </View>
                         </View>
                         <View style={styles.menuList}>
                             <View style={styles.iconMenu}>
-                            <AntIcon name="areachart" size={25} color="#494949"/>
+                            <AntIcon name="areachart" size={20} color="#5C5C5C"/>
                             </View>       
                             <View style={styles.textMenuBox}>
                                 <Text style={styles.textMenu}>Privacy Policy</Text>
                             </View>
                             <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={20} color="#494949"/>
+                            <AntIcon name="right" size={16} color="#5C5C5C"/>
                                 
                             </View>
                         </View>
@@ -167,7 +167,7 @@ export default function DrawerContent(props) {
                             logout(props);
                         }}>
                             <View style={styles.iconMenu}>
-                            <AntIcon name="logout" size={25} color="#494949"/>
+                            <AntIcon name="logout" size={20} color="#5C5C5C"/>
                             </View>       
                             <View style={styles.textMenuBox}>
                                 <Text style={styles.textMenu}>Log Out</Text>
@@ -179,7 +179,7 @@ export default function DrawerContent(props) {
                 <Drawer.Section>
                     {/* <DrawerItem
                         icon={({ color, size }) => (
-                            <Ionicons
+<Ionicons
                                 name="log-out-outline"
                                 color={color}
                                 size={size}
@@ -232,7 +232,8 @@ const styles = StyleSheet.create({
         width:'30%',
         height:'100%',
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
+       
     },
     detailNumber:{
         fontSize:22,
@@ -249,7 +250,10 @@ const styles = StyleSheet.create({
         // backgroundColor:'red',
         marginVertical:5,
         flexDirection:'row',
-        paddingLeft:10
+        paddingLeft:10,
+        borderBottomColor:'#EEEEEE',
+        borderBottomWidth:1,
+        borderRadius:10
     },
     iconMenu:{
         width:'15%',
@@ -266,8 +270,8 @@ const styles = StyleSheet.create({
         paddingLeft:10
     },
     textMenu:{
-        fontSize:18,
-        fontWeight:'700',
-        color:"#494949"
+        fontSize:14,
+        // fontWeight:'700',
+        color: '#5C5C5C'
     }
 });

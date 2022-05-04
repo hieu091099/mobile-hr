@@ -1,28 +1,57 @@
-import React, { useState } from "react"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import HomeScreen from "../Home/HomeScreen"
-import Salary from "../Salary/Salary"
-import { Text, TouchableOpacity, View } from "react-native"
-import { useDispatch } from "react-redux"
-import Ionicons from "react-native-vector-icons/Ionicons"
-import HeaderHomeScreen from "../../components/HeaderHomeScreen/HeaderHomeScreen"
-import { useNavigation } from "@react-navigation/native"
-
-import OnLeave from "../OnLeave/OnLeave"
-import HomeStackScreen from "../RootStackScreen/HomeRoot"
-const Tab = createBottomTabNavigator()
+import React, { useState } from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import HomeScreen from "../Home/HomeScreen";
+import { Constants } from "expo";
+import Salary from "../Salary/Salary";
+import {
+    Text,
+    TouchableOpacity,
+    View,
+    Dimensions,
+    Linking,
+} from "react-native";
+import { WebView } from "react-native-webview";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { useNavigation } from "@react-navigation/native";
+import HomeStackScreen from "../RootStackScreen/HomeRoot";
+const Tab = createBottomTabNavigator();
 
 const Contact = () => {
+    const PdfReader = ({ url: uri }) => (
+        <WebView
+            javaScriptEnabled={true}
+            style={{ flex: 1 }}
+            source={{ uri }}
+        />
+    );
+    const source = {
+        uri: "http://192.168.0.96/modules/ME/pph/LSA/LSA_Uploads/B96304.pdf",
+        cache: true,
+    };
+    const _handlePress = () => {};
     return (
-        <View>
-            <Text></Text>
+        <View
+            style={{
+                flex: 1,
+                height: "100%",
+                width: "100%",
+                backgroundColor: "#ecf0f1",
+            }}>
+            <TouchableOpacity
+                onPress={() =>
+                    Linking.openURL(
+                        "http://192.168.0.96/webview/lyv/sotaylaodong.html",
+                    )
+                }>
+                <Text>leuleu</Text>
+            </TouchableOpacity>
         </View>
-    )
-}
+    );
+};
 const Profile = () => {
-    const navigation = useNavigation()
-    return <View></View>
-}
+    const navigation = useNavigation();
+    return <View></View>;
+};
 export const optionsHeader = {
     headerStyle: {
         height: 65,
@@ -31,7 +60,7 @@ export const optionsHeader = {
     },
 
     headerLeft: () => {
-        const navigation = useNavigation()
+        const navigation = useNavigation();
         return (
             <TouchableOpacity
                 onPress={() => navigation.goBack()}
@@ -45,7 +74,7 @@ export const optionsHeader = {
                 }}>
                 <Ionicons name="arrow-back" size={30} />
             </TouchableOpacity>
-        )
+        );
     },
     headerRight: () => {
         return (
@@ -61,10 +90,10 @@ export const optionsHeader = {
                 }}>
                 <Ionicons name="person-circle" size={30} />
             </TouchableOpacity>
-        )
+        );
     },
     headerTitleAlign: "center",
-}
+};
 
 const MainTab = () => {
     return (
@@ -83,21 +112,21 @@ const MainTab = () => {
                     paddingTop: 5,
                 },
                 tabBarIcon: ({ focused, color, size }) => {
-                    let iconName
-                    color = focused ? "#0D4A85" : "gray"
+                    let iconName;
+                    color = focused ? "#0D4A85" : "gray";
                     if (route.name === "HomeScreen") {
-                        iconName = focused ? "home" : "home-outline"
+                        iconName = focused ? "home" : "home-outline";
                     } else if (route.name === "Salary") {
-                        iconName = focused ? "wallet-sharp" : "wallet-outline"
+                        iconName = focused ? "wallet-sharp" : "wallet-outline";
                     } else if (route.name === "Contact") {
-                        iconName = focused ? "easel" : "easel-outline"
+                        iconName = focused ? "easel" : "easel-outline";
                     } else if (route.name === "Setting") {
                         // iconName = focused ? 'earth-sharp' : 'earth-outline';
-                        iconName = focused ? "settings" : "settings-outline"
+                        iconName = focused ? "settings" : "settings-outline";
                     }
                     return (
                         <Ionicons name={iconName} size={size} color={color} />
-                    )
+                    );
                 },
             })}
             screenListeners={{
@@ -128,6 +157,6 @@ const MainTab = () => {
                 options={optionsHeader}
             />
         </Tab.Navigator>
-    )
-}
-export default MainTab
+    );
+};
+export default MainTab;

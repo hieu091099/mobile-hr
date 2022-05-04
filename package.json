@@ -16,6 +16,8 @@
     "@react-navigation/drawer": "^6.3.2",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
+    "@rneui/base": "^4.0.0-rc.1",
+    "@rneui/themed": "^4.0.0-rc.1",
     "axios": "^0.26.1",
     "expo": "~44.0.0",
     "expo-font": "~10.0.4",
@@ -42,6 +44,7 @@
     "react-native-ui-lib": "^6.13.2",
     "react-native-vector-icons": "^9.1.0",
     "react-native-web": "0.17.1",
+    "react-native-webview": "^11.18.1",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1"

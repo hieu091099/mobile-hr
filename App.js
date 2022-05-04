@@ -1,18 +1,18 @@
-import { StatusBar } from "expo-status-bar"
-import React, { useState, useEffect } from "react"
-import { NavigationContainer } from "@react-navigation/native"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { useSelector } from "react-redux"
-import MainTab from "./screen/MainTab/MainTab"
-import { DefaultTheme, Provider as PaperProvider } from "react-native-paper"
-import { createDrawerNavigator } from "@react-navigation/drawer"
-import DrawerContent from "./screen/Drawer/Drawer"
-import * as Font from "expo-font"
-import { setCustomText } from "react-native-global-props"
-import LoginRoot from "./screen/RootStackScreen/LoginRoot"
-import { SafeAreaProvider } from "react-native-safe-area-context"
-import ChangePassword from "./screen/ChangePassword/ChangePassword"
-import SuccessChangePass from "./screen/ChangePassword/SuccessChangePass"
+import { StatusBar } from "expo-status-bar";
+import React, { useState, useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useSelector } from "react-redux";
+import MainTab from "./screen/MainTab/MainTab";
+import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import DrawerContent from "./screen/Drawer/Drawer";
+import * as Font from "expo-font";
+import { setCustomText } from "react-native-global-props";
+import LoginRoot from "./screen/RootStackScreen/LoginRoot";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import ChangePassword from "./screen/ChangePassword/ChangePassword";
+import SuccessChangePass from "./screen/ChangePassword/SuccessChangePass";
 // import OnLeave from "./screen/OnLeave/OnLeave"
 
 export default function App() {
@@ -21,19 +21,19 @@ export default function App() {
             await Font.loadAsync({
                 MondaBold: require("./assets/fonts/Monda-Bold.ttf"),
                 Monda: require("./assets/fonts/Monda-Regular.ttf"),
-            })
+            });
             await setCustomText({
                 style: {
                     fontFamily: "Monda",
                 },
-            })
-        }
-        loadFonts()
-    }, [])
+            });
+        };
+        loadFonts();
+    }, []);
 
-    const Stack = createNativeStackNavigator()
-    const Drawer = createDrawerNavigator()
-    const { isLoggedIn } = useSelector((state) => state.UserReducer)
+    const Stack = createNativeStackNavigator();
+    const Drawer = createDrawerNavigator();
+    const { isLoggedIn } = useSelector((state) => state.UserReducer);
 
     const theme = {
         ...DefaultTheme,
@@ -43,7 +43,7 @@ export default function App() {
             primary: "#0D4A85",
             accent: "#f1c40f",
         },
-    }
+    };
 
     return (
         <SafeAreaProvider>
@@ -52,20 +52,32 @@ export default function App() {
                     <StatusBar hidden />
                     {isLoggedIn ? (
                         <>
-                        <Drawer.Navigator
-                            screenOptions={{
-                                headerShown: false,
-                                animation: "slide_from_right",
-                            }}
-                            drawerContent={(props) => (
-                                <DrawerContent {...props} />
-                            )}>
-                            <Drawer.Screen name="MainTab" component={MainTab} />
-                        <Stack.Screen name="ChangePassword" component={ChangePassword}  screenOptions={{ headerShown: true}}/>
-                        <Stack.Screen name="SuccessChangePass" component={SuccessChangePass}  screenOptions={{ headerShown: true}}/>
-
-                           
-                        </Drawer.Navigator>
+                            <Drawer.Navigator
+                                screenOptions={{
+                                    headerShown: false,
+                                    animation: "slide_from_right",
+                                    drawerStyle: {
+                                        width: "75%",
+                                    },
+                                }}
+                                drawerContent={(props) => (
+                                    <DrawerContent {...props} />
+                                )}>
+                                <Drawer.Screen
+                                    name="MainTab"
+                                    component={MainTab}
+                                />
+                                <Stack.Screen
+                                    name="ChangePassword"
+                                    component={ChangePassword}
+                                    screenOptions={{ headerShown: true }}
+                                />
+                                <Stack.Screen
+                                    name="SuccessChangePass"
+                                    component={SuccessChangePass}
+                                    screenOptions={{ headerShown: true }}
+                                />
+                            </Drawer.Navigator>
                         </>
                     ) : (
                         <LoginRoot />
@@ -73,5 +85,5 @@ export default function App() {
                 </NavigationContainer>
             </PaperProvider>
         </SafeAreaProvider>
-    )
+    );
 }

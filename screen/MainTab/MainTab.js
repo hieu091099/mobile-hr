@@ -2,26 +2,35 @@ import React, { useState } from "react"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import HomeScreen from "../Home/HomeScreen"
 import Salary from "../Salary/Salary"
-import { Text, TouchableOpacity, View } from "react-native"
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native"
 import { useDispatch } from "react-redux"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import HeaderHomeScreen from "../../components/HeaderHomeScreen/HeaderHomeScreen"
 import { useNavigation } from "@react-navigation/native"
-
+import { WebView } from 'react-native-webview';
 import OnLeave from "../OnLeave/OnLeave"
 import HomeStackScreen from "../RootStackScreen/HomeRoot"
 const Tab = createBottomTabNavigator()
 
 const Contact = () => {
+    const [visible, setvisible] = useState(true);
     return (
-        <View>
-            <Text></Text>
+        <View style={{flex:1,position:'relative'}}>
+            <Text>Sổ tay lao đsộng</Text>
+        <WebView
+               onLoadEnd={() => setvisible(false)}
+        source={{ uri: 'https://docs.google.com/gview?embedded=true&url=http://b2b.lacty.com.vn/webview/lhg/lhg.pdf' }}
+        style={{  width:'100%',height:200}}
+      />
+     {visible &&  <View style={{width:'100%',height:'100%',position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'#00000021'}}>
+      <ActivityIndicator size="large" color="#0D4A85" />
+      </View>}
         </View>
     )
 }
 const Profile = () => {
     const navigation = useNavigation()
-    return <View></View>
+    return <Text>123</Text>
 }
 export const optionsHeader = {
     headerStyle: {

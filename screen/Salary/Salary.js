@@ -18,13 +18,11 @@ import SalaryDetail from "../../components/SalaryDetail/SalaryDetail";
 
 export default function Salary() {
     const { salary } = useSelector((state) => state.UserReducer);
-
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
     const [selectDate, setSelectDate] = useState(
-        new Date().getFullYear() + " " + new Date().getMonth(),
+        new Date().getFullYear() + " " + (new Date().getDate() < 10 ? new Date().getMonth()-1 : Date().getMonth()),
     );
-    // console.log({ salary })
     const formatNum = (num) => {
         if (typeof num == "number") {
             return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
@@ -32,12 +30,6 @@ export default function Salary() {
             return num;
         }
     };
-    // const addZeroNumber = (num) => {
-    //     if (num.length == 1) {
-    //         return `0${num}`
-    //     }
-    //     return num
-    // }
     const pad = (num) => (num.length == 1 ? "0" : "") + num;
     useEffect(() => {
         getToken("user").then((res) => {

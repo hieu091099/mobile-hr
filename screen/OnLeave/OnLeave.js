@@ -17,14 +17,13 @@ import { getToken } from "../../config";
 import { getOnLeave } from "../../redux/actions/UserAction";
 import moment from "moment";
 import DatePicker from "react-native-modern-datepicker";
+import { color } from "react-native-reanimated";
 export default function OnLeave() {
     const [activeSections, setActiveSections] = useState([]);
 
     const { listOnLeave } = useSelector((state) => state.UserReducer);
     const [modalVisible, setModalVisible] = useState(false);
-    const [selectDate, setSelectDate] = useState(
-        new Date().getFullYear() + " " + new Date().getMonth(),
-    );
+    const [selectYear, setSelectYear] = useState(new Date().getFullYear());
     const dispatch = useDispatch();
     // console.log(listOnLeave);
     useEffect(() => {
@@ -34,11 +33,11 @@ export default function OnLeave() {
                 let personId = res.userId;
                 getToken("accessToken").then((res) => {
                     //   console.log(res);
-                    dispatch(getOnLeave(res, personId, "2022"));
+                    dispatch(getOnLeave(res, personId, selectYear));
                 });
             }
         });
-    }, []);
+    }, [selectYear]);
     const setSections = (sections) => {
         //setting up a active section state
         setActiveSections(sections.includes(undefined) ? [] : sections);
@@ -121,72 +120,96 @@ export default function OnLeave() {
         );
     };
     const renderContentMonth = (section, _, isActive) => {
-        let data = listOnLeave.filter(v=>{return moment(v?.Vacation_From_Date).format("MM") == section});
-        if(data.length == 0){
+        let data = listOnLeave.filter((v) => {
+            return moment(v?.Vacation_From_Date).format("MM") == section;
+        });
+        if (data.length == 0) {
             return (
-                <View style={styles.leaveItem} >
-                        <View style={{width:'100%',alignItems:'center'}}><Text>NO DATA</Text></View>
+                <View style={styles.leaveItem}>
+                    <View style={{ width: "100%", alignItems: "center" }}>
+                        <Text>NO DATA</Text>
                     </View>
+                </View>
             );
-         }else{    
-        return data.map((item, index) => {
-            if (moment(item?.Vacation_From_Date).format("MM") == section) {
-                return (
-                    <View style={styles.leaveItem} key={index}>
-                        <View style={styles.itemLeft}>
-                            <Text style={styles.leaveTitle} numberOfLines={1}>
-                                {item.Vacation_ID}
-                            </Text>
-                            <Text style={styles.leaveDate}>
-                               
-                                {`${moment(item?.Vacation_From_Date).format(
-                                    "DD/MM/YYYY",
-                                )}`}
-                                {item.Vacation_From_Date !=
-                                item.Vacation_To_Date
-                                    ? `  ${moment(
-                                          item?.Vacation_To_Date,
-                                      ).format("DD/MM/YYYY")}`
-                                    : ""}
-                            </Text>
-                            <Text>
-                               
-                                {item.Vacation_Detail_Note}
-                            </Text>
-                        </View>
-                        <View style={{ maxWidth: "30%" }}>
-                            {renderTypeLeave(item.Vacation_ID)}
-                            <View
-                                style={{
-                                    alignSelf: "flex-end",
-                                    marginTop: 10,
-                                }}>
-                                <Ionicons
-                                    name="bookmark-outline"
-                                    size={26}
-                                    color="gray"
-                                />
+        } else {
+            return data.map((item, index) => {
+                if (moment(item?.Vacation_From_Date).format("MM") == section) {
+                    return (
+                        <View style={styles.leaveItem} key={index}>
+                            <View style={styles.itemLeft}>
+                                <Text
+                                    style={styles.leaveTitle}
+                                    numberOfLines={1}>
+                                    {item.Vacation_ID}
+                                </Text>
+                                <Text style={styles.leaveDate}>
+                                    {`${moment(item?.Vacation_From_Date).format(
+                                        "DD/MM/YYYY",
+                                    )}`}
+                                    {item.Vacation_From_Date !=
+                                    item.Vacation_To_Date
+                                        ? `  ${moment(
+                                              item?.Vacation_To_Date,
+                                          ).format("DD/MM/YYYY")}`
+                                        : ""}
+                                </Text>
+                                <Text>{item.Vacation_Detail_Note}</Text>
+                            </View>
+                            <View style={{ maxWidth: "30%" }}>
+                                {renderTypeLeave(item.Vacation_ID)}
+                                <View
+                                    style={{
+                                        alignSelf: "flex-end",
+                                        marginTop: 10,
+                                    }}>
+                                    <Ionicons
+                                        name="bookmark-outline"
+                                        size={26}
+                                        color="gray"
+                                    />
+                                </View>
                             </View>
                         </View>
-                    </View>
-                );
-            }
-        });
-    }
+                    );
+                }
+            });
+        }
     };
 
+    const renderYear = () => {
+        let arr = [];
+        for (let i = 2000; i <= new Date().getFullYear(); i++) {
+            // console.log(i);
+
+            arr.push(
+                <TouchableOpacity key={i} style={[styles.Year, i == selectYear && styles.focusYear]} onPress={()=>{
+                    setSelectYear(i);
+                    setModalVisible(false);
+                }}>
+                    <Text
+                        style={[
+                            styles.textYear,
+                            i == selectYear && { color: "white", fontWeight: "bold" },
+                        ]}>
+                        {i}
+                    </Text>
+                </TouchableOpacity>,
+            );
+        }
+        return arr.reverse();
+    };
     return (
         <View style={{ paddingHorizontal: 10, paddingTop: 10 }}>
             {/* <Text style={styles.titleSalaryDetail}>Ngày Phép Năm <TouchableOpacity onPress={()=>{setModalVisible(true)}}><Text>2022</Text></TouchableOpacity></Text> */}
             <View style={styles.summary}>
                 <View style={{ marginLeft: 10 }}>
-                   
-                        <TouchableOpacity onPress={()=>{setModalVisible(true)}}>
-                        <Text style={styles.textTitle}>
-                        Tổng phép năm 2022
-                        </Text>
-                        </TouchableOpacity>
-                        {/* <Text
+                    <TouchableOpacity
+                        onPress={() => {
+                            setModalVisible(true);
+                        }}>
+                        <Text style={styles.textTitle}>Tổng phép năm {selectYear}</Text>
+                    </TouchableOpacity>
+                    {/* <Text
                                     onStartShouldSetResponder={() =>
                                         setModalVisible(true)
                                     }
@@ -216,7 +239,7 @@ export default function OnLeave() {
                     </View>
                 </View>
             </View>
-            <ScrollView style={{ height:'80%' }}>
+            <ScrollView style={{ height: "80%" }}>
                 <Accordion
                     activeSections={activeSections}
                     sections={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
@@ -229,6 +252,7 @@ export default function OnLeave() {
                 />
             </ScrollView>
             <Modal
+                propagateSwipe={true}
                 animationType="fade"
                 transparent={true}
                 visible={modalVisible}
@@ -246,20 +270,17 @@ export default function OnLeave() {
                     onPress={() => {
                         setModalVisible(false);
                     }}>
-                    <DatePicker
-                        options={{
-                            selectedTextColor: "white",
-                            mainColor: "#0D4A85",
-                        }}
-                        selected={selectDate}
-                        mode="monthYear"
-                        onMonthYearChange={(selectedDate) => {
-                            setSelectDate(selectedDate);
-                            setModalVisible(false);
-                        }}
-                        current={selectDate}
-                        style={{ borderRadius: 10 }}
-                    />
+                    <View style={styles.pickYear}>
+                        <ScrollView style={{ height: 300, width: "100%" }}>
+                            <Pressable
+                                style={[
+                                    styles.pickYear,
+                                    { width: "100%", padding: 10 },
+                                ]}>
+                                {renderYear()}
+                            </Pressable>
+                        </ScrollView>
+                    </View>
                 </Pressable>
             </Modal>
         </View>
@@ -345,5 +366,25 @@ const styles = StyleSheet.create({
     leaveDate: {
         fontSize: 24,
         fontWeight: "bold",
+    },
+    pickYear: {
+        width: "90%",
+        backgroundColor: "white",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        flexWrap: "wrap",
+    },
+    Year: {
+        width: "30%",
+        alignItems: "center",
+        paddingVertical: 15,
+    },
+    textYear: {
+        fontSize: 16,
+        color:'black'
+    },
+    focusYear: {
+        backgroundColor: "#0D4A85",
+        borderRadius: 8,
     },
 });

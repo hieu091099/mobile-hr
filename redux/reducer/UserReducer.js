@@ -14,7 +14,7 @@ const stateDefault = {
   checkIsChoose: 0,
   listOnLeave:[],
   setShowYearPicker: false,
-
+  listOnLeaveSummary:[]
 };
 
 export const UserReducer = (state = stateDefault, action) => {
@@ -66,6 +66,10 @@ export const UserReducer = (state = stateDefault, action) => {
     }
     case "GET_ONLEAVE": {
       state.listOnLeave = action.onLeave;
+      return { ...state };
+    }
+    case "GET_ONLEAVE_SUMMARY": {
+      state.listOnLeaveSummary = action.onLeaveSummary;
       return { ...state };
     }
     case "SET_SHOW_YEAR_PICKER": {

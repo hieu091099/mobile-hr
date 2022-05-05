@@ -13,19 +13,9 @@ import HomeStackScreen from "../RootStackScreen/HomeRoot"
 const Tab = createBottomTabNavigator()
 
 const Contact = () => {
-    const [visible, setvisible] = useState(true);
+
     return (
-        <View style={{flex:1,position:'relative'}}>
-            <Text>Sổ tay lao đsộng</Text>
-        <WebView
-               onLoadEnd={() => setvisible(false)}
-        source={{ uri: 'https://docs.google.com/gview?embedded=true&url=http://b2b.lacty.com.vn/webview/lhg/lhg.pdf' }}
-        style={{  width:'100%',height:200}}
-      />
-     {visible &&  <View style={{width:'100%',height:'100%',position:'absolute',alignItems:'center',justifyContent:'center',backgroundColor:'#00000021'}}>
-      <ActivityIndicator size="large" color="#0D4A85" />
-      </View>}
-        </View>
+     <></>
     )
 }
 const Profile = () => {

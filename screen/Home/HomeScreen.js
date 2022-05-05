@@ -83,13 +83,13 @@ export default function HomeScreen() {
                             <Text style={styles.titleDetail}>Chi tiết ngày nghỉ</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem} onPress={fadeIn}>
+                    <TouchableOpacity style={styles.menuItem}  onPress={() => navigation.navigate("Book")}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
-                                <Ionicons name="logo-electron" color="#0D4A85" size={40} />
+                                <Ionicons name="book-outline" color="#0D4A85" size={40} />
                             </View>
-                            <Text style={styles.titleItem}>Electron</Text>
-                            <Text style={styles.titleDetail}>View your salary</Text>
+                            <Text style={styles.titleItem}>Book</Text>
+                            <Text style={styles.titleDetail}>View your book</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuItem}>

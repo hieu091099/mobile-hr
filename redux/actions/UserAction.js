@@ -66,11 +66,32 @@ export const getOnLeave = (accessToken, userId, monthYear) => {
                 `user/onLeave/${userId}/${monthYear}`,
                 accessToken,
             );
-            console.log("tene", result.data);
+            // console.log("tene", result.data);
             // if (result.data != "") {
             dispatch({
                 type: "GET_ONLEAVE",
                 onLeave: result.data,
+            });
+            // }
+        } catch (e) {
+            console.log(e);
+        }
+    };
+};
+export const getOnLeaveSummary = (accessToken, userId, year) => {
+    return async (dispatch) => {
+        try {
+            let result = await axiosInstanceToken(
+                "GET",
+                `user/onLeaveSummary/${userId}/${year}`,
+                accessToken,
+            );
+            // console.log("tene", result.data);
+            // if (result.data != "") {
+            console.log(result);
+            dispatch({
+                type: "GET_ONLEAVE_SUMMARY",
+                onLeaveSummary: result.data,
             });
             // }
         } catch (e) {

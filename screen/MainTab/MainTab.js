@@ -1,56 +1,47 @@
 import React, { useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../Home/HomeScreen";
-import { Constants } from "expo";
 import Salary from "../Salary/Salary";
-import {
-    Text,
-    TouchableOpacity,
-    View,
-    Dimensions,
-    Linking,
-} from "react-native";
-import { WebView } from "react-native-webview";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import { useDispatch } from "react-redux";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import HeaderHomeScreen from "../../components/HeaderHomeScreen/HeaderHomeScreen";
 import { useNavigation } from "@react-navigation/native";
+import { WebView } from "react-native-webview";
+import OnLeave from "../OnLeave/OnLeave";
 import HomeStackScreen from "../RootStackScreen/HomeRoot";
 const Tab = createBottomTabNavigator();
 
 const Contact = () => {
-    const PdfReader = ({ url: uri }) => (
-        <WebView
-            javaScriptEnabled={true}
-            style={{ flex: 1 }}
-            source={{ uri }}
-        />
-    );
-    const source = {
-        uri: "http://192.168.0.96/modules/ME/pph/LSA/LSA_Uploads/B96304.pdf",
-        cache: true,
-    };
-    const _handlePress = () => {};
+    const [visible, setVisible] = useState(true);
     return (
-        <View
-            style={{
-                flex: 1,
-                height: "100%",
-                width: "100%",
-                backgroundColor: "#ecf0f1",
-            }}>
-            <TouchableOpacity
-                onPress={() =>
-                    Linking.openURL(
-                        "http://192.168.0.96/webview/lyv/sotaylaodong.html",
-                    )
-                }>
-                <Text>leuleu</Text>
-            </TouchableOpacity>
+        <View style={{ flex: 1, position: "relative" }}>
+            <WebView
+                onLoadEnd={() => setVisible(false)}
+                source={{
+                    uri: "https://docs.google.com/gview?embedded=true&url=http://b2b.lacty.com.vn/webview/lhg/lhg.pdf",
+                }}
+                style={{ width: "100%", height: 200 }}
+            />
+            {visible && (
+                <View
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        position: "absolute",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        // backgroundColor: "white",
+                    }}>
+                    <ActivityIndicator size="large" color="#0D4A85" />
+                </View>
+            )}
         </View>
     );
 };
 const Profile = () => {
     const navigation = useNavigation();
-    return <View></View>;
+    return <Text></Text>;
 };
 export const optionsHeader = {
     headerStyle: {
@@ -66,11 +57,6 @@ export const optionsHeader = {
                 onPress={() => navigation.goBack()}
                 style={{
                     marginLeft: 20,
-                    // padding: 6,
-                    // // backgroundColor: '#F5F5F5',
-                    // borderRadius: 10,r
-                    // borderColor: '#EEEEEE',
-                    // borderWidth: 1
                 }}>
                 <Ionicons name="arrow-back" size={30} />
             </TouchableOpacity>

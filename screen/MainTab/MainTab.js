@@ -13,31 +13,7 @@ import HomeStackScreen from "../RootStackScreen/HomeRoot";
 const Tab = createBottomTabNavigator();
 
 const Contact = () => {
-    const [visible, setVisible] = useState(true);
-    return (
-        <View style={{ flex: 1, position: "relative" }}>
-            <WebView
-                onLoadEnd={() => setVisible(false)}
-                source={{
-                    uri: "https://docs.google.com/gview?embedded=true&url=http://b2b.lacty.com.vn/webview/lhg/lhg.pdf",
-                }}
-                style={{ width: "100%", height: 200 }}
-            />
-            {visible && (
-                <View
-                    style={{
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        // backgroundColor: "white",
-                    }}>
-                    <ActivityIndicator size="large" color="#0D4A85" />
-                </View>
-            )}
-        </View>
-    );
+    return <></>;
 };
 const Profile = () => {
     const navigation = useNavigation();
@@ -65,7 +41,7 @@ export const optionsHeader = {
     headerRight: () => {
         return (
             <TouchableOpacity
-                onPress={() => alert("Co gi dau ma click, qua ngu ngok haiz!")}
+                // onPress={() => alert("Co gi dau ma click, qua ngu ngok haiz!")}
                 style={{
                     marginRight: 20,
                     padding: 6,

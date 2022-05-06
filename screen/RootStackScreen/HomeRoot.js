@@ -7,6 +7,7 @@ import OnLeave from "../OnLeave/OnLeave";
 import Salary from "../Salary/Salary";
 import IconAnt from "react-native-vector-icons/AntDesign";
 import { useDispatch } from "react-redux";
+import SoTayLaoDong from "../SoTayLaoDong/SoTayLaoDong";
 
 // calendar
 
@@ -46,6 +47,10 @@ const HomeStackScreen = () => {
                         );
                     },
                 }}
+            />
+            <Stack.Screen
+                name="Book"
+                component={SoTayLaoDong}
             />
             {/* <Stack.Screen name="Notifications" component={Notifications} /> */}
             {/* <Stack.Screen name="Profile" component={Profile} /> */}

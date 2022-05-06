@@ -52,11 +52,6 @@ export default function DrawerContent(props) {
         <SafeAreaView
             style={styles.container}
             forceInset={{ top: "always", horizontal: "never" }}>
-            {/* <DialogNavigate
-                visible={isVisibleExpired}
-                message={messageExpiredToken}
-            /> */}
-
             <View style={styles.avatar}>
                 <View
                     style={{

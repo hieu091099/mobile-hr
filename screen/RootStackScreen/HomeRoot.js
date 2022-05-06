@@ -8,11 +8,14 @@ import Salary from "../Salary/Salary";
 import IconAnt from "react-native-vector-icons/AntDesign";
 import { useDispatch } from "react-redux";
 import SoTayLaoDong from "../SoTayLaoDong/SoTayLaoDong";
+import { useNavigation } from "@react-navigation/native";
 
 // calendar
 
 const Stack = createNativeStackNavigator();
+
 const HomeStackScreen = () => {
+    const navigation = useNavigation();
     const dispatch = useDispatch();
     return (
         <Stack.Navigator
@@ -51,6 +54,19 @@ const HomeStackScreen = () => {
             <Stack.Screen
                 name="Book"
                 component={SoTayLaoDong}
+                options={{
+                    headerRight: () => {
+                        return (
+                            <IconAnt
+                                name="reload1"
+                                size={30}
+                                onPress={() => {
+                                    console.log('reload');
+                                }}
+                            />
+                        );
+                    },
+                }}
             />
             {/* <Stack.Screen name="Notifications" component={Notifications} /> */}
             {/* <Stack.Screen name="Profile" component={Profile} /> */}

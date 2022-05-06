@@ -212,7 +212,7 @@ export default function DrawerContent(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#084594",
+        backgroundColor: "#084594"
     },
     avatar: {
         width: "100%",
@@ -233,6 +233,7 @@ const styles = StyleSheet.create({
     menuRow: {
         height: 530,
         backgroundColor: "white",
+        // flex:1
     },
     nameUser: {
         fontSize: 22,

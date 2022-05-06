@@ -41,7 +41,6 @@ export default function OnLeave() {
             }
         });
     }, [selectYear]);
-    console.log('show',listOnLeaveSummary);
     const setSections = (sections) => {
         //setting up a active section state
         setActiveSections(sections.includes(undefined) ? [] : sections);
@@ -240,15 +239,29 @@ export default function OnLeave() {
                         <View style={styles.row}>
                             <View style={styles.column}>
                                 <Text style={styles.titleText}>Tổng phép</Text>
-                                <Text style={styles.contentText}>{listOnLeave.length != 0 && listOnLeaveSummary[0]?.TONGPHEPTAMTINH }</Text>
+                                <Text style={styles.contentText}>{listOnLeaveSummary.length != 0 && listOnLeaveSummary[0]?.TONGPHEPTAMTINH }</Text>
                             </View>
                             <View style={styles.column}>
-                                <Text style={styles.titleText}>Đã nghỉ</Text>
-                                <Text style={styles.contentText}>{ listOnLeave.length != 0 && listOnLeaveSummary[0]?.DANGHI + listOnLeaveSummary[0]?.DANGHIPTT}</Text>
+                                <Text style={styles.titleText}>P đã nghỉ</Text>
+                                <Text style={styles.contentText}>{ listOnLeaveSummary.length != 0 && listOnLeaveSummary[0]?.DANGHI }</Text>
                             </View>
                             <View style={styles.column}>
-                                <Text style={styles.titleText}>Còn lại</Text>
-                                <Text style={styles.contentText}>{ listOnLeave.length != 0 && listOnLeaveSummary[0]?.CONLAI + listOnLeaveSummary[0]?.CONLAIPTT}</Text>
+                                <Text style={styles.titleText}>P còn lại</Text>
+                                <Text style={styles.contentText}>{ listOnLeaveSummary.length != 0 && listOnLeaveSummary[0]?.CONLAI}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.row}>
+                            <View style={styles.column}>
+                                <Text style={styles.titleText}>Phép tồn</Text>
+                                <Text style={styles.contentText}>{listOnLeaveSummary.length != 0 && listOnLeaveSummary[0]?.TONPHEPNAMTRUOC }</Text>
+                            </View>
+                            <View style={styles.column}>
+                                <Text style={styles.titleText}>Đã nghỉ PTT</Text>
+                                <Text style={styles.contentText}>{ listOnLeaveSummary.length != 0 && listOnLeaveSummary[0]?.DANGHIPTT}</Text>
+                            </View>
+                            <View style={styles.column}>
+                                <Text style={styles.titleText}>Còn lại PTT</Text>
+                                <Text style={styles.contentText}>{ listOnLeaveSummary.length != 0 && listOnLeaveSummary[0]?.CONLAIPTT}</Text>
                             </View>
                         </View>
                     </View>

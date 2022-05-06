@@ -77,6 +77,7 @@ export const UserReducer = (state = stateDefault, action) => {
       return { ...state };
     }
 
+
     // case 'CHANGE_SCREEN': {
     //     state.indexScreen = action.indexScreen;
     //     return { ...state };

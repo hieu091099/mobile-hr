@@ -88,7 +88,6 @@ export const getOnLeaveSummary = (accessToken, userId, year) => {
             );
             // console.log("tene", result.data);
             // if (result.data != "") {
-            console.log(result);
             dispatch({
                 type: "GET_ONLEAVE_SUMMARY",
                 onLeaveSummary: result.data,
@@ -99,6 +98,28 @@ export const getOnLeaveSummary = (accessToken, userId, year) => {
         }
     };
 };
+// export const changePassword = (accessToken, data) => {
+//     return async (dispatch) => {
+//         try {
+//             let result = await axiosInstanceToken(
+//                 "GET",
+//                 `user/changePassword/`,
+//                 accessToken,data
+//             );
+//             // console.log("tene", result.data);
+//             // if (result.data != "") {
+//             console.log(result);
+//             dispatch({
+//                 type: "MSG_CHANGEPASSS",
+//                 msgChangePassword: result.data,
+//             });
+//             // }
+//         } catch (e) {
+//             console.log(e);
+//         }
+//     };
+// };
+
 
 export const loginFingerAction = () => {
     return async (dispatch) => {

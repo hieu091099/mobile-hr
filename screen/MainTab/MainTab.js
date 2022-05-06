@@ -49,7 +49,6 @@ export const optionsHeader = {
     headerRight: () => {
         return (
             <TouchableOpacity
-                onPress={() => alert("Co gi dau ma click, qua ngu ngok haiz!")}
                 style={{
                     marginRight: 20,
                     padding: 6,

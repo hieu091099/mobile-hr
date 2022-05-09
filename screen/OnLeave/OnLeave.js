@@ -214,7 +214,6 @@ export default function OnLeave() {
       };
     return (
         <View style={{ paddingHorizontal: 10, paddingTop: 10 }}>
-            {/* <Text style={styles.titleSalaryDetail}>Ngày Phép Năm <TouchableOpacity onPress={()=>{setModalVisible(true)}}><Text>2022</Text></TouchableOpacity></Text> */}
             <View style={styles.summary}>
                 <View style={{ marginLeft: 10 }}>
                     <TouchableOpacity
@@ -223,16 +222,6 @@ export default function OnLeave() {
                         }}>
                         <Text style={styles.textTitle}>Chi tiết phép năm {selectYear}</Text>
                     </TouchableOpacity>
-                    {/* <Text
-                                    onStartShouldSetResponder={() =>
-                                        setModalVisible(true)
-                                    }
-                                    style={{
-                                        textDecorationLine: "underline",
-                                        color: "white",
-                                    }}>
-                                </Text> */}
-                    {/* </Text> */}
                 </View>
                 <View>
                     <View>
@@ -267,7 +256,7 @@ export default function OnLeave() {
                     </View>
                 </View>
             </View>
-            <ScrollView style={{ height: "80%" }}>
+            <ScrollView style={{ height: "73%"}}>
                 {listOnLeave.length != 0 ?  
                 <Accordion
                     activeSections={activeSections}

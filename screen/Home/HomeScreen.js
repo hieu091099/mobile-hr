@@ -92,13 +92,13 @@ export default function HomeScreen() {
                             <Text style={styles.titleDetail}>View your book</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}>
+                    <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("OverTime")}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
-                                <Ionicons name="logo-instagram" color="#0D4A85" size={40} />
+                                <Ionicons name="ios-timer" color="#0D4A85" size={40} />
                             </View>
-                            <Text style={styles.titleItem}>Instagram</Text>
-                            <Text style={styles.titleDetail}>View your salary</Text>
+                            <Text style={styles.titleItem}>OverTime</Text>
+                            <Text style={styles.titleDetail}>View your overtime</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

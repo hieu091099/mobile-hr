@@ -14,7 +14,8 @@ const stateDefault = {
   checkIsChoose: 0,
   listOnLeave:[],
   setShowYearPicker: false,
-  listOnLeaveSummary:[]
+  listOnLeaveSummary:[],
+  listOverTime:[]
 };
 
 export const UserReducer = (state = stateDefault, action) => {
@@ -74,6 +75,10 @@ export const UserReducer = (state = stateDefault, action) => {
     }
     case "SET_SHOW_YEAR_PICKER": {
       state.setShowYearPicker = !state.setShowYearPicker;
+      return { ...state };
+    }
+    case "GET_OVERTIME": {
+      state.listOverTime = action.overTime;
       return { ...state };
     }
 

@@ -78,6 +78,27 @@ export const getOnLeave = (accessToken, userId, monthYear) => {
         }
     };
 };
+export const getOverTime = (accessToken, userId, monthYear) => {
+    return async (dispatch) => {
+        try {
+            let result = await axiosInstanceToken(
+                "GET",
+                `user/overTime/${userId}/${monthYear}`,
+                accessToken,
+            );
+            // console.log("tene", result.data);
+            // if (result.data != "") 
+            dispatch({
+                type: "GET_OVERTIME",
+                overTime: result.data,
+            });
+            // }
+        } catch (e) {
+            console.log(e);
+        }
+    };
+};
+
 export const getOnLeaveSummary = (accessToken, userId, year) => {
     return async (dispatch) => {
         try {

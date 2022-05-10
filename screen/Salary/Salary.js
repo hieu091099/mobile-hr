@@ -21,7 +21,7 @@ export default function Salary() {
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
     const [selectDate, setSelectDate] = useState(
-        new Date().getFullYear() + " " + (new Date().getDate() < 10 ? new Date().getMonth()-1 : Date().getMonth()),
+        new Date().getFullYear() + " " + (new Date().getDate() < 10 ? new Date().getMonth()-1 : new Date().getMonth()),
     );
     const formatNum = (num) => {
         if (typeof num == "number") {

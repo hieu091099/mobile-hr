@@ -10,7 +10,7 @@ import DrawerContent from "./screen/Drawer/Drawer";
 import * as Font from "expo-font";
 import { setCustomText } from "react-native-global-props";
 import LoginRoot from "./screen/RootStackScreen/LoginRoot";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaView } from 'react-native-safe-area-context'
 import ChangePassword from "./screen/ChangePassword/ChangePassword";
 import SuccessChangePass from "./screen/ChangePassword/SuccessChangePass";
 // import OnLeave from "./screen/OnLeave/OnLeave"
@@ -46,7 +46,7 @@ export default function App() {
     };
 
     return (
-        <SafeAreaProvider>
+       <SafeAreaView style={{flex:1}}>
             <PaperProvider theme={theme}>
                 <NavigationContainer>
                     <StatusBar hidden />
@@ -84,6 +84,6 @@ export default function App() {
                     )}
                 </NavigationContainer>
             </PaperProvider>
-        </SafeAreaProvider>
+        </SafeAreaView>
     );
 }

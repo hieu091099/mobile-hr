@@ -64,24 +64,35 @@ export default function OverTime() {
             <View
                 style={{
                     backgroundColor: "red",
-                    height: 55,
+                    height: 75,
                     alignItems: "center",
                     backgroundColor: isActive ? "#0D4A85" : "white",
                     flexDirection: "row",
                     justifyContent: "space-between",
                 }}>
+                    <View>
                 <Text
                     style={[
                         styles.font,
                         {
                             color: isActive ? "white" : "#0D4A85",
                             fontWeight: "bold",
-                            fontSize: 15,
+                            fontSize: 19,
+                            paddingLeft: 20,
+                            marginBottom:5
+                        },
+                    ]}>Tháng {section}</Text>
+                    <Text
+                    style={[
+                        styles.font,
+                        {
+                            color: isActive ? "white" : "#3d6b97",
+                            fontWeight: "bold",
+                            fontSize: 13,
                             paddingLeft: 20,
                         },
-                    ]}>
-                    Tháng {section} - 
-                    {tongGioThang(section)} tiếng</Text>
+                    ]}><Ionicons name='ios-time-outline' size={15} /> {tongGioThang(section)} tiếng</Text>
+                    </View>
                 <Text
                     style={[
                         styles.font,

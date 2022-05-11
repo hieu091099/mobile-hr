@@ -17,6 +17,7 @@ import EntypoIcon from "react-native-vector-icons/Entypo";
 import { checkTokenExpired } from "../../config";
 import DialogNavigate from "../../components/SimpleDialog/DialogNavigate";
 import { useNavigation } from "@react-navigation/native";
+import SvgQRCode from 'react-native-qrcode-svg';
 
 export default function DrawerContent(props) {
     const dispatch = useDispatch();
@@ -75,7 +76,11 @@ export default function DrawerContent(props) {
             </View>
 
             <View style={styles.detailRow}>
-                <View style={styles.colDetail}>
+             <SvgQRCode value="29975" size={120} 
+             backgroundColor="#084594" color="white"
+             />
+             {/* logo={require('../../assets/images/LAI_logo.png')} */}
+                {/* <View style={styles.colDetail}>
                     <Text style={styles.detailNumber}>27</Text>
                     <Text style={styles.detailText}>Employee</Text>
                 </View>
@@ -86,7 +91,7 @@ export default function DrawerContent(props) {
                 <View style={styles.colDetail}>
                     <Text style={styles.detailNumber}>50</Text>
                     <Text style={styles.detailText}>Total File</Text>
-                </View>
+                </View> */}
             </View>
             <DrawerContentScrollView {...props}>
                 <View style={styles.menuRow}>
@@ -99,7 +104,7 @@ export default function DrawerContent(props) {
                             <AntIcon name="setting" size={20} color="#5C5C5C" />
                         </View>
                         <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>Setting</Text>
+                            <Text style={styles.textMenu}>Change password</Text>
                         </View>
                         <View style={styles.iconMenu}>
                             <AntIcon name="right" size={16} color="#5C5C5C" />
@@ -107,14 +112,12 @@ export default function DrawerContent(props) {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.menuList}
-                        onPress={() => {
-                            navigation.navigate("SuccessChangePass");
-                        }}>
+                        >
                         <View style={styles.iconMenu}>
                             <AntIcon name="link" size={20} color="#5C5C5C" />
                         </View>
                         <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>Premium</Text>
+                            <Text style={styles.textMenu}>Qr scanner</Text>
                         </View>
                         <View style={styles.iconMenu}>
                             <AntIcon name="right" size={16} color="#5C5C5C" />
@@ -226,12 +229,13 @@ const styles = StyleSheet.create({
     },
     detailRow: {
         width: "100%",
-        height: 90,
+        height: 150,
         flexDirection: "row",
         justifyContent: "space-around",
+        alignItems:'center'
     },
     menuRow: {
-        height: 530,
+        height: 500,
         backgroundColor: "white",
         // flex:1
     },

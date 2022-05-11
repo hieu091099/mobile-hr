@@ -13,13 +13,15 @@ import { getToken } from "../../config";
 import { useDispatch, useSelector } from "react-redux";
 import { getSalaryAction } from "../../redux/actions/UserAction";
 import DatePicker from "react-native-modern-datepicker";
-import AntDesign from "react-native-vector-icons/AntDesign";
+import FeatherIcon from "react-native-vector-icons/Feather";
 import SalaryDetail from "../../components/SalaryDetail/SalaryDetail";
 
 export default function Salary() {
     const { salary } = useSelector((state) => state.UserReducer);
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
+    const [showSalary, setShowSalary] = useState(false);
+
     const [selectDate, setSelectDate] = useState(
         new Date().getFullYear() + " " + (new Date().getDate() < 10 ? new Date().getMonth()-1 : new Date().getMonth()),
     );
@@ -118,16 +120,15 @@ export default function Salary() {
                         {salary?.Final_Salary != undefined ? (
                             <View>
                                 <View style={{ marginLeft: 10 }}>
-                                    <Text style={styles.textSalary}>
+                                    {showSalary ?   <Text style={styles.textSalary} onPress={()=>{setShowSalary(false)}}>
                                         {salary?.Final_Salary != ""
                                             ? formatNum(salary.Final_Salary)
                                             : ""}{" "}
-                                        VNĐ
-                                    </Text>
-
-                                    {/* <Text style={styles.textSalary}>
-                                        100.000.000 VNĐ
-                                    </Text> */}
+                                        VNĐ <FeatherIcon name="eye" size={20} onPress={()=>{setShowSalary(false)}} />
+                                    </Text>:     <Text style={styles.textSalary} onPress={()=>{setShowSalary(true)}}>
+                                        ***.***.*** VNĐ <FeatherIcon name="eye-off" size={20} onPress={()=>{setShowSalary(true)}} />
+                                    </Text>}
+                                  
                                 </View>
                                 <View>
                                     <View style={styles.row}>

@@ -36,57 +36,21 @@ const HomeStackScreen = () => {
                 name="OnLeave"
                 component={OnLeave}
                 options={{
-                    headerTitle:"On Leave",
-                    headerRight: () => {
-                        return (
-                            <IconAnt
-                                name="calendar"
-                                size={30}
-                                onPress={() => {
-                                    dispatch({
-                                        type: "SET_SHOW_YEAR_PICKER",
-                                    });
-                                }}
-                            />
-                        );
-                    },
+                    headerTitle:"Ngày nghỉ"
                 }}
             />
                 <Stack.Screen
                 name="OverTime"
                 component={OverTime}
                 options={{
-                    headerTitle:"OverTime",
-                    headerRight: () => {
-                        return (
-                            <IconAnt
-                                name="calendar"
-                                size={30}
-                                onPress={() => {
-                                    dispatch({
-                                        type: "SET_SHOW_YEAR_PICKER",
-                                    });
-                                }}
-                            />
-                        );
-                    },
+                    headerTitle:"Tăng ca"
                 }}
             />
             <Stack.Screen
                 name="Book"
                 component={SoTayLaoDong}
                 options={{
-                    headerRight: () => {
-                        return (
-                            <IconAnt
-                                name="reload1"
-                                size={30}
-                                onPress={() => {
-                                    console.log('reload');
-                                }}
-                            />
-                        );
-                    },
+                    headerTitle:"Sổ tay lao động"
                 }}
             />
             {/* <Stack.Screen name="Notifications" component={Notifications} /> */}

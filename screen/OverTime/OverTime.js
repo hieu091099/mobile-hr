@@ -6,6 +6,7 @@ import {
     Modal,
     Pressable,
     Image,
+    ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -23,6 +24,8 @@ export default function OverTime() {
     const [activeSections, setActiveSections] = useState([]);
     const [countDate, setCountDate] = useState(0);
     const [sumHour, setSumHour] = useState(0);
+    const [onLoad, setOnLoad] = useState(false);
+
 
 
     const { listOverTime} = useSelector((state) => state.UserReducer);
@@ -31,13 +34,16 @@ export default function OverTime() {
     const [selectYear, setSelectYear] = useState(new Date().getFullYear());
     const dispatch = useDispatch();
     useEffect(() => {
+        setOnLoad(true);
         getToken("user").then((res) => {
             if (res != "" || res != undefined) {
                 res = JSON.parse(res);
                 let personId = res.userId;
-                getToken("accessToken").then((res) => {
+                getToken("accessToken").then(async (res) => {
                     //   console.log(res);
-                    dispatch(getOverTime(res, personId, selectYear));
+                   await dispatch(getOverTime(res, personId, selectYear));
+                    setOnLoad(false);
+                
                 });
             }
         });
@@ -192,6 +198,7 @@ export default function OverTime() {
            return arr.sort();
       };
     return (
+        <>
         <View style={{ paddingHorizontal: 10, paddingTop: 10 }}>
             <View style={styles.summary}>
                 <View style={{ marginLeft: 10 }}>
@@ -278,6 +285,20 @@ export default function OverTime() {
                 </Pressable>
             </Modal>
         </View>
+        {onLoad && (
+            <View
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        position: "absolute",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "#00000021",
+                    }}>
+                    <ActivityIndicator size="large" color="#0D4A85" />
+                </View>
+            )} 
+        </>
     );
 }
 

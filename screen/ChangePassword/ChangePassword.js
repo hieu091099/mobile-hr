@@ -80,7 +80,9 @@ export default function ChangePassword() {
                     flex: 1,
                     paddingHorizontal: 20,
                 }}>
-                <Text style={styles.title}>Thay đổi mật khẩu</Text>
+                <Text style={styles.title}>
+                    Thay đổi mật khẩu
+                </Text>
 
                 <TextInput
                     secureTextEntry={true}

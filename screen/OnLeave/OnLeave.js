@@ -6,6 +6,7 @@ import {
     Modal,
     Pressable,
     Image,
+    ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -24,20 +25,33 @@ export default function OnLeave() {
 
     const { listOnLeave,listOnLeaveSummary } = useSelector((state) => state.UserReducer);
     const [modalVisible, setModalVisible] = useState(false);
+    const [onLoad, setOnLoad] = useState(false);
+    
+    
 
     const [selectYear, setSelectYear] = useState(new Date().getFullYear());
     const dispatch = useDispatch();
     // console.log(listOnLeave);
     useEffect(() => {
+        setOnLoad(true);
         getToken("user").then((res) => {
             if (res != "" || res != undefined) {
                 res = JSON.parse(res);
                 let personId = res.userId;
-                getToken("accessToken").then((res) => {
+                getToken("accessToken").then(async (res) => {
                     //   console.log(res);
-                    dispatch(getOnLeave(res, personId, selectYear));
-                    dispatch(getOnLeaveSummary(res, personId, selectYear));
+                  p1=  new Promise(function(resolve, reject) {dispatch(getOnLeave(res, personId, selectYear)).then(val=>{
+                    resolve();
+                  }) });
+
+                 p2=  new Promise(function(resolve, reject) {dispatch(getOnLeaveSummary(res, personId, selectYear)).then(val=>{
+                    resolve();
+                }) });
+                 Promise.all([p1, p2]).then(function(values) {
+                    setOnLoad(false);
                 });
+                });
+
             }
         });
     }, [selectYear]);
@@ -137,6 +151,7 @@ export default function OnLeave() {
         } else {
             return data.map((item, index) => {
                 if (moment(item?.Vacation_From_Date).format("MM") == section) {
+                    // console.log(item);
                     return (
                         <View style={styles.leaveItem} key={index}>
                             <View style={styles.itemLeft}>
@@ -165,11 +180,7 @@ export default function OnLeave() {
                                         alignSelf: "flex-end",
                                         marginTop: 10,
                                     }}>
-                                    <Ionicons
-                                        name="bookmark-outline"
-                                        size={26}
-                                        color="gray"
-                                    />
+                                      <Text>{item.Vacation_Day >= 1 ? item.Vacation_Day +' ngày' : (item.Vacation_Day*8).toFixed() +' tiếng' }</Text>
                                 </View>
                             </View>
                         </View>
@@ -213,6 +224,7 @@ export default function OnLeave() {
            return arr.sort();
       };
     return (
+        <>
         <View style={{ paddingHorizontal: 10, paddingTop: 10 }}>
             <View style={styles.summary}>
                 <View style={{ marginLeft: 10 }}>
@@ -312,7 +324,22 @@ export default function OnLeave() {
                     </View>
                 </Pressable>
             </Modal>
+        
         </View>
+            {onLoad && (
+            <View
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        position: "absolute",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "#00000021",
+                    }}>
+                    <ActivityIndicator size="large" color="#0D4A85" />
+                </View>
+            )} 
+        </>
     );
 }
 

@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useSelector } from "react-redux";
 import MainTab from "./screen/MainTab/MainTab";
@@ -13,6 +13,9 @@ import LoginRoot from "./screen/RootStackScreen/LoginRoot";
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ChangePassword from "./screen/ChangePassword/ChangePassword";
 import SuccessChangePass from "./screen/ChangePassword/SuccessChangePass";
+import HeaderHomeScreen from "./components/HeaderHomeScreen/HeaderHomeScreen";
+import IconAnt from "react-native-vector-icons/AntDesign";
+
 // import OnLeave from "./screen/OnLeave/OnLeave"
 
 export default function App() {
@@ -54,7 +57,6 @@ export default function App() {
                         <>
                             <Drawer.Navigator
                                 screenOptions={{
-                                    headerShown: false,
                                     animation: "slide_from_right",
                                     drawerStyle: {
                                         width: "75%",
@@ -66,16 +68,33 @@ export default function App() {
                                 <Drawer.Screen
                                     name="MainTab"
                                     component={MainTab}
+                                    options={{ headerShown: false }}
                                 />
                                 <Stack.Screen
                                     name="ChangePassword"
                                     component={ChangePassword}
                                     screenOptions={{ headerShown: true }}
+                                    options={{
+                                        headerTitle:"Thay đổi mật khẩu",
+                                        headerLeft: () => {
+                                            const navigation = useNavigation();
+                                            return (
+                                                <IconAnt
+                                                    name="arrowleft"
+                                                    size={30}
+                                                    onPress={() => {
+                                                        navigation.goBack();
+                                                    }}
+                                                    style={{marginLeft:20}}
+                                                />
+                                            );
+                                        },
+                                    }}
                                 />
                                 <Stack.Screen
                                     name="SuccessChangePass"
                                     component={SuccessChangePass}
-                                    screenOptions={{ headerShown: true }}
+                                    options={{ headerShown: false }}
                                 />
                             </Drawer.Navigator>
                         </>

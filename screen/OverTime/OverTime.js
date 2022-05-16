@@ -186,7 +186,7 @@ export default function OverTime() {
         }
         return arr.reverse();
     };
-   const groupByMonth = (objectArray)=> {
+   const groupByMonth = (objectArray)=> { 
             let arr=[];
             objectArray.forEach(element => {
                let index= arr.indexOf(moment(element?.Check_Day).format("MM"));

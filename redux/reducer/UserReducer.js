@@ -15,7 +15,8 @@ const stateDefault = {
   listOnLeave:[],
   setShowYearPicker: false,
   listOnLeaveSummary:[],
-  listOverTime:[]
+  listOverTime:[],
+  lang:'en'
 };
 
 export const UserReducer = (state = stateDefault, action) => {
@@ -79,6 +80,10 @@ export const UserReducer = (state = stateDefault, action) => {
     }
     case "GET_OVERTIME": {
       state.listOverTime = action.overTime;
+      return { ...state };
+    }
+    case "CHANGE_LANG": {
+      state.lang = action.lang;
       return { ...state };
     }
 

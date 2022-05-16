@@ -76,7 +76,7 @@ export default function DrawerContent(props) {
             </View>
 
             <View style={styles.detailRow}>
-             <SvgQRCode value="29975" size={120} 
+             <SvgQRCode value={user.userId} size={120} 
              backgroundColor="#084594" color="white"
              />
              {/* logo={require('../../assets/images/LAI_logo.png')} */}
@@ -104,13 +104,13 @@ export default function DrawerContent(props) {
                             <AntIcon name="setting" size={20} color="#5C5C5C" />
                         </View>
                         <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>Change password</Text>
+                            <Text style={styles.textMenu}>Đổi mật khẩu</Text>
                         </View>
                         <View style={styles.iconMenu}>
                             <AntIcon name="right" size={16} color="#5C5C5C" />
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         style={styles.menuList}
                         >
                         <View style={styles.iconMenu}>
@@ -193,6 +193,23 @@ export default function DrawerContent(props) {
                         <View style={styles.iconMenu}>
                             <AntIcon name="right" size={16} color="#5C5C5C" />
                         </View>
+                    </TouchableOpacity> */}
+                    <TouchableOpacity style={styles.menuList} onPress={()=>{
+            
+                navigation.navigate("ChangeLanguage"); }}>
+                        <View style={styles.iconMenu}>
+                            <AntIcon
+                                name="areachart"
+                                size={20}
+                                color="#5C5C5C"
+                            />
+                        </View>
+                        <View style={styles.textMenuBox}>
+                            <Text style={styles.textMenu}>Ngôn ngữ</Text>
+                        </View>
+                        <View style={styles.iconMenu}>
+                            <AntIcon name="right" size={16} color="#5C5C5C" />
+                        </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.menuList}
@@ -203,7 +220,7 @@ export default function DrawerContent(props) {
                             <AntIcon name="logout" size={20} color="#5C5C5C" />
                         </View>
                         <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>Log Out</Text>
+                            <Text style={styles.textMenu}>Đăng xuất</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

@@ -76,13 +76,13 @@ const MainTab = () => {
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
                     color = focused ? "#0D4A85" : "gray";
-                    if (route.name === "HomeScreen") {
+                    if (route.name === "Trang chủ") {
                         iconName = focused ? "home" : "home-outline";
-                    } else if (route.name === "Salary") {
+                    } else if (route.name === "Lương") {
                         iconName = focused ? "wallet-sharp" : "wallet-outline";
-                    } else if (route.name === "Contact") {
+                    } else if (route.name === "Liên hệ") {
                         iconName = focused ? "easel" : "easel-outline";
-                    } else if (route.name === "Setting") {
+                    } else if (route.name === "Cài đặt") {
                         // iconName = focused ? 'earth-sharp' : 'earth-outline';
                         iconName = focused ? "settings" : "settings-outline";
                     }
@@ -97,24 +97,24 @@ const MainTab = () => {
                 },
             }}>
             <Tab.Screen
-                name="HomeScreen"
+                name="Trang chủ"
                 component={HomeStackScreen}
                 options={{
                     headerShown: false,
                 }}
             />
             <Tab.Screen
-                name="Salary"
+                name="Lương"
                 component={Salary}
                 options={optionsHeader}
             />
             <Tab.Screen
-                name="Contact"
+                name="Liên hệ"
                 component={Contact}
                 options={optionsHeader}
             />
             <Tab.Screen
-                name="Setting"
+                name="Cài đặt"
                 component={Profile}
                 options={optionsHeader}
             />

@@ -95,7 +95,7 @@ export default function DrawerContent(props) {
             </View>
             <DrawerContentScrollView {...props}>
                 <View style={styles.menuRow}>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         style={[styles.menuList, { marginTop: 10 }]}
                         onPress={() => {
                             navigation.navigate("ChangePassword");
@@ -109,92 +109,8 @@ export default function DrawerContent(props) {
                         <View style={styles.iconMenu}>
                             <AntIcon name="right" size={16} color="#5C5C5C" />
                         </View>
-                    </TouchableOpacity>
-                    {/* <TouchableOpacity
-                        style={styles.menuList}
-                        >
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="link" size={20} color="#5C5C5C" />
-                        </View>
-                        <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>Qr scanner</Text>
-                        </View>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={16} color="#5C5C5C" />
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuList}>
-                        <View style={styles.iconMenu}>
-                            <AntIcon
-                                name="areachart"
-                                size={20}
-                                color="#5C5C5C"
-                            />
-                        </View>
-                        <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>Holiday</Text>
-                        </View>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={16} color="#5C5C5C" />
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuList}>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="staro" size={20} color="#5C5C5C" />
-                        </View>
-                        <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>AppLock</Text>
-                        </View>
-                        <View style={styles.iconMenu}>
-                            <EntypoIcon
-                                name="switch"
-                                size={16}
-                                color="#5C5C5C"
-                            />
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuList}>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="setting" size={20} color="#5C5C5C" />
-                        </View>
-                        <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>
-                                Share With Friends
-                            </Text>
-                        </View>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={16} color="#5C5C5C" />
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuList}>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="link" size={20} color="#5C5C5C" />
-                        </View>
-                        <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>
-                                Terms of Services
-                            </Text>
-                        </View>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={16} color="#5C5C5C" />
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuList}>
-                        <View style={styles.iconMenu}>
-                            <AntIcon
-                                name="areachart"
-                                size={20}
-                                color="#5C5C5C"
-                            />
-                        </View>
-                        <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>Privacy Policy</Text>
-                        </View>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={16} color="#5C5C5C" />
-                        </View>
                     </TouchableOpacity> */}
-                    <TouchableOpacity style={styles.menuList} onPress={()=>{
+                    {/* <TouchableOpacity style={styles.menuList} onPress={()=>{
             
                 navigation.navigate("ChangeLanguage"); }}>
                         <View style={styles.iconMenu}>
@@ -210,7 +126,7 @@ export default function DrawerContent(props) {
                         <View style={styles.iconMenu}>
                             <AntIcon name="right" size={16} color="#5C5C5C" />
                         </View>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity
                         style={styles.menuList}
                         onPress={() => {

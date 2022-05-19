@@ -7,7 +7,7 @@ export const vi ={
     luong:"Lương",
     chiTiet:"Chi tiết",
     ngaynghi:"Ngày nghỉ",
-    sotay:"Sổ tay lao động",
+    sotay:"Sổ tay",
     tangca:"Tăng ca"
 
 }

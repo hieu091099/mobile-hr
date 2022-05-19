@@ -1,9 +1,12 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import * as SecureStore from "expo-secure-store";
+import * as Notifications from 'expo-notifications';
+import * as Device from 'expo-device';
+
 
 export const BASE_URL = "http://erp.lacty.com.vn:8000/";
-// export const BASE_URL = "http://192.168.18.14:8000/";
+// export const BASE_URL = "http://192.168.18.172:8000/";
 
 export const getToken = async (key) => {
     try {
@@ -23,7 +26,11 @@ export const setToken = async (key, value) => {
         console.log(e);
     }
 };
-
+export const getExpoPushNoti=async ()=>{
+          let   token =await (await Notifications.getExpoPushTokenAsync()).data;
+        await setToken('expoPushToken',token );
+        return token;
+  }
 export const deleteToken = async (key) => {
     try {
         const value = await SecureStore.deleteItemAsync(key);

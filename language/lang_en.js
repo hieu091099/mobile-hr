@@ -7,6 +7,6 @@ export const en ={
     luong:"Salary",
     chiTiet:"Detail",
     ngaynghi:"Day off",
-    sotay:"Labor handbook",
+    sotay:"Book",
     tangca:"Over time"
 }

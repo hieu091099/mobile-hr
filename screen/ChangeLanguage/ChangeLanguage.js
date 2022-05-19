@@ -3,6 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { withTheme } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
+import { setToken } from "../../config";
 
 export default function ChangeLanguage() {
     const { lang } = useSelector(state => state.UserReducer);
@@ -19,6 +20,7 @@ export default function ChangeLanguage() {
             type: "CHANGE_LANG",
             lang:langinmenu    
         });
+        setToken('lang',langinmenu);
         navigation.navigate('MainTab')
     }
     return (
@@ -41,7 +43,7 @@ export default function ChangeLanguage() {
                     />
                 </View>
                 <View style={styles.viewtextlang}>
-                    <Text style={[styles.textlang,checkactive("mm")]}>Myanmar Language</Text>
+                    <Text style={[styles.textlang,checkactive("mm")]}>မြန်မာဘာသာစကား</Text>
                 </View>
             </View>
             </TouchableOpacity>
@@ -51,7 +53,7 @@ export default function ChangeLanguage() {
                 <View style={styles.logolang}>
                     <Image
                         style={{ width: 80, height: 80 }}
-                        source={require("../../assets/images/flags/vn.png")}
+                        source={require("../../assets/images/flags/vi.png")}
                         resizeMode="contain"
                     />
                 </View>
@@ -61,8 +63,8 @@ export default function ChangeLanguage() {
             </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>{
-                  changelang("cn");
-        }}><View style={[styles.viewlang,checkactive("cn")]}>
+                  changelang("tw");
+        }}><View style={[styles.viewlang,checkactive("tw")]}>
                 <View style={styles.logolang}>
                     <Image
                         style={{ width: 80, height: 80 }}
@@ -71,7 +73,7 @@ export default function ChangeLanguage() {
                     />
                 </View>
                 <View style={styles.viewtextlang}>
-                      <Text style={[styles.textlang,checkactive("cn")]}>Taiwanese</Text>
+                      <Text style={[styles.textlang,checkactive("tw")]}>台湾</Text>
                 </View>
             </View>
             </TouchableOpacity>
@@ -81,7 +83,7 @@ export default function ChangeLanguage() {
                 <View style={styles.logolang}>
                     <Image
                         style={{ width: 80, height: 80 }}
-                        source={require("../../assets/images/flags/gb.png")}
+                        source={require("../../assets/images/flags/en.png")}
                         resizeMode="contain"
                     />
                 </View>

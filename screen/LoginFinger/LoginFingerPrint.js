@@ -15,19 +15,29 @@ import { Provider as PaperProvider } from "react-native-paper"
 import { useDispatch, useSelector } from "react-redux"
 import { loginAction, loginFingerAction } from "../../redux/actions/UserAction"
 import { useNavigation } from "@react-navigation/native"
-import { deleteToken, getToken } from "../../config"
+import { deleteToken, getToken, setToken } from "../../config"
 import { Icon } from "react-native-elements"
 import SimpleDialog from "../../components/SimpleDialog/SimpleDialog"
+import { multilang } from "../../language/multilang";
 
 export default function LoginFingerPrint() {
+    const imglang = {
+        vi: { img: require("../../assets/images/flags/vi.png"), name: "vi" },
+        mm: { img: require("../../assets/images/flags/mm.png"), name: "mm" },
+        en: { img: require("../../assets/images/flags/en.png"), name: "en" },
+        tw: { img: require("../../assets/images/flags/tw.png"), name: "tw" },
+    };
     const [compatible, isCompatible] = useState(false)
     const [fingerPrints, setFingerPrints] = useState(false)
+    const [showChooseLang, setShowChooseLang] = useState(false);
+    const [showPassW, setShowPassW] = useState(true);
+
     /** state get userid from asyncstore */
     const [userIdFromDevice, setUserIdFromDevice] = useState("")
     const [factoryFromDevice, setFactoryFromDevice] = useState("")
     const [cancel, setCancel] = useState(false)
     /** global state get user info */
-    const { isLoggedIn, isVisibleLogin, messageLoginResponse } = useSelector(
+    const { isLoggedIn, isVisibleLogin, messageLoginResponse,lang } = useSelector(
         (state) => state.UserReducer,
     )
     /** state set when user type input */
@@ -56,6 +66,13 @@ export default function LoginFingerPrint() {
             setFactoryFromDevice(res.factory)
         }
     })
+    const changelang = (langinmenu) => {
+        dispatch({
+            type: "CHANGE_LANG",
+            lang: langinmenu,
+        });
+        setToken('lang',langinmenu);
+    };
     const setVisibleDispatch = () => {
         dispatch({
             type: "CLOSE_DIALOG_LOGIN",
@@ -134,7 +151,70 @@ export default function LoginFingerPrint() {
                 source={require("../../assets/images/bg_login2.png")}
                 resizeMode="cover"
                 style={{ width: "100%", height: "100%" }}>
-                <View></View>
+           <TouchableOpacity
+                    onPress={() => {
+                        // console.log("ok");
+                        setShowChooseLang(!showChooseLang);
+                    }}
+                    style={{
+                        flex: 1,
+                        position: "absolute",
+                        width: 35,
+                        height: 35,
+                        borderRadius: 50,
+                        right: 20,
+                        top: 20,
+                        overflow: "hidden",
+                    }}>
+                    <Image
+                        source={imglang[lang].img}
+                        resizeMode="cover"
+                        style={{
+                            width: 35,
+                            height: 35,
+                            borderRadius: 50,
+                            overflow: "hidden",
+                        }}
+                    />
+                </TouchableOpacity>
+                {showChooseLang && (
+                    <View
+                        style={{
+                            position: "absolute",
+                            width: 50,
+                            right: 17.5,
+                            top: 60,
+                            elevation: 10,
+                            alignItems: "center",
+                            paddingTop: 8,
+                            zIndex:2,
+                            elevation:10
+                        }}>
+                        {Object.keys(imglang)?.map((value, index, array) => {
+                            if(lang != value){
+                            return (
+                                <View
+                                    key={index}
+                                    onStartShouldSetResponder={() => {
+                                        changelang(value);
+                                        setShowChooseLang(false);
+                                    }}>
+                                    <Image
+                                        style={{
+                                            width: 35,
+                                            height: 35,
+                                            borderRadius: 100,
+                                            marginBottom: 10,
+                                        }}
+                                        source={imglang[value].img}
+                                        resizeMode="contain"
+                                    />
+                                </View>
+                            );
+                                    }
+                        })}
+                    </View>
+                )}
                 <View
                     style={{
                         alignItems: "center",
@@ -148,7 +228,7 @@ export default function LoginFingerPrint() {
                 </View>
                 <View style={styles.tieude}>
                     <Text style={[styles.td]}>
-                        Xin chào{" "}
+                    {multilang[lang].chao}{" "}
                         <Text style={{ fontSize: 35 }}>
                             {userIdFromDevice}!
                         </Text>
@@ -174,7 +254,10 @@ export default function LoginFingerPrint() {
                         value={userLogin.password}
                         label="PASSWORD"
                         mode="outlined"
-                        secureTextEntry={true}
+                        secureTextEntry={showPassW}
+                        right={<TextInput.Icon name={showPassW ? "eye": "eye-off"} color={"#ccc"}  onPress={()=>{
+                            setShowPassW(!showPassW);
+                        }}/>}
                         placeholder="Mật khẩu"
                         style={[styles.inputlogin]}
                         onChangeText={(val) => {

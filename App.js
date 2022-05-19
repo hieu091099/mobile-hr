@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MainTab from "./screen/MainTab/MainTab";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -16,11 +16,30 @@ import SuccessChangePass from "./screen/ChangePassword/SuccessChangePass";
 import HeaderHomeScreen from "./components/HeaderHomeScreen/HeaderHomeScreen";
 import IconAnt from "react-native-vector-icons/AntDesign";
 import ChangeLanguage from "./screen/ChangeLanguage/ChangeLanguage";
-
+import { getExpoPushNoti, getToken, setToken } from "./config";
 // import OnLeave from "./screen/OnLeave/OnLeave"
+import * as Notifications from 'expo-notifications';
 
 export default function App() {
-    useEffect(() => {
+    Notifications.setNotificationHandler({
+        handleNotification: async () => ({
+          shouldShowAlert: true,
+          shouldPlaySound: false,
+          shouldSetBadge: false,
+        }),
+      });
+    const dispatch = useDispatch();
+   
+    useEffect(async () => {
+        getToken('lang').then(val=>{
+            if(val != undefined){
+                dispatch({
+                    type: "CHANGE_LANG",
+                    lang: val,
+                });
+                setToken('lang',val);
+            }
+        })
         const loadFonts = async () => {
             await Font.loadAsync({
                 MondaBold: require("./assets/fonts/Monda-Bold.ttf"),
@@ -48,7 +67,7 @@ export default function App() {
             accent: "#f1c40f",
         },
     };
-
+   
     return (
        <SafeAreaView style={{flex:1}}>
             <PaperProvider theme={theme}>

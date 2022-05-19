@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react";
 import {
     StyleSheet,
     Text,
@@ -7,92 +7,123 @@ import {
     TouchableOpacity,
     Dimensions,
     ImageBackground,
-} from "react-native"
-import { TextInput } from "react-native-paper"
-import { PaperSelect } from "react-native-paper-select"
-import { Provider as PaperProvider } from "react-native-paper"
-import { useDispatch, useSelector } from "react-redux"
-import { loginAction, loginFingerAction } from "../../redux/actions/UserAction"
-import { useNavigation } from "@react-navigation/native"
-import { deleteToken, getToken } from "../../config"
-import { Icon } from "react-native-elements"
-import SimpleDialog from "../../components/SimpleDialog/SimpleDialog"
+} from "react-native";
+import { TextInput } from "react-native-paper";
+import { PaperSelect } from "react-native-paper-select";
+import { Provider as PaperProvider } from "react-native-paper";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAction, loginFingerAction } from "../../redux/actions/UserAction";
+import { useNavigation } from "@react-navigation/native";
+import { deleteToken, getExpoPushNoti, getToken, setToken } from "../../config";
+import { Icon } from "react-native-elements";
+import SimpleDialog from "../../components/SimpleDialog/SimpleDialog";
+import { Value } from "react-native-reanimated";
+import { multilang } from "../../language/multilang";
+import * as Notifications from "expo-notifications";
 
 export default function LoginScreen() {
+    //
+    const imglang = {
+        vi: { img: require("../../assets/images/flags/vi.png"), name: "vi" },
+        mm: { img: require("../../assets/images/flags/mm.png"), name: "mm" },
+        en: { img: require("../../assets/images/flags/en.png"), name: "en" },
+        tw: { img: require("../../assets/images/flags/tw.png"), name: "tw" },
+    };
+    // console.log(imglang.vi);
+
+    //
     /** state get userid from asyncstore */
-    const [userIdFromDevice, setUserIdFromDevice] = useState("")
-    const [factoryFromDevice, setFactoryFromDevice] = useState("")
-    const [cancel, setCancel] = useState(false)
+
+    const [userIdFromDevice, setUserIdFromDevice] = useState("");
+    const [factoryFromDevice, setFactoryFromDevice] = useState("");
+    // const [tokenExpo, setTokenExpo] = useState("");
+
+    const [cancel, setCancel] = useState(false);
+    const [showPassW, setShowPassW] = useState(true);
+
+    const [showChooseLang, setShowChooseLang] = useState(false);
     /** global state get user info */
-    const { user, isLoggedIn, isVisibleLogin, messageLoginResponse } =
-        useSelector((state) => state.UserReducer)
+    const { user, isLoggedIn, isVisibleLogin, messageLoginResponse, lang } =
+        useSelector((state) => state.UserReducer);
     /** state set when user type input */
     const [userLogin, setUserLogin] = useState({
         userId: "",
         password: "",
         factory: "",
-    })
-
+    });
     /** state call dialog */
-    const [isVisible, setIsVisible] = useState(false)
+    const [isVisible, setIsVisible] = useState(false);
     /** state message dialog */
-    const [dialogMessage, setDialogMessage] = useState("")
+    const [dialogMessage, setDialogMessage] = useState("");
 
-    const navigation = useNavigation()
-    const dispatch = useDispatch()
+    const navigation = useNavigation();
+    const dispatch = useDispatch();
+    const changelang = (langinmenu) => {
+        dispatch({
+            type: "CHANGE_LANG",
+            lang: langinmenu,
+        });
+        setToken("lang", langinmenu);
+    };
     getToken("user").then((res) => {
         if (res != undefined) {
-            res = JSON.parse(res)
-            setUserIdFromDevice(res.userId)
+            res = JSON.parse(res);
+            setUserIdFromDevice(res.userId);
         }
-    })
+    });
     getToken("user").then((res) => {
         if (res != undefined) {
-            res = JSON.parse(res)
-            setFactoryFromDevice(res.factory)
+            res = JSON.parse(res);
+            setFactoryFromDevice(res.factory);
         }
-    })
+    });
     const setVisibleDispatch = () => {
         dispatch({
             type: "CLOSE_DIALOG_LOGIN",
-        })
-    }
+        });
+    };
     const checkConditionLogin = (user) => {
-        setCancel(false)
+        setCancel(false);
         if (user.userId == "") {
-            setIsVisible(true)
-            setDialogMessage("Vui lòng nhập số thẻ!")
-            return false
+            setIsVisible(true);
+            setDialogMessage("Vui lòng nhập số thẻ!");
+            return false;
         }
         if (user.password == "") {
-            setIsVisible(true)
-            setDialogMessage("Vui lòng nhập mật khẩu!")
-            return false
+            setIsVisible(true);
+            setDialogMessage("Vui lòng nhập mật khẩu!");
+            return false;
         }
         if (user.factory == "") {
-            setIsVisible(true)
-            setDialogMessage("Vui lòng chọn nhà máy!")
-            return false
+            setIsVisible(true);
+            setDialogMessage("Vui lòng chọn nhà máy!");
+            return false;
         }
-        return true
-    }
+        return true;
+    };
     useEffect(() => {
         if (isLoggedIn) {
-            navigation.navigate("MainTab")
+            navigation.navigate("MainTab");
         }
-    }, [isLoggedIn])
-
+    }, [isLoggedIn]);
     const login = async () => {
         if (checkConditionLogin(userLogin)) {
-            let action = loginAction(
-                userLogin,
-                navigation,
-                setIsVisible,
-                setDialogMessage,
-            )
-            dispatch(action)
+            getExpoPushNoti().then((val) => {
+                // console.log({ val });
+                //setUserLogin({ ...userLogin, exponentPushToken: val });
+                //console.log(userLogin);
+                
+                    let action = loginAction(
+                        {...userLogin, exponentPushToken:val},
+                        navigation,
+                        setIsVisible,
+                        setDialogMessage,
+                    );
+                    dispatch(action);
+                
+            });
         }
-    }
+    };
     const [factory, setFactory] = useState({
         value: "",
         list: [
@@ -102,8 +133,15 @@ export default function LoginScreen() {
         ],
         selectedList: [],
         error: "",
-    })
+    });
 
+    //    const returnurl= async ()=>{
+    //         test:any =  require(`../../assets/images/flags/${lang}.png`);
+
+    //     console.log(test);
+
+    //    }
+    //    console.log();
     return (
         <PaperProvider>
             <SimpleDialog
@@ -120,8 +158,71 @@ export default function LoginScreen() {
             <ImageBackground
                 source={require("../../assets/images/bg_login2.png")}
                 resizeMode="cover"
-                style={{ width: "100%", height: "100%" }}>
-                <View></View>
+                style={{ width: "100%", height: "100%", position: "relative" }}>
+                <TouchableOpacity
+                    onPress={() => {
+                        // console.log("ok");
+                        setShowChooseLang(!showChooseLang);
+                    }}
+                    style={{
+                        flex: 1,
+                        position: "absolute",
+                        width: 35,
+                        height: 35,
+                        borderRadius: 50,
+                        right: 20,
+                        top: 20,
+                        overflow: "hidden",
+                    }}>
+                    <Image
+                        source={imglang[lang].img}
+                        resizeMode="cover"
+                        style={{
+                            width: 35,
+                            height: 35,
+                            borderRadius: 50,
+                            overflow: "hidden",
+                        }}
+                    />
+                </TouchableOpacity>
+                {showChooseLang && (
+                    <View
+                        style={{
+                            position: "absolute",
+                            width: 50,
+                            right: 17.5,
+                            top: 60,
+                            elevation: 10,
+                            alignItems: "center",
+                            paddingTop: 8,
+                            zIndex: 2,
+                            elevation: 10,
+                        }}>
+                        {Object.keys(imglang)?.map((value, index, array) => {
+                            if (lang != value) {
+                                return (
+                                    <View
+                                        key={index}
+                                        onStartShouldSetResponder={() => {
+                                            changelang(value);
+                                            setShowChooseLang(false);
+                                        }}>
+                                        <Image
+                                            style={{
+                                                width: 35,
+                                                height: 35,
+                                                borderRadius: 100,
+                                                marginBottom: 10,
+                                            }}
+                                            source={imglang[value].img}
+                                            resizeMode="contain"
+                                        />
+                                    </View>
+                                );
+                            }
+                        })}
+                    </View>
+                )}
                 <View
                     style={{
                         alignItems: "center",
@@ -135,7 +236,8 @@ export default function LoginScreen() {
                 </View>
                 <View style={styles.tieude}>
                     <Text style={[styles.td]}>
-                        Xin chào <Text style={{ fontSize: 35 }}>Bạn!!</Text>
+                        {multilang[lang].chao}{" "}
+                        <Text style={{ fontSize: 35 }}>Bạn!!</Text>
                     </Text>
                 </View>
                 <View style={styles.form}>
@@ -152,7 +254,7 @@ export default function LoginScreen() {
                         placeholder="Tài khoản"
                         style={[styles.inputlogin, { marginTop: 20 }]}
                         onChangeText={(val) => {
-                            setUserLogin({ ...userLogin, userId: val })
+                            setUserLogin({ ...userLogin, userId: val });
                         }}
                     />
                     <TextInput
@@ -165,11 +267,20 @@ export default function LoginScreen() {
                         value={userLogin.password}
                         label="PASSWORD"
                         mode="outlined"
-                        secureTextEntry={true}
+                        secureTextEntry={showPassW}
                         placeholder="Mật khẩu"
                         style={[styles.inputlogin]}
+                        right={
+                            <TextInput.Icon
+                                name={showPassW ? "eye" : "eye-off"}
+                                color={"#ccc"}
+                                onPress={() => {
+                                    setShowPassW(!showPassW);
+                                }}
+                            />
+                        }
                         onChangeText={(val) => {
-                            setUserLogin({ ...userLogin, password: val })
+                            setUserLogin({ ...userLogin, password: val });
                         }}
                     />
 
@@ -188,11 +299,11 @@ export default function LoginScreen() {
                                 value: value.text,
                                 selectedList: value.selectedList,
                                 error: "",
-                            })
+                            });
                             setUserLogin({
                                 ...userLogin,
                                 factory: value.text,
-                            })
+                            });
                         }}
                         arrayList={[...factory.list]}
                         selectedArrayList={factory.selectedList}
@@ -247,7 +358,7 @@ export default function LoginScreen() {
                 </View>
             </ImageBackground>
         </PaperProvider>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -317,4 +428,4 @@ const styles = StyleSheet.create({
         color: "#0D4A85",
         fontWeight: "900",
     },
-})
+});

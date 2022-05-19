@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const cn ={
+export const tw ={
     chao:"你好",
     chaoTrolai:"你好，很高兴你回来了 !",
     chucNang:"函数",

@@ -10,16 +10,19 @@ import { useNavigation } from "@react-navigation/native";
 import { WebView } from "react-native-webview";
 import OnLeave from "../OnLeave/OnLeave";
 import HomeStackScreen from "../RootStackScreen/HomeRoot";
+import Setting from "../Setting/Setting";
 const Tab = createBottomTabNavigator();
 
 const Contact = () => {
     return <></>;
 };
-const Profile = () => {
-    const navigation = useNavigation();
-    return <Text></Text>;
-};
-export const optionsHeader = {
+// const Setting = () => {
+//     const navigation = useNavigation();
+//     return <Text>123</Text>;
+// };
+export const optionsHeader =(title)=> {
+
+    return {
     headerStyle: {
         height: 65,
         borderBottomLeftRadius: 10,
@@ -55,6 +58,9 @@ export const optionsHeader = {
         );
     },
     headerTitleAlign: "center",
+    headerTitle:title,
+    tabBarLabel:title
+};
 };
 
 const MainTab = () => {
@@ -76,13 +82,13 @@ const MainTab = () => {
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
                     color = focused ? "#0D4A85" : "gray";
-                    if (route.name === "Trang chủ") {
+                    if (route.name === "HomeM") {
                         iconName = focused ? "home" : "home-outline";
-                    } else if (route.name === "Lương") {
+                    } else if (route.name === "Salary") {
                         iconName = focused ? "wallet-sharp" : "wallet-outline";
-                    } else if (route.name === "Liên hệ") {
+                    } else if (route.name === "Contact") {
                         iconName = focused ? "easel" : "easel-outline";
-                    } else if (route.name === "Cài đặt") {
+                    } else if (route.name === "Setting") {
                         // iconName = focused ? 'earth-sharp' : 'earth-outline';
                         iconName = focused ? "settings" : "settings-outline";
                     }
@@ -97,26 +103,27 @@ const MainTab = () => {
                 },
             }}>
             <Tab.Screen
-                name="Trang chủ"
+                name="HomeM"
                 component={HomeStackScreen}
                 options={{
                     headerShown: false,
+                    tabBarLabel:'Trang Chủ'
                 }}
             />
             <Tab.Screen
-                name="Lương"
+                name="Salary"
                 component={Salary}
-                options={optionsHeader}
+                options={optionsHeader("Lương")}
             />
             <Tab.Screen
-                name="Liên hệ"
+                name="Contact"
                 component={Contact}
-                options={optionsHeader}
+                options={optionsHeader("Liên Hệ")}
             />
             <Tab.Screen
-                name="Cài đặt"
-                component={Profile}
-                options={optionsHeader}
+                name="Setting"
+                component={Setting}
+                options={optionsHeader("Cài Đặt")}
             />
         </Tab.Navigator>
     );

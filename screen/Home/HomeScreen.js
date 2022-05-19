@@ -61,12 +61,12 @@ export default function HomeScreen() {
             </Animated.View>
             <View style={styles.mainMenu}>
                 <View>
-                    <Text style={styles.titleMenu}>
+                    {/* <Text style={styles.titleMenu}>
                     {multilang[lang].chucNang}
-                    </Text>
+                    </Text> */}
                 </View>
                 <View style={styles.menuWrapper}>
-                    <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("Lương")}>
+                    <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("Salary")}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
                                 <Fontisto name="mastercard" color="#0D4A85" size={40} />

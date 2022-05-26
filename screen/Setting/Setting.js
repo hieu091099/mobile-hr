@@ -1,17 +1,53 @@
 import { View, Text, StyleSheet,ScrollView, Linking,TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AntIcon from "react-native-vector-icons/AntDesign";
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
+import moment from 'moment'
+
+import { axiosInstanceToken, getToken } from '../../config';
 
 export default function Setting() {
+    const [infoUser, setInfoUser] = useState();
     const navigation = useNavigation();
     const dispatch = useDispatch();
+    useEffect(() => {
+        // http://192.168.18.172:8000/user/getUserInfo/29975
+        getToken("user").then((res) => {
+            if (res != "" || res != undefined) {
+                res = JSON.parse(res);
+                let personId = res.userId;
+                getToken("accessToken").then(async (res) => {
+                    let result = await axiosInstanceToken(
+                        "GET",
+                        `user/getUserInfo/${personId}`,
+                        res
+                    );
+                    setInfoUser(result?.data?.userInfo);
+                });
+            }
+        });
+    }, []);    
 
   return (
     <View style={{backgroundColor:'#F4F4F4',flex:1}}>
         <ScrollView style={styles.chuaBox}>
-        <View style={styles.boxus}><Text></Text></View>
+        <TouchableOpacity onPress={()=>{
+            navigation.navigate('UserDetail');
+        }}>
+        <View style={styles.boxus}>
+          
+            <View style={styles.boxusleft}>
+                <Text style={{fontSize:20,fontWeight:'bold',color:'black'}}>{infoUser?.Person_Name}</Text>
+                <Text style={{fontSize:16,fontWeight:'600'}}>{infoUser?.Department_Name}</Text>
+                <Text>Ngày vào : {moment(infoUser?.Date_Come_In).format('DD-MM-YYYY')}</Text>
+
+
+            </View>
+            <View style={styles.boxusright}><AntIcon color={"black"} name="right" size={25}/></View>
+
+        </View>
+        </TouchableOpacity>
         <View style={styles.boxMenu}>
             <View style={styles.menuItem} onStartShouldSetResponder={()=>{Linking.openURL(`tel:123456`)}}>
                 <Text style={styles.textMenu}>ĐƯỜNG DÂY NÓNG : <Text style={{color:"#0D4A85"}}>099999999</Text> </Text>
@@ -46,7 +82,9 @@ const styles = StyleSheet.create({
         width:'100%',
         height:100,
         marginTop:5,
-        marginBottom:10
+        marginBottom:10,
+        flexDirection:'row',
+        paddingHorizontal:10
     },
     chuaBox:{
         flex:1
@@ -81,5 +119,23 @@ const styles = StyleSheet.create({
         fontWeight:'700',
         fontSize:15
 
+    },
+    boxusleft:{
+        width:'90%',
+        height:'100%',
+        justifyContent:'space-evenly'
     }
+    ,
+    boxusright:{
+        width:'10%',
+        height:'100%',
+        justifyContent:'center',
+        alignItems:'center'
+    },title: {
+        fontSize: 30,
+        color: "black",
+        marginTop: 30,
+        marginBottom: 50,
+        fontWeight: "900",
+    },
 });

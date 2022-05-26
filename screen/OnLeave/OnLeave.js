@@ -31,7 +31,7 @@ export default function OnLeave() {
 
     const [selectYear, setSelectYear] = useState(new Date().getFullYear());
     const dispatch = useDispatch();
-    // console.log(listOnLeave);
+    //// console.log(listOnLeave);
     useEffect(() => {
         setOnLoad(true);
         getToken("user").then((res) => {
@@ -39,7 +39,7 @@ export default function OnLeave() {
                 res = JSON.parse(res);
                 let personId = res.userId;
                 getToken("accessToken").then(async (res) => {
-                    //   console.log(res);
+                    //  // console.log(res);
                   p1=  new Promise(function(resolve, reject) {dispatch(getOnLeave(res, personId, selectYear)).then(val=>{
                     resolve();
                   }) });
@@ -151,7 +151,7 @@ export default function OnLeave() {
         } else {
             return data.map((item, index) => {
                 if (moment(item?.Vacation_From_Date).format("MM") == section) {
-                    // console.log(item);
+                    //// console.log(item);
                     return (
                         <View style={styles.leaveItem} key={index}>
                             <View style={styles.itemLeft}>
@@ -193,7 +193,7 @@ export default function OnLeave() {
     const renderYear = () => {
         let arr = [];
         for (let i = 2000; i <= new Date().getFullYear(); i++) {
-            // console.log(i);
+            //// console.log(i);
 
             arr.push(
                 <TouchableOpacity key={i} style={[styles.Year, i == selectYear && styles.focusYear]} onPress={()=>{

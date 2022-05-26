@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import LoginScreen from '../Login/LoginScreen';
 import LoginFingerPrint from '../LoginFinger/LoginFingerPrint';
 import { getToken } from '../../config';
+import ChangePasswordCMND from '../ChangePassword/ChangePasswordCMND';
 
 export default function LoginRoot() {
     const Stack = createNativeStackNavigator();
@@ -32,6 +33,7 @@ export default function LoginRoot() {
                 <Stack.Screen name="Login" component={LoginScreen} />
                 :
                 <Stack.Screen name="Login" component={LoginFingerPrint} />}
+                <Stack.Screen name="ChangePassCMND" component={ChangePasswordCMND} />
         </Stack.Navigator>
     )
 }

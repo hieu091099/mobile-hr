@@ -29,7 +29,7 @@ export default function LoginScreen() {
         en: { img: require("../../assets/images/flags/en.png"), name: "en" },
         tw: { img: require("../../assets/images/flags/tw.png"), name: "tw" },
     };
-    // console.log(imglang.vi);
+    //// console.log(imglang.vi);
 
     //
     /** state get userid from asyncstore */
@@ -109,7 +109,7 @@ export default function LoginScreen() {
     const login = async () => {
         if (checkConditionLogin(userLogin)) {
             getExpoPushNoti().then((val) => {
-                // console.log({ val });
+                //// console.log({ val });
                 //setUserLogin({ ...userLogin, exponentPushToken: val });
                 //console.log(userLogin);
                 
@@ -138,10 +138,10 @@ export default function LoginScreen() {
     //    const returnurl= async ()=>{
     //         test:any =  require(`../../assets/images/flags/${lang}.png`);
 
-    //     console.log(test);
+    //    // console.log(test);
 
     //    }
-    //    console.log();
+    //   // console.log();
     return (
         <PaperProvider>
             <SimpleDialog
@@ -161,7 +161,7 @@ export default function LoginScreen() {
                 style={{ width: "100%", height: "100%", position: "relative" }}>
                 <TouchableOpacity
                     onPress={() => {
-                        // console.log("ok");
+                        //// console.log("ok");
                         setShowChooseLang(!showChooseLang);
                     }}
                     style={{
@@ -333,6 +333,12 @@ export default function LoginScreen() {
                             <Text style={styles.textbtndn}>ĐĂNG NHẬP</Text>
                         </TouchableOpacity>
                     </View>
+                    <TouchableOpacity onPress={()=>{
+                      navigation.navigate("ChangePassCMND");
+                    }}>
+                    <Text style={{color: "gray",
+                            marginTop: 10,textDecorationLine:'underline',textDecorationColor:'#0D4A85'}}>Quên mật khẩu ?</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.contact}>
                     <View style={styles.contactItem}>

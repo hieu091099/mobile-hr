@@ -25,7 +25,7 @@ export default function ChangePassword() {
             getToken("user").then((res) => {
                 if (res != "" || res != undefined) {
                     res = JSON.parse(res);
-                    console.log(res);
+                   // console.log(res);
                     let personId = res.userId;
                     let factory = res.factory;
                     getToken("accessToken").then(async (res) => {
@@ -41,7 +41,7 @@ export default function ChangePassword() {
                         );
                         setOnLoad(false);
                         setMsgChangePass(result.data);
-                        console.log(result.data);
+                       // console.log(result.data);
 
                         if(result.data.status == true){
                                 navigation.navigate("SuccessChangePass");
@@ -55,7 +55,7 @@ export default function ChangePassword() {
            
             // }
         } catch (e) {
-            console.log(e);
+           // console.log(e);
         }
     }else{
        

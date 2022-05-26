@@ -5,8 +5,8 @@ import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 
 
-export const BASE_URL = "http://erp.lacty.com.vn:8000/";
-// export const BASE_URL = "http://192.168.18.172:8000/";
+// export const BASE_URL = "http://erp.lacty.com.vn:8000/";
+export const BASE_URL = "http://192.168.18.172:8000/";
 
 export const getToken = async (key) => {
     try {
@@ -15,7 +15,7 @@ export const getToken = async (key) => {
             return value;
         }
     } catch (e) {
-        console.log(e);
+       // console.log(e);
     }
 };
 
@@ -23,7 +23,7 @@ export const setToken = async (key, value) => {
     try {
         await SecureStore.setItemAsync(key, value);
     } catch (e) {
-        console.log(e);
+       // console.log(e);
     }
 };
 export const getExpoPushNoti=async ()=>{
@@ -38,7 +38,7 @@ export const deleteToken = async (key) => {
             return value;
         }
     } catch (e) {
-        console.log(e);
+       // console.log(e);
     }
 };
 export const axiosInstance = axios.create({
@@ -60,21 +60,21 @@ export const axiosInstanceToken = async (method, url, accessToken, data) => {
         try {
             return await instance.get(url);
         } catch (error) {
-            console.log(error);
+           // console.log(error);
         }
     }
     if (method == "POST") {
         try {
             return await instance.post(url, data);
         } catch (error) {
-            console.log(error);
+           // console.log(error);
         }
     }
     if (method == "PUT") {
         try {
             return await instance.put(url, data);
         } catch (error) {
-            console.log(error);
+           // console.log(error);
         }
     }
 
@@ -82,7 +82,7 @@ export const axiosInstanceToken = async (method, url, accessToken, data) => {
         try {
             return await instance.delete(url);
         } catch (error) {
-            console.log(error);
+           // console.log(error);
         }
     }
 };
@@ -122,7 +122,7 @@ export const checkLoginFinger = async () => {
                     return { status: true, accessToken: res.data.accessToken };
                 }
             } catch (e) {
-                console.log(e);
+               // console.log(e);
             }
         } else {
             return { status: true, accessToken: accessToken };
@@ -135,7 +135,7 @@ export const checkTokenExpired = async () => {
     if (accessToken) {
         const decoded = jwt_decode(accessToken);
         const current_time = new Date().getTime() / 1000;
-        // console.log(current_time, decoded.exp)
+        //// console.log(current_time, decoded.exp)
         if (current_time >= decoded.exp) {
             return 0;
         } else {

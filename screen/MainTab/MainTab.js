@@ -11,6 +11,7 @@ import { WebView } from "react-native-webview";
 import OnLeave from "../OnLeave/OnLeave";
 import HomeStackScreen from "../RootStackScreen/HomeRoot";
 import Setting from "../Setting/Setting";
+import SettingStackScreen from "../RootStackScreen/SettingRoot";
 const Tab = createBottomTabNavigator();
 
 const Contact = () => {
@@ -41,22 +42,22 @@ export const optionsHeader =(title)=> {
             </TouchableOpacity>
         );
     },
-    headerRight: () => {
-        return (
-            <TouchableOpacity
-                // onPress={() => alert("Co gi dau ma click, qua ngu ngok haiz!")}
-                style={{
-                    marginRight: 20,
-                    padding: 6,
-                    // backgroundColor: '#F5F5F5',
-                    borderRadius: 10,
-                    borderColor: "#EEEEEE",
-                    borderWidth: 1,
-                }}>
-                <Ionicons name="person-circle" size={30} />
-            </TouchableOpacity>
-        );
-    },
+    // headerRight: () => {
+    //     return (
+    //         <TouchableOpacity
+    //             // onPress={() => alert("Co gi dau ma click, qua ngu ngok haiz!")}
+    //             style={{
+    //                 marginRight: 20,
+    //                 padding: 6,
+    //                 // backgroundColor: '#F5F5F5',
+    //                 borderRadius: 10,
+    //                 borderColor: "#EEEEEE",
+    //                 borderWidth: 1,
+    //             }}>
+    //             <Ionicons name="person-circle" size={30} />
+    //         </TouchableOpacity>
+    //     );
+    // },
     headerTitleAlign: "center",
     headerTitle:title,
     tabBarLabel:title
@@ -99,7 +100,7 @@ const MainTab = () => {
             })}
             screenListeners={{
                 state: (e) => {
-                    // console.log(e.data.state)
+                    //// console.log(e.data.state)
                 },
             }}>
             <Tab.Screen

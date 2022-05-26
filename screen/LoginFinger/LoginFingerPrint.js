@@ -15,7 +15,7 @@ import { Provider as PaperProvider } from "react-native-paper"
 import { useDispatch, useSelector } from "react-redux"
 import { loginAction, loginFingerAction } from "../../redux/actions/UserAction"
 import { useNavigation } from "@react-navigation/native"
-import { deleteToken, getToken, setToken } from "../../config"
+import { deleteToken, getToken, setToken,getExpoPushNoti } from "../../config"
 import { Icon } from "react-native-elements"
 import SimpleDialog from "../../components/SimpleDialog/SimpleDialog"
 import { multilang } from "../../language/multilang";
@@ -108,15 +108,18 @@ export default function LoginFingerPrint() {
     }
 
     const login = async () => {
+        getExpoPushNoti().then((val) => {
         let action = loginAction(
             {
                 userId: userIdFromDevice,
                 password: userLogin.password,
                 factory: factoryFromDevice,
+                exponentPushToken:val
             },
             navigation,
         )
         dispatch(action)
+    });
     }
     const confirmWithCondition = () => {
         deleteToken("accessToken").then((res) => {
@@ -153,7 +156,7 @@ export default function LoginFingerPrint() {
                 style={{ width: "100%", height: "100%" }}>
            <TouchableOpacity
                     onPress={() => {
-                        // console.log("ok");
+                        //// console.log("ok");
                         setShowChooseLang(!showChooseLang);
                     }}
                     style={{

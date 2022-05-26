@@ -19,6 +19,7 @@ import ChangeLanguage from "./screen/ChangeLanguage/ChangeLanguage";
 import { getExpoPushNoti, getToken, setToken } from "./config";
 // import OnLeave from "./screen/OnLeave/OnLeave"
 import * as Notifications from 'expo-notifications';
+import UserDetail from "./screen/Setting/UserDetail";
 
 export default function App() {
     Notifications.setNotificationHandler({
@@ -117,6 +118,27 @@ export default function App() {
                                     screenOptions={{ headerShown: true }}
                                     options={{
                                         headerTitle:"Thay đổi ngôn ngữ",
+                                        headerLeft: () => {
+                                            const navigation = useNavigation();
+                                            return (
+                                                <IconAnt
+                                                    name="arrowleft"
+                                                    size={30}
+                                                    onPress={() => {
+                                                        navigation.goBack();
+                                                    }}
+                                                    style={{marginLeft:20}}
+                                                />
+                                            );
+                                        },
+                                    }}
+                                />
+                                 <Stack.Screen
+                                    name="UserDetail"
+                                    component={UserDetail}
+                                    screenOptions={{ headerShown: true }}
+                                    options={{
+                                        headerTitle:"Tài khoản",
                                         headerLeft: () => {
                                             const navigation = useNavigation();
                                             return (

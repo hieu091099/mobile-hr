@@ -13,7 +13,7 @@ export default function SoTayLaoDong() {
             <WebView
               originWhitelist={['*']}
                 onLoadEnd={(syntheticEvent) => {
-                    //  console.log(syntheticEvent);
+                    // // console.log(syntheticEvent);
                     setvisible(!syntheticEvent.nativeEvent);
                 }}
                 source={{

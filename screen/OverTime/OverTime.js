@@ -40,7 +40,7 @@ export default function OverTime() {
                 res = JSON.parse(res);
                 let personId = res.userId;
                 getToken("accessToken").then(async (res) => {
-                    //   console.log(res);
+                    //  // console.log(res);
                    await dispatch(getOverTime(res, personId, selectYear));
                     setOnLoad(false);
                 
@@ -186,7 +186,7 @@ export default function OverTime() {
         }
         return arr.reverse();
     };
-   const groupByMonth = (objectArray)=> {
+   const groupByMonth = (objectArray)=> { 
             let arr=[];
             objectArray.forEach(element => {
                let index= arr.indexOf(moment(element?.Check_Day).format("MM"));

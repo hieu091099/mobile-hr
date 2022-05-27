@@ -99,7 +99,7 @@ export default function Salary() {
                     />
                 </View>
             ) : (
-                <View style={{ width: "93%", height: "100%" }}>
+                <View style={{ width: "93%", height: "100%",flex:1 }}>
                     <View style={styles.summary}>
                         <View style={{ marginLeft: 10 }}>
                             <Text style={styles.textTitle}>
@@ -217,7 +217,7 @@ export default function Salary() {
                             <Text>No data</Text>
                         </View>
                     ) : (
-                        <SalaryDetail salary={salary} />
+                        <SalaryDetail salary={salary}/>
                     )}
                 </View>
             )}
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
         width: "100%",
         backgroundColor: "#0D4A85",
         borderRadius: 8,
-        paddingVertical: 10,
+        paddingVertical: 10
     },
     row: {
         flexDirection: "row",

@@ -28,7 +28,7 @@ export const loginAction = (userLogin, navigation) => {
                 });
             }
         } catch (e) {
-            console.log(e);
+            // console.log(e);
         }
     };
 };
@@ -41,7 +41,7 @@ export const getSalaryAction = (accessToken, personId, monthYear) => {
                 `salary/${personId}/${monthYear}`,
                 accessToken,
             );
-            // console.log(result.data);
+            //// console.log(result.data);
             if (result.data != "") {
                 dispatch({
                     type: "GET_SALARY",
@@ -54,7 +54,7 @@ export const getSalaryAction = (accessToken, personId, monthYear) => {
                 });
             }
         } catch (e) {
-            console.log(e);
+            // console.log(e);
         }
     };
 };
@@ -66,7 +66,7 @@ export const getOnLeave = (accessToken, userId, monthYear) => {
                 `user/onLeave/${userId}/${monthYear}`,
                 accessToken,
             );
-            // console.log("tene", result.data);
+            //// console.log("tene", result.data);
             // if (result.data != "") {
             dispatch({
                 type: "GET_ONLEAVE",
@@ -74,7 +74,7 @@ export const getOnLeave = (accessToken, userId, monthYear) => {
             });
             // }
         } catch (e) {
-            console.log(e);
+            // console.log(e);
         }
     };
 };
@@ -86,7 +86,7 @@ export const getOverTime = (accessToken, userId, monthYear) => {
                 `user/overTime/${userId}/${monthYear}`,
                 accessToken,
             );
-            // console.log("tene", result.data);
+            //// console.log("tene", result.data);
             // if (result.data != "")
             dispatch({
                 type: "GET_OVERTIME",
@@ -94,7 +94,7 @@ export const getOverTime = (accessToken, userId, monthYear) => {
             });
             // }
         } catch (e) {
-            console.log(e);
+            // console.log(e);
         }
     };
 };
@@ -107,7 +107,7 @@ export const getOnLeaveSummary = (accessToken, userId, year) => {
                 `user/onLeaveSummary/${userId}/${year}`,
                 accessToken,
             );
-            // console.log("tene", result.data);
+            //// console.log("tene", result.data);
             // if (result.data != "") {
             dispatch({
                 type: "GET_ONLEAVE_SUMMARY",
@@ -115,7 +115,7 @@ export const getOnLeaveSummary = (accessToken, userId, year) => {
             });
             // }
         } catch (e) {
-            console.log(e);
+            // console.log(e);
         }
     };
 };
@@ -127,16 +127,16 @@ export const getOnLeaveSummary = (accessToken, userId, year) => {
 //                 `user/changePassword/`,
 //                 accessToken,data
 //             );
-//             // console.log("tene", result.data);
+//             //// console.log("tene", result.data);
 //             // if (result.data != "") {
-//             console.log(result);
+//            // console.log(result);
 //             dispatch({
 //                 type: "MSG_CHANGEPASSS",
 //                 msgChangePassword: result.data,
 //             });
 //             // }
 //         } catch (e) {
-//             console.log(e);
+//            // console.log(e);
 //         }
 //     };
 // };
@@ -160,7 +160,7 @@ export const loginFingerAction = () => {
                 });
             }
         } catch (e) {
-            console.log(e);
+            // console.log(e);
         }
     };
 };

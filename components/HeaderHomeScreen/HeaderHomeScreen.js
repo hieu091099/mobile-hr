@@ -14,10 +14,10 @@ export default function HeaderHomeScreen() {
             </TouchableOpacity>
             <View style={styles.rightItem}>
                 <View style={styles.iconRight}>
-                    <Ionicons name='md-qr-code-outline' size={26} />
+                    {/* <Ionicons name='md-qr-code-outline' size={26} /> */}
                 </View>
                 <View style={styles.iconRight}>
-                    <Ionicons name='md-notifications-circle-outline' size={30} />
+                    {/* <Ionicons name='md-notifications-circle-outline' size={30} /> */}
                 </View>
             </View>
         </View>

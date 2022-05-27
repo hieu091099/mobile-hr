@@ -14,6 +14,10 @@ import { Drawer } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import AntIcon from "react-native-vector-icons/AntDesign";
 import EntypoIcon from "react-native-vector-icons/Entypo";
+import FonttistoIcon from "react-native-vector-icons/Fontisto";
+
+
+
 import { checkTokenExpired } from "../../config";
 import DialogNavigate from "../../components/SimpleDialog/DialogNavigate";
 import { useNavigation } from "@react-navigation/native";
@@ -36,6 +40,32 @@ export default function DrawerContent(props) {
             type: "LOGOUT",
         });
     };
+
+    const RMenuList=({name,icon,navigate})=>{
+        return (
+            <TouchableOpacity style={styles.menuList} onPress={()=>{
+            
+                navigation.navigate(navigate); }}>
+                        <View style={styles.iconMenu}>
+                            {/*  */}
+                            {icon}
+                        </View>
+                        <View style={styles.textMenuBox}>
+                            <Text style={styles.textMenu}>{name}</Text>
+                        </View>
+                        <View style={styles.iconMenu}>
+                            <AntIcon name="right" size={16} color="#5C5C5C" />
+                        </View>
+                    </TouchableOpacity> 
+        );
+    }
+    const  RMenuListDisble=({name})=>{
+      return  <View style={[styles.menuList,styles.menuDisble]}>
+                    <View style={styles.textMenuBox}>
+                        <Text style={[styles.textMenu,styles.textMenuDisble]}>{name}</Text>
+                    </View>
+                </View>
+    }
     useEffect(() => {
         setInterval(() => {
             checkTokenExpired().then((res) => {
@@ -76,126 +106,25 @@ export default function DrawerContent(props) {
             </View>
 
             <View style={styles.detailRow}>
-             <SvgQRCode value="29975" size={120} 
+             <SvgQRCode value={user.userId} size={120} 
              backgroundColor="#084594" color="white"
              />
-             {/* logo={require('../../assets/images/LAI_logo.png')} */}
-                {/* <View style={styles.colDetail}>
-                    <Text style={styles.detailNumber}>27</Text>
-                    <Text style={styles.detailText}>Employee</Text>
-                </View>
-                <View style={styles.colDetail}>
-                    <Text style={styles.detailNumber}>12</Text>
-                    <Text style={styles.detailText}>Client</Text>
-                </View>
-                <View style={styles.colDetail}>
-                    <Text style={styles.detailNumber}>50</Text>
-                    <Text style={styles.detailText}>Total File</Text>
-                </View> */}
             </View>
             <DrawerContentScrollView {...props}>
                 <View style={styles.menuRow}>
+                <RMenuListDisble name="Thông tin cá nhân" />
+                <RMenuList name="Thông tin" icon={<AntIcon type='ant-design' name="infocirlceo" size={20} color="#5C5C5C" />} navigate="UserDetail"/>
+                <RMenuList name="Lương" icon={<AntIcon name="creditcard" size={20} color="#5C5C5C" />} navigate="Salary"/>
+                <RMenuList name="Kiểm tra ngày phép" icon={<FonttistoIcon name="holiday-village" size={20} color="#5C5C5C" />} navigate="OnLeave"/>
+                <RMenuList name="Tăng ca" icon={<EntypoIcon name="time-slot" size={20} color="#5C5C5C" />} navigate="OverTime"/>
+                <RMenuListDisble name="Trợ giúp" />
+                <RMenuList name="Thông báo" icon={<AntIcon name="notification" size={20} color="#5C5C5C" />} navigate="ChangeLanguage"/>
+                <RMenuList name="Thay đổi mật khẩu" icon={<AntIcon name="key" size={20} color="#5C5C5C" />} navigate="ChangePassword"/>
+                <RMenuList name="Liên hệ" icon={<AntIcon name="contacts" size={20} color="#5C5C5C" />} navigate="ChangeLanguage"/>
+                <RMenuList name="Cài đặt" icon={<AntIcon name="setting" size={20} color="#5C5C5C" />} navigate="Setting"/>
+                <RMenuList name="Sổ tay lao động" icon={<AntIcon name="book" size={20} color="#5C5C5C" />} navigate="Book"/>
                     <TouchableOpacity
-                        style={[styles.menuList, { marginTop: 10 }]}
-                        onPress={() => {
-                            navigation.navigate("ChangePassword");
-                        }}>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="setting" size={20} color="#5C5C5C" />
-                        </View>
-                        <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>Change password</Text>
-                        </View>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={16} color="#5C5C5C" />
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.menuList}
-                        >
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="link" size={20} color="#5C5C5C" />
-                        </View>
-                        <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>Qr scanner</Text>
-                        </View>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={16} color="#5C5C5C" />
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuList}>
-                        <View style={styles.iconMenu}>
-                            <AntIcon
-                                name="areachart"
-                                size={20}
-                                color="#5C5C5C"
-                            />
-                        </View>
-                        <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>Holiday</Text>
-                        </View>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={16} color="#5C5C5C" />
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuList}>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="staro" size={20} color="#5C5C5C" />
-                        </View>
-                        <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>AppLock</Text>
-                        </View>
-                        <View style={styles.iconMenu}>
-                            <EntypoIcon
-                                name="switch"
-                                size={16}
-                                color="#5C5C5C"
-                            />
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuList}>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="setting" size={20} color="#5C5C5C" />
-                        </View>
-                        <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>
-                                Share With Friends
-                            </Text>
-                        </View>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={16} color="#5C5C5C" />
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuList}>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="link" size={20} color="#5C5C5C" />
-                        </View>
-                        <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>
-                                Terms of Services
-                            </Text>
-                        </View>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={16} color="#5C5C5C" />
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuList}>
-                        <View style={styles.iconMenu}>
-                            <AntIcon
-                                name="areachart"
-                                size={20}
-                                color="#5C5C5C"
-                            />
-                        </View>
-                        <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>Privacy Policy</Text>
-                        </View>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={16} color="#5C5C5C" />
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.menuList}
+                        style={[styles.menuList]}
                         onPress={() => {
                             logout(props);
                         }}>
@@ -203,7 +132,7 @@ export default function DrawerContent(props) {
                             <AntIcon name="logout" size={20} color="#5C5C5C" />
                         </View>
                         <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>Log Out</Text>
+                            <Text style={styles.textMenu}>Đăng xuất</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -235,7 +164,7 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     menuRow: {
-        height: 500,
+        height: 600,
         backgroundColor: "white",
         // flex:1
     },
@@ -262,14 +191,15 @@ const styles = StyleSheet.create({
     },
     menuList: {
         width: "100%",
-        marginVertical: 5,
         flexDirection: "row",
         alignItems: "center",
         paddingLeft: 10,
         paddingVertical: 10,
         borderBottomColor: "#EEEEEE",
         borderBottomWidth: 1,
-        borderRadius: 10,
+    },
+    menuDisble:{
+        backgroundColor:'#CCC'
     },
     iconMenu: {
         width: "15%",
@@ -285,4 +215,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: "#5C5C5C",
     },
+    textMenuDisble:{
+        fontWeight:'bold'
+    }
 });

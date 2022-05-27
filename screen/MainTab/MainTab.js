@@ -10,16 +10,20 @@ import { useNavigation } from "@react-navigation/native";
 import { WebView } from "react-native-webview";
 import OnLeave from "../OnLeave/OnLeave";
 import HomeStackScreen from "../RootStackScreen/HomeRoot";
+import Setting from "../Setting/Setting";
+import SettingStackScreen from "../RootStackScreen/SettingRoot";
 const Tab = createBottomTabNavigator();
 
 const Contact = () => {
     return <></>;
 };
-const Profile = () => {
-    const navigation = useNavigation();
-    return <Text></Text>;
-};
-export const optionsHeader = {
+// const Setting = () => {
+//     const navigation = useNavigation();
+//     return <Text>123</Text>;
+// };
+export const optionsHeader =(title)=> {
+
+    return {
     headerStyle: {
         height: 65,
         borderBottomLeftRadius: 10,
@@ -38,23 +42,26 @@ export const optionsHeader = {
             </TouchableOpacity>
         );
     },
-    headerRight: () => {
-        return (
-            <TouchableOpacity
-                // onPress={() => alert("Co gi dau ma click, qua ngu ngok haiz!")}
-                style={{
-                    marginRight: 20,
-                    padding: 6,
-                    // backgroundColor: '#F5F5F5',
-                    borderRadius: 10,
-                    borderColor: "#EEEEEE",
-                    borderWidth: 1,
-                }}>
-                <Ionicons name="person-circle" size={30} />
-            </TouchableOpacity>
-        );
-    },
+    // headerRight: () => {
+    //     return (
+    //         <TouchableOpacity
+    //             // onPress={() => alert("Co gi dau ma click, qua ngu ngok haiz!")}
+    //             style={{
+    //                 marginRight: 20,
+    //                 padding: 6,
+    //                 // backgroundColor: '#F5F5F5',
+    //                 borderRadius: 10,
+    //                 borderColor: "#EEEEEE",
+    //                 borderWidth: 1,
+    //             }}>
+    //             <Ionicons name="person-circle" size={30} />
+    //         </TouchableOpacity>
+    //     );
+    // },
     headerTitleAlign: "center",
+    headerTitle:title,
+    tabBarLabel:title
+};
 };
 
 const MainTab = () => {
@@ -76,7 +83,7 @@ const MainTab = () => {
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
                     color = focused ? "#0D4A85" : "gray";
-                    if (route.name === "HomeScreen") {
+                    if (route.name === "HomeM") {
                         iconName = focused ? "home" : "home-outline";
                     } else if (route.name === "Salary") {
                         iconName = focused ? "wallet-sharp" : "wallet-outline";
@@ -93,30 +100,31 @@ const MainTab = () => {
             })}
             screenListeners={{
                 state: (e) => {
-                    // console.log(e.data.state)
+                    //// console.log(e.data.state)
                 },
             }}>
             <Tab.Screen
-                name="HomeScreen"
+                name="HomeM"
                 component={HomeStackScreen}
                 options={{
                     headerShown: false,
+                    tabBarLabel:'Trang Chủ'
                 }}
             />
             <Tab.Screen
                 name="Salary"
                 component={Salary}
-                options={optionsHeader}
+                options={optionsHeader("Lương")}
             />
             <Tab.Screen
                 name="Contact"
                 component={Contact}
-                options={optionsHeader}
+                options={optionsHeader("Liên Hệ")}
             />
             <Tab.Screen
                 name="Setting"
-                component={Profile}
-                options={optionsHeader}
+                component={Setting}
+                options={optionsHeader("Cài Đặt")}
             />
         </Tab.Navigator>
     );

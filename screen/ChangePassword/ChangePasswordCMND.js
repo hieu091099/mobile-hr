@@ -101,7 +101,7 @@ export default function ChangePasswordCMND() {
                                 setdatetimebd(masked);
                             }}
                             mask={Masks.DATE_DDMMYYYY}
-                            placeholder={"NGÀY CẤP CMND"}
+                            placeholder={"NGÀY SINH"}
                             style={{
                                 width: "100%",
                                 height: 55,
@@ -149,29 +149,36 @@ export default function ChangePasswordCMND() {
                             datetimebd.length == 10 &&
                             matKhau.trim() != ""
                         ) {
-                            // let result = await axiosInstance.post(
-                            //     `user/forgetPassword/`,
-                            //     {
-                            //         userId: "29975",
-                            //         birthday: "09/10/1999",
-                            //         idCard: "272727344",
-                            //         factory: "LYV1",
-                            //         newPassword: "0918",
-                            //     },
-                            // );
-                            // setOnLoad(false);
-                            // if (result.data?.status) {
-                            if (1==2) {
-                                setMessDialog(result.data?.msg);
+                            // 09-10-1999
+                            // console.log(datetimebd.split("/")[0]);
+                            let datesplit = datetimebd.split("/");
+                            let result = await axiosInstance.post(
+                                `user/forgetPassword/`,
+                                {
+                                    userId: soThe,
+                                    birthday: datesplit[2]+"-"+datesplit[1]+"-"+datesplit[0],
+                                    idCard: cmnd,
+                                    newPassword: matKhau,
+                                },
+                            );
+                            setOnLoad(false);
+                            console.log(result.data)
+                           if(result?.status == 200){
+                            if (result.data?.status) {
+                                setMessDialog(result.data?.message);
                                 setVisibleDialog(true);
                                 setsoThe("");
                                 setCmnd("");
                                 setdatetimebd("");
                                 setMatKhau("");
                             } else {
-                                setMessDialog("Lỗi khi thay đổi mật khẩu");
+                                setMessDialog(result.data?.message);
                                 setVisibleDialog(true);
                             }
+                        }else {
+                            setMessDialog("Lỗi khi thay đổi mật khẩu");
+                            setVisibleDialog(true);
+                        }
 
                             // if(result.data.status == true){
                             //         navigation.navigate("SuccessChangePass");

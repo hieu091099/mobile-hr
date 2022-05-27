@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "1022187698695",
-    "project_id": "lyv-noti",
-    "storage_bucket": "lyv-noti.appspot.com"
+    "project_number": "744061605445",
+    "project_id": "noti-mobile-app",
+    "storage_bucket": "noti-mobile-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1022187698695:android:83aa05ab351492e364c8a2",
+        "mobilesdk_app_id": "1:744061605445:android:737ba5be4c7b6e1ab5b52c",
         "android_client_info": {
-          "package_name": "com.trungnam71201.mobilehr"
+          "package_name": "com.lactydev.mobilehr"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1022187698695-6v7f3dekltja923htv92m48vkiitqf6o.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.trungnam71201.mobilehr",
-            "certificate_hash": "8f3ee26436cda04b55dd9df39202367d046d1a1d"
-          }
-        },
-        {
-          "client_id": "1022187698695-335vuvv4p543aam5g4chnn9q5coqtc10.apps.googleusercontent.com",
+          "client_id": "744061605445-qm8l9elol47tk6pab8hk3vnenhd2blrb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB1lfIM9NhFINJzIjVuOfSfRYFPsDm9gSo"
+          "current_key": "AIzaSyCGMJfJ1OMx6YjAvDqvnGHpyzKMNASQCb4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1022187698695-335vuvv4p543aam5g4chnn9q5coqtc10.apps.googleusercontent.com",
+              "client_id": "744061605445-qm8l9elol47tk6pab8hk3vnenhd2blrb.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

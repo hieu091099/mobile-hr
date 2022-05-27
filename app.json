@@ -18,7 +18,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.trungnam71201.mobilehr"
+      "bundleIdentifier": "com.lactydev.mobilehr"
     },
     "android": {
       "useNextNotificationsApi": true,
@@ -26,7 +26,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#000000"
       },
-      "package": "com.trungnam71201.mobilehr",
+      "package": "com.lactydev.mobilehr",
       "googleServicesFile": "./google-services.json"
     },
     "web": {

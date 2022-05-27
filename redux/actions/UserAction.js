@@ -87,7 +87,7 @@ export const getOverTime = (accessToken, userId, monthYear) => {
                 accessToken,
             );
             // console.log("tene", result.data);
-            // if (result.data != "") 
+            // if (result.data != "")
             dispatch({
                 type: "GET_OVERTIME",
                 overTime: result.data,
@@ -140,7 +140,6 @@ export const getOnLeaveSummary = (accessToken, userId, year) => {
 //         }
 //     };
 // };
-
 
 export const loginFingerAction = () => {
     return async (dispatch) => {

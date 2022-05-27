@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "770839764010",
+    "project_id": "lyv-notification",
+    "storage_bucket": "lyv-notification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770839764010:android:35e9905d9d3aa8fe5f7753",
+        "android_client_info": {
+          "package_name": "com.trungnam71201.mobilehr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "770839764010-t6gl00ehpu6gnbh0ctchiseql5pklcp3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpUdsJ60BZ2P9unde8st2YhyjggHAjlyc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "770839764010-t6gl00ehpu6gnbh0ctchiseql5pklcp3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

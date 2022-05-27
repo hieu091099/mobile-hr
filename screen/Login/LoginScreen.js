@@ -69,11 +69,6 @@ export default function LoginScreen() {
         if (res != undefined) {
             res = JSON.parse(res);
             setUserIdFromDevice(res.userId);
-        }
-    });
-    getToken("user").then((res) => {
-        if (res != undefined) {
-            res = JSON.parse(res);
             setFactoryFromDevice(res.factory);
         }
     });
@@ -101,11 +96,6 @@ export default function LoginScreen() {
         }
         return true;
     };
-    useEffect(() => {
-        if (isLoggedIn) {
-            navigation.navigate("MainTab");
-        }
-    }, [isLoggedIn]);
     const login = async () => {
         if (checkConditionLogin(userLogin)) {
             getExpoPushNoti().then((val) => {

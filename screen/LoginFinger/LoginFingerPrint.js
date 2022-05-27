@@ -58,12 +58,8 @@ export default function LoginFingerPrint() {
         if (res != undefined) {
             res = JSON.parse(res)
             setUserIdFromDevice(res.userId)
-        }
-    })
-    getToken("user").then((res) => {
-        if (res != undefined) {
-            res = JSON.parse(res)
             setFactoryFromDevice(res.factory)
+
         }
     })
     const changelang = (langinmenu) => {
@@ -82,12 +78,6 @@ export default function LoginFingerPrint() {
         checkDeviceForHardware()
         checkForFingerprints()
     }, [])
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            navigation.navigate("MainTab")
-        }
-    }, [isLoggedIn])
     const checkDeviceForHardware = async () => {
         let compatible = await LocalAuthentication.hasHardwareAsync()
         isCompatible(compatible)

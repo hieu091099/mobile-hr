@@ -349,7 +349,7 @@ export default function LoginScreen() {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.contact}>
-                    <View style={styles.contactItem}>
+                    {/* <View style={styles.contactItem}>
                         <Icon
                             name="phone-call"
                             type="feather"
@@ -368,7 +368,7 @@ export default function LoginScreen() {
                         <Text style={styles.contactText}>
                             lactycom@lacty.com.vn
                         </Text>
-                    </View>
+                    </View> */}
                 </View>
             </ImageBackground>
         </PaperProvider>

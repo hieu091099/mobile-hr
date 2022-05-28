@@ -16,7 +16,7 @@ import Anticons from "react-native-vector-icons/AntDesign";
 import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import { getToken } from "../../config";
-import { getOverTime} from "../../redux/actions/UserAction";
+import { getOverTime } from "../../redux/actions/UserAction";
 import moment from "moment";
 import DatePicker from "react-native-modern-datepicker";
 import { color } from "react-native-reanimated";
@@ -26,9 +26,7 @@ export default function OverTime() {
     const [sumHour, setSumHour] = useState(0);
     const [onLoad, setOnLoad] = useState(false);
 
-
-
-    const { listOverTime} = useSelector((state) => state.UserReducer);
+    const { listOverTime } = useSelector((state) => state.UserReducer);
     const [modalVisible, setModalVisible] = useState(false);
 
     const [selectYear, setSelectYear] = useState(new Date().getFullYear());
@@ -41,25 +39,28 @@ export default function OverTime() {
                 let personId = res.userId;
                 getToken("accessToken").then(async (res) => {
                     //  // console.log(res);
-                   await dispatch(getOverTime(res, personId, selectYear));
+                    await dispatch(getOverTime(res, personId, selectYear));
                     setOnLoad(false);
-                
                 });
             }
         });
     }, [selectYear]);
-    const tongGioThang=(thang)=>{
-       let sumOvertime=0;
-        listOverTime.filter(v => moment(v?.Check_Day).format("MM") == thang ? sumOvertime += v.Overtime : 0);
-       return sumOvertime;
-    }
-    const tongNgay=()=>{
+    const tongGioThang = (thang) => {
+        let sumOvertime = 0;
+        listOverTime.filter((v) =>
+            moment(v?.Check_Day).format("MM") == thang
+                ? (sumOvertime += v.Overtime)
+                : 0,
+        );
+        return sumOvertime;
+    };
+    const tongNgay = () => {
         let tong = 0;
-        listOverTime?.forEach(element => {
-           tong+=Number(element.Overtime);
+        listOverTime?.forEach((element) => {
+            tong += Number(element.Overtime);
         });
         return tong;
-     }
+    };
     const setSections = (sections) => {
         //setting up a active section state
         setActiveSections(sections.includes(undefined) ? [] : sections);
@@ -76,29 +77,34 @@ export default function OverTime() {
                     flexDirection: "row",
                     justifyContent: "space-between",
                 }}>
-                    <View>
-                <Text
-                    style={[
-                        styles.font,
-                        {
-                            color: isActive ? "white" : "#0D4A85",
-                            fontWeight: "bold",
-                            fontSize: 19,
-                            paddingLeft: 20,
-                            marginBottom:5
-                        },
-                    ]}>Tháng {section}</Text>
+                <View>
                     <Text
-                    style={[
-                        styles.font,
-                        {
-                            color: isActive ? "white" : "#3d6b97",
-                            fontWeight: "bold",
-                            fontSize: 13,
-                            paddingLeft: 20,
-                        },
-                    ]}><Ionicons name='ios-time-outline' size={15} /> {tongGioThang(section)} tiếng</Text>
-                    </View>
+                        style={[
+                            styles.font,
+                            {
+                                color: isActive ? "white" : "#0D4A85",
+                                fontWeight: "bold",
+                                fontSize: 19,
+                                paddingLeft: 20,
+                                marginBottom: 5,
+                            },
+                        ]}>
+                        Tháng {section}
+                    </Text>
+                    <Text
+                        style={[
+                            styles.font,
+                            {
+                                color: isActive ? "white" : "#3d6b97",
+                                fontWeight: "bold",
+                                fontSize: 13,
+                                paddingLeft: 20,
+                            },
+                        ]}>
+                        <Ionicons name="ios-time-outline" size={15} />{" "}
+                        {tongGioThang(section)} tiếng
+                    </Text>
+                </View>
                 <Text
                     style={[
                         styles.font,
@@ -170,14 +176,20 @@ export default function OverTime() {
         let arr = [];
         for (let i = 2000; i <= new Date().getFullYear(); i++) {
             arr.push(
-                <TouchableOpacity key={i} style={[styles.Year, i == selectYear && styles.focusYear]} onPress={()=>{
-                    setSelectYear(i);
-                    setModalVisible(false);
-                }}>
+                <TouchableOpacity
+                    key={i}
+                    style={[styles.Year, i == selectYear && styles.focusYear]}
+                    onPress={() => {
+                        setSelectYear(i);
+                        setModalVisible(false);
+                    }}>
                     <Text
                         style={[
                             styles.textYear,
-                            i == selectYear && { color: "white", fontWeight: "bold" },
+                            i == selectYear && {
+                                color: "white",
+                                fontWeight: "bold",
+                            },
                         ]}>
                         {i}
                     </Text>
@@ -186,107 +198,123 @@ export default function OverTime() {
         }
         return arr.reverse();
     };
-   const groupByMonth = (objectArray)=> { 
-            let arr=[];
-            objectArray.forEach(element => {
-               let index= arr.indexOf(moment(element?.Check_Day).format("MM"));
-              
-               if(index == -1 ){
-                   arr.push(moment(element?.Check_Day).format("MM"));
-               }
-            });
-           return arr.sort();
-      };
+    const groupByMonth = (objectArray) => {
+        let arr = [];
+        objectArray.forEach((element) => {
+            let index = arr.indexOf(moment(element?.Check_Day).format("MM"));
+
+            if (index == -1) {
+                arr.push(moment(element?.Check_Day).format("MM"));
+            }
+        });
+        return arr.sort();
+    };
     return (
         <>
-        <View style={{ paddingHorizontal: 10, paddingTop: 10 }}>
-            <View style={styles.summary}>
-                <View style={{ marginLeft: 10 }}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            setModalVisible(true);
-                        }}>
-                        <Text style={styles.textTitle}>Chi tiết làm thêm giờ {selectYear}</Text>
-                    </TouchableOpacity>
-                </View>
-                <View>
+            <View style={{ paddingHorizontal: 10, paddingTop: 10 }}>
+                <View style={styles.summary}>
+                    <View style={{ marginLeft: 10 }}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                setModalVisible(true);
+                            }}>
+                            <Text style={styles.textTitle}>
+                                Chi tiết làm thêm giờ {selectYear}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                     <View>
-                        <View style={styles.row}>
-                            <View style={styles.column}>
-                                <Text style={styles.titleText}>Làm thêm tối đa</Text>
-                                <Text style={styles.contentText}>300 giờ</Text>
-                            </View>
-                            <View style={styles.column}>
-                                <Text style={styles.titleText}>Số ngày tăng ca</Text>
-                                <Text style={styles.contentText}>{listOverTime?.length}</Text>
-                            </View>
-                            <View style={styles.column}>
-                                <Text style={styles.titleText}>Số giờ tăng ca</Text>
-                                <Text style={styles.contentText}>{tongNgay()} giờ</Text>
+                        <View>
+                            <View style={styles.row}>
+                                <View style={styles.column}>
+                                    <Text style={styles.titleText}>
+                                        Làm thêm tối đa
+                                    </Text>
+                                    <Text style={styles.contentText}>
+                                        300 giờ
+                                    </Text>
+                                </View>
+                                <View style={styles.column}>
+                                    <Text style={styles.titleText}>
+                                        Số ngày tăng ca
+                                    </Text>
+                                    <Text style={styles.contentText}>
+                                        {listOverTime?.length}
+                                    </Text>
+                                </View>
+                                <View style={styles.column}>
+                                    <Text style={styles.titleText}>
+                                        Số giờ tăng ca
+                                    </Text>
+                                    <Text style={styles.contentText}>
+                                        {tongNgay()} giờ
+                                    </Text>
+                                </View>
                             </View>
                         </View>
                     </View>
                 </View>
-            </View>
-            <ScrollView style={{ height: "80%"}}>
-                {listOverTime.length != 0 ?  
-                <Accordion
-                    activeSections={activeSections}
-                    sections={groupByMonth(listOverTime)}
-                    touchableComponent={TouchableOpacity}
-                    expandMultiple={false}
-                    renderHeader={renderHeaderMonth}
-                    renderContent={renderContentMonth}
-                    duration={400}
-                    onChange={setSections}
-                />
-            :    <View
-            style={{
-                alignItems: "center",
-                marginTop: 30,
-            }}>
-            <Image
-                style={{ width: 80, height: 80 }}
-                source={require("../../assets/images/nodata.png")}
-            />
-            <Text style={{ color: "black" }}>No data</Text>
-        </View>}
-            </ScrollView>
-            <Modal
-                propagateSwipe={true}
-                animationType="fade"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                    Alert.alert("Modal has been closed.");
-                    setModalVisible(!modalVisible);
-                }}>
-                <Pressable
-                    style={{
-                        justifyContent: "center",
-                        alignItems: "center",
-                        flex: 1,
-                        backgroundColor: "#00000078",
-                    }}
-                    onPress={() => {
-                        setModalVisible(false);
+                <ScrollView style={{ height: "80%" }}>
+                    {listOverTime.length != 0 ? (
+                        <Accordion
+                            activeSections={activeSections}
+                            sections={groupByMonth(listOverTime)}
+                            touchableComponent={TouchableOpacity}
+                            expandMultiple={false}
+                            renderHeader={renderHeaderMonth}
+                            renderContent={renderContentMonth}
+                            duration={400}
+                            onChange={setSections}
+                        />
+                    ) : (
+                        <View
+                            style={{
+                                alignItems: "center",
+                                marginTop: 30,
+                            }}>
+                            <Image
+                                style={{ width: 80, height: 80 }}
+                                source={require("../../assets/images/nodata.png")}
+                            />
+                            <Text style={{ color: "black" }}>No data</Text>
+                        </View>
+                    )}
+                </ScrollView>
+                <Modal
+                    propagateSwipe={true}
+                    animationType="fade"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                        setModalVisible(!modalVisible);
                     }}>
-                    <View style={styles.pickYear}>
-                        <ScrollView style={{ height: 300, width: "100%" }}>
-                            <Pressable
-                                style={[
-                                    styles.pickYear,
-                                    { width: "100%", padding: 10 },
-                                ]}>
-                                {renderYear()}
-                            </Pressable>
-                        </ScrollView>
-                    </View>
-                </Pressable>
-            </Modal>
-        </View>
-        {onLoad && (
-            <View
+                    <Pressable
+                        style={{
+                            justifyContent: "center",
+                            alignItems: "center",
+                            flex: 1,
+                            backgroundColor: "#00000078",
+                        }}
+                        onPress={() => {
+                            setModalVisible(false);
+                        }}>
+                        <View style={styles.pickYear}>
+                            <ScrollView style={{ height: 300, width: "100%" }}>
+                                <Pressable
+                                    style={[
+                                        styles.pickYear,
+                                        { width: "100%", padding: 10 },
+                                    ]}>
+                                    {renderYear()}
+                                </Pressable>
+                            </ScrollView>
+                        </View>
+                    </Pressable>
+                </Modal>
+            </View>
+            {onLoad && (
+                <View
                     style={{
                         width: "100%",
                         height: "100%",
@@ -297,7 +325,7 @@ export default function OverTime() {
                     }}>
                     <ActivityIndicator size="large" color="#0D4A85" />
                 </View>
-            )} 
+            )}
         </>
     );
 }
@@ -396,7 +424,7 @@ const styles = StyleSheet.create({
     },
     textYear: {
         fontSize: 16,
-        color:'black'
+        color: "black",
     },
     focusYear: {
         backgroundColor: "#0D4A85",

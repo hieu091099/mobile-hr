@@ -64,7 +64,6 @@ export default function ChangePasswordCMND() {
                     onChangeText={(val) => {
                         setsoThe(val);
                     }}
-                    
                 />
                 <TextInput
                     theme={{
@@ -156,29 +155,34 @@ export default function ChangePasswordCMND() {
                                 `user/forgetPassword/`,
                                 {
                                     userId: soThe,
-                                    birthday: datesplit[2]+"-"+datesplit[1]+"-"+datesplit[0],
+                                    birthday:
+                                        datesplit[2] +
+                                        "-" +
+                                        datesplit[1] +
+                                        "-" +
+                                        datesplit[0],
                                     idCard: cmnd,
                                     newPassword: matKhau,
                                 },
                             );
                             setOnLoad(false);
-                            console.log(result.data)
-                           if(result?.status == 200){
-                            if (result.data?.status) {
-                                setMessDialog(result.data?.message);
-                                setVisibleDialog(true);
-                                setsoThe("");
-                                setCmnd("");
-                                setdatetimebd("");
-                                setMatKhau("");
+                            console.log(result.data);
+                            if (result?.status == 200) {
+                                if (result.data?.status) {
+                                    setMessDialog(result.data?.message);
+                                    setVisibleDialog(true);
+                                    setsoThe("");
+                                    setCmnd("");
+                                    setdatetimebd("");
+                                    setMatKhau("");
+                                } else {
+                                    setMessDialog(result.data?.message);
+                                    setVisibleDialog(true);
+                                }
                             } else {
-                                setMessDialog(result.data?.message);
+                                setMessDialog("Lỗi khi thay đổi mật khẩu");
                                 setVisibleDialog(true);
                             }
-                        }else {
-                            setMessDialog("Lỗi khi thay đổi mật khẩu");
-                            setVisibleDialog(true);
-                        }
 
                             // if(result.data.status == true){
                             //         navigation.navigate("SuccessChangePass");

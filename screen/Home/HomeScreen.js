@@ -1,33 +1,46 @@
-import { View, Text, Button, ScrollView, StyleSheet, Image, TouchableOpacity, Animated } from 'react-native'
-import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigation } from '@react-navigation/native';
-import { getToken } from '../../config';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import { useFonts } from 'expo-font';
-import { color } from 'react-native-reanimated';
-import {multilang} from '../../language/multilang';
+import {
+    View,
+    Text,
+    Button,
+    ScrollView,
+    StyleSheet,
+    Image,
+    TouchableOpacity,
+    Animated,
+} from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
+import { getToken } from "../../config";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import Fontisto from "react-native-vector-icons/Fontisto";
+import { useFonts } from "expo-font";
+import { color } from "react-native-reanimated";
+import { multilang } from "../../language/multilang";
 
 export default function HomeScreen() {
     const dispatch = useDispatch();
-    const { user, isLoggedIn,lang } = useSelector(state => state.UserReducer);
+    const { user, isLoggedIn, lang } = useSelector(
+        (state) => state.UserReducer,
+    );
     const [User, setUser] = useState();
     const navigation = useNavigation();
     let arrName = user?.fullName.split(" ");
-    let firstName = `${arrName[arrName.length - 2]} ${arrName[arrName.length - 1]}`;
+    let firstName = `${arrName[arrName.length - 2]} ${
+        arrName[arrName.length - 1]
+    }`;
     useEffect(() => {
-        getToken('user').then(res => {
+        getToken("user").then((res) => {
             if (res != "" || res != undefined) {
-                setUser(JSON.parse(res))
+                setUser(JSON.parse(res));
             }
-        })
-    }, [isLoggedIn])
-    getToken('user').then((res) => {
+        });
+    }, [isLoggedIn]);
+    getToken("user").then((res) => {
         if (res != "" || res != undefined) {
             res = JSON.parse(res);
         }
-    })
+    });
     const fadeAnim = useRef(new Animated.Value(1)).current;
 
     const fadeIn = () => {
@@ -35,7 +48,7 @@ export default function HomeScreen() {
         Animated.timing(fadeAnim, {
             toValue: 1,
             duration: 1000,
-            useNativeDriver: true
+            useNativeDriver: true,
         }).start();
     };
 
@@ -44,20 +57,21 @@ export default function HomeScreen() {
         Animated.timing(fadeAnim, {
             toValue: 0,
             duration: 1000,
-            useNativeDriver: true
+            useNativeDriver: true,
         }).start();
     };
     return (
         <View style={styles.home}>
-
             <Animated.View style={[styles.titleHome, { opacity: fadeAnim }]}>
-                <View >
-                    <Text style={styles.titleName}>{multilang[lang].chao} {firstName},</Text>
-                    <Text style={styles.titleBack}>{multilang[lang].chaoTrolai}</Text>
-                </View>
                 <View>
-                    {/* <Ionicons name="options" size={26} /> */}
+                    <Text style={styles.titleName}>
+                        {multilang[lang].chao} {firstName},
+                    </Text>
+                    <Text style={styles.titleBack}>
+                        {multilang[lang].chaoTrolai}
+                    </Text>
                 </View>
+                <View>{/* <Ionicons name="options" size={26} /> */}</View>
             </Animated.View>
             <View style={styles.mainMenu}>
                 <View>
@@ -66,40 +80,83 @@ export default function HomeScreen() {
                     </Text> */}
                 </View>
                 <View style={styles.menuWrapper}>
-                    <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("Salary")}>
+                    <TouchableOpacity
+                        style={styles.menuItem}
+                        onPress={() => navigation.navigate("Salary")}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
-                                <Fontisto name="mastercard" color="#0D4A85" size={40} />
+                                <Fontisto
+                                    name="mastercard"
+                                    color="#0D4A85"
+                                    size={40}
+                                />
                             </View>
-                            <Text style={styles.titleItem}>{multilang[lang].luong}</Text>
-                            <Text style={styles.titleDetail}>{multilang[lang].chiTiet} {multilang[lang].luong}</Text>
+                            <Text style={styles.titleItem}>
+                                {multilang[lang].luong}
+                            </Text>
+                            <Text style={styles.titleDetail}>
+                                {multilang[lang].chiTiet}{" "}
+                                {multilang[lang].luong}
+                            </Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("OnLeave")}>
+                    <TouchableOpacity
+                        style={styles.menuItem}
+                        onPress={() => navigation.navigate("OnLeave")}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
-                                <Fontisto name="holiday-village" color="#0D4A85" size={40} />
+                                <Fontisto
+                                    name="holiday-village"
+                                    color="#0D4A85"
+                                    size={40}
+                                />
                             </View>
-                            <Text style={styles.titleItem}>{multilang[lang].ngaynghi}</Text>
-                            <Text style={styles.titleDetail}>{multilang[lang].chiTiet} {multilang[lang].ngaynghi}</Text>
+                            <Text style={styles.titleItem}>
+                                {multilang[lang].ngaynghi}
+                            </Text>
+                            <Text style={styles.titleDetail}>
+                                {multilang[lang].chiTiet}{" "}
+                                {multilang[lang].ngaynghi}
+                            </Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem}  onPress={() => navigation.navigate("Book")}>
+                    <TouchableOpacity
+                        style={styles.menuItem}
+                        onPress={() => navigation.navigate("Book")}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
-                                <Ionicons name="book-outline" color="#0D4A85" size={40} />
+                                <Ionicons
+                                    name="book-outline"
+                                    color="#0D4A85"
+                                    size={40}
+                                />
                             </View>
-                            <Text style={styles.titleItem}>{multilang[lang].sotay}</Text>
-                            <Text style={styles.titleDetail}>{multilang[lang].sotay}</Text>
+                            <Text style={styles.titleItem}>
+                                {multilang[lang].sotay}
+                            </Text>
+                            <Text style={styles.titleDetail}>
+                                {multilang[lang].sotay}
+                            </Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("OverTime")}>
+                    <TouchableOpacity
+                        style={styles.menuItem}
+                        onPress={() => navigation.navigate("OverTime")}>
                         <View style={styles.menuItemBox}>
                             <View style={styles.menuIcon}>
-                                <Ionicons name="ios-timer" color="#0D4A85" size={40} />
+                                <Ionicons
+                                    name="ios-timer"
+                                    color="#0D4A85"
+                                    size={40}
+                                />
                             </View>
-                            <Text style={styles.titleItem}>{multilang[lang].tangca}</Text>
-                            <Text style={styles.titleDetail}>{multilang[lang].chiTiet} {multilang[lang].tangca}</Text>
+                            <Text style={styles.titleItem}>
+                                {multilang[lang].tangca}
+                            </Text>
+                            <Text style={styles.titleDetail}>
+                                {multilang[lang].chiTiet}{" "}
+                                {multilang[lang].tangca}
+                            </Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -169,99 +226,99 @@ export default function HomeScreen() {
                     </ScrollView>
                 </View>
             </View> */}
-        </View >
-    )
+        </View>
+    );
 }
 const styles = StyleSheet.create({
     home: {
-        backgroundColor: 'white',
-        height: '100%',
-        width: '100%',
+        backgroundColor: "white",
+        height: "100%",
+        width: "100%",
         paddingHorizontal: 20,
-        paddingVertical: 20
+        paddingVertical: 20,
     },
     titleHome: {
-        flexDirection: 'row',
-        justifyContent: 'space-between'
+        flexDirection: "row",
+        justifyContent: "space-between",
     },
     titleName: {
         fontSize: 25,
-        fontWeight: '900',
+        fontWeight: "900",
         // color: 'black'
-        color: '#0D4A85'
+        color: "#0D4A85",
     },
     titleBack: {
         fontSize: 13,
         letterSpacing: 1,
-        color: 'gray',
-        fontWeight: '900'
+        color: "gray",
+        fontWeight: "900",
     },
     mainMenu: {
-        marginTop: 20
+        marginTop: 20,
     },
     titleMenu: {
         fontSize: 20,
-        fontWeight: '900',
-        color: '#5C5C5C'
+        fontWeight: "900",
+        color: "#5C5C5C",
     },
     menuWrapper: {
         marginTop: 10,
-        flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexDirection: "row",
+        flexWrap: "wrap",
     },
     menuItem: {
-        flexBasis: '50%',
+        flexBasis: "50%",
         paddingVertical: 6,
-        paddingHorizontal: 6
+        paddingHorizontal: 6,
     },
     menuItemBox: {
         height: 120,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#ebf7fa',
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#ebf7fa",
         borderRadius: 10,
-        padding: 10
+        padding: 10,
     },
     containIcon: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: "row",
+        justifyContent: "space-between",
     },
     titleItem: {
         marginTop: 5,
         fontSize: 20,
-        fontWeight: '900',
-        color: '#0D4A85'
+        fontWeight: "900",
+        color: "#0D4A85",
     },
     titleDetail: {
         fontSize: 12,
-        fontWeight: '900',
-        color: '#69737a'
+        fontWeight: "900",
+        color: "#69737a",
     },
     menuWrapperProg: {
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
     },
     menuContainItem: {
         marginTop: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
         borderWidth: 1,
         paddingVertical: 8,
         borderRadius: 20,
-        borderColor: '#EEEEEE'
+        borderColor: "#EEEEEE",
     },
     menuContainItemLeft: {
-        flexDirection: 'row'
+        flexDirection: "row",
     },
     boxIcon: {
         padding: 8,
         marginRight: 20,
         marginLeft: 15,
-        backgroundColor: '#ebf7fa',
-        borderRadius: 50
+        backgroundColor: "#ebf7fa",
+        borderRadius: 50,
     },
     contentItem: {
-        fontWeight: '900',
-        fontSize: 18
-    }
+        fontWeight: "900",
+        fontSize: 18,
+    },
 });

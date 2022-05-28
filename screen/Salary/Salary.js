@@ -23,7 +23,11 @@ export default function Salary() {
     const [showSalary, setShowSalary] = useState(false);
 
     const [selectDate, setSelectDate] = useState(
-        new Date().getFullYear() + " " + (new Date().getDate() < 10 ? new Date().getMonth()-1 : new Date().getMonth()),
+        new Date().getFullYear() +
+            " " +
+            (new Date().getDate() < 10
+                ? new Date().getMonth() - 1
+                : new Date().getMonth()),
     );
     const formatNum = (num) => {
         if (typeof num == "number") {
@@ -99,7 +103,7 @@ export default function Salary() {
                     />
                 </View>
             ) : (
-                <View style={{ width: "93%", height: "100%",flex:1 }}>
+                <View style={{ width: "93%", height: "100%", flex: 1 }}>
                     <View style={styles.summary}>
                         <View style={{ marginLeft: 10 }}>
                             <Text style={styles.textTitle}>
@@ -120,15 +124,40 @@ export default function Salary() {
                         {salary?.Final_Salary != undefined ? (
                             <View>
                                 <View style={{ marginLeft: 10 }}>
-                                    {showSalary ?   <Text style={styles.textSalary} onPress={()=>{setShowSalary(false)}}>
-                                        {salary?.Final_Salary != ""
-                                            ? formatNum(salary.Final_Salary)
-                                            : ""}{" "}
-                                        VNĐ <FeatherIcon name="eye" size={20} onPress={()=>{setShowSalary(false)}} />
-                                    </Text>:     <Text style={styles.textSalary} onPress={()=>{setShowSalary(true)}}>
-                                        ***.***.*** VNĐ <FeatherIcon name="eye-off" size={20} onPress={()=>{setShowSalary(true)}} />
-                                    </Text>}
-                                  
+                                    {showSalary ? (
+                                        <Text
+                                            style={styles.textSalary}
+                                            onPress={() => {
+                                                setShowSalary(false);
+                                            }}>
+                                            {salary?.Final_Salary != ""
+                                                ? formatNum(salary.Final_Salary)
+                                                : ""}{" "}
+                                            VNĐ{" "}
+                                            <FeatherIcon
+                                                name="eye"
+                                                size={20}
+                                                onPress={() => {
+                                                    setShowSalary(false);
+                                                }}
+                                            />
+                                        </Text>
+                                    ) : (
+                                        <Text
+                                            style={styles.textSalary}
+                                            onPress={() => {
+                                                setShowSalary(true);
+                                            }}>
+                                            ***.***.*** VNĐ{" "}
+                                            <FeatherIcon
+                                                name="eye-off"
+                                                size={20}
+                                                onPress={() => {
+                                                    setShowSalary(true);
+                                                }}
+                                            />
+                                        </Text>
+                                    )}
                                 </View>
                                 <View>
                                     <View style={styles.row}>
@@ -217,7 +246,7 @@ export default function Salary() {
                             <Text>No data</Text>
                         </View>
                     ) : (
-                        <SalaryDetail salary={salary}/>
+                        <SalaryDetail salary={salary} />
                     )}
                 </View>
             )}
@@ -230,7 +259,7 @@ const styles = StyleSheet.create({
         width: "100%",
         backgroundColor: "#0D4A85",
         borderRadius: 8,
-        paddingVertical: 10
+        paddingVertical: 10,
     },
     row: {
         flexDirection: "row",

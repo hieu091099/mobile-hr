@@ -292,7 +292,7 @@ export default function LoginFingerPrint() {
                     </View>
                 </View>
                 <View style={styles.contact}>
-                    <View style={styles.contactItem}>
+                    {/* <View style={styles.contactItem}>
                         <Icon
                             name="phone-call"
                             type="feather"
@@ -311,7 +311,7 @@ export default function LoginFingerPrint() {
                         <Text style={styles.contactText}>
                             lactycom@lacty.com.vn
                         </Text>
-                    </View>
+                    </View> */}
                 </View>
             </ImageBackground>
         </PaperProvider>

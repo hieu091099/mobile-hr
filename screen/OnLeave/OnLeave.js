@@ -16,18 +16,18 @@ import Anticons from "react-native-vector-icons/AntDesign";
 import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import { getToken } from "../../config";
-import { getOnLeave,getOnLeaveSummary } from "../../redux/actions/UserAction";
+import { getOnLeave, getOnLeaveSummary } from "../../redux/actions/UserAction";
 import moment from "moment";
 import DatePicker from "react-native-modern-datepicker";
 import { color } from "react-native-reanimated";
 export default function OnLeave() {
     const [activeSections, setActiveSections] = useState([]);
 
-    const { listOnLeave,listOnLeaveSummary } = useSelector((state) => state.UserReducer);
+    const { listOnLeave, listOnLeaveSummary } = useSelector(
+        (state) => state.UserReducer,
+    );
     const [modalVisible, setModalVisible] = useState(false);
     const [onLoad, setOnLoad] = useState(false);
-    
-    
 
     const [selectYear, setSelectYear] = useState(new Date().getFullYear());
     const dispatch = useDispatch();
@@ -40,18 +40,25 @@ export default function OnLeave() {
                 let personId = res.userId;
                 getToken("accessToken").then(async (res) => {
                     //  // console.log(res);
-                  p1=  new Promise(function(resolve, reject) {dispatch(getOnLeave(res, personId, selectYear)).then(val=>{
-                    resolve();
-                  }) });
+                    p1 = new Promise(function (resolve, reject) {
+                        dispatch(getOnLeave(res, personId, selectYear)).then(
+                            (val) => {
+                                resolve();
+                            },
+                        );
+                    });
 
-                 p2=  new Promise(function(resolve, reject) {dispatch(getOnLeaveSummary(res, personId, selectYear)).then(val=>{
-                    resolve();
-                }) });
-                 Promise.all([p1, p2]).then(function(values) {
-                    setOnLoad(false);
+                    p2 = new Promise(function (resolve, reject) {
+                        dispatch(
+                            getOnLeaveSummary(res, personId, selectYear),
+                        ).then((val) => {
+                            resolve();
+                        });
+                    });
+                    Promise.all([p1, p2]).then(function (values) {
+                        setOnLoad(false);
+                    });
                 });
-                });
-
             }
         });
     }, [selectYear]);
@@ -180,7 +187,13 @@ export default function OnLeave() {
                                         alignSelf: "flex-end",
                                         marginTop: 10,
                                     }}>
-                                      <Text>{item.Vacation_Day >= 1 ? item.Vacation_Day +' ngày' : (item.Vacation_Day*8).toFixed() +' tiếng' }</Text>
+                                    <Text>
+                                        {item.Vacation_Day >= 1
+                                            ? item.Vacation_Day + " ngày"
+                                            : (
+                                                  item.Vacation_Day * 8
+                                              ).toFixed() + " tiếng"}
+                                    </Text>
                                 </View>
                             </View>
                         </View>
@@ -196,14 +209,20 @@ export default function OnLeave() {
             //// console.log(i);
 
             arr.push(
-                <TouchableOpacity key={i} style={[styles.Year, i == selectYear && styles.focusYear]} onPress={()=>{
-                    setSelectYear(i);
-                    setModalVisible(false);
-                }}>
+                <TouchableOpacity
+                    key={i}
+                    style={[styles.Year, i == selectYear && styles.focusYear]}
+                    onPress={() => {
+                        setSelectYear(i);
+                        setModalVisible(false);
+                    }}>
                     <Text
                         style={[
                             styles.textYear,
-                            i == selectYear && { color: "white", fontWeight: "bold" },
+                            i == selectYear && {
+                                color: "white",
+                                fontWeight: "bold",
+                            },
                         ]}>
                         {i}
                     </Text>
@@ -212,122 +231,159 @@ export default function OnLeave() {
         }
         return arr.reverse();
     };
-   const groupByMonth = (objectArray)=> {
-            let arr=[];
-            objectArray.forEach(element => {
-               let index= arr.indexOf(moment(element?.Vacation_From_Date).format("MM"));
-              
-               if(index == -1 ){
-                   arr.push(moment(element?.Vacation_From_Date).format("MM"));
-               }
-            });
-           return arr.sort();
-      };
+    const groupByMonth = (objectArray) => {
+        let arr = [];
+        objectArray.forEach((element) => {
+            let index = arr.indexOf(
+                moment(element?.Vacation_From_Date).format("MM"),
+            );
+
+            if (index == -1) {
+                arr.push(moment(element?.Vacation_From_Date).format("MM"));
+            }
+        });
+        return arr.sort();
+    };
     return (
         <>
-        <View style={{ paddingHorizontal: 10, paddingTop: 10 }}>
-            <View style={styles.summary}>
-                <View style={{ marginLeft: 10 }}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            setModalVisible(true);
-                        }}>
-                        <Text style={styles.textTitle}>Chi tiết phép năm {selectYear}</Text>
-                    </TouchableOpacity>
-                </View>
-                <View>
+            <View style={{ paddingHorizontal: 10, paddingTop: 10 }}>
+                <View style={styles.summary}>
+                    <View style={{ marginLeft: 10 }}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                setModalVisible(true);
+                            }}>
+                            <Text style={styles.textTitle}>
+                                Chi tiết phép năm {selectYear}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                     <View>
-                        <View style={styles.row}>
-                            <View style={styles.column}>
-                                <Text style={styles.titleText}>Tổng phép</Text>
-                                <Text style={styles.contentText}>{listOnLeaveSummary.length != 0 && listOnLeaveSummary[0]?.TONGPHEPTAMTINH }</Text>
+                        <View>
+                            <View style={styles.row}>
+                                <View style={styles.column}>
+                                    <Text style={styles.titleText}>
+                                        Tổng phép
+                                    </Text>
+                                    <Text style={styles.contentText}>
+                                        {listOnLeaveSummary.length != 0 &&
+                                            listOnLeaveSummary[0]
+                                                ?.TONGPHEPTAMTINH}
+                                    </Text>
+                                </View>
+                                <View style={styles.column}>
+                                    <Text style={styles.titleText}>
+                                        P đã nghỉ
+                                    </Text>
+                                    <Text style={styles.contentText}>
+                                        {listOnLeaveSummary.length != 0 &&
+                                            listOnLeaveSummary[0]?.DANGHI}
+                                    </Text>
+                                </View>
+                                <View style={styles.column}>
+                                    <Text style={styles.titleText}>
+                                        P còn lại
+                                    </Text>
+                                    <Text style={styles.contentText}>
+                                        {listOnLeaveSummary.length != 0 &&
+                                            listOnLeaveSummary[0]?.CONLAI}
+                                    </Text>
+                                </View>
                             </View>
-                            <View style={styles.column}>
-                                <Text style={styles.titleText}>P đã nghỉ</Text>
-                                <Text style={styles.contentText}>{ listOnLeaveSummary.length != 0 && listOnLeaveSummary[0]?.DANGHI }</Text>
-                            </View>
-                            <View style={styles.column}>
-                                <Text style={styles.titleText}>P còn lại</Text>
-                                <Text style={styles.contentText}>{ listOnLeaveSummary.length != 0 && listOnLeaveSummary[0]?.CONLAI}</Text>
-                            </View>
-                        </View>
-                        <View style={styles.row}>
-                            <View style={styles.column}>
-                                <Text style={styles.titleText}>Phép tồn</Text>
-                                <Text style={styles.contentText}>{listOnLeaveSummary.length != 0 && listOnLeaveSummary[0]?.TONPHEPNAMTRUOC }</Text>
-                            </View>
-                            <View style={styles.column}>
-                                <Text style={styles.titleText}>Đã nghỉ PTT</Text>
-                                <Text style={styles.contentText}>{ listOnLeaveSummary.length != 0 && listOnLeaveSummary[0]?.DANGHIPTT}</Text>
-                            </View>
-                            <View style={styles.column}>
-                                <Text style={styles.titleText}>Còn lại PTT</Text>
-                                <Text style={styles.contentText}>{ listOnLeaveSummary.length != 0 && listOnLeaveSummary[0]?.CONLAIPTT}</Text>
+                            <View style={styles.row}>
+                                <View style={styles.column}>
+                                    <Text style={styles.titleText}>
+                                        Phép tồn
+                                    </Text>
+                                    <Text style={styles.contentText}>
+                                        {listOnLeaveSummary.length != 0 &&
+                                            listOnLeaveSummary[0]
+                                                ?.TONPHEPNAMTRUOC}
+                                    </Text>
+                                </View>
+                                <View style={styles.column}>
+                                    <Text style={styles.titleText}>
+                                        Đã nghỉ PTT
+                                    </Text>
+                                    <Text style={styles.contentText}>
+                                        {listOnLeaveSummary.length != 0 &&
+                                            listOnLeaveSummary[0]?.DANGHIPTT}
+                                    </Text>
+                                </View>
+                                <View style={styles.column}>
+                                    <Text style={styles.titleText}>
+                                        Còn lại PTT
+                                    </Text>
+                                    <Text style={styles.contentText}>
+                                        {listOnLeaveSummary.length != 0 &&
+                                            listOnLeaveSummary[0]?.CONLAIPTT}
+                                    </Text>
+                                </View>
                             </View>
                         </View>
                     </View>
                 </View>
-            </View>
-            <ScrollView style={{ height: "73%"}}>
-                {listOnLeave.length != 0 ?  
-                <Accordion
-                    activeSections={activeSections}
-                    sections={groupByMonth(listOnLeave)}
-                    touchableComponent={TouchableOpacity}
-                    expandMultiple={false}
-                    renderHeader={renderHeaderMonth}
-                    renderContent={renderContentMonth}
-                    duration={400}
-                    onChange={setSections}
-                />
-            :    <View
-            style={{
-                alignItems: "center",
-                marginTop: 30,
-            }}>
-            <Image
-                style={{ width: 80, height: 80 }}
-                source={require("../../assets/images/nodata.png")}
-            />
-            <Text style={{ color: "black" }}>No data</Text>
-        </View>}
-            </ScrollView>
-            <Modal
-                propagateSwipe={true}
-                animationType="fade"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                    Alert.alert("Modal has been closed.");
-                    setModalVisible(!modalVisible);
-                }}>
-                <Pressable
-                    style={{
-                        justifyContent: "center",
-                        alignItems: "center",
-                        flex: 1,
-                        backgroundColor: "#00000078",
-                    }}
-                    onPress={() => {
-                        setModalVisible(false);
+                <ScrollView style={{ height: "73%" }}>
+                    {listOnLeave.length != 0 ? (
+                        <Accordion
+                            activeSections={activeSections}
+                            sections={groupByMonth(listOnLeave)}
+                            touchableComponent={TouchableOpacity}
+                            expandMultiple={false}
+                            renderHeader={renderHeaderMonth}
+                            renderContent={renderContentMonth}
+                            duration={400}
+                            onChange={setSections}
+                        />
+                    ) : (
+                        <View
+                            style={{
+                                alignItems: "center",
+                                marginTop: 30,
+                            }}>
+                            <Image
+                                style={{ width: 80, height: 80 }}
+                                source={require("../../assets/images/nodata.png")}
+                            />
+                            <Text style={{ color: "black" }}>No data</Text>
+                        </View>
+                    )}
+                </ScrollView>
+                <Modal
+                    propagateSwipe={true}
+                    animationType="fade"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                        setModalVisible(!modalVisible);
                     }}>
-                    <View style={styles.pickYear}>
-                        <ScrollView style={{ height: 300, width: "100%" }}>
-                            <Pressable
-                                style={[
-                                    styles.pickYear,
-                                    { width: "100%", padding: 10 },
-                                ]}>
-                                {renderYear()}
-                            </Pressable>
-                        </ScrollView>
-                    </View>
-                </Pressable>
-            </Modal>
-        
-        </View>
+                    <Pressable
+                        style={{
+                            justifyContent: "center",
+                            alignItems: "center",
+                            flex: 1,
+                            backgroundColor: "#00000078",
+                        }}
+                        onPress={() => {
+                            setModalVisible(false);
+                        }}>
+                        <View style={styles.pickYear}>
+                            <ScrollView style={{ height: 300, width: "100%" }}>
+                                <Pressable
+                                    style={[
+                                        styles.pickYear,
+                                        { width: "100%", padding: 10 },
+                                    ]}>
+                                    {renderYear()}
+                                </Pressable>
+                            </ScrollView>
+                        </View>
+                    </Pressable>
+                </Modal>
+            </View>
             {onLoad && (
-            <View
+                <View
                     style={{
                         width: "100%",
                         height: "100%",
@@ -338,7 +394,7 @@ export default function OnLeave() {
                     }}>
                     <ActivityIndicator size="large" color="#0D4A85" />
                 </View>
-            )} 
+            )}
         </>
     );
 }
@@ -437,7 +493,7 @@ const styles = StyleSheet.create({
     },
     textYear: {
         fontSize: 16,
-        color:'black'
+        color: "black",
     },
     focusYear: {
         backgroundColor: "#0D4A85",

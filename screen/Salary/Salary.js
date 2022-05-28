@@ -15,9 +15,10 @@ import { getSalaryAction } from "../../redux/actions/UserAction";
 import DatePicker from "react-native-modern-datepicker";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import SalaryDetail from "../../components/SalaryDetail/SalaryDetail";
+import { multilang } from "../../language/multilang";
 
 export default function Salary() {
-    const { salary } = useSelector((state) => state.UserReducer);
+    const { salary,lang } = useSelector((state) => state.UserReducer);
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
     const [showSalary, setShowSalary] = useState(false);
@@ -103,7 +104,7 @@ export default function Salary() {
                     <View style={styles.summary}>
                         <View style={{ marginLeft: 10 }}>
                             <Text style={styles.textTitle}>
-                                Tổng lương nhận tháng{" "}
+                                {multilang[lang].tongLuongNhan}
                                 <Text
                                     onStartShouldSetResponder={() =>
                                         setModalVisible(true)
@@ -134,7 +135,7 @@ export default function Salary() {
                                     <View style={styles.row}>
                                         <View style={styles.column}>
                                             <Text style={styles.titleText}>
-                                                Công TT
+                                            {multilang[lang].congTt}
                                             </Text>
                                             <Text style={styles.contentText}>
                                                 {salary?.Working_Days}
@@ -142,7 +143,7 @@ export default function Salary() {
                                         </View>
                                         <View style={styles.column}>
                                             <Text style={styles.titleText}>
-                                                T.Ca lũy kế
+                                            {multilang[lang].tCaLuyKe}
                                             </Text>
                                             <Text style={styles.contentText}>
                                                 {salary?.Overtime}
@@ -150,7 +151,7 @@ export default function Salary() {
                                         </View>
                                         <View style={styles.column}>
                                             <Text style={styles.titleText}>
-                                                Loại bình bầu
+                                            {multilang[lang].loaiBinhBau}
                                             </Text>
                                             <Text style={styles.contentText}>
                                                 {salary?.Rating_ID.trim()}
@@ -160,7 +161,7 @@ export default function Salary() {
                                     <View style={styles.row}>
                                         <View style={styles.column}>
                                             <Text style={styles.titleText}>
-                                                Số phép năm
+                                            {multilang[lang].soPhepNam}
                                             </Text>
                                             <Text style={styles.contentText}>
                                                 {salary?.Annual_Leave}
@@ -168,7 +169,7 @@ export default function Salary() {
                                         </View>
                                         <View style={styles.column}>
                                             <Text style={styles.titleText}>
-                                                Đã nghỉ
+                                            {multilang[lang].daNghi}
                                             </Text>
                                             <Text style={styles.contentText}>
                                                 {salary?.Leave_Days}
@@ -176,7 +177,7 @@ export default function Salary() {
                                         </View>
                                         <View style={styles.column}>
                                             <Text style={styles.titleText}>
-                                                Còn lại
+                                            {multilang[lang].conLai}
                                             </Text>
                                             <Text style={styles.contentText}>
                                                 {salary?.Annual_Leave -
@@ -202,7 +203,7 @@ export default function Salary() {
                     </View>
 
                     <Text style={styles.titleSalaryDetail}>
-                        Lương chi tiết{" "}
+                    {multilang[lang].luongChiTiet}
                     </Text>
                     {salary && salary.Final_Salary == undefined ? (
                         <View

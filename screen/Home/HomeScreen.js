@@ -53,7 +53,7 @@ export default function HomeScreen() {
             <Animated.View style={[styles.titleHome, { opacity: fadeAnim }]}>
                 <View >
                     <Text style={styles.titleName}>{multilang[lang].chao} {firstName},</Text>
-                    <Text style={styles.titleBack}>{multilang[lang].chaoTrolai}</Text>
+                    <Text style={styles.titleBack}>{multilang[lang].chaoMungQuayTroLai}</Text>
                 </View>
                 <View>
                     {/* <Ionicons name="options" size={26} /> */}
@@ -80,8 +80,8 @@ export default function HomeScreen() {
                             <View style={styles.menuIcon}>
                                 <Fontisto name="holiday-village" color="#0D4A85" size={40} />
                             </View>
-                            <Text style={styles.titleItem}>{multilang[lang].ngaynghi}</Text>
-                            <Text style={styles.titleDetail}>{multilang[lang].chiTiet} {multilang[lang].ngaynghi}</Text>
+                            <Text style={styles.titleItem}>{multilang[lang].ngayNghi}</Text>
+                            <Text style={styles.titleDetail}>{multilang[lang].chiTiet} {multilang[lang].chiTietNgayNghi}</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuItem}  onPress={() => navigation.navigate("Book")}>
@@ -89,8 +89,8 @@ export default function HomeScreen() {
                             <View style={styles.menuIcon}>
                                 <Ionicons name="book-outline" color="#0D4A85" size={40} />
                             </View>
-                            <Text style={styles.titleItem}>{multilang[lang].sotay}</Text>
-                            <Text style={styles.titleDetail}>{multilang[lang].sotay}</Text>
+                            <Text style={styles.titleItem}>{multilang[lang].soTay}</Text>
+                            <Text style={styles.titleDetail}>{multilang[lang].soTay}</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("OverTime")}>
@@ -98,8 +98,8 @@ export default function HomeScreen() {
                             <View style={styles.menuIcon}>
                                 <Ionicons name="ios-timer" color="#0D4A85" size={40} />
                             </View>
-                            <Text style={styles.titleItem}>{multilang[lang].tangca}</Text>
-                            <Text style={styles.titleDetail}>{multilang[lang].chiTiet} {multilang[lang].tangca}</Text>
+                            <Text style={styles.titleItem}>{multilang[lang].tangCa}</Text>
+                            <Text style={styles.titleDetail}>{multilang[lang].chiTiet} {multilang[lang].tangCa}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

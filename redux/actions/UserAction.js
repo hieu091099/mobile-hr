@@ -28,7 +28,7 @@ export const loginAction = (userLogin, navigation) => {
                 });
             }
         } catch (e) {
-           // console.log(e);
+            // console.log(e);
         }
     };
 };
@@ -54,7 +54,7 @@ export const getSalaryAction = (accessToken, personId, monthYear) => {
                 });
             }
         } catch (e) {
-           // console.log(e);
+            // console.log(e);
         }
     };
 };
@@ -74,7 +74,7 @@ export const getOnLeave = (accessToken, userId, monthYear) => {
             });
             // }
         } catch (e) {
-           // console.log(e);
+            // console.log(e);
         }
     };
 };
@@ -87,14 +87,14 @@ export const getOverTime = (accessToken, userId, monthYear) => {
                 accessToken,
             );
             //// console.log("tene", result.data);
-            // if (result.data != "") 
+            // if (result.data != "")
             dispatch({
                 type: "GET_OVERTIME",
                 overTime: result.data,
             });
             // }
         } catch (e) {
-           // console.log(e);
+            // console.log(e);
         }
     };
 };
@@ -115,7 +115,7 @@ export const getOnLeaveSummary = (accessToken, userId, year) => {
             });
             // }
         } catch (e) {
-           // console.log(e);
+            // console.log(e);
         }
     };
 };
@@ -141,7 +141,6 @@ export const getOnLeaveSummary = (accessToken, userId, year) => {
 //     };
 // };
 
-
 export const loginFingerAction = () => {
     return async (dispatch) => {
         try {
@@ -161,7 +160,7 @@ export const loginFingerAction = () => {
                 });
             }
         } catch (e) {
-           // console.log(e);
+            // console.log(e);
         }
     };
 };

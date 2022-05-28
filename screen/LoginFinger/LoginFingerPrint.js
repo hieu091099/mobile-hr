@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react";
 import {
     StyleSheet,
     Text,
@@ -7,17 +7,17 @@ import {
     TouchableOpacity,
     Dimensions,
     ImageBackground,
-} from "react-native"
-import { TextInput } from "react-native-paper"
-import Ionicons from "react-native-vector-icons/Ionicons"
-import * as LocalAuthentication from "expo-local-authentication"
-import { Provider as PaperProvider } from "react-native-paper"
-import { useDispatch, useSelector } from "react-redux"
-import { loginAction, loginFingerAction } from "../../redux/actions/UserAction"
-import { useNavigation } from "@react-navigation/native"
-import { deleteToken, getToken, setToken,getExpoPushNoti } from "../../config"
-import { Icon } from "react-native-elements"
-import SimpleDialog from "../../components/SimpleDialog/SimpleDialog"
+} from "react-native";
+import { TextInput } from "react-native-paper";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import * as LocalAuthentication from "expo-local-authentication";
+import { Provider as PaperProvider } from "react-native-paper";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAction, loginFingerAction } from "../../redux/actions/UserAction";
+import { useNavigation } from "@react-navigation/native";
+import { deleteToken, getToken, setToken, getExpoPushNoti } from "../../config";
+import { Icon } from "react-native-elements";
+import SimpleDialog from "../../components/SimpleDialog/SimpleDialog";
 import { multilang } from "../../language/multilang";
 
 export default function LoginFingerPrint() {
@@ -27,104 +27,110 @@ export default function LoginFingerPrint() {
         en: { img: require("../../assets/images/flags/en.png"), name: "en" },
         tw: { img: require("../../assets/images/flags/tw.png"), name: "tw" },
     };
-    const [compatible, isCompatible] = useState(false)
-    const [fingerPrints, setFingerPrints] = useState(false)
+    const [compatible, isCompatible] = useState(false);
+    const [fingerPrints, setFingerPrints] = useState(false);
     const [showChooseLang, setShowChooseLang] = useState(false);
     const [showPassW, setShowPassW] = useState(true);
 
     /** state get userid from asyncstore */
-    const [userIdFromDevice, setUserIdFromDevice] = useState("")
-    const [factoryFromDevice, setFactoryFromDevice] = useState("")
-    const [cancel, setCancel] = useState(false)
+    const [userIdFromDevice, setUserIdFromDevice] = useState("");
+    const [factoryFromDevice, setFactoryFromDevice] = useState("");
+    const [cancel, setCancel] = useState(false);
     /** global state get user info */
-    const { isLoggedIn, isVisibleLogin, messageLoginResponse,lang } = useSelector(
-        (state) => state.UserReducer,
-    )
+    const { isLoggedIn, isVisibleLogin, messageLoginResponse, lang } =
+        useSelector((state) => state.UserReducer);
     /** state set when user type input */
     const [userLogin, setUserLogin] = useState({
         userId: "",
         password: "",
         factory: "",
-    })
+    });
 
     /** state call dialog */
-    const [isVisible, setIsVisible] = useState(false)
+    const [isVisible, setIsVisible] = useState(false);
     /** state message dialog */
-    const [dialogMessage, setDialogMessage] = useState("")
+    const [dialogMessage, setDialogMessage] = useState("");
 
-    const navigation = useNavigation()
-    const dispatch = useDispatch()
-    getToken("user").then((res) => {
-        if (res != undefined) {
-            res = JSON.parse(res)
-            setUserIdFromDevice(res.userId)
-            setFactoryFromDevice(res.factory)
+    const navigation = useNavigation();
+    const dispatch = useDispatch();
 
-        }
-    })
     const changelang = (langinmenu) => {
         dispatch({
             type: "CHANGE_LANG",
             lang: langinmenu,
         });
-        setToken('lang',langinmenu);
+        setToken("lang", langinmenu);
     };
     const setVisibleDispatch = () => {
         dispatch({
             type: "CLOSE_DIALOG_LOGIN",
-        })
-    }
+        });
+    };
     useEffect(() => {
-        checkDeviceForHardware()
-        checkForFingerprints()
-    }, [])
+        checkDeviceForHardware();
+        checkForFingerprints();
+        getToken("user").then((res) => {
+            if (res != undefined) {
+                let value = JSON.parse(res);
+                setUserIdFromDevice(value.userId);
+                setFactoryFromDevice(value.factory);
+            }
+        });
+    }, []);
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigation.navigate("MainTab");
+        }
+        return () => {};
+    }, [isLoggedIn]);
     const checkDeviceForHardware = async () => {
-        let compatible = await LocalAuthentication.hasHardwareAsync()
-        isCompatible(compatible)
-    }
+        let compatible = await LocalAuthentication.hasHardwareAsync();
+        isCompatible(compatible);
+    };
 
     const checkForFingerprints = async () => {
-        let fingerprints = await LocalAuthentication.isEnrolledAsync()
-        setFingerPrints(fingerprints)
-    }
+        let fingerprints = await LocalAuthentication.isEnrolledAsync();
+        setFingerPrints(fingerprints);
+    };
 
     const scanFingerprint = async () => {
         await LocalAuthentication.authenticateAsync().then((res) => {
             if (res.success) {
-                let action = loginFingerAction()
-                dispatch(action)
+                let action = loginFingerAction();
+                dispatch(action);
             }
-        })
-    }
+        });
+    };
 
     const login = async () => {
         getExpoPushNoti().then((val) => {
-        let action = loginAction(
-            {
-                userId: userIdFromDevice,
-                password: userLogin.password,
-                factory: factoryFromDevice,
-                exponentPushToken:val
-            },
-            navigation,
-        )
-        dispatch(action)
-    });
-    }
+            let action = loginAction(
+                {
+                    userId: userIdFromDevice,
+                    password: userLogin.password,
+                    factory: factoryFromDevice,
+                    exponentPushToken: val,
+                },
+                navigation,
+            );
+            dispatch(action);
+        });
+    };
     const confirmWithCondition = () => {
         deleteToken("accessToken").then((res) => {
             deleteToken("user").then((ress) => {
                 dispatch({
                     type: "LOGIN_ANOTHER_USERID",
-                })
-            })
-        })
-    }
+                });
+            });
+        });
+    };
     const loginWithAnotherUserId = () => {
-        setIsVisible(true)
-        setCancel(true)
-        setDialogMessage("Bạn có chắc chắn muốn đặng nhập với số thẻ khác!")
-    }
+        setIsVisible(true);
+        setCancel(true);
+        setDialogMessage("Bạn có chắc chắn muốn đặng nhập với số thẻ khác!");
+    };
     return (
         <PaperProvider>
             <SimpleDialog
@@ -144,7 +150,7 @@ export default function LoginFingerPrint() {
                 source={require("../../assets/images/bg_login2.png")}
                 resizeMode="cover"
                 style={{ width: "100%", height: "100%" }}>
-           <TouchableOpacity
+                <TouchableOpacity
                     onPress={() => {
                         //// console.log("ok");
                         setShowChooseLang(!showChooseLang);
@@ -180,31 +186,31 @@ export default function LoginFingerPrint() {
                             elevation: 10,
                             alignItems: "center",
                             paddingTop: 8,
-                            zIndex:2,
-                            elevation:10
+                            zIndex: 2,
+                            elevation: 10,
                         }}>
                         {Object.keys(imglang)?.map((value, index, array) => {
-                            if(lang != value){
-                            return (
-                                <View
-                                    key={index}
-                                    onStartShouldSetResponder={() => {
-                                        changelang(value);
-                                        setShowChooseLang(false);
-                                    }}>
-                                    <Image
-                                        style={{
-                                            width: 35,
-                                            height: 35,
-                                            borderRadius: 100,
-                                            marginBottom: 10,
-                                        }}
-                                        source={imglang[value].img}
-                                        resizeMode="contain"
-                                    />
-                                </View>
-                            );
-                                    }
+                            if (lang != value) {
+                                return (
+                                    <View
+                                        key={index}
+                                        onStartShouldSetResponder={() => {
+                                            changelang(value);
+                                            setShowChooseLang(false);
+                                        }}>
+                                        <Image
+                                            style={{
+                                                width: 35,
+                                                height: 35,
+                                                borderRadius: 100,
+                                                marginBottom: 10,
+                                            }}
+                                            source={imglang[value].img}
+                                            resizeMode="contain"
+                                        />
+                                    </View>
+                                );
+                            }
                         })}
                     </View>
                 )}
@@ -221,9 +227,9 @@ export default function LoginFingerPrint() {
                 </View>
                 <View style={styles.tieude}>
                     <Text style={[styles.td]}>
-                    {multilang[lang].chao}{" "}
+                        {multilang[lang].chao}{" "}
                         <Text style={{ fontSize: 35 }}>
-                            {userIdFromDevice}!
+                            {userIdFromDevice && userIdFromDevice}!
                         </Text>
                     </Text>
                     <Text
@@ -248,13 +254,19 @@ export default function LoginFingerPrint() {
                         label="PASSWORD"
                         mode="outlined"
                         secureTextEntry={showPassW}
-                        right={<TextInput.Icon name={showPassW ? "eye": "eye-off"} color={"#ccc"}  onPress={()=>{
-                            setShowPassW(!showPassW);
-                        }}/>}
+                        right={
+                            <TextInput.Icon
+                                name={showPassW ? "eye" : "eye-off"}
+                                color={"#ccc"}
+                                onPress={() => {
+                                    setShowPassW(!showPassW);
+                                }}
+                            />
+                        }
                         placeholder="Mật khẩu"
                         style={[styles.inputlogin]}
                         onChangeText={(val) => {
-                            setUserLogin({ ...userLogin, password: val })
+                            setUserLogin({ ...userLogin, password: val });
                         }}
                     />
                     <View
@@ -273,7 +285,7 @@ export default function LoginFingerPrint() {
                                 size={35}
                                 color="white"
                                 onPress={() => {
-                                    scanFingerprint()
+                                    scanFingerprint();
                                 }}
                             />
                         </TouchableOpacity>
@@ -303,7 +315,7 @@ export default function LoginFingerPrint() {
                 </View>
             </ImageBackground>
         </PaperProvider>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -372,4 +384,4 @@ const styles = StyleSheet.create({
         color: "#0D4A85",
         fontWeight: "900",
     },
-})
+});

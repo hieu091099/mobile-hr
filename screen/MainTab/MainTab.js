@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../Home/HomeScreen";
 import Salary from "../Salary/Salary";
 import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import HeaderHomeScreen from "../../components/HeaderHomeScreen/HeaderHomeScreen";
 import { useNavigation } from "@react-navigation/native";
@@ -12,6 +12,8 @@ import OnLeave from "../OnLeave/OnLeave";
 import HomeStackScreen from "../RootStackScreen/HomeRoot";
 import Setting from "../Setting/Setting";
 import SettingStackScreen from "../RootStackScreen/SettingRoot";
+import {multilang} from '../../language/multilang';
+
 const Tab = createBottomTabNavigator();
 
 const Contact = () => {
@@ -65,6 +67,7 @@ export const optionsHeader =(title)=> {
 };
 
 const MainTab = () => {
+    const { lang } = useSelector(state => state.UserReducer);
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -108,23 +111,23 @@ const MainTab = () => {
                 component={HomeStackScreen}
                 options={{
                     headerShown: false,
-                    tabBarLabel:'Trang Chủ'
+                    tabBarLabel:multilang[lang].trangChu
                 }}
             />
             <Tab.Screen
                 name="Salary"
                 component={Salary}
-                options={optionsHeader("Lương")}
+                options={optionsHeader(multilang[lang].luong)}
             />
             <Tab.Screen
                 name="Contact"
                 component={Contact}
-                options={optionsHeader("Liên Hệ")}
+                options={optionsHeader(multilang[lang].lienHe)}
             />
             <Tab.Screen
                 name="Setting"
                 component={Setting}
-                options={optionsHeader("Cài Đặt")}
+                options={optionsHeader(multilang[lang].caiDat)}
             />
         </Tab.Navigator>
     );

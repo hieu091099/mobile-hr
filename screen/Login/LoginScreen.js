@@ -96,21 +96,26 @@ export default function LoginScreen() {
         }
         return true;
     };
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigation.navigate("MainTab");
+        }
+        return () => {};
+    }, [isLoggedIn]);
     const login = async () => {
         if (checkConditionLogin(userLogin)) {
             getExpoPushNoti().then((val) => {
                 //// console.log({ val });
                 //setUserLogin({ ...userLogin, exponentPushToken: val });
                 //console.log(userLogin);
-                
-                    let action = loginAction(
-                        {...userLogin, exponentPushToken:val},
-                        navigation,
-                        setIsVisible,
-                        setDialogMessage,
-                    );
-                    dispatch(action);
-                
+
+                let action = loginAction(
+                    { ...userLogin, exponentPushToken: val },
+                    navigation,
+                    setIsVisible,
+                    setDialogMessage,
+                );
+                dispatch(action);
             });
         }
     };
@@ -323,11 +328,19 @@ export default function LoginScreen() {
                             <Text style={styles.textbtndn}>ĐĂNG NHẬP</Text>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={()=>{
-                      navigation.navigate("ChangePassCMND");
-                    }}>
-                    <Text style={{color: "gray",
-                            marginTop: 10,textDecorationLine:'underline',textDecorationColor:'#0D4A85'}}>Quên mật khẩu ?</Text>
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigation.navigate("ChangePassCMND");
+                        }}>
+                        <Text
+                            style={{
+                                color: "gray",
+                                marginTop: 10,
+                                textDecorationLine: "underline",
+                                textDecorationColor: "#0D4A85",
+                            }}>
+                            Quên mật khẩu ?
+                        </Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.contact}>

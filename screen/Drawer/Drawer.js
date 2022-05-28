@@ -16,12 +16,10 @@ import AntIcon from "react-native-vector-icons/AntDesign";
 import EntypoIcon from "react-native-vector-icons/Entypo";
 import FonttistoIcon from "react-native-vector-icons/Fontisto";
 
-
-
 import { checkTokenExpired } from "../../config";
 import DialogNavigate from "../../components/SimpleDialog/DialogNavigate";
 import { useNavigation } from "@react-navigation/native";
-import SvgQRCode from 'react-native-qrcode-svg';
+import SvgQRCode from "react-native-qrcode-svg";
 
 export default function DrawerContent(props) {
     const dispatch = useDispatch();
@@ -41,31 +39,37 @@ export default function DrawerContent(props) {
         });
     };
 
-    const RMenuList=({name,icon,navigate})=>{
+    const RMenuList = ({ name, icon, navigate }) => {
         return (
-            <TouchableOpacity style={styles.menuList} onPress={()=>{
-            
-                navigation.navigate(navigate); }}>
-                        <View style={styles.iconMenu}>
-                            {/*  */}
-                            {icon}
-                        </View>
-                        <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>{name}</Text>
-                        </View>
-                        <View style={styles.iconMenu}>
-                            <AntIcon name="right" size={16} color="#5C5C5C" />
-                        </View>
-                    </TouchableOpacity> 
-        );
-    }
-    const  RMenuListDisble=({name})=>{
-      return  <View style={[styles.menuList,styles.menuDisble]}>
-                    <View style={styles.textMenuBox}>
-                        <Text style={[styles.textMenu,styles.textMenuDisble]}>{name}</Text>
-                    </View>
+            <TouchableOpacity
+                style={styles.menuList}
+                onPress={() => {
+                    navigation.navigate(navigate);
+                }}>
+                <View style={styles.iconMenu}>
+                    {/*  */}
+                    {icon}
                 </View>
-    }
+                <View style={styles.textMenuBox}>
+                    <Text style={styles.textMenu}>{name}</Text>
+                </View>
+                <View style={styles.iconMenu}>
+                    <AntIcon name="right" size={16} color="#5C5C5C" />
+                </View>
+            </TouchableOpacity>
+        );
+    };
+    const RMenuListDisble = ({ name }) => {
+        return (
+            <View style={[styles.menuList, styles.menuDisble]}>
+                <View style={styles.textMenuBox}>
+                    <Text style={[styles.textMenu, styles.textMenuDisble]}>
+                        {name}
+                    </Text>
+                </View>
+            </View>
+        );
+    };
     useEffect(() => {
         setInterval(() => {
             checkTokenExpired().then((res) => {
@@ -106,23 +110,101 @@ export default function DrawerContent(props) {
             </View>
 
             <View style={styles.detailRow}>
-             <SvgQRCode value={user.userId} size={120} 
-             backgroundColor="#084594" color="white"
-             />
+                <SvgQRCode
+                    value={user.userId}
+                    size={120}
+                    backgroundColor="#084594"
+                    color="white"
+                />
             </View>
             <DrawerContentScrollView {...props}>
                 <View style={styles.menuRow}>
-                <RMenuListDisble name="Thông tin cá nhân" />
-                <RMenuList name="Thông tin" icon={<AntIcon type='ant-design' name="infocirlceo" size={20} color="#5C5C5C" />} navigate="UserDetail"/>
-                <RMenuList name="Lương" icon={<AntIcon name="creditcard" size={20} color="#5C5C5C" />} navigate="Salary"/>
-                <RMenuList name="Kiểm tra ngày phép" icon={<FonttistoIcon name="holiday-village" size={20} color="#5C5C5C" />} navigate="OnLeave"/>
-                <RMenuList name="Tăng ca" icon={<EntypoIcon name="time-slot" size={20} color="#5C5C5C" />} navigate="OverTime"/>
-                <RMenuListDisble name="Trợ giúp" />
-                <RMenuList name="Thông báo" icon={<AntIcon name="notification" size={20} color="#5C5C5C" />} navigate="ChangeLanguage"/>
-                <RMenuList name="Thay đổi mật khẩu" icon={<AntIcon name="key" size={20} color="#5C5C5C" />} navigate="ChangePassword"/>
-                <RMenuList name="Liên hệ" icon={<AntIcon name="contacts" size={20} color="#5C5C5C" />} navigate="ChangeLanguage"/>
-                <RMenuList name="Cài đặt" icon={<AntIcon name="setting" size={20} color="#5C5C5C" />} navigate="Setting"/>
-                <RMenuList name="Sổ tay lao động" icon={<AntIcon name="book" size={20} color="#5C5C5C" />} navigate="Book"/>
+                    <RMenuListDisble name="Thông tin cá nhân" />
+                    <RMenuList
+                        name="Thông tin"
+                        icon={
+                            <AntIcon
+                                type="ant-design"
+                                name="infocirlceo"
+                                size={20}
+                                color="#5C5C5C"
+                            />
+                        }
+                        navigate="UserDetail"
+                    />
+                    <RMenuList
+                        name="Lương"
+                        icon={
+                            <AntIcon
+                                name="creditcard"
+                                size={20}
+                                color="#5C5C5C"
+                            />
+                        }
+                        navigate="Salary"
+                    />
+                    <RMenuList
+                        name="Kiểm tra ngày phép"
+                        icon={
+                            <FonttistoIcon
+                                name="holiday-village"
+                                size={20}
+                                color="#5C5C5C"
+                            />
+                        }
+                        navigate="OnLeave"
+                    />
+                    <RMenuList
+                        name="Tăng ca"
+                        icon={
+                            <EntypoIcon
+                                name="time-slot"
+                                size={20}
+                                color="#5C5C5C"
+                            />
+                        }
+                        navigate="OverTime"
+                    />
+                    <RMenuListDisble name="Trợ giúp" />
+                    <RMenuList
+                        name="Thông báo"
+                        icon={
+                            <AntIcon
+                                name="notification"
+                                size={20}
+                                color="#5C5C5C"
+                            />
+                        }
+                        navigate="ChangeLanguage"
+                    />
+                    <RMenuList
+                        name="Thay đổi mật khẩu"
+                        icon={<AntIcon name="key" size={20} color="#5C5C5C" />}
+                        navigate="ChangePassword"
+                    />
+                    <RMenuList
+                        name="Liên hệ"
+                        icon={
+                            <AntIcon
+                                name="contacts"
+                                size={20}
+                                color="#5C5C5C"
+                            />
+                        }
+                        navigate="ChangeLanguage"
+                    />
+                    <RMenuList
+                        name="Cài đặt"
+                        icon={
+                            <AntIcon name="setting" size={20} color="#5C5C5C" />
+                        }
+                        navigate="Setting"
+                    />
+                    <RMenuList
+                        name="Sổ tay lao động"
+                        icon={<AntIcon name="book" size={20} color="#5C5C5C" />}
+                        navigate="Book"
+                    />
                     <TouchableOpacity
                         style={[styles.menuList]}
                         onPress={() => {
@@ -144,7 +226,7 @@ export default function DrawerContent(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#084594"
+        backgroundColor: "#084594",
     },
     avatar: {
         width: "100%",
@@ -161,7 +243,7 @@ const styles = StyleSheet.create({
         height: 150,
         flexDirection: "row",
         justifyContent: "space-around",
-        alignItems:'center'
+        alignItems: "center",
     },
     menuRow: {
         height: 600,
@@ -198,8 +280,8 @@ const styles = StyleSheet.create({
         borderBottomColor: "#EEEEEE",
         borderBottomWidth: 1,
     },
-    menuDisble:{
-        backgroundColor:'#CCC'
+    menuDisble: {
+        backgroundColor: "#CCC",
     },
     iconMenu: {
         width: "15%",
@@ -215,7 +297,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: "#5C5C5C",
     },
-    textMenuDisble:{
-        fontWeight:'bold'
-    }
+    textMenuDisble: {
+        fontWeight: "bold",
+    },
 });

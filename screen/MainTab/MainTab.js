@@ -23,47 +23,46 @@ const Contact = () => {
 //     const navigation = useNavigation();
 //     return <Text>123</Text>;
 // };
-export const optionsHeader =(title)=> {
-
+export const optionsHeader = (title) => {
     return {
-    headerStyle: {
-        height: 65,
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-    },
+        headerStyle: {
+            height: 65,
+            borderBottomLeftRadius: 10,
+            borderBottomRightRadius: 10,
+        },
 
-    headerLeft: () => {
-        const navigation = useNavigation();
-        return (
-            <TouchableOpacity
-                onPress={() => navigation.goBack()}
-                style={{
-                    marginLeft: 20,
-                }}>
-                <Ionicons name="arrow-back" size={30} />
-            </TouchableOpacity>
-        );
-    },
-    // headerRight: () => {
-    //     return (
-    //         <TouchableOpacity
-    //             // onPress={() => alert("Co gi dau ma click, qua ngu ngok haiz!")}
-    //             style={{
-    //                 marginRight: 20,
-    //                 padding: 6,
-    //                 // backgroundColor: '#F5F5F5',
-    //                 borderRadius: 10,
-    //                 borderColor: "#EEEEEE",
-    //                 borderWidth: 1,
-    //             }}>
-    //             <Ionicons name="person-circle" size={30} />
-    //         </TouchableOpacity>
-    //     );
-    // },
-    headerTitleAlign: "center",
-    headerTitle:title,
-    tabBarLabel:title
-};
+        headerLeft: () => {
+            const navigation = useNavigation();
+            return (
+                <TouchableOpacity
+                    onPress={() => navigation.goBack()}
+                    style={{
+                        marginLeft: 20,
+                    }}>
+                    <Ionicons name="arrow-back" size={30} />
+                </TouchableOpacity>
+            );
+        },
+        // headerRight: () => {
+        //     return (
+        //         <TouchableOpacity
+        //             // onPress={() => alert("Co gi dau ma click, qua ngu ngok haiz!")}
+        //             style={{
+        //                 marginRight: 20,
+        //                 padding: 6,
+        //                 // backgroundColor: '#F5F5F5',
+        //                 borderRadius: 10,
+        //                 borderColor: "#EEEEEE",
+        //                 borderWidth: 1,
+        //             }}>
+        //             <Ionicons name="person-circle" size={30} />
+        //         </TouchableOpacity>
+        //     );
+        // },
+        headerTitleAlign: "center",
+        headerTitle: title,
+        tabBarLabel: title,
+    };
 };
 
 const MainTab = () => {

@@ -3,15 +3,15 @@ import React, { useState } from "react";
 import WebView from "react-native-webview";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useSelector } from "react-redux";
-import { usePreventScreenCapture } from 'expo-screen-capture';
+import { usePreventScreenCapture } from "expo-screen-capture";
 
 export default function SoTayLaoDong() {
-  usePreventScreenCapture();
+    usePreventScreenCapture();
     const [visible, setvisible] = useState(true);
     return (
         <View style={{ flex: 1, position: "relative" }}>
             <WebView
-              originWhitelist={['*']}
+                originWhitelist={["*"]}
                 onLoadEnd={(syntheticEvent) => {
                     // // console.log(syntheticEvent);
                     setvisible(!syntheticEvent.nativeEvent);

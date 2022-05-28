@@ -1,9 +1,15 @@
-import { View, Text, StyleSheet, ImageBackground, ActivityIndicator } from "react-native";
+import {
+    View,
+    Text,
+    StyleSheet,
+    ImageBackground,
+    ActivityIndicator,
+} from "react-native";
 import React, { useState } from "react";
 import { TextInput } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
-import {axiosInstanceToken, getToken} from "../../config";
+import { axiosInstanceToken, getToken } from "../../config";
 import DialogNavigate from "../../components/SimpleDialog/DialogNavigate";
 import SimpleDialog from "../../components/SimpleDialog/SimpleDialog";
 export default function ChangePassword() {
@@ -15,74 +21,78 @@ export default function ChangePassword() {
     const [visibleMsg, setVisibleMsg] = useState(false);
     const [onLoad, setOnLoad] = useState(false);
 
-
     const [msgChangePass, setMsgChangePass] = useState();
 
     const changePassword = async () => {
-        if(oldPass != '' && newPass != '' && newPassCf != '' && newPass == newPassCf){
-        try {
-            setOnLoad(true);
-            getToken("user").then((res) => {
-                if (res != "" || res != undefined) {
-                    res = JSON.parse(res);
-                   // console.log(res);
-                    let personId = res.userId;
-                    let factory = res.factory;
-                    getToken("accessToken").then(async (res) => {
-                        let result = await axiosInstanceToken(
-                            "POST",
-                            `user/changePassword/`,
-                            res,{
-                                "userId":personId,
-                                "factory":factory,
-                                "password":oldPass,
-                                "newPassword":newPass
-                            }
-                        );
-                        setOnLoad(false);
-                        setMsgChangePass(result.data);
-                       // console.log(result.data);
+        if (
+            oldPass != "" &&
+            newPass != "" &&
+            newPassCf != "" &&
+            newPass == newPassCf
+        ) {
+            try {
+                setOnLoad(true);
+                getToken("user").then((res) => {
+                    if (res != "" || res != undefined) {
+                        res = JSON.parse(res);
+                        // console.log(res);
+                        let personId = res.userId;
+                        let factory = res.factory;
+                        getToken("accessToken").then(async (res) => {
+                            let result = await axiosInstanceToken(
+                                "POST",
+                                `user/changePassword/`,
+                                res,
+                                {
+                                    userId: personId,
+                                    factory: factory,
+                                    password: oldPass,
+                                    newPassword: newPass,
+                                },
+                            );
+                            setOnLoad(false);
+                            setMsgChangePass(result.data);
+                            // console.log(result.data);
 
-                        if(result.data.status == true){
+                            if (result.data.status == true) {
                                 navigation.navigate("SuccessChangePass");
-                        }else{
-                            setVisibleMsg(true);
-                        }
-                    });
-                }
-            });
-         
-           
-            // }
-        } catch (e) {
-           // console.log(e);
+                            } else {
+                                setVisibleMsg(true);
+                            }
+                        });
+                    }
+                });
+
+                // }
+            } catch (e) {
+                // console.log(e);
+            }
+        } else {
+            if (newPass != newPassCf) {
+                setMsgChangePass({ message: "Mật khẩu xác nhận không khớp" });
+                setVisibleMsg(true);
+            } else {
+                setMsgChangePass({ message: "Vui lòng nhập đầy đủ thông tin" });
+                setVisibleMsg(true);
+            }
         }
-    }else{
-       
-        if(newPass != newPassCf){
-            setMsgChangePass({message:'Mật khẩu xác nhận không khớp'});
-            setVisibleMsg(true);
-        }else{
-            setMsgChangePass({message:'Vui lòng nhập đầy đủ thông tin'});
-            setVisibleMsg(true);
-        }
-    }
     };
     return (
-
         <ImageBackground
             source={require("../../assets/images/bg_login2.png")}
             resizeMode="cover"
             style={{ width: "100%", height: "100%" }}>
-                <SimpleDialog message={msgChangePass?.message} visible={visibleMsg} setVisible={setVisibleMsg}  />
+            <SimpleDialog
+                message={msgChangePass?.message}
+                visible={visibleMsg}
+                setVisible={setVisibleMsg}
+            />
             <View
                 style={{
                     flex: 1,
                     paddingHorizontal: 20,
                 }}>
-                <Text style={styles.title}>
-                    Thay đổi mật khẩu
-                </Text>
+                <Text style={styles.title}>Thay đổi mật khẩu</Text>
 
                 <TextInput
                     secureTextEntry={true}
@@ -120,7 +130,7 @@ export default function ChangePassword() {
                         <Text
                             style={styles.textBtn}
                             onStartShouldSetResponder={() => {
-                                changePassword()
+                                changePassword();
                             }}>
                             Đổi mật khẩu
                         </Text>

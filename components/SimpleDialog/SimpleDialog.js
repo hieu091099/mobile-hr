@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import {
-    Button,
-    Dialog,
-} from 'react-native-elements';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import { Button, Dialog } from "react-native-elements";
+import { View, Text, StyleSheet } from "react-native";
 
-
-const SimpleDialog = ({ visible, setVisible, message, confirmWithCondition = () => { }, cancel }) => {
+const SimpleDialog = ({
+    visible,
+    setVisible,
+    message,
+    confirmWithCondition = () => {},
+    cancel,
+}) => {
     // const cfm = confirmWithCondition;
     const toggleDialog = () => {
         setVisible(!visible);
@@ -18,36 +20,42 @@ const SimpleDialog = ({ visible, setVisible, message, confirmWithCondition = () 
         <View>
             <Dialog
                 isVisible={visible}
-            // onBackdropPress={toggleDialog}
+                // onBackdropPress={toggleDialog}
             >
                 <Dialog.Title title="Thông Báo" />
                 <Text style={{ marginBottom: 20 }}>{message}</Text>
-                <View style={{ flexDirection: 'row' }} >
+                <View style={{ flexDirection: "row" }}>
                     <Button
                         containerStyle={{
-                            width: cancel ? '50%' : '100%',
-                            paddingHorizontal: 5
+                            width: cancel ? "50%" : "100%",
+                            paddingHorizontal: 5,
                             // marginHorizontal: 50,
                             // marginVertical: 10,
                         }}
                         buttonStyle={{
-                            backgroundColor: '#0D4A85',
-                            borderColor: 'transparent',
+                            backgroundColor: "#0D4A85",
+                            borderColor: "transparent",
                             borderWidth: 0,
-                        }} onPress={() => toggleDialog()} title="ĐỒNG Ý"></Button>
+                        }}
+                        onPress={() => toggleDialog()}
+                        title="ĐỒNG Ý"></Button>
 
-                    {cancel && <Button
-                        containerStyle={{
-                            width: '50%',
-                            paddingHorizontal: 5
-                            // marginHorizontal: 50,
-                            // marginVertical: 10,
-                        }}
-                        buttonStyle={{
-                            backgroundColor: '#9B100C',
-                            borderColor: 'transparent',
-                            borderWidth: 0,
-                        }} onPress={() => setVisible(!visible)} title="HỦY BỎ"></Button>}
+                    {cancel && (
+                        <Button
+                            containerStyle={{
+                                width: "50%",
+                                paddingHorizontal: 5,
+                                // marginHorizontal: 50,
+                                // marginVertical: 10,
+                            }}
+                            buttonStyle={{
+                                backgroundColor: "#9B100C",
+                                borderColor: "transparent",
+                                borderWidth: 0,
+                            }}
+                            onPress={() => setVisible(!visible)}
+                            title="HỦY BỎ"></Button>
+                    )}
                 </View>
             </Dialog>
         </View>
@@ -62,8 +70,8 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         margin: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
     },
 });
 

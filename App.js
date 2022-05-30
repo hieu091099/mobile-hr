@@ -32,7 +32,7 @@ export default function App() {
     });
     const dispatch = useDispatch();
 
-    useEffect(async () => {
+    useEffect(() => {
         getToken("lang").then((val) => {
             if (val != undefined) {
                 dispatch({
@@ -139,7 +139,7 @@ export default function App() {
                                     component={UserDetail}
                                     screenOptions={{ headerShown: true }}
                                     options={{
-                                        headerTitle: "Tài khoản",
+                                        headerTitle: multilang[lang].taiKhoan,
                                         headerLeft: () => {
                                             const navigation = useNavigation();
                                             return (
@@ -155,6 +155,7 @@ export default function App() {
                                         },
                                     }}
                                 />
+                                
                                 <Stack.Screen
                                     name="SuccessChangePass"
                                     component={SuccessChangePass}

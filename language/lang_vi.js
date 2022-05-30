@@ -73,6 +73,27 @@ thayDoiNgonNgu:"Thay đổi ngôn ngữ",
 doiMatKhau:"Đổi mật khẩu",
 matKhauCu:"Mật khẩu cũ",
 matKhauMoi:"Mật khẩu mới",
-xacNhanMatKhau:"Xác nhận mật khẩu"
+xacNhanMatKhau:"Xác nhận mật khẩu",
+ngay:"ngày",
+gio:"giờ",
+thongTin:"Thông tin",
+thongBao:"Thông báo",
+chiTietLamThemGio:"Chi tiết làm thêm giờ",
+lamThemToiDa:"Làm thêm tối đa",
+soNgayTangCa:"Số ngày tăng ca",
+soGioTangCa:"Số giờ tăng ca",
+ngayLamThem:"ngày làm thêm",
+troGiup:"trợ giúp",
+taiKhoan:"tài khoản",
+donVi:"đơn vị",
+soThe:"số thẻ",
+ngayVaoCongTy:"ngày vào công ty",
+hoVaTen:"họ và tên",
+ngaySinh:"ngày sinh",
+soDienThoai:"số điện thoại",
+chungMinhNhanDan:"chứng minh nhân dân ",
+diaChi:"địa chỉ",
+phepTon:"remaining last year"
+
 
 }

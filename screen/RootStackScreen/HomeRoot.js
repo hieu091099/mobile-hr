@@ -11,6 +11,7 @@ import IconAnt from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import {multilang} from '../../language/multilang';
+import Notify from "../Notify/Notify";
 
 
 const Stack = createNativeStackNavigator();
@@ -54,6 +55,13 @@ const HomeStackScreen = () => {
                 component={SoTayLaoDong}
                 options={{
                     headerTitle:multilang[lang].soTay
+                }}
+            />
+             <Stack.Screen
+                name="Notify"
+                component={Notify}
+                options={{
+                    headerTitle:multilang[lang].thongBao
                 }}
             />
             {/* <Stack.Screen name="Notifications" component={Notifications} /> */}

@@ -15,7 +15,7 @@ import Accordion from "react-native-collapsible/Accordion";
 import Anticons from "react-native-vector-icons/AntDesign";
 import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
-import { getToken } from "../../config";
+import { getToken, renderMonth3Lang } from "../../config";
 import { getOnLeave, getOnLeaveSummary } from "../../redux/actions/UserAction";
 import moment from "moment";
 import DatePicker from "react-native-modern-datepicker";
@@ -127,7 +127,8 @@ export default function OnLeave() {
                             paddingLeft: 20,
                         },
                     ]}>
-                    Tháng {section}
+                    {/* Tháng {section} */}
+                    {renderMonth3Lang(lang,section)}
                 </Text>
                 <Text
                     style={[
@@ -191,10 +192,10 @@ export default function OnLeave() {
                                     }}>
                                     <Text>
                                         {item.Vacation_Day >= 1
-                                            ? item.Vacation_Day + " ngày"
+                                            ? item.Vacation_Day + " "+multilang[lang].ngay
                                             : (
                                                   item.Vacation_Day * 8
-                                              ).toFixed() + " tiếng"}
+                                              ).toFixed() + " "+multilang[lang].gio}
                                     </Text>
                                 </View>
                             </View>
@@ -295,7 +296,7 @@ export default function OnLeave() {
                             <View style={styles.row}>
                                 <View style={styles.column}>
                                     <Text style={styles.titleText}>
-                                        Phép tồn
+                                    {multilang[lang].phepTon}
                                     </Text>
                                     <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
@@ -443,6 +444,7 @@ const styles = StyleSheet.create({
         fontWeight: "300",
         fontSize: 19,
         marginBottom: 10,
+        textDecorationLine:"underline"
     },
     contentText: {
         textAlign: "center",

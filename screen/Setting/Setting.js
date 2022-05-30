@@ -60,7 +60,7 @@ export default function Setting() {
                                 {infoUser?.Department_Name}
                             </Text>
                             <Text>
-                                Ngày vào :{" "}
+                            {multilang[lang].ngayVaoCongTy} :{" "}
                                 {moment(infoUser?.Date_Come_In).format(
                                     "DD-MM-YYYY",
                                 )}
@@ -72,7 +72,7 @@ export default function Setting() {
                     </View>
                 </TouchableOpacity>
                 <View style={styles.boxMenu}>
-                    <View
+                    {/* <View
                         style={styles.menuItem}
                         onStartShouldSetResponder={() => {
                             Linking.openURL(`tel:123456`);
@@ -99,7 +99,7 @@ export default function Setting() {
                         <Text>
                             <AntIcon color={"black"} name="right" size={15} />
                         </Text>
-                    </View>
+                    </View> */}
                     <View
                         style={styles.menuItem}
                         onStartShouldSetResponder={() => {

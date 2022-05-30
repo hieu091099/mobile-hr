@@ -15,18 +15,20 @@ import Accordion from "react-native-collapsible/Accordion";
 import Anticons from "react-native-vector-icons/AntDesign";
 import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
-import { getToken } from "../../config";
+import { getToken, renderMonth3Lang } from "../../config";
 import { getOverTime } from "../../redux/actions/UserAction";
 import moment from "moment";
 import DatePicker from "react-native-modern-datepicker";
 import { color } from "react-native-reanimated";
+import { multilang } from "../../language/multilang";
+
 export default function OverTime() {
     const [activeSections, setActiveSections] = useState([]);
     const [countDate, setCountDate] = useState(0);
     const [sumHour, setSumHour] = useState(0);
     const [onLoad, setOnLoad] = useState(false);
 
-    const { listOverTime } = useSelector((state) => state.UserReducer);
+    const { listOverTime,lang } = useSelector((state) => state.UserReducer);
     const [modalVisible, setModalVisible] = useState(false);
 
     const [selectYear, setSelectYear] = useState(new Date().getFullYear());
@@ -89,7 +91,8 @@ export default function OverTime() {
                                 marginBottom: 5,
                             },
                         ]}>
-                        Tháng {section}
+                        {/* Tháng {section} */}
+                        {renderMonth3Lang(lang,section)}
                     </Text>
                     <Text
                         style={[
@@ -102,7 +105,7 @@ export default function OverTime() {
                             },
                         ]}>
                         <Ionicons name="ios-time-outline" size={15} />{" "}
-                        {tongGioThang(section)} tiếng
+                        {tongGioThang(section)}{" "+multilang[lang].gio}
                     </Text>
                 </View>
                 <Text
@@ -142,14 +145,14 @@ export default function OverTime() {
                                 <Text
                                     style={styles.leaveTitle}
                                     numberOfLines={1}>
-                                    ngày làm thêm
+                                    {multilang[lang].ngayLamThem}
                                 </Text>
                                 <Text style={styles.leaveDate}>
                                     {`${moment(item?.Check_Day).format(
                                         "DD/MM/YYYY",
                                     )}`}
                                 </Text>
-                                <Text>{item.Overtime} tiếng</Text>
+                                <Text>{item.Overtime}  {multilang[lang].gio}</Text>
                             </View>
                             <View style={{ maxWidth: "30%" }}>
                                 {/* <Text>213</Text> */}
@@ -219,7 +222,7 @@ export default function OverTime() {
                                 setModalVisible(true);
                             }}>
                             <Text style={styles.textTitle}>
-                                Chi tiết làm thêm giờ {selectYear}
+                              {multilang[lang].chiTietLamThemGio} {selectYear}
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -228,15 +231,15 @@ export default function OverTime() {
                             <View style={styles.row}>
                                 <View style={styles.column}>
                                     <Text style={styles.titleText}>
-                                        Làm thêm tối đa
+                                    {multilang[lang].lamThemToiDa}
                                     </Text>
                                     <Text style={styles.contentText}>
-                                        300 giờ
+                                        300{" "+multilang[lang].gio}
                                     </Text>
                                 </View>
                                 <View style={styles.column}>
                                     <Text style={styles.titleText}>
-                                        Số ngày tăng ca
+                                    {multilang[lang].soNgayTangCa}
                                     </Text>
                                     <Text style={styles.contentText}>
                                         {listOverTime?.length}
@@ -244,10 +247,10 @@ export default function OverTime() {
                                 </View>
                                 <View style={styles.column}>
                                     <Text style={styles.titleText}>
-                                        Số giờ tăng ca
+                                    {multilang[lang].soGioTangCa}
                                     </Text>
                                     <Text style={styles.contentText}>
-                                        {tongNgay()} giờ
+                                        {tongNgay()}{" "+multilang[lang].gio}
                                     </Text>
                                 </View>
                             </View>

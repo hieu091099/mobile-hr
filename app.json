@@ -25,7 +25,8 @@
                 "backgroundColor": "#000000"
             },
             "package": "com.lactydev.mobilehr",
-            "googleServicesFile": "./google-services.json"
+            "googleServicesFile": "./google-services.json",
+            "versionCode": 4
         },
         "web": {
             "favicon": "./assets/favicon.png"

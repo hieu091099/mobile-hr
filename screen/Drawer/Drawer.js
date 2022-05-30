@@ -120,9 +120,9 @@ export default function DrawerContent(props) {
             </View>
             <DrawerContentScrollView {...props}>
                 <View style={styles.menuRow}>
-                    <RMenuListDisble name="Thông tin cá nhân" />
+                    <RMenuListDisble   name={multilang[lang].thongTin} />
                     <RMenuList
-                        name="Thông tin"
+                       name={multilang[lang].thongTin} 
                         icon={
                             <AntIcon
                                 type="ant-design"
@@ -166,9 +166,9 @@ export default function DrawerContent(props) {
                         }
                         navigate="OverTime"
                     />
-                    <RMenuListDisble name="Trợ giúp" />
+                    <RMenuListDisble name={multilang[lang].troGiup} />
                     <RMenuList
-                        name="Thông báo"
+                       name={multilang[lang].thongBao}
                         icon={
                             <AntIcon
                                 name="notification"
@@ -176,7 +176,7 @@ export default function DrawerContent(props) {
                                 color="#5C5C5C"
                             />
                         }
-                        navigate="ChangeLanguage"
+                        navigate="Notify"
                     />
                     <RMenuList
                          name={multilang[lang].doiMatKhau}
@@ -192,7 +192,7 @@ export default function DrawerContent(props) {
                                 color="#5C5C5C"
                             />
                         }
-                        navigate="ChangeLanguage"
+                        navigate="Contact"
                     />
                     <RMenuList
                            name={multilang[lang].caiDat}

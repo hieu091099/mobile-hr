@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
     td: {
         color: "#2D5881",
         fontSize: 25,
-        fontWeight: "900",
+        fontWeight: "600",
         textAlign: "center",
     },
     tinyLogo: {
@@ -358,7 +358,7 @@ const styles = StyleSheet.create({
     textbtndn: {
         fontSize: 18,
         color: "white",
-        fontWeight: "900",
+        fontWeight: "600",
     },
     btnFinger: {
         marginTop: 30,
@@ -383,6 +383,6 @@ const styles = StyleSheet.create({
     contactText: {
         marginLeft: 10,
         color: "#0D4A85",
-        fontWeight: "900",
+        fontWeight: "600",
     },
 });

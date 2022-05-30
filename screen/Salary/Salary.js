@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
     },
     textSalary: {
         color: "white",
-        fontWeight: "900",
+        fontWeight: "600",
         fontSize: 35,
     },
     titleText: {
@@ -301,17 +301,14 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 10,
         marginBottom: 10,
-        fontWeight: "900",
+        fontWeight: "600",
         fontSize: 20,
         letterSpacing: 0.5,
     },
     contentText: {
         textAlign: "center",
         color: "white",
-        fontWeight: "900",
+        fontWeight: "600",
         fontSize: 16,
-    },
-    font: {
-        fontFamily: "Monda",
-    },
+    }
 });

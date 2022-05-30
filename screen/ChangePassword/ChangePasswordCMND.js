@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
     textbtndn: {
         fontSize: 18,
         color: "white",
-        fontWeight: "900",
+        fontWeight: "600",
     },
     tinyLogo: {
         width: 80,
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
     td: {
         color: "#2D5881",
         fontSize: 30,
-        fontWeight: "900",
+        fontWeight: "600",
         textAlign: "center",
         fontWeight: "bold",
         marginTop: 30,

@@ -16,20 +16,6 @@ export default function App() {
             shouldSetBadge: false,
         }),
     });
-    useEffect(() => {
-        const loadFonts = async () => {
-            await Font.loadAsync({
-                MondaBold: require("./assets/fonts/Monda-Bold.ttf"),
-                Monda: require("./assets/fonts/Monda-Regular.ttf"),
-            });
-            await setCustomText({
-                style: {
-                    fontFamily: "Monda",
-                },
-            });
-        };
-        loadFonts();
-    });
 
     return (
         <Provider store={store}>

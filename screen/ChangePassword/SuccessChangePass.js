@@ -41,12 +41,12 @@ export default function SuccessChangePass() {
 const styles = StyleSheet.create({
     title: {
         fontSize: 25,
-        fontWeight: "900",
+        fontWeight: "600",
         textAlign: "center",
     },
     titleSmall: {
         fontSize: 15,
-        fontWeight: "900",
+        fontWeight: "600",
         textAlign: "center",
         marginTop: 10,
         color: "#787878",

@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     },
     titleName: {
         fontSize: 25,
-        fontWeight: "900",
+        fontWeight: "600",
         // color: 'black'
         color: "#0D4A85",
     },
@@ -233,14 +233,14 @@ const styles = StyleSheet.create({
         fontSize: 13,
         letterSpacing: 1,
         color: "gray",
-        fontWeight: "900",
+        fontWeight: "600",
     },
     mainMenu: {
         marginTop: 20,
     },
     titleMenu: {
         fontSize: 20,
-        fontWeight: "900",
+        fontWeight: "600",
         color: "#5C5C5C",
     },
     menuWrapper: {
@@ -268,12 +268,12 @@ const styles = StyleSheet.create({
     titleItem: {
         marginTop: 5,
         fontSize: 20,
-        fontWeight: "900",
+        fontWeight: "600",
         color: "#0D4A85",
     },
     titleDetail: {
         fontSize: 12,
-        fontWeight: "900",
+        fontWeight: "600",
         color: "#69737a",
     },
     menuWrapperProg: {
@@ -300,7 +300,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
     },
     contentItem: {
-        fontWeight: "900",
+        fontWeight: "600",
         fontSize: 18,
     },
 });

@@ -420,6 +420,6 @@ export default function SalaryDetail({ salary }) {
 
 const styles = StyleSheet.create({
     font: {
-        fontFamily: "Monda",
+        
     },
 });

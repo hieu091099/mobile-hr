@@ -195,6 +195,6 @@ const styles = StyleSheet.create({
         color: "black",
         marginTop: 30,
         marginBottom: 50,
-        fontWeight: "900",
+        fontWeight: "600",
     },
 });

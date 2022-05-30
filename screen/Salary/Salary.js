@@ -7,6 +7,7 @@ import {
     Modal,
     Pressable,
     Image,
+    TouchableOpacity,
 } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import { getToken } from "../../config";
@@ -106,20 +107,24 @@ export default function Salary() {
                 <View style={{ width: "93%", height: "100%", flex: 1 }}>
                     <View style={styles.summary}>
                         <View style={{ marginLeft: 10 }}>
-                            <Text style={styles.textTitle}>
-                                Tổng lương nhận tháng{" "}
-                                <Text
-                                    onStartShouldSetResponder={() =>
-                                        setModalVisible(true)
-                                    }
-                                    style={{
-                                        textDecorationLine: "underline",
-                                        color: "white",
-                                    }}>
-                                    {pad(selectDate.split(" ")[1])} -{" "}
-                                    {selectDate.split(" ")[0]}
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setModalVisible(true);
+                                    console.log("first");
+                                }}>
+                                <Text style={styles.textTitle}>
+                                    Tổng lương nhận tháng{" "}
+                                    <Text
+                                        style={{
+                                            textDecorationLine: "underline",
+                                            color: "white",
+                                            fontSize: 14,
+                                        }}>
+                                        {pad(selectDate.split(" ")[1])} -{" "}
+                                        {selectDate.split(" ")[0]}
+                                    </Text>
                                 </Text>
-                            </Text>
+                            </TouchableOpacity>
                         </View>
                         {salary?.Final_Salary != undefined ? (
                             <View>

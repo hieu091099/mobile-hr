@@ -12,11 +12,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { TextInput } from "react-native-paper";
 import { axiosInstanceToken, getToken } from "../../config";
 import AweIcon from "react-native-vector-icons/FontAwesome";
-
 import moment from "moment";
+import { multilang } from "../../language/multilang";
 export default function UserDetail() {
     const [zoomQr, setZoomQr] = useState(false);
-    const { user } = useSelector((state) => state.UserReducer);
+    const { user,lang } = useSelector((state) => state.UserReducer);
     const [infoUser, setInfoUser] = useState();
     const [showInput, setShowInput] = useState(true);
 
@@ -76,7 +76,7 @@ export default function UserDetail() {
                         },
                     }}
                     value={infoUser?.Department_Name}
-                    label="Đơn vị"
+                    label={multilang[lang].donVi}
                     mode="outlined"
                     style={[styles.input]}
                     disabled={true}
@@ -89,7 +89,7 @@ export default function UserDetail() {
                         },
                     }}
                     value={infoUser?.Person_ID}
-                    label="Số thẻ"
+                    label={multilang[lang].soThe}
                     mode="outlined"
                     style={[styles.input]}
                     disabled={true}
@@ -102,7 +102,7 @@ export default function UserDetail() {
                         },
                     }}
                     value={moment(infoUser?.Date_Come_In).format("DD/MM/YYYY")}
-                    label="Ngày vào công ty"
+                    label={multilang[lang].ngayVaoCongTy}
                     mode="outlined"
                     style={[styles.input]}
                     disabled={true}
@@ -115,7 +115,7 @@ export default function UserDetail() {
                         },
                     }}
                     value={infoUser?.Person_Name}
-                    label="Họ và tên"
+                    label={multilang[lang].hoVaTen}
                     mode="outlined"
                     style={[styles.input]}
                     disabled={true}
@@ -128,7 +128,7 @@ export default function UserDetail() {
                         },
                     }}
                     value={moment(infoUser?.Birthday).format("DD/MM/YYYY")}
-                    label="Ngày sinh"
+                    label={multilang[lang].ngaySinh}
                     mode="outlined"
                     style={[styles.input]}
                     disabled={true}
@@ -142,7 +142,7 @@ export default function UserDetail() {
                         },
                     }}
                     value={infoUser?.Mobilephone_Number}
-                    label="Số điện thoại"
+                    label={multilang[lang].soDienThoai}
                     mode="outlined"
                     style={[styles.input]}
                     disabled={true}
@@ -156,7 +156,7 @@ export default function UserDetail() {
                         },
                     }}
                     value={infoUser?.ID}
-                    label="Chứng minh nhân dân"
+                    label={multilang[lang].chungMinhNhanDan}
                     mode="outlined"
                     style={[styles.input]}
                     disabled={true}
@@ -170,7 +170,7 @@ export default function UserDetail() {
                         },
                     }}
                     value={infoUser?.Staying_Address}
-                    label="Địa chỉ"
+                    label={multilang[lang].diaChi}
                     mode="outlined"
                     style={[styles.input]}
                     disabled={true}

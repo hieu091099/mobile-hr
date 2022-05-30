@@ -12,8 +12,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { axiosInstanceToken, getToken } from "../../config";
 import DialogNavigate from "../../components/SimpleDialog/DialogNavigate";
 import SimpleDialog from "../../components/SimpleDialog/SimpleDialog";
+import { multilang } from "../../language/multilang";
+
 export default function ChangePassword() {
     const dispatch = useDispatch();
+    const { lang } = useSelector(
+        (state) => state.UserReducer,
+    );
     const navigation = useNavigation();
     const [oldPass, setOldPass] = useState("");
     const [newPass, setNewPass] = useState("");
@@ -92,7 +97,7 @@ export default function ChangePassword() {
                     flex: 1,
                     paddingHorizontal: 20,
                 }}>
-                <Text style={styles.title}>Thay đổi mật khẩu</Text>
+                <Text style={styles.title}>{multilang[lang].doiMatKhau}</Text>
 
                 <TextInput
                     secureTextEntry={true}
@@ -132,7 +137,7 @@ export default function ChangePassword() {
                             onStartShouldSetResponder={() => {
                                 changePassword();
                             }}>
-                            Đổi mật khẩu
+                          {multilang[lang].doiMatKhau}
                         </Text>
                     </View>
                 </View>

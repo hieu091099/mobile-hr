@@ -9,15 +9,18 @@ import {
 import React, { useEffect, useState } from "react";
 import AntIcon from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
 import { axiosInstanceToken, getToken } from "../../config";
+import { multilang } from "../../language/multilang";
 
 export default function Setting() {
     const [infoUser, setInfoUser] = useState();
     const navigation = useNavigation();
     const dispatch = useDispatch();
+    const { lang } =
+        useSelector((state) => state.UserReducer);
     useEffect(() => {
         // http://192.168.18.172:8000/user/getUserInfo/29975
         getToken("user").then((res) => {
@@ -57,7 +60,7 @@ export default function Setting() {
                                 {infoUser?.Department_Name}
                             </Text>
                             <Text>
-                                Ngày vào :{" "}
+                            {multilang[lang].ngayVaoCongTy} :{" "}
                                 {moment(infoUser?.Date_Come_In).format(
                                     "DD-MM-YYYY",
                                 )}
@@ -69,13 +72,13 @@ export default function Setting() {
                     </View>
                 </TouchableOpacity>
                 <View style={styles.boxMenu}>
-                    <View
+                    {/* <View
                         style={styles.menuItem}
                         onStartShouldSetResponder={() => {
                             Linking.openURL(`tel:123456`);
                         }}>
                         <Text style={styles.textMenu}>
-                            ĐƯỜNG DÂY NÓNG :{" "}
+                        {multilang[lang].duongDayNong} :{" "}
                             <Text style={{ color: "#0D4A85" }}>099999999</Text>{" "}
                         </Text>
                         <Text>
@@ -96,13 +99,13 @@ export default function Setting() {
                         <Text>
                             <AntIcon color={"black"} name="right" size={15} />
                         </Text>
-                    </View>
+                    </View> */}
                     <View
                         style={styles.menuItem}
                         onStartShouldSetResponder={() => {
                             navigation.navigate("ChangeLanguage");
                         }}>
-                        <Text style={styles.textMenu}>Thay đổi ngôn ngữ </Text>
+                        <Text style={styles.textMenu}>{multilang[lang].thayDoiNgonNgu} </Text>
                         <Text>
                             <AntIcon color={"black"} name="right" size={15} />
                         </Text>
@@ -112,7 +115,7 @@ export default function Setting() {
                         onStartShouldSetResponder={() => {
                             navigation.navigate("ChangePassword");
                         }}>
-                        <Text style={styles.textMenu}>Đổi mật khẩu </Text>
+                        <Text style={styles.textMenu}>{multilang[lang].doiMatKhau} </Text>
                         <Text>
                             <AntIcon color={"black"} name="right" size={15} />
                         </Text>
@@ -125,7 +128,7 @@ export default function Setting() {
                             type: "LOGOUT",
                         });
                     }}>
-                    <Text style={styles.textbtndx}>Đăng xuất</Text>
+                    <Text style={styles.textbtndx}>{multilang[lang].dangXuat}</Text>
                 </TouchableOpacity>
             </ScrollView>
         </View>

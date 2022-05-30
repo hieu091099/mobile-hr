@@ -15,15 +15,17 @@ import Accordion from "react-native-collapsible/Accordion";
 import Anticons from "react-native-vector-icons/AntDesign";
 import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
-import { getToken } from "../../config";
+import { getToken, renderMonth3Lang } from "../../config";
 import { getOnLeave, getOnLeaveSummary } from "../../redux/actions/UserAction";
 import moment from "moment";
 import DatePicker from "react-native-modern-datepicker";
 import { color } from "react-native-reanimated";
+import {multilang} from '../../language/multilang';
+
 export default function OnLeave() {
     const [activeSections, setActiveSections] = useState([]);
 
-    const { listOnLeave, listOnLeaveSummary } = useSelector(
+    const { listOnLeave, listOnLeaveSummary,lang } = useSelector(
         (state) => state.UserReducer,
     );
     const [modalVisible, setModalVisible] = useState(false);
@@ -125,7 +127,8 @@ export default function OnLeave() {
                             paddingLeft: 20,
                         },
                     ]}>
-                    Tháng {section}
+                    {/* Tháng {section} */}
+                    {renderMonth3Lang(lang,section)}
                 </Text>
                 <Text
                     style={[
@@ -189,10 +192,10 @@ export default function OnLeave() {
                                     }}>
                                     <Text>
                                         {item.Vacation_Day >= 1
-                                            ? item.Vacation_Day + " ngày"
+                                            ? item.Vacation_Day + " "+multilang[lang].ngay
                                             : (
                                                   item.Vacation_Day * 8
-                                              ).toFixed() + " tiếng"}
+                                              ).toFixed() + " "+multilang[lang].gio}
                                     </Text>
                                 </View>
                             </View>
@@ -254,7 +257,7 @@ export default function OnLeave() {
                                 setModalVisible(true);
                             }}>
                             <Text style={styles.textTitle}>
-                                Chi tiết phép năm {selectYear}
+                                {multilang[lang].chiTietPhepNam} {selectYear}
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -263,7 +266,7 @@ export default function OnLeave() {
                             <View style={styles.row}>
                                 <View style={styles.column}>
                                     <Text style={styles.titleText}>
-                                        Tổng phép
+                                    {multilang[lang].tongPhep}
                                     </Text>
                                     <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
@@ -273,7 +276,7 @@ export default function OnLeave() {
                                 </View>
                                 <View style={styles.column}>
                                     <Text style={styles.titleText}>
-                                        P đã nghỉ
+                                    {multilang[lang].phepDaNghi}
                                     </Text>
                                     <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
@@ -282,7 +285,7 @@ export default function OnLeave() {
                                 </View>
                                 <View style={styles.column}>
                                     <Text style={styles.titleText}>
-                                        P còn lại
+                                    {multilang[lang].phepConLai}
                                     </Text>
                                     <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
@@ -293,7 +296,7 @@ export default function OnLeave() {
                             <View style={styles.row}>
                                 <View style={styles.column}>
                                     <Text style={styles.titleText}>
-                                        Phép tồn
+                                    {multilang[lang].phepTon}
                                     </Text>
                                     <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
@@ -303,7 +306,7 @@ export default function OnLeave() {
                                 </View>
                                 <View style={styles.column}>
                                     <Text style={styles.titleText}>
-                                        Đã nghỉ PTT
+                                    {multilang[lang].daNghiPtt}
                                     </Text>
                                     <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
@@ -312,7 +315,7 @@ export default function OnLeave() {
                                 </View>
                                 <View style={styles.column}>
                                     <Text style={styles.titleText}>
-                                        Còn lại PTT
+                                    {multilang[lang].conLaiPtt}
                                     </Text>
                                     <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
@@ -441,6 +444,7 @@ const styles = StyleSheet.create({
         fontWeight: "300",
         fontSize: 19,
         marginBottom: 10,
+        textDecorationLine:"underline"
     },
     contentText: {
         textAlign: "center",

@@ -69,11 +69,6 @@ export default function LoginScreen() {
         if (res != undefined) {
             res = JSON.parse(res);
             setUserIdFromDevice(res.userId);
-        }
-    });
-    getToken("user").then((res) => {
-        if (res != undefined) {
-            res = JSON.parse(res);
             setFactoryFromDevice(res.factory);
         }
     });
@@ -330,7 +325,7 @@ export default function LoginScreen() {
                                 { width: "100%", borderRadius: 5 },
                             ]}
                             onPress={() => login()}>
-                            <Text style={styles.textbtndn}>ĐĂNG NHẬP</Text>
+                            <Text style={styles.textbtndn}>  {multilang[lang].dangNhap}</Text>
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity
@@ -344,7 +339,7 @@ export default function LoginScreen() {
                                 textDecorationLine: "underline",
                                 textDecorationColor: "#0D4A85",
                             }}>
-                            Quên mật khẩu ?
+                            {multilang[lang].quenMatKhau}
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -416,6 +411,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: "white",
         fontWeight: "900",
+        textTransform: 'uppercase'
     },
     btnFinger: {
         marginTop: 30,

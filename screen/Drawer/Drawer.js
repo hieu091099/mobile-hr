@@ -20,12 +20,13 @@ import { checkTokenExpired } from "../../config";
 import DialogNavigate from "../../components/SimpleDialog/DialogNavigate";
 import { useNavigation } from "@react-navigation/native";
 import SvgQRCode from "react-native-qrcode-svg";
+import { multilang } from "../../language/multilang";
 
 export default function DrawerContent(props) {
     const dispatch = useDispatch();
     const navigation = useNavigation();
 
-    const { isVisibleExpired, messageExpiredToken, user } = useSelector(
+    const { isVisibleExpired, messageExpiredToken, user,lang } = useSelector(
         (state) => state.UserReducer,
     );
     let arrName = user?.fullName.split(" ");
@@ -119,9 +120,9 @@ export default function DrawerContent(props) {
             </View>
             <DrawerContentScrollView {...props}>
                 <View style={styles.menuRow}>
-                    <RMenuListDisble name="Thông tin cá nhân" />
+                    <RMenuListDisble   name={multilang[lang].thongTin} />
                     <RMenuList
-                        name="Thông tin"
+                       name={multilang[lang].thongTin} 
                         icon={
                             <AntIcon
                                 type="ant-design"
@@ -133,7 +134,7 @@ export default function DrawerContent(props) {
                         navigate="UserDetail"
                     />
                     <RMenuList
-                        name="Lương"
+                        name={multilang[lang].luong}
                         icon={
                             <AntIcon
                                 name="creditcard"
@@ -144,7 +145,7 @@ export default function DrawerContent(props) {
                         navigate="Salary"
                     />
                     <RMenuList
-                        name="Kiểm tra ngày phép"
+                         name={multilang[lang].ngayNghi}
                         icon={
                             <FonttistoIcon
                                 name="holiday-village"
@@ -155,7 +156,7 @@ export default function DrawerContent(props) {
                         navigate="OnLeave"
                     />
                     <RMenuList
-                        name="Tăng ca"
+                        name={multilang[lang].tangCa}
                         icon={
                             <EntypoIcon
                                 name="time-slot"
@@ -165,9 +166,9 @@ export default function DrawerContent(props) {
                         }
                         navigate="OverTime"
                     />
-                    <RMenuListDisble name="Trợ giúp" />
+                    <RMenuListDisble name={multilang[lang].troGiup} />
                     <RMenuList
-                        name="Thông báo"
+                       name={multilang[lang].thongBao}
                         icon={
                             <AntIcon
                                 name="notification"
@@ -175,15 +176,15 @@ export default function DrawerContent(props) {
                                 color="#5C5C5C"
                             />
                         }
-                        navigate="ChangeLanguage"
+                        navigate="Notify"
                     />
                     <RMenuList
-                        name="Thay đổi mật khẩu"
+                         name={multilang[lang].doiMatKhau}
                         icon={<AntIcon name="key" size={20} color="#5C5C5C" />}
                         navigate="ChangePassword"
                     />
                     <RMenuList
-                        name="Liên hệ"
+                        name={multilang[lang].lienHe}
                         icon={
                             <AntIcon
                                 name="contacts"
@@ -191,17 +192,17 @@ export default function DrawerContent(props) {
                                 color="#5C5C5C"
                             />
                         }
-                        navigate="ChangeLanguage"
+                        navigate="Contact"
                     />
                     <RMenuList
-                        name="Cài đặt"
+                           name={multilang[lang].caiDat}
                         icon={
                             <AntIcon name="setting" size={20} color="#5C5C5C" />
                         }
                         navigate="Setting"
                     />
                     <RMenuList
-                        name="Sổ tay lao động"
+                    name={multilang[lang].soTay}
                         icon={<AntIcon name="book" size={20} color="#5C5C5C" />}
                         navigate="Book"
                     />
@@ -214,7 +215,7 @@ export default function DrawerContent(props) {
                             <AntIcon name="logout" size={20} color="#5C5C5C" />
                         </View>
                         <View style={styles.textMenuBox}>
-                            <Text style={styles.textMenu}>Đăng xuất</Text>
+                            <Text style={styles.textMenu}>{multilang[lang].dangXuat}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

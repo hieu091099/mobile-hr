@@ -240,6 +240,7 @@ export default function LoginFingerPrint() {
                             marginTop: 10,
                         }}>
                         Đăng nhập dưới UserID khác?
+                        {/* {multilang[lang].chao} */}
                     </Text>
                 </View>
                 <View style={styles.form}>
@@ -277,7 +278,7 @@ export default function LoginFingerPrint() {
                         <TouchableOpacity
                             style={[styles.btndn]}
                             onPress={() => login()}>
-                            <Text style={styles.textbtndn}>ĐĂNG NHẬP</Text>
+                            <Text style={styles.textbtndn}> {multilang[lang].dangNhap}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.btnFinger}>
                             <Ionicons

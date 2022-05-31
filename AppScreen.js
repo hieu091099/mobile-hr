@@ -20,12 +20,14 @@ import { getExpoPushNoti, getToken, setToken } from "./config";
 // import OnLeave from "./screen/OnLeave/OnLeave"
 import * as Notifications from "expo-notifications";
 import UserDetail from "./screen/Setting/UserDetail";
+import { multilang } from "./language/multilang";
+
 
 export default function App() {
     const Stack = createNativeStackNavigator();
     const Drawer = createDrawerNavigator();
     const dispatch = useDispatch();
-    const { isLoggedIn } = useSelector((state) => state.UserReducer);
+    const { isLoggedIn,lang } = useSelector((state) => state.UserReducer);
 
     useEffect(() => {
         getToken("lang").then((val) => {
@@ -75,7 +77,7 @@ export default function App() {
                                     component={ChangePassword}
                                     screenOptions={{ headerShown: true }}
                                     options={{
-                                        headerTitle: "Thay đổi mật khẩu",
+                                        headerTitle: multilang[lang].doiMatKhau,
                                         headerLeft: () => {
                                             const navigation = useNavigation();
                                             return (
@@ -96,7 +98,7 @@ export default function App() {
                                     component={ChangeLanguage}
                                     screenOptions={{ headerShown: true }}
                                     options={{
-                                        headerTitle: "Thay đổi ngôn ngữ",
+                                        headerTitle:  multilang[lang].thayDoiNgonNgu,
                                         headerLeft: () => {
                                             const navigation = useNavigation();
                                             return (
@@ -117,7 +119,7 @@ export default function App() {
                                     component={UserDetail}
                                     screenOptions={{ headerShown: true }}
                                     options={{
-                                        headerTitle: "Tài khoản",
+                                        headerTitle: multilang[lang].taiKhoan,
                                         headerLeft: () => {
                                             const navigation = useNavigation();
                                             return (

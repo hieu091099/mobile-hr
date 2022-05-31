@@ -6,6 +6,7 @@ import {
     View,
     Image,
     TouchableOpacity,
+    Pressable,
 } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import React, { useEffect, useState } from "react";
@@ -21,6 +22,7 @@ import DialogNavigate from "../../components/SimpleDialog/DialogNavigate";
 import { useNavigation } from "@react-navigation/native";
 import SvgQRCode from "react-native-qrcode-svg";
 import { multilang } from "../../language/multilang";
+import AweIcon from "react-native-vector-icons/FontAwesome";
 
 export default function DrawerContent(props) {
     const dispatch = useDispatch();
@@ -29,6 +31,7 @@ export default function DrawerContent(props) {
     const { isVisibleExpired, messageExpiredToken, user,lang } = useSelector(
         (state) => state.UserReducer,
     );
+    const [zoomQr, setZoomQr] = useState(false);
     let arrName = user?.fullName.split(" ");
     let firstName = `${arrName[arrName.length - 2]} ${
         arrName[arrName.length - 1]
@@ -100,24 +103,34 @@ export default function DrawerContent(props) {
                         justifyContent: "center",
                         alignItems: "center",
                     }}>
-                    <Image
+                    {/* <Image
                         style={{ width: 90, height: 90 }}
                         source={{
                             uri: "https://cdn3d.iconscout.com/3d/premium/thumb/male-avatar-5200586-4385765.png",
                         }}
-                    />
+                    /> */}
+                    <TouchableOpacity onPress={()=>{
+                        setZoomQr(true);
+                    }}>
+                     <SvgQRCode
+                    value={user.userId}
+                    size={60}
+                    backgroundColor="#084594"
+                    color="white"
+                /></TouchableOpacity>
+                <AweIcon name='eye' size={15} color={"#084594"}/>
                 </View>
                 <Text style={styles.nameUser}>{firstName}</Text>
             </View>
 
-            <View style={styles.detailRow}>
+            {/* <View style={styles.detailRow}>
                 <SvgQRCode
                     value={user.userId}
                     size={120}
                     backgroundColor="#084594"
                     color="white"
                 />
-            </View>
+            </View> */}
             <DrawerContentScrollView {...props}>
                 <View style={styles.menuRow}>
                     <RMenuListDisble   name={multilang[lang].thongTin} />
@@ -219,7 +232,24 @@ export default function DrawerContent(props) {
                         </View>
                     </TouchableOpacity>
                 </View>
+              
             </DrawerContentScrollView>
+            {zoomQr && (
+                <Pressable
+                    style={styles.zoomqr}
+                    onPress={() => {
+                        setZoomQr(false);
+                    }}>
+                    <View>
+                        <SvgQRCode
+                            value={user.userId}
+                            size={200}
+                            backgroundColor="white"
+                            color="#084594"
+                        />
+                    </View>
+                </Pressable>
+            )}
         </SafeAreaView>
     );
 }
@@ -227,7 +257,17 @@ export default function DrawerContent(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#084594",
+        // backgroundColor: "#084594",
+    },
+    zoomqr:{
+        position:"absolute",
+        top:0,
+        left:0,
+        backgroundColor: "#000000b3",
+        width: '100%',
+        height:'100%',
+        justifyContent:'center',
+        alignItems:'center'
     },
     avatar: {
         width: "100%",
@@ -282,7 +322,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
     },
     menuDisble: {
-        backgroundColor: "#CCC",
+        // backgroundColor: "#CCC",
+        backgroundColor:"#084594"
     },
     iconMenu: {
         width: "15%",
@@ -300,5 +341,6 @@ const styles = StyleSheet.create({
     },
     textMenuDisble: {
         fontWeight: "bold",
+        color:"white"
     },
 });

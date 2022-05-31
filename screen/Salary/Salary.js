@@ -164,55 +164,61 @@ export default function Salary() {
                                 <View>
                                     <View style={styles.row}>
                                         <View style={styles.column}>
+                                        <Text style={styles.contentText}>
+                                                {salary?.Working_Days}
+                                            </Text>
                                             <Text style={styles.titleText}>
                                                 {multilang[lang].congTt}
                                             </Text>
-                                            <Text style={styles.contentText}>
-                                                {salary?.Working_Days}
-                                            </Text>
+                                           
                                         </View>
                                         <View style={styles.column}>
+                                        <Text style={styles.contentText}>
+                                                {salary?.Overtime}
+                                            </Text>
                                             <Text style={styles.titleText}>
                                                 {multilang[lang].tCaLuyKe}
                                             </Text>
-                                            <Text style={styles.contentText}>
-                                                {salary?.Overtime}
-                                            </Text>
+                                         
                                         </View>
                                         <View style={styles.column}>
+                                        <Text style={styles.contentText}>
+                                                {salary?.Rating_ID.trim()}
+                                            </Text>
                                             <Text style={styles.titleText}>
                                                 {multilang[lang].loaiBinhBau}
                                             </Text>
-                                            <Text style={styles.contentText}>
-                                                {salary?.Rating_ID.trim()}
-                                            </Text>
+                                          
                                         </View>
                                     </View>
-                                    <View style={styles.row}>
+                                    <View style={[styles.row,{marginTop:15}]}>
                                         <View style={styles.column}>
+                                        <Text style={styles.contentText}>
+                                                {salary?.Annual_Leave}
+                                            </Text>
                                             <Text style={styles.titleText}>
                                                 {multilang[lang].soPhepNam}
                                             </Text>
-                                            <Text style={styles.contentText}>
-                                                {salary?.Annual_Leave}
-                                            </Text>
+                                           
                                         </View>
                                         <View style={styles.column}>
+                                        <Text style={styles.contentText}>
+                                                {salary?.Leave_Days}
+                                            </Text>
                                             <Text style={styles.titleText}>
                                                 {multilang[lang].daNghi}
                                             </Text>
-                                            <Text style={styles.contentText}>
-                                                {salary?.Leave_Days}
-                                            </Text>
+                                          
                                         </View>
                                         <View style={styles.column}>
-                                            <Text style={styles.titleText}>
-                                                {multilang[lang].conLai}
-                                            </Text>
-                                            <Text style={styles.contentText}>
+                                        <Text style={styles.contentText}>
                                                 {salary?.Annual_Leave -
                                                     salary?.Leave_Days}
                                             </Text>
+                                            <Text style={styles.titleText}>
+                                                {multilang[lang].conLai}
+                                            </Text>
+                                           
                                         </View>
                                     </View>
                                 </View>

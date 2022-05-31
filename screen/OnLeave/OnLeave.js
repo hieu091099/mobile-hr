@@ -249,7 +249,7 @@ export default function OnLeave() {
     };
     return (
         <>
-            <View style={{ paddingHorizontal: 10, paddingTop: 10 }}>
+            <View style={{ paddingHorizontal: 10, paddingTop: 10,flex:1 }}>
                 <View style={styles.summary}>
                     <View style={{ marginLeft: 10 }}>
                         <TouchableOpacity
@@ -265,68 +265,74 @@ export default function OnLeave() {
                         <View>
                             <View style={styles.row}>
                                 <View style={styles.column}>
-                                    <Text style={styles.titleText}>
-                                    {multilang[lang].tongPhep}
-                                    </Text>
-                                    <Text style={styles.contentText}>
+                                <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
                                             listOnLeaveSummary[0]
                                                 ?.TONGPHEPTAMTINH}
                                     </Text>
+                                    <Text style={styles.titleText}>
+                                    {multilang[lang].tongPhep}
+                                    </Text>
+                                    
                                 </View>
                                 <View style={styles.column}>
-                                    <Text style={styles.titleText}>
-                                    {multilang[lang].phepDaNghi}
-                                    </Text>
-                                    <Text style={styles.contentText}>
+                                <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
                                             listOnLeaveSummary[0]?.DANGHI}
                                     </Text>
+                                    <Text style={styles.titleText}>
+                                    {multilang[lang].phepDaNghi}
+                                    </Text>
+                                   
                                 </View>
                                 <View style={styles.column}>
-                                    <Text style={styles.titleText}>
-                                    {multilang[lang].phepConLai}
-                                    </Text>
-                                    <Text style={styles.contentText}>
+                                <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
                                             listOnLeaveSummary[0]?.CONLAI}
                                     </Text>
+                                    <Text style={styles.titleText}>
+                                    {multilang[lang].phepConLai}
+                                    </Text>
+                                   
                                 </View>
                             </View>
-                            <View style={styles.row}>
+                            <View style={[styles.row,{marginTop:15}]}>
                                 <View style={styles.column}>
-                                    <Text style={styles.titleText}>
-                                    {multilang[lang].phepTon}
-                                    </Text>
-                                    <Text style={styles.contentText}>
+                                <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
                                             listOnLeaveSummary[0]
                                                 ?.TONPHEPNAMTRUOC}
                                     </Text>
+                                    <Text style={styles.titleText}>
+                                    {multilang[lang].phepTon}
+                                    </Text>
+                                  
                                 </View>
                                 <View style={styles.column}>
-                                    <Text style={styles.titleText}>
-                                    {multilang[lang].daNghiPtt}
-                                    </Text>
-                                    <Text style={styles.contentText}>
+                                <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
                                             listOnLeaveSummary[0]?.DANGHIPTT}
                                     </Text>
+                                    <Text style={styles.titleText}>
+                                    {multilang[lang].daNghiPtt}
+                                    </Text>
+                                  
                                 </View>
                                 <View style={styles.column}>
-                                    <Text style={styles.titleText}>
-                                    {multilang[lang].conLaiPtt}
-                                    </Text>
-                                    <Text style={styles.contentText}>
+                                <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
                                             listOnLeaveSummary[0]?.CONLAIPTT}
                                     </Text>
+                                    <Text style={styles.titleText}>
+                                    {multilang[lang].conLaiPtt}
+                                    </Text>
+                                   
                                 </View>
                             </View>
                         </View>
                     </View>
                 </View>
-                <ScrollView style={{ height: "73%" }}>
+                <ScrollView>
                     {listOnLeave.length != 0 ? (
                         <Accordion
                             activeSections={activeSections}

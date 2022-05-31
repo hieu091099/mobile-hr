@@ -93,7 +93,7 @@ ngaySinh:"ngày sinh",
 soDienThoai:"số điện thoại",
 chungMinhNhanDan:"chứng minh nhân dân ",
 diaChi:"địa chỉ",
-phepTon:"remaining last year"
+phepTon:"phép tồn"
 
 
 }

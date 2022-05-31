@@ -214,7 +214,7 @@ export default function OverTime() {
     };
     return (
         <>
-            <View style={{ paddingHorizontal: 10, paddingTop: 10 }}>
+            <View style={{ paddingHorizontal: 10, paddingTop: 10,flex:1 }}>
                 <View style={styles.summary}>
                     <View style={{ marginLeft: 10 }}>
                         <TouchableOpacity
@@ -228,36 +228,39 @@ export default function OverTime() {
                     </View>
                     <View>
                         <View>
-                            <View style={styles.row}>
+                            <View style={[styles.row,{marginTop:10}]}>
                                 <View style={styles.column}>
+                                <Text style={styles.contentText}>
+                                        300{" "+multilang[lang].gio}
+                                    </Text>
                                     <Text style={styles.titleText}>
                                     {multilang[lang].lamThemToiDa}
                                     </Text>
-                                    <Text style={styles.contentText}>
-                                        300{" "+multilang[lang].gio}
-                                    </Text>
+                                  
                                 </View>
                                 <View style={styles.column}>
+                                <Text style={styles.contentText}>
+                                        {listOverTime?.length}
+                                    </Text>
                                     <Text style={styles.titleText}>
                                     {multilang[lang].soNgayTangCa}
                                     </Text>
-                                    <Text style={styles.contentText}>
-                                        {listOverTime?.length}
-                                    </Text>
+                                    
                                 </View>
                                 <View style={styles.column}>
+                                <Text style={styles.contentText}>
+                                        {tongNgay()}{" "+multilang[lang].gio}
+                                    </Text>
                                     <Text style={styles.titleText}>
                                     {multilang[lang].soGioTangCa}
                                     </Text>
-                                    <Text style={styles.contentText}>
-                                        {tongNgay()}{" "+multilang[lang].gio}
-                                    </Text>
+                                   
                                 </View>
                             </View>
                         </View>
                     </View>
                 </View>
-                <ScrollView style={{ height: "80%" }}>
+                <ScrollView>
                     {listOverTime.length != 0 ? (
                         <Accordion
                             activeSections={activeSections}

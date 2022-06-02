@@ -86,13 +86,13 @@ export default function LoginFingerPrint() {
     }, [isLoggedIn]);
     const checkDeviceForHardware = async () => {
         let compatible = await LocalAuthentication.hasHardwareAsync();
-        alert("compatible : "+compatible);
+        // alert("compatible : "+compatible);
         isCompatible(compatible);
     };
 
     const checkForFingerprints = async () => {
         let fingerprints = await LocalAuthentication.isEnrolledAsync();
-        alert("fingerprints : " + fingerprints);
+        // alert("fingerprints : " + fingerprints);
         setFingerPrints(fingerprints);
     };
 

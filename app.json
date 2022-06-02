@@ -26,7 +26,7 @@
             },
             "package": "com.lactydev.mobilehr",
             "googleServicesFile": "./google-services.json",
-            "versionCode": 7,
+            "versionCode": 8,
             "permissions": ["USE_FINGERPRINT"]
         },
         "web": {

@@ -86,11 +86,13 @@ export default function LoginFingerPrint() {
     }, [isLoggedIn]);
     const checkDeviceForHardware = async () => {
         let compatible = await LocalAuthentication.hasHardwareAsync();
+        alert("compatible : "+compatible);
         isCompatible(compatible);
     };
 
     const checkForFingerprints = async () => {
         let fingerprints = await LocalAuthentication.isEnrolledAsync();
+        alert("fingerprints : " + fingerprints);
         setFingerPrints(fingerprints);
     };
 
@@ -129,7 +131,7 @@ export default function LoginFingerPrint() {
     const loginWithAnotherUserId = () => {
         setIsVisible(true);
         setCancel(true);
-        setDialogMessage("Bạn có chắc chắn muốn đặng nhập với số thẻ khác!");
+        setDialogMessage(multilang[lang].banCoChacChanMuonDangNhapVoiSoTheKhac);
     };
     return (
         <PaperProvider>
@@ -239,8 +241,8 @@ export default function LoginFingerPrint() {
                             color: "gray",
                             marginTop: 10,
                         }}>
-                        Đăng nhập dưới UserID khác?
-                        {/* {multilang[lang].chao} */}
+                        {/* Đăng nhập dưới UserID khác? */}
+                        {multilang[lang].dangNhapVoiSoTheKhac}
                     </Text>
                 </View>
                 <View style={styles.form}>
@@ -252,7 +254,7 @@ export default function LoginFingerPrint() {
                             },
                         }}
                         value={userLogin.password}
-                        label="PASSWORD"
+                        label={multilang[lang].matKhau}
                         mode="outlined"
                         secureTextEntry={showPassW}
                         right={
@@ -264,7 +266,7 @@ export default function LoginFingerPrint() {
                                 }}
                             />
                         }
-                        placeholder="Mật khẩu"
+                        placeholder={multilang[lang].matKhau}
                         style={[styles.inputlogin]}
                         onChangeText={(val) => {
                             setUserLogin({ ...userLogin, password: val });

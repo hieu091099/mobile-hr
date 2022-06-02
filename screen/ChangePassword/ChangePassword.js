@@ -74,10 +74,10 @@ export default function ChangePassword() {
             }
         } else {
             if (newPass != newPassCf) {
-                setMsgChangePass({ message: "Mật khẩu xác nhận không khớp" });
+                setMsgChangePass({ message: multilang[lang].matKhauXacNhanKhongKhop });
                 setVisibleMsg(true);
             } else {
-                setMsgChangePass({ message: "Vui lòng nhập đầy đủ thông tin" });
+                setMsgChangePass({ message: multilang[lang].vuiLongNhapDayDuThongTin });
                 setVisibleMsg(true);
             }
         }
@@ -101,7 +101,7 @@ export default function ChangePassword() {
 
                 <TextInput
                     secureTextEntry={true}
-                    label="Mật khẩu hiện tại"
+                    label={multilang[lang].matKhauHienTai}
                     mode="outlined"
                     value={oldPass}
                     onChangeText={setOldPass}
@@ -110,7 +110,7 @@ export default function ChangePassword() {
 
                 <TextInput
                     secureTextEntry={true}
-                    label="Mật khẩu mới"
+                    label={multilang[lang].matKhauMoi}
                     mode="outlined"
                     value={newPass}
                     onChangeText={setNewPass}
@@ -119,7 +119,7 @@ export default function ChangePassword() {
 
                 <TextInput
                     secureTextEntry={true}
-                    label="Xác nhận mật khẩu"
+                    label={multilang[lang].nhapLaiMatKhauMoi}
                     mode="outlined"
                     value={newPassCf}
                     onChangeText={setNewPassCf}

@@ -16,7 +16,7 @@ const stateDefault = {
     setShowYearPicker: false,
     listOnLeaveSummary: [],
     listOverTime: [],
-    lang: "en",
+    lang: "vi",
 };
 
 export const UserReducer = (state = stateDefault, action) => {

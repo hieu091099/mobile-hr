@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { Button, Dialog } from "react-native-elements";
 import { View, Text, StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
-
+import { multilang } from "../../language/multilang";
+import { useSelector } from "react-redux";
 const DialogNavigate = ({ visible, message }) => {
     const dispatch = useDispatch();
+    const { lang } =
+    useSelector((state) => state.UserReducer);
     const toggleDialog = () => {
         dispatch({
             type: "CLOSE_DIALOG_EXPIRED",
@@ -16,7 +19,7 @@ const DialogNavigate = ({ visible, message }) => {
     return (
         <View>
             <Dialog isVisible={visible}>
-                <Dialog.Title title="Thông Báo" />
+                <Dialog.Title title={multilang[lang].thongBao} />
                 <Text style={{ marginBottom: 20 }}>{message}</Text>
                 <View style={{ flexDirection: "row" }}>
                     <Button
@@ -32,7 +35,7 @@ const DialogNavigate = ({ visible, message }) => {
                             borderWidth: 0,
                         }}
                         onPress={() => toggleDialog()}
-                        title="ĐỒNG Ý"></Button>
+                        title={multilang[lang].dongY}></Button>
                 </View>
             </Dialog>
         </View>

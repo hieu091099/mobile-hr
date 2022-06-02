@@ -94,7 +94,23 @@ ngaySinh:"出生日期",
 soDienThoai:"電話號碼",
 chungMinhNhanDan:"身份證",
 diaChi:"地址",
-phepTon:"上一年剩餘"
+phepTon:"上一年剩餘",
+dangNhapVoiSoTheKhac:"使用其他 卡號登錄",
+matKhau:"密碼",
+nhaMay:"工廠",
+banCoChacChanMuonDangNhapVoiSoTheKhac:"您確定要使用其他卡號 登錄嗎？",
+phepNam:"年假",
+viecRieng:"事假",
+phepTapTrung:"集體性年假",
+matKhauXacNhanKhongKhop:"密碼不匹配",
+vuiLongNhapDayDuThongTin:"請輸入完整資訊",
+matKhauHienTai:"當前密碼",
+matKhauMoi:"新密碼",
+nhapLaiMatKhauMoi:"驗證新密碼",
+dongY:"同意",
+huyBo:"取消",
+saiThongTinMatKhau:"密碼錯誤",
+
 
 
 }

@@ -13,6 +13,8 @@ import MaskInput, { Masks } from "react-native-mask-input";
 import SimpleDialog from "../../components/SimpleDialog/SimpleDialog";
 import { axiosInstance } from "../../config";
 import { useNavigation } from "@react-navigation/native";
+import { multilang } from "../../language/multilang";
+import { useSelector } from "react-redux";
 export default function ChangePasswordCMND() {
     const [soThe, setsoThe] = useState("");
     const [cmnd, setCmnd] = useState("");
@@ -21,6 +23,8 @@ export default function ChangePasswordCMND() {
     const [visibleDialog, setVisibleDialog] = useState(false);
     const [messDialog, setMessDialog] = useState("");
     const [onLoad, setOnLoad] = useState(false);
+    const { lang } =
+    useSelector((state) => state.UserReducer);
 
     const [showPassW, setShowPassW] = useState(true);
 
@@ -47,7 +51,7 @@ export default function ChangePasswordCMND() {
                     source={require("../../assets/images/logo_login.jpg")}
                 />
                 <View style={styles.tieude}>
-                    <Text style={[styles.td]}>Quên mật khẩu</Text>
+                    <Text style={[styles.td]}>{multilang[lang].quenMatKhau}</Text>
                 </View>
                 <TextInput
                     theme={{
@@ -57,9 +61,9 @@ export default function ChangePasswordCMND() {
                         },
                     }}
                     value={soThe}
-                    label="SỐ THẺ"
+                    label={multilang[lang].soThe}
                     mode="outlined"
-                    placeholder="SỐ THẺ"
+                    placeholder={multilang[lang].soThe}
                     style={[styles.inputlogin, { marginTop: 10 }]}
                     onChangeText={(val) => {
                         setsoThe(val);
@@ -73,9 +77,9 @@ export default function ChangePasswordCMND() {
                         },
                     }}
                     value={cmnd}
-                    label="SỐ CMND"
+                    label={multilang[lang].chungMinhNhanDan}
                     mode="outlined"
-                    placeholder="SỐ CMND"
+                    placeholder={multilang[lang].chungMinhNhanDan}
                     style={[styles.inputlogin]}
                     onChangeText={(val) => {
                         setCmnd(val);
@@ -100,7 +104,7 @@ export default function ChangePasswordCMND() {
                                 setdatetimebd(masked);
                             }}
                             mask={Masks.DATE_DDMMYYYY}
-                            placeholder={"NGÀY SINH"}
+                            placeholder={multilang[lang].ngaySinh}
                             style={{
                                 width: "100%",
                                 height: 55,
@@ -118,10 +122,10 @@ export default function ChangePasswordCMND() {
                         },
                     }}
                     value={matKhau}
-                    label="MẬT KHẨU"
+                    label={multilang[lang].matKhau}
                     mode="outlined"
                     secureTextEntry={showPassW}
-                    placeholder="Mật khẩu"
+                    placeholder={multilang[lang].matKhau}
                     style={[styles.inputlogin]}
                     right={
                         <TextInput.Icon
@@ -192,12 +196,12 @@ export default function ChangePasswordCMND() {
                             setOnLoad(false);
                         } else {
                             setOnLoad(false);
-                            setMessDialog("Vui lòng nhập đầy đủ thông tin");
+                            setMessDialog(multilang[lang].vuiLongNhapDayDuThongTin);
                             setVisibleDialog(true);
                         }
                         // navigation.navigate("SuccessChangePass");
                     }}>
-                    <Text style={styles.textbtndn}>ĐẶT LẠI MẬT KHẨU</Text>
+                    <Text style={styles.textbtndn}>{multilang[lang].doiMatKhau}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => {
@@ -211,7 +215,7 @@ export default function ChangePasswordCMND() {
                             textDecorationLine: "underline",
                             textDecorationColor: "#0D4A85",
                         }}>
-                        Đăng nhập ?
+                        {multilang[lang].dangNhap} ?
                     </Text>
                 </TouchableOpacity>
             </ImageBackground>

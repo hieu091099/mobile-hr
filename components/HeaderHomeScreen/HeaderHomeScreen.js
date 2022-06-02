@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { Badge } from 'react-native-paper';
 
 
 export default function HeaderHomeScreen() {
@@ -13,12 +14,15 @@ export default function HeaderHomeScreen() {
                 <Ionicons name='menu' size={30} />
             </TouchableOpacity>
             <View style={styles.rightItem}>
-                <View style={styles.iconRight}>
-                    {/* <Ionicons name='md-qr-code-outline' size={26} /> */}
-                </View>
-                <View style={styles.iconRight}>
-                    {/* <Ionicons name='md-notifications-circle-outline' size={30} /> */}
-                </View>
+                {/* <View style={styles.iconRight}>
+                    <Ionicons name='md-qr-code-outline' size={26} />
+                </View> */}
+                <TouchableOpacity style={styles.iconRight} onPress={()=>{
+                  navigation.navigate('Notify')
+                }}>
+                    <Ionicons name='md-notifications-circle-outline' size={30} />
+                    <Badge style={{position:'absolute'}}>1</Badge>
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -51,6 +55,7 @@ const styles = StyleSheet.create({
     iconRight: {
         marginLeft: 10,
         padding: 6,
+        position:'relative',
         // backgroundColor: '#F5F5F5',
         borderRadius: 10,
         borderColor: '#EEEEEE',

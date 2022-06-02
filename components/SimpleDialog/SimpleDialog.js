@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, Dialog } from "react-native-elements";
 import { View, Text, StyleSheet } from "react-native";
+import { multilang } from "../../language/multilang";
+import { useSelector } from "react-redux";
 
 const SimpleDialog = ({
     visible,
@@ -9,6 +11,8 @@ const SimpleDialog = ({
     confirmWithCondition = () => {},
     cancel,
 }) => {
+    const { lang } =
+    useSelector((state) => state.UserReducer);
     // const cfm = confirmWithCondition;
     const toggleDialog = () => {
         setVisible(!visible);
@@ -22,7 +26,7 @@ const SimpleDialog = ({
                 isVisible={visible}
                 // onBackdropPress={toggleDialog}
             >
-                <Dialog.Title title="Thông Báo" />
+                <Dialog.Title title={multilang[lang].thongBao} />
                 <Text style={{ marginBottom: 20 }}>{message}</Text>
                 <View style={{ flexDirection: "row" }}>
                     <Button
@@ -38,7 +42,7 @@ const SimpleDialog = ({
                             borderWidth: 0,
                         }}
                         onPress={() => toggleDialog()}
-                        title="ĐỒNG Ý"></Button>
+                        title={multilang[lang].dongY}></Button>
 
                     {cancel && (
                         <Button
@@ -54,7 +58,7 @@ const SimpleDialog = ({
                                 borderWidth: 0,
                             }}
                             onPress={() => setVisible(!visible)}
-                            title="HỦY BỎ"></Button>
+                            title={multilang[lang].huyBo}></Button>
                     )}
                 </View>
             </Dialog>

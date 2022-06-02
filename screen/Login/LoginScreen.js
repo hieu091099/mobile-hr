@@ -81,17 +81,17 @@ export default function LoginScreen() {
         setCancel(false);
         if (user.userId == "") {
             setIsVisible(true);
-            setDialogMessage("Vui lòng nhập số thẻ!");
+            setDialogMessage(multilang[lang].vuiLongNhapDayDuThongTin);
             return false;
         }
         if (user.password == "") {
             setIsVisible(true);
-            setDialogMessage("Vui lòng nhập mật khẩu!");
+            setDialogMessage(multilang[lang].vuiLongNhapDayDuThongTin);
             return false;
         }
         if (user.factory == "") {
             setIsVisible(true);
-            setDialogMessage("Vui lòng chọn nhà máy!");
+            setDialogMessage(multilang[lang].vuiLongNhapDayDuThongTin);
             return false;
         }
         return true;
@@ -231,8 +231,8 @@ export default function LoginScreen() {
                 </View>
                 <View style={styles.tieude}>
                     <Text style={[styles.td]}>
-                        {multilang[lang].chao}{" "}
-                        <Text style={{ fontSize: 35 }}>Bạn!!</Text>
+                        {multilang[lang].chao}{" "}!!
+                        {/* <Text style={{ fontSize: 35 }}>!!</Text> */}
                     </Text>
                 </View>
                 <View style={styles.form}>
@@ -244,9 +244,9 @@ export default function LoginScreen() {
                             },
                         }}
                         value={userLogin.userId}
-                        label="USERID"
+                        label= {multilang[lang].soThe}
                         mode="outlined"
-                        placeholder="Tài khoản"
+                        placeholder={multilang[lang].soThe}
                         style={[styles.inputlogin, { marginTop: 20 }]}
                         onChangeText={(val) => {
                             setUserLogin({ ...userLogin, userId: val });
@@ -260,10 +260,10 @@ export default function LoginScreen() {
                             },
                         }}
                         value={userLogin.password}
-                        label="PASSWORD"
+                        label={multilang[lang].matKhau}
                         mode="outlined"
                         secureTextEntry={showPassW}
-                        placeholder="Mật khẩu"
+                        placeholder={multilang[lang].matKhau}
                         style={[styles.inputlogin]}
                         right={
                             <TextInput.Icon
@@ -280,7 +280,7 @@ export default function LoginScreen() {
                     />
 
                     <PaperSelect
-                        label="FACTORY"
+                        label={multilang[lang].nhaMay}
                         value={factory.value}
                         outlineColor="gray"
                         activeOutlineColor="#0D4A85"

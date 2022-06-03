@@ -2,8 +2,9 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import * as SecureStore from "expo-secure-store";
 import * as Notifications from "expo-notifications";
-
 // import * as Device from "expo-device";
+import { useSelector } from "react-redux";
+import { multilang } from "./language/multilang";
 
 export const BASE_URL = "http://erp.lacty.com.vn:8000/";
 // export const BASE_URL = "http://192.168.18.172:8000/";
@@ -88,6 +89,8 @@ export const axiosInstanceToken = async (method, url, accessToken, data) => {
 };
 
 export const checkLoginFinger = async () => {
+const { lang } = useSelector(state => state.UserReducer);
+
     let accessToken = await getToken("accessToken");
     let refreshToken = await getToken("refreshToken");
 
@@ -109,12 +112,12 @@ export const checkLoginFinger = async () => {
                     if (res.data.key == 1) {
                         return {
                             status: false,
-                            msg: "Đăng nhập vân tay chỉ có thể sử dụng trong 7 ngày kể từ ngày đăng nhập bằng mật khẩu!\nVui lòng đăng nhập bằng mật khẩu để tái kích hoạt chức năng!",
+                            msg: `${multilang[lang].dangNhapVanTayChiCoTheSuDungTrong7NgayKeTuNgayDangNhapBangMatKhau}\n${multilang[lang].vuiLongDangNhapBangMatKhauDeTaiKichHoatChucNang}`,
                         };
                     } else {
                         return {
                             status: false,
-                            msg: "Tài khoản đã được đăng nhập từ 1 thiết bị khác!\nVui lòng đăng nhập lại để tái kích hoạt chức năng!",
+                            msg: `${multilang[lang].taiKhoanDaDuocDangNhapTu1ThietBiKhac}\n${multilang[lang].vuiLongDangNhapLaiDeTaiKichHoatChucNang}`,
                         };
                     }
                 } else {

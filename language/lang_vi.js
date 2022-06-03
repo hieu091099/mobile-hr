@@ -109,6 +109,16 @@ nhapLaiMatKhauMoi:"Nhập lại mật khẩu mới",
 dongY:"đồng ý",
 huyBo:"hủy bỏ",
 saiThongTinMatKhau:"sai thông tin mật khẩu",
+capNhatThanhCong:"Cập nhật thành công",
+matKhauDaDuocThayDoiThanhCong:"Mật khẩu đã được thay đổi thành công",
+veTrangChu:"Về trang chủ",
+dangNhapVanTayChiCoTheSuDungTrong7NgayKeTuNgayDangNhapBangMatKhau:"Đăng nhập vân tay chỉ có thể sử dụng trong 7 ngày kể từ ngày đăng nhập bằng mật khẩu",
+vuiLongDangNhapBangMatKhauDeTaiKichHoatChucNang:"Vui lòng đăng nhập bằng mật khẩu để tái kích hoạt chức năng!",
+taiKhoanDaDuocDangNhapTu1ThietBiKhac:"Tài khoản đã được đăng nhập từ 1 thiết bị khác!",
+vuiLongDangNhapLaiDeTaiKichHoatChucNang:"Vui lòng đăng nhập lại để tái kích hoạt chức năng!",
+saiThongTinDangNhap:"sai thông tin đăng nhập",
+loiChuaXacDinh:"Lỗi chưa xác định!",
+saiThongTinCaNhan:"Sai thông tin cá nhân !",
 
 
 

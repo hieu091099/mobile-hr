@@ -110,7 +110,16 @@ nhapLaiMatKhauMoi:"驗證新密碼",
 dongY:"同意",
 huyBo:"取消",
 saiThongTinMatKhau:"密碼錯誤",
-
+capNhatThanhCong:"更新成功",
+matKhauDaDuocThayDoiThanhCong:"您的密碼已成功更改",
+veTrangChu:"回主頁",
+dangNhapVanTayChiCoTheSuDungTrong7NgayKeTuNgayDangNhapBangMatKhau:"指紋僅在您使用密碼登錄之日起 7 天內識別",
+vuiLongDangNhapBangMatKhauDeTaiKichHoatChucNang:"請使用密碼登錄以重新啟用該！",
+taiKhoanDaDuocDangNhapTu1ThietBiKhac:"此帳號已被其他設備登錄！",
+vuiLongDangNhapLaiDeTaiKichHoatChucNang:"請重新登錄以重新啟用該！",
+saiThongTinDangNhap:"您的 ID 或密碼錯誤",
+loiChuaXacDinh:"錯誤未確定",
+saiThongTinCaNhan:"個人資訊有誤",
 
 
 }

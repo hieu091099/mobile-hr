@@ -23,7 +23,7 @@ import { multilang } from "../../language/multilang";
 export default function LoginFingerPrint() {
     const imglang = {
         vi: { img: require("../../assets/images/flags/vi.png"), name: "vi" },
-        mm: { img: require("../../assets/images/flags/mm.png"), name: "mm" },
+        // mm: { img: require("../../assets/images/flags/mm.png"), name: "mm" },
         en: { img: require("../../assets/images/flags/en.png"), name: "en" },
         tw: { img: require("../../assets/images/flags/tw.png"), name: "tw" },
     };
@@ -99,7 +99,7 @@ export default function LoginFingerPrint() {
     const scanFingerprint = async () => {
         await LocalAuthentication.authenticateAsync().then((res) => {
             if (res.success) {
-                let action = loginFingerAction();
+                let action = loginFingerAction(lang);
                 dispatch(action);
             }
         });
@@ -146,7 +146,7 @@ export default function LoginFingerPrint() {
             <SimpleDialog
                 visible={isVisibleLogin}
                 setVisible={setVisibleDispatch}
-                message={messageLoginResponse}
+                message={multilang[lang][messageLoginResponse]}
             />
             <ImageBackground
                 source={require("../../assets/images/bg_login2.png")}

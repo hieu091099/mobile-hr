@@ -31,7 +31,7 @@ export default function ChangeLanguage() {
                 flex: 1,
                 backgroundColor: "#FAFAFA",
             }}>
-            <TouchableOpacity
+            {/* <TouchableOpacity
                 onPress={() => {
                     changelang("mm");
                 }}>
@@ -49,7 +49,7 @@ export default function ChangeLanguage() {
                         </Text>
                     </View>
                 </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity
                 onPress={() => {
                     changelang("vi");

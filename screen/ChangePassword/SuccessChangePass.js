@@ -1,8 +1,11 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-
+import { multilang } from "../../language/multilang";
+import { useSelector } from "react-redux";
 export default function SuccessChangePass() {
+    const { lang } =
+    useSelector((state) => state.UserReducer);
     const navigation = useNavigation();
     return (
         <View
@@ -21,9 +24,9 @@ export default function SuccessChangePass() {
                     resizeMode="contain"
                 />
             </View>
-            <Text style={styles.title}>Cập Nhật Thành Công</Text>
+            <Text style={styles.title}>{multilang[lang].capNhatThanhCong}</Text>
             <Text style={styles.titleSmall}>
-                Mật khẩu đã được cập nhật thành công
+            {multilang[lang].matKhauDaDuocThayDoiThanhCong}
             </Text>
             <View style={styles.btn}>
                 <Text
@@ -31,7 +34,7 @@ export default function SuccessChangePass() {
                     onStartShouldSetResponder={() => {
                         navigation.navigate("MainTab");
                     }}>
-                    Về Trang Chủ
+                     {multilang[lang].veTrangChu}
                 </Text>
             </View>
         </View>

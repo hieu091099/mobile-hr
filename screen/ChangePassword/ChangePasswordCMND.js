@@ -44,7 +44,7 @@ export default function ChangePasswordCMND() {
                 <SimpleDialog
                     visible={visibleDialog}
                     setVisible={setVisibleDialog}
-                    message={messDialog}
+                    message={multilang[lang][messDialog]}
                 />
                 <Image
                     style={styles.tinyLogo}
@@ -184,7 +184,7 @@ export default function ChangePasswordCMND() {
                                     setVisibleDialog(true);
                                 }
                             } else {
-                                setMessDialog("Lỗi khi thay đổi mật khẩu");
+                                setMessDialog("loiChuaXacDinh");
                                 setVisibleDialog(true);
                             }
 

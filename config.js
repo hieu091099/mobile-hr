@@ -5,8 +5,8 @@ import * as Notifications from "expo-notifications";
 
 // import * as Device from "expo-device";
 
-export const BASE_URL = "http://erp.lacty.com.vn:8000/";
-// export const BASE_URL = "http://192.168.18.172:8000/";
+// export const BASE_URL = "http://erp.lacty.com.vn:8000/";
+export const BASE_URL = "http://192.168.18.172:8000/";
 
 export const getToken = async (key) => {
     try {
@@ -146,12 +146,50 @@ export const checkTokenExpired = async () => {
     }
 };
 
-export const renderMonth3Lang = (lang,num) => {
-    const monthLang ={
-        vi:['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'],
-        en:["January","February","March","April","May","June","July","August","September","October","November","December"],
-        tw:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"]
+export const renderMonth3Lang = (lang, num) => {
+    const monthLang = {
+        vi: [
+            "Tháng 1",
+            "Tháng 2",
+            "Tháng 3",
+            "Tháng 4",
+            "Tháng 5",
+            "Tháng 6",
+            "Tháng 7",
+            "Tháng 8",
+            "Tháng 9",
+            "Tháng 10",
+            "Tháng 11",
+            "Tháng 12",
+        ],
+        en: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+        ],
+        tw: [
+            "一月",
+            "二月",
+            "三月",
+            "四月",
+            "五月",
+            "六月",
+            "七月",
+            "八月",
+            "九月",
+            "十月",
+            "十一月",
+            "十二月",
+        ],
     };
-    return <>{monthLang[lang][parseInt(num)-1]}</>;
-
-}
+    return <>{monthLang[lang][parseInt(num) - 1]}</>;
+};

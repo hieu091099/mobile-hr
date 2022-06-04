@@ -17,18 +17,21 @@ import Fontisto from "react-native-vector-icons/Fontisto";
 import { useFonts } from "expo-font";
 import { color } from "react-native-reanimated";
 import { multilang } from "../../language/multilang";
+import { getNotifications } from "../../redux/actions/NotificationAction";
 
 export default function HomeScreen() {
     const dispatch = useDispatch();
     const { user, isLoggedIn, lang } = useSelector(
         (state) => state.UserReducer,
     );
+
     const [User, setUser] = useState();
     const navigation = useNavigation();
     let arrName = user?.fullName.split(" ");
     let firstName = `${arrName[arrName.length - 2]} ${
         arrName[arrName.length - 1]
     }`;
+
     useEffect(() => {
         getToken("user").then((res) => {
             if (res != "" || res != undefined) {
@@ -63,9 +66,13 @@ export default function HomeScreen() {
     return (
         <View style={styles.home}>
             <Animated.View style={[styles.titleHome, { opacity: fadeAnim }]}>
-                <View >
-                    <Text style={styles.titleName}>{multilang[lang].chao} {firstName},</Text>
-                    <Text style={styles.titleBack}>{multilang[lang].chaoMungQuayTroLai}</Text>
+                <View>
+                    <Text style={styles.titleName}>
+                        {multilang[lang].chao} {firstName},
+                    </Text>
+                    <Text style={styles.titleBack}>
+                        {multilang[lang].chaoMungQuayTroLai}
+                    </Text>
                 </View>
                 <View>{/* <Ionicons name="options" size={26} /> */}</View>
             </Animated.View>
@@ -107,8 +114,13 @@ export default function HomeScreen() {
                                     size={40}
                                 />
                             </View>
-                            <Text style={styles.titleItem}>{multilang[lang].ngayNghi}</Text>
-                            <Text style={styles.titleDetail}>{multilang[lang].chiTiet} {multilang[lang].chiTietNgayNghi}</Text>
+                            <Text style={styles.titleItem}>
+                                {multilang[lang].ngayNghi}
+                            </Text>
+                            <Text style={styles.titleDetail}>
+                                {multilang[lang].chiTiet}{" "}
+                                {multilang[lang].chiTietNgayNghi}
+                            </Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -122,8 +134,12 @@ export default function HomeScreen() {
                                     size={40}
                                 />
                             </View>
-                            <Text style={styles.titleItem}>{multilang[lang].soTay}</Text>
-                            <Text style={styles.titleDetail}>{multilang[lang].soTay}</Text>
+                            <Text style={styles.titleItem}>
+                                {multilang[lang].soTay}
+                            </Text>
+                            <Text style={styles.titleDetail}>
+                                {multilang[lang].soTay}
+                            </Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -137,8 +153,13 @@ export default function HomeScreen() {
                                     size={40}
                                 />
                             </View>
-                            <Text style={styles.titleItem}>{multilang[lang].tangCa}</Text>
-                            <Text style={styles.titleDetail}>{multilang[lang].chiTiet} {multilang[lang].tangCa}</Text>
+                            <Text style={styles.titleItem}>
+                                {multilang[lang].tangCa}
+                            </Text>
+                            <Text style={styles.titleDetail}>
+                                {multilang[lang].chiTiet}{" "}
+                                {multilang[lang].tangCa}
+                            </Text>
                         </View>
                     </TouchableOpacity>
                 </View>

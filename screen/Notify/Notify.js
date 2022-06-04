@@ -1,106 +1,134 @@
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import React from "react";
-
+import {
+    View,
+    Text,
+    StyleSheet,
+    Image,
+    ScrollView,
+    TouchableOpacity,
+} from "react-native";
+import React, { useEffect } from "react";
+import { getToken } from "../../config";
+import {
+    getNotifications,
+    updateUserNotification,
+} from "../../redux/actions/NotificationAction";
+import { useDispatch, useSelector } from "react-redux";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Entypo from "react-native-vector-icons/Entypo";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { useNavigation } from "@react-navigation/native";
 export default function Notify() {
+    const { user } = useSelector((state) => state.UserReducer);
+    const { listNotifications, idNotify } = useSelector(
+        (state) => state.NotificationReducer,
+    );
+    const dispatch = useDispatch();
+    const navigation = useNavigation();
+    useEffect(() => {
+        getToken("accessToken").then((res) => {
+            if (res != undefined) {
+                dispatch(getNotifications(user.userId, res));
+            }
+        });
+    }, [idNotify]);
+    const updateUserNotificationByUserId = async (notificationId) => {
+        let accessToken = await getToken("accessToken");
+
+        dispatch(
+            updateUserNotification(
+                user.userId,
+                notificationId,
+                accessToken,
+                navigation,
+            ),
+        );
+    };
+    const navigateToContent = (notificationId) => {
+        navigation.navigate("NotifyContent", {
+            notificationId: notificationId,
+        });
+    };
+    const renderNotify = () => {
+        return listNotifications?.map((item, index) => {
+            return (
+                <TouchableOpacity
+                    onPress={() =>
+                        item.isReaded == 0
+                            ? updateUserNotificationByUserId(item.ID)
+                            : navigateToContent(item.ID)
+                    }
+                    style={
+                        item.isReaded == 1
+                            ? [styles.notiBox]
+                            : [styles.notiBox, styles.unRead]
+                    }
+                    key={index}>
+                    <View style={styles.itemLeft}>
+                        <View style={styles.iconLeft}>
+                            <AntDesign
+                                name="notification"
+                                size={25}
+                                color={"white"}
+                            />
+                        </View>
+                    </View>
+                    <View style={styles.itemCenter}>
+                        <View>
+                            <Text>{item.Notifications}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.itemRight}>
+                        <Icon name="dots-horizontal" size={18} />
+                    </View>
+                </TouchableOpacity>
+            );
+        });
+    };
     return (
-        <View style={{ flex: 1 }}>
-            <ScrollView contentContainerStyle={{alignItems:'center',paddingBottom:100}}>
-                <View style={styles.boxNoti}>
-                  <View style={styles.boxText}>
-                    <Text style={styles.boxTextTD}>Thông báo lịch nghỉ phép tập trung</Text>
-                    <Text style={styles.boxTextND}>Công ty thông báo về việc nghỉ phép tập trung năm 2022</Text>
-
-                  </View>
-                  <View style={[styles.readed,{backgroundColor:'#0D4A85'}]}></View>
-
-                </View>
-                <View style={styles.boxNoti}>
-                  <View style={styles.boxText}>
-                    <Text style={styles.boxTextTD}>Thông báo lịch nghỉ phép tập trung</Text>
-                    <Text style={styles.boxTextND}>Công ty thông báo về việc nghỉ phép tập trung năm 2022</Text>
-
-                  </View>
-                  <View style={styles.readed}></View>
-
-                </View>
-                <View style={styles.boxNoti}>
-                  <View style={styles.boxText}>
-                    <Text style={styles.boxTextTD}>Thông báo lịch nghỉ phép tập trung tập trung tập trung</Text>
-                    <Text style={styles.boxTextND}>Công ty thông báo về việc nghỉ phép tập trung năm 2022 trung năm 2022 trung năm 2022 trung năm 2022 trung năm 2022</Text>
-
-                  </View>
-                  <View style={[styles.readed,{backgroundColor:'#0D4A85'}]}></View>
-                </View>
-                <View style={styles.boxNoti}>
-                  <View style={styles.boxText}>
-                    <Text style={styles.boxTextTD}>Thông báo lịch nghỉ phép tập trung</Text>
-                    <Text style={styles.boxTextND}>Công ty thông báo về việc nghỉ phép tập trung năm 2022</Text>
-
-                  </View>
-                  <View style={[styles.readed,{backgroundColor:'#0D4A85'}]}></View>
-
-                </View>
-                <View style={styles.boxNoti}>
-                  <View style={styles.boxText}>
-                    <Text style={styles.boxTextTD}>Thông báo lịch nghỉ phép tập trung</Text>
-                    <Text style={styles.boxTextND}>Công ty thông báo về việc nghỉ phép tập trung năm 2022</Text>
-
-                  </View>
-                  <View style={styles.readed}></View>
-
-                </View>
-                <View style={styles.boxNoti}>
-                  <View style={styles.boxText}>
-                    <Text style={styles.boxTextTD}>Thông báo lịch nghỉ phép tập trung</Text>
-                    <Text style={styles.boxTextND}>Công ty thông báo về việc nghỉ phép tập trung năm 2022</Text>
-
-                  </View>
-                  <View style={styles.readed}></View>
-
-                </View>
-            </ScrollView>
-            {/* <View
-                style={{
-                    justifyContent: "center",
+        <View style={{ flex: 1, backgroundColor: "white" }}>
+            <ScrollView
+                contentContainerStyle={{
                     alignItems: "center",
+                    paddingBottom: 100,
                 }}>
-                <Image
-                    style={{ width: "50%", height: "50%", marginTop: 50 }}
-                    source={require("../../assets/images/notification.png")}
-                />
-            </View> */}
+                {renderNotify()}
+            </ScrollView>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    boxNoti: {
-        // backgroundColor: "blue",
-        width: "95%",
-        // height: 100,
-        marginVertical: 8,
-        borderRadius:10,
-        flexDirection:'row',
-        overflow: 'hidden',
+    notiBox: {
+        padding: 10,
+        paddingVertical: 20,
+        flexDirection: "row",
+        borderBottomColor: "#F1EEE9",
+        borderBottomWidth: 0.5,
     },
-    boxText:{
-      width:'97%',
-      backgroundColor:'white',
-      height:'100%',
-      padding:10
+    unRead: {
+        backgroundColor: "#ebf7fa",
     },
-    readed:{
-      width:'3%',
-      height:'100%',
-      backgroundColor:'#C2C2C2'
+    itemLeft: {
+        alignItems: "center",
+        justifyContent: "center",
+        width: "20%",
     },
-    boxTextTD:{
-      fontSize:18,
-      fontWeight:'700'
-    },boxTextND:{
-      fontSize:15,
-      marginTop:5,
-      fontStyle:"italic",
-      color:'#65656B'
-    }
+    itemCenter: {
+        width: "70%",
+        justifyContent: "center",
+    },
+    itemRight: {
+        width: "10%",
+        alignItems: "flex-end",
+        justifyContent: "center",
+    },
+    iconLeft: {
+        backgroundColor: "#0D4A85",
+        justifyContent: "center",
+        alignItems: "center",
+        height: 40,
+        width: 40,
+        borderRadius: 50,
+        transform: [{ rotateY: "180deg" }],
+    },
 });

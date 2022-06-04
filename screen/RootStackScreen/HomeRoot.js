@@ -10,14 +10,14 @@ import Salary from "../Salary/Salary";
 import IconAnt from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
-import {multilang} from '../../language/multilang';
+import { multilang } from "../../language/multilang";
 import Notify from "../Notify/Notify";
-
+import NotifyContent from "../NotifyContent/NotifyContent";
 
 const Stack = createNativeStackNavigator();
 
 const HomeStackScreen = () => {
-    const { lang } = useSelector(state => state.UserReducer);
+    const { lang } = useSelector((state) => state.UserReducer);
 
     const navigation = useNavigation();
     const dispatch = useDispatch();
@@ -40,28 +40,35 @@ const HomeStackScreen = () => {
                 name="OnLeave"
                 component={OnLeave}
                 options={{
-                    headerTitle:multilang[lang].ngayNghi
+                    headerTitle: multilang[lang].ngayNghi,
                 }}
             />
-                <Stack.Screen
+            <Stack.Screen
                 name="OverTime"
                 component={OverTime}
                 options={{
-                    headerTitle:multilang[lang].tangCa
+                    headerTitle: multilang[lang].tangCa,
                 }}
             />
             <Stack.Screen
                 name="Book"
                 component={SoTayLaoDong}
                 options={{
-                    headerTitle:multilang[lang].soTay
+                    headerTitle: multilang[lang].soTay,
                 }}
             />
-             <Stack.Screen
+            <Stack.Screen
                 name="Notify"
                 component={Notify}
                 options={{
-                    headerTitle:multilang[lang].thongBao
+                    headerTitle: multilang[lang].thongBao,
+                }}
+            />
+            <Stack.Screen
+                name="NotifyContent"
+                component={NotifyContent}
+                options={{
+                    headerTitle: multilang[lang].thongBao,
                 }}
             />
             {/* <Stack.Screen name="Notifications" component={Notifications} /> */}

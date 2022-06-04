@@ -22,6 +22,7 @@ export const loginAction = (userLogin, navigation) => {
                     userToken: result.data.accessToken,
                 });
             } else {
+                console.log(result.data.message)
                 dispatch({
                     type: "LOGIN_FAIL",
                     messageLoginResponse: result.data.message,
@@ -141,10 +142,12 @@ export const getOnLeaveSummary = (accessToken, userId, year) => {
 //     };
 // };
 
-export const loginFingerAction = () => {
+export const loginFingerAction = (lang) => {
     return async (dispatch) => {
         try {
-            let checkLogin = await checkLoginFinger();
+            let checkLogin = await checkLoginFinger(lang);
+            console.log(checkLogin);
+
             if (checkLogin.status == true) {
                 let user = await getToken("user");
                 user = JSON.parse(user);

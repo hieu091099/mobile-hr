@@ -88,12 +88,9 @@ export const axiosInstanceToken = async (method, url, accessToken, data) => {
     }
 };
 
-export const checkLoginFinger = async () => {
-const { lang } = useSelector(state => state.UserReducer);
-
+export const checkLoginFinger = async (lang) => {
     let accessToken = await getToken("accessToken");
     let refreshToken = await getToken("refreshToken");
-
     if (accessToken) {
         const decoded = jwt_decode(accessToken);
         const current_time = new Date().getTime() / 1000;
@@ -112,12 +109,12 @@ const { lang } = useSelector(state => state.UserReducer);
                     if (res.data.key == 1) {
                         return {
                             status: false,
-                            msg: `${multilang[lang].dangNhapVanTayChiCoTheSuDungTrong7NgayKeTuNgayDangNhapBangMatKhau}\n${multilang[lang].vuiLongDangNhapBangMatKhauDeTaiKichHoatChucNang}`,
+                            msg: "dangNhapVanTayChiCoTheSuDungTrong7NgayKeTuNgayDangNhapBangMatKhauVuiLongDangNhapBangMatKhauDeTaiKichHoatChucNang",
                         };
                     } else {
                         return {
                             status: false,
-                            msg: `${multilang[lang].taiKhoanDaDuocDangNhapTu1ThietBiKhac}\n${multilang[lang].vuiLongDangNhapLaiDeTaiKichHoatChucNang}`,
+                            msg: "taiKhoanDaDuocDangNhapTu1ThietBiKhacVuiLongDangNhapLaiDeTaiKichHoatChucNang",
                         };
                     }
                 } else {

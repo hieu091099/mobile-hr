@@ -25,7 +25,7 @@ export default function LoginScreen() {
     //
     const imglang = {
         vi: { img: require("../../assets/images/flags/vi.png"), name: "vi" },
-        mm: { img: require("../../assets/images/flags/mm.png"), name: "mm" },
+        // mm: { img: require("../../assets/images/flags/mm.png"), name: "mm" },
         en: { img: require("../../assets/images/flags/en.png"), name: "en" },
         tw: { img: require("../../assets/images/flags/tw.png"), name: "tw" },
     };
@@ -148,7 +148,7 @@ export default function LoginScreen() {
             <SimpleDialog
                 visible={isVisibleLogin}
                 setVisible={setVisibleDispatch}
-                message={messageLoginResponse}
+                message={multilang[lang][messageLoginResponse]}
             />
             <ImageBackground
                 source={require("../../assets/images/bg_login2.png")}

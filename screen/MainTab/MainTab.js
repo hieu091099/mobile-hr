@@ -13,12 +13,9 @@ import HomeStackScreen from "../RootStackScreen/HomeRoot";
 import Setting from "../Setting/Setting";
 import SettingStackScreen from "../RootStackScreen/SettingRoot";
 import {multilang} from '../../language/multilang';
+import Contact from "../Contact/Contact";
 
 const Tab = createBottomTabNavigator();
-
-const Contact = () => {
-    return <></>;
-};
 // const Setting = () => {
 //     const navigation = useNavigation();
 //     return <Text>123</Text>;

@@ -21,7 +21,7 @@ export default function HeaderHomeScreen() {
                   navigation.navigate('Notify')
                 }}>
                     <Ionicons name='md-notifications-circle-outline' size={30} />
-                    <Badge style={{position:'absolute'}}>1</Badge>
+                    {/* <Badge style={{position:'absolute'}}>1</Badge> */}
                 </TouchableOpacity>
             </View>
         </View>

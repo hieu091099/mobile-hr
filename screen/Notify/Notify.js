@@ -4,7 +4,7 @@ import React from "react";
 export default function Notify() {
     return (
         <View style={{ flex: 1 }}>
-            <ScrollView contentContainerStyle={{alignItems:'center',paddingBottom:100}}>
+            {/* <ScrollView contentContainerStyle={{alignItems:'center',paddingBottom:100}}>
                 <View style={styles.boxNoti}>
                   <View style={styles.boxText}>
                     <Text style={styles.boxTextTD}>Thông báo lịch nghỉ phép tập trung</Text>
@@ -58,8 +58,8 @@ export default function Notify() {
                   <View style={styles.readed}></View>
 
                 </View>
-            </ScrollView>
-            {/* <View
+            </ScrollView> */}
+            <View
                 style={{
                     justifyContent: "center",
                     alignItems: "center",
@@ -68,7 +68,7 @@ export default function Notify() {
                     style={{ width: "50%", height: "50%", marginTop: 50 }}
                     source={require("../../assets/images/notification.png")}
                 />
-            </View> */}
+            </View>
         </View>
     );
 }

@@ -47,16 +47,17 @@ export default function HeaderHomeScreen() {
                 <TouchableOpacity
                     style={styles.iconRight}
                     onPress={() => {
-                        navigation.navigate("Notify");
+                        // navigation.navigate("Notify");
                     }}>
                     <Ionicons
                         name="md-notifications-circle-outline"
                         size={30}
                     />
                     {sumNotification() > 0 ? (
-                        <Badge style={{ position: "absolute" }}>
-                            {sumNotification()}
-                        </Badge>
+                        // <Badge style={{ position: "absolute" }}>
+                        //     {sumNotification()}
+                        // </Badge>
+                        <></>
                     ) : (
                         <></>
                     )}

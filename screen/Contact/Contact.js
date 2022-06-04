@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 import Accordion from 'react-native-collapsible/Accordion'
 import Anticons from "react-native-vector-icons/AntDesign";
@@ -50,7 +50,17 @@ export default function Contact() {
     };
   return (
     <View style={{flex:1}} >
-        <Text style={{textAlign:'center',marginTop:100}}>Tính năng đang hoàn thiện</Text>
+        {/* <Text style={{textAlign:'center',marginTop:100}}>Tính năng đang hoàn thiện</Text> */}
+        <View
+                style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}>
+                <Image
+                    style={{ width: "50%", height: "50%", marginTop: 50 }}
+                    source={require("../../assets/images/notification.png")}
+                />
+            </View>
        {/* <Accordion
                             activeSections={activeSections}
                             sections={[1,2,3,4,5,6]}

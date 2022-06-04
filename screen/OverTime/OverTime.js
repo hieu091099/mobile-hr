@@ -378,6 +378,7 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         fontSize: 19,
         marginBottom: 10,
+        textDecorationLine:"underline"
     },
     contentText: {
         textAlign: "center",

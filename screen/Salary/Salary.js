@@ -17,8 +17,10 @@ import DatePicker from "react-native-modern-datepicker";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import SalaryDetail from "../../components/SalaryDetail/SalaryDetail";
 import { multilang } from "../../language/multilang";
+import { usePreventScreenCapture } from "expo-screen-capture";
 
 export default function Salary() {
+    usePreventScreenCapture();
     const { salary, lang } = useSelector((state) => state.UserReducer);
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);

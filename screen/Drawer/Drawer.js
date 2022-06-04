@@ -180,7 +180,7 @@ export default function DrawerContent(props) {
                         navigate="OverTime"
                     />
                     <RMenuListDisble name={multilang[lang].troGiup} />
-                    <RMenuList
+                    {/* <RMenuList
                        name={multilang[lang].thongBao}
                         icon={
                             <AntIcon
@@ -190,7 +190,7 @@ export default function DrawerContent(props) {
                             />
                         }
                         navigate="Notify"
-                    />
+                    /> */}
                     <RMenuList
                          name={multilang[lang].doiMatKhau}
                         icon={<AntIcon name="key" size={20} color="#5C5C5C" />}

@@ -74,10 +74,10 @@ export default function ChangePassword() {
             }
         } else {
             if (newPass != newPassCf) {
-                setMsgChangePass({ message: multilang[lang].matKhauXacNhanKhongKhop });
+                setMsgChangePass({ message: "matKhauXacNhanKhongKhop"});
                 setVisibleMsg(true);
             } else {
-                setMsgChangePass({ message: multilang[lang].vuiLongNhapDayDuThongTin });
+                setMsgChangePass({ message: "vuiLongNhapDayDuThongTin" });
                 setVisibleMsg(true);
             }
         }
@@ -88,9 +88,9 @@ export default function ChangePassword() {
             resizeMode="cover"
             style={{ width: "100%", height: "100%" }}>
             <SimpleDialog
-                message={msgChangePass?.message}
                 visible={visibleMsg}
                 setVisible={setVisibleMsg}
+                message={multilang[lang][msgChangePass?.message]}
             />
             <View
                 style={{

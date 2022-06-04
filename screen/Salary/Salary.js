@@ -25,7 +25,7 @@ export default function Salary() {
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
     const [showSalary, setShowSalary] = useState(false);
-
+    const [hideSalary, setHideSalary] = useState(false);
     const [selectDate, setSelectDate] = useState(
         new Date().getFullYear() +
             " " +
@@ -33,6 +33,7 @@ export default function Salary() {
                 ? new Date().getMonth() - 1
                 : new Date().getMonth()),
     );
+
     const formatNum = (num) => {
         if (typeof num == "number") {
             return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
@@ -40,8 +41,23 @@ export default function Salary() {
             return num;
         }
     };
+
     const pad = (num) => (num.length == 1 ? "0" : "") + num;
     useEffect(() => {
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, "0");
+        let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+        let yyyy = today.getFullYear();
+
+        if (selectDate.split(" ")[0] == yyyy) {
+            if (selectDate.split(" ")[1] == mm - 1 && dd < 9) {
+                setHideSalary(true);
+            } else if (selectDate.split(" ")[1] > mm - 1) {
+                setHideSalary(true);
+            } else {
+                setHideSalary(false);
+            }
+        }
         getToken("user").then((res) => {
             if (res != "" || res != undefined) {
                 res = JSON.parse(res);
@@ -125,7 +141,7 @@ export default function Salary() {
                                 </Text>
                             </TouchableOpacity>
                         </View>
-                        {salary?.Final_Salary != undefined ? (
+                        {salary?.Final_Salary != undefined && !hideSalary ? (
                             <View>
                                 <View style={{ marginLeft: 10 }}>
                                     {showSalary ? (
@@ -166,61 +182,56 @@ export default function Salary() {
                                 <View>
                                     <View style={styles.row}>
                                         <View style={styles.column}>
-                                        <Text style={styles.contentText}>
+                                            <Text style={styles.contentText}>
                                                 {salary?.Working_Days}
                                             </Text>
                                             <Text style={styles.titleText}>
                                                 {multilang[lang].congTt}
                                             </Text>
-                                           
                                         </View>
                                         <View style={styles.column}>
-                                        <Text style={styles.contentText}>
+                                            <Text style={styles.contentText}>
                                                 {salary?.Overtime}
                                             </Text>
                                             <Text style={styles.titleText}>
                                                 {multilang[lang].tCaLuyKe}
                                             </Text>
-                                         
                                         </View>
                                         <View style={styles.column}>
-                                        <Text style={styles.contentText}>
+                                            <Text style={styles.contentText}>
                                                 {salary?.Rating_ID.trim()}
                                             </Text>
                                             <Text style={styles.titleText}>
                                                 {multilang[lang].loaiBinhBau}
                                             </Text>
-                                          
                                         </View>
                                     </View>
-                                    <View style={[styles.row,{marginTop:15}]}>
+                                    <View
+                                        style={[styles.row, { marginTop: 15 }]}>
                                         <View style={styles.column}>
-                                        <Text style={styles.contentText}>
+                                            <Text style={styles.contentText}>
                                                 {salary?.Annual_Leave}
                                             </Text>
                                             <Text style={styles.titleText}>
                                                 {multilang[lang].soPhepNam}
                                             </Text>
-                                           
                                         </View>
                                         <View style={styles.column}>
-                                        <Text style={styles.contentText}>
+                                            <Text style={styles.contentText}>
                                                 {salary?.Leave_Days}
                                             </Text>
                                             <Text style={styles.titleText}>
                                                 {multilang[lang].daNghi}
                                             </Text>
-                                          
                                         </View>
                                         <View style={styles.column}>
-                                        <Text style={styles.contentText}>
+                                            <Text style={styles.contentText}>
                                                 {salary?.Annual_Leave -
                                                     salary?.Leave_Days}
                                             </Text>
                                             <Text style={styles.titleText}>
                                                 {multilang[lang].conLai}
                                             </Text>
-                                           
                                         </View>
                                     </View>
                                 </View>
@@ -243,7 +254,7 @@ export default function Salary() {
                     <Text style={styles.titleSalaryDetail}>
                         {multilang[lang].luongChiTiet}
                     </Text>
-                    {salary && salary.Final_Salary == undefined ? (
+                    {hideSalary ? (
                         <View
                             style={{
                                 justifyContent: "center",
@@ -318,5 +329,5 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: "600",
         fontSize: 16,
-    }
+    },
 });

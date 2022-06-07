@@ -26,7 +26,6 @@ export default function Notify() {
     );
     const dispatch = useDispatch();
     const navigation = useNavigation();
-    console.log(moment.locale());
 
     useEffect(() => {
         getToken("accessToken").then((res) => {

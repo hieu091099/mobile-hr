@@ -2,9 +2,8 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 import Accordion from 'react-native-collapsible/Accordion'
 import Anticons from "react-native-vector-icons/AntDesign";
-
-
 export default function Contact() {
+
     const [activeSections, setActiveSections] = useState([]);
     const setSections = (sections) => {
         //setting up a active section state

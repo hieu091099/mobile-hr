@@ -17,6 +17,8 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Entypo from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
+import moment from "moment-timezone";
+import "moment/locale/zh-cn";
 export default function Notify() {
     const { user } = useSelector((state) => state.UserReducer);
     const { listNotifications, idNotify } = useSelector(
@@ -24,6 +26,8 @@ export default function Notify() {
     );
     const dispatch = useDispatch();
     const navigation = useNavigation();
+    console.log(moment.locale());
+
     useEffect(() => {
         getToken("accessToken").then((res) => {
             if (res != undefined) {
@@ -31,6 +35,7 @@ export default function Notify() {
             }
         });
     }, [idNotify]);
+
     const updateUserNotificationByUserId = async (notificationId) => {
         let accessToken = await getToken("accessToken");
 
@@ -43,9 +48,9 @@ export default function Notify() {
             ),
         );
     };
-    const navigateToContent = (notificationId) => {
+    const navigateToContent = (item) => {
         navigation.navigate("NotifyContent", {
-            notificationId: notificationId,
+            item: item,
         });
     };
     const renderNotify = () => {
@@ -55,7 +60,7 @@ export default function Notify() {
                     onPress={() =>
                         item.isReaded == 0
                             ? updateUserNotificationByUserId(item.ID)
-                            : navigateToContent(item.ID)
+                            : navigateToContent(item)
                     }
                     style={
                         item.isReaded == 1
@@ -75,6 +80,14 @@ export default function Notify() {
                     <View style={styles.itemCenter}>
                         <View>
                             <Text>{item.Notifications}</Text>
+                        </View>
+                        <View>
+                            <Text style={{}}>
+                                {moment(
+                                    item.Modify_Date,
+                                    "YYYY-MM-DD HH:mm:ss",
+                                ).fromNow()}
+                            </Text>
                         </View>
                     </View>
                     <View style={styles.itemRight}>

@@ -22,6 +22,7 @@ import { usePreventScreenCapture } from "expo-screen-capture";
 export default function Salary() {
     usePreventScreenCapture();
     const { salary, lang } = useSelector((state) => state.UserReducer);
+    // console.log({ salary });
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
     const [showSalary, setShowSalary] = useState(false);
@@ -141,7 +142,7 @@ export default function Salary() {
                                 </Text>
                             </TouchableOpacity>
                         </View>
-                        {salary?.Final_Salary != undefined && !hideSalary ? (
+                        {salary?.Final_Salary != undefined ? (
                             <View>
                                 <View style={{ marginLeft: 10 }}>
                                     {showSalary ? (
@@ -254,7 +255,7 @@ export default function Salary() {
                     <Text style={styles.titleSalaryDetail}>
                         {multilang[lang].luongChiTiet}
                     </Text>
-                    {hideSalary ? (
+                    {salary?.Final_Salary == undefined ? (
                         <View
                             style={{
                                 justifyContent: "center",

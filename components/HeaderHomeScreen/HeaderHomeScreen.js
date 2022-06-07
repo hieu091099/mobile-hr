@@ -6,6 +6,7 @@ import { Badge } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import { getToken } from "../../config";
 import { getNotifications } from "../../redux/actions/NotificationAction";
+import moment from "moment";
 
 export default function HeaderHomeScreen() {
     const navigation = useNavigation();
@@ -16,6 +17,7 @@ export default function HeaderHomeScreen() {
     const { listNotifications, idNotify } = useSelector(
         (state) => state.NotificationReducer,
     );
+
     const sumNotification = () => {
         let result = 0;
         for (let i in listNotifications) {
@@ -47,17 +49,16 @@ export default function HeaderHomeScreen() {
                 <TouchableOpacity
                     style={styles.iconRight}
                     onPress={() => {
-                        // navigation.navigate("Notify");
+                        navigation.navigate("Notify");
                     }}>
                     <Ionicons
                         name="md-notifications-circle-outline"
                         size={30}
                     />
                     {sumNotification() > 0 ? (
-                        // <Badge style={{ position: "absolute" }}>
-                        //     {sumNotification()}
-                        // </Badge>
-                        <></>
+                        <Badge style={{ position: "absolute" }}>
+                            {sumNotification()}
+                        </Badge>
                     ) : (
                         <></>
                     )}

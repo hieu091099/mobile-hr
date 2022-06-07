@@ -22,7 +22,7 @@ export const loginAction = (userLogin, navigation) => {
                     userToken: result.data.accessToken,
                 });
             } else {
-                console.log(result.data.message)
+                console.log(result.data.message);
                 dispatch({
                     type: "LOGIN_FAIL",
                     messageLoginResponse: result.data.message,

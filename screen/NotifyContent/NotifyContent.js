@@ -3,21 +3,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 export default function NotifyContent({ route }) {
-    let { notificationId } = route.params;
-    let { listNotifications } = useSelector(
-        (state) => state.NotificationReducer,
+    let { item } = route.params;
+
+    console.log({ item });
+    return (
+        <View key={1}>
+            <Text>{item.Content}</Text>
+        </View>
     );
-    const renderNotifyContent = () => {
-        return listNotifications?.map((item) => {
-            if (item.ID == notificationId) {
-                return (
-                    <View>
-                        <Text>{item.Content}</Text>
-                    </View>
-                );
-            }
-        });
-    };
-    console.log({ listNotifications });
-    return <View>{renderNotifyContent()}</View>;
 }

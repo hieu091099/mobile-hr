@@ -107,6 +107,7 @@ export default function LoginFingerPrint() {
 
     const login = async () => {
         getExpoPushNoti().then((val) => {
+            console.log(factoryFromDevice);
             let action = loginAction(
                 {
                     userId: userIdFromDevice,
@@ -280,7 +281,10 @@ export default function LoginFingerPrint() {
                         <TouchableOpacity
                             style={[styles.btndn]}
                             onPress={() => login()}>
-                            <Text style={styles.textbtndn}> {multilang[lang].dangNhap}</Text>
+                            <Text style={styles.textbtndn}>
+                                {" "}
+                                {multilang[lang].dangNhap}
+                            </Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.btnFinger}>
                             <Ionicons

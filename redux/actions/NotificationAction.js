@@ -27,7 +27,7 @@ export const getNotifications = (userId, accessToken) => {
 };
 export const updateUserNotification = (
     userId,
-    notificationId,
+    item,
     accessToken,
     navigation,
 ) => {
@@ -37,16 +37,16 @@ export const updateUserNotification = (
                 "POST",
                 `notification/updateNotificationUser`,
                 accessToken,
-                { userId, notificationId },
+                { userId, notificationId: item.ID },
             );
             if (result.status == 200) {
                 dispatch(getNotifications(userId, accessToken));
                 dispatch({
                     type: "CHOOSE_ID_NOTI",
-                    idNotify: notificationId,
+                    idNotify: item.ID,
                 });
                 navigation.navigate("NotifyContent", {
-                    notificationId: notificationId,
+                    item: item,
                 });
             }
 

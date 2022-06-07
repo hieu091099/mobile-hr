@@ -36,16 +36,11 @@ export default function Notify() {
         });
     }, [idNotify]);
 
-    const updateUserNotificationByUserId = async (notificationId) => {
+    const updateUserNotificationByUserId = async (item) => {
         let accessToken = await getToken("accessToken");
 
         dispatch(
-            updateUserNotification(
-                user.userId,
-                notificationId,
-                accessToken,
-                navigation,
-            ),
+            updateUserNotification(user.userId, item, accessToken, navigation),
         );
     };
     const navigateToContent = (item) => {
@@ -59,7 +54,7 @@ export default function Notify() {
                 <TouchableOpacity
                     onPress={() =>
                         item.isReaded == 0
-                            ? updateUserNotificationByUserId(item.ID)
+                            ? updateUserNotificationByUserId(item)
                             : navigateToContent(item)
                     }
                     style={

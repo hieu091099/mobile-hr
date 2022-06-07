@@ -8,7 +8,7 @@ export default function NotifyContent({ route }) {
     console.log({ item });
     return (
         <View key={1}>
-            <Text>{item.Content}</Text>
+            <Text>{item?.Content}</Text>
         </View>
     );
 }

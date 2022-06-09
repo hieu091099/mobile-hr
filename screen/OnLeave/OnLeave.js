@@ -155,7 +155,7 @@ export default function OnLeave() {
             return (
                 <View style={styles.leaveItem}>
                     <View style={{ width: "100%", alignItems: "center" }}>
-                        <Text>NO DATA</Text>
+                        <Text>{multilang[lang].khongCoDuLieu}</Text>
                     </View>
                 </View>
             );
@@ -364,7 +364,7 @@ export default function OnLeave() {
                                 style={{ width: 80, height: 80 }}
                                 source={require("../../assets/images/nodata.png")}
                             />
-                            <Text style={{ color: "black" }}>No data</Text>
+                            <Text style={{ color: "black" }}>{multilang[lang].khongCoDuLieu}</Text>
                         </View>
                     )}
                 </ScrollView>

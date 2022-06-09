@@ -6,8 +6,8 @@ import * as Notifications from "expo-notifications";
 import { useSelector } from "react-redux";
 import { multilang } from "./language/multilang";
 
-// export const BASE_URL = "http://erp.lacty.com.vn:8000/";
-export const BASE_URL = "http://192.168.18.172:8000/";
+export const BASE_URL = "http://erp.lacty.com.vn:8000/";
+// export const BASE_URL = "http://192.168.18.172:8000/";
 
 export const getToken = async (key) => {
     try {
@@ -193,3 +193,12 @@ export const renderMonth3Lang = (lang, num) => {
     };
     return <>{monthLang[lang][parseInt(num) - 1]}</>;
 };
+export const stringToHslColor = (str, s, l) => {
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+  
+    var h = hash % 360;
+    return 'hsl('+h+', '+s+'%, '+l+'%)';
+  }

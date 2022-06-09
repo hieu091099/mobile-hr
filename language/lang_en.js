@@ -117,4 +117,6 @@ taiKhoanDaDuocDangNhapTu1ThietBiKhacVuiLongDangNhapLaiDeTaiKichHoatChucNang:"Thi
 saiThongTinDangNhap:"Your ID or password is wrong",
 loiChuaXacDinh:"Error is not defined",
 saiThongTinCaNhan:"Personal information is wrong",
+khongCoDuLieu:"No data",
+
 }

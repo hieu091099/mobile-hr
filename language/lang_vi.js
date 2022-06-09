@@ -117,4 +117,6 @@ taiKhoanDaDuocDangNhapTu1ThietBiKhacVuiLongDangNhapLaiDeTaiKichHoatChucNang:"Tà
 saiThongTinDangNhap:"Sai thông tin đăng nhập",
 loiChuaXacDinh:"Lỗi chưa xác định!",
 saiThongTinCaNhan:"Sai thông tin cá nhân !",
+khongCoDuLieu:"không có dữ liệu",
+
 }

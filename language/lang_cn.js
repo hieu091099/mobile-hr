@@ -118,6 +118,6 @@ taiKhoanDaDuocDangNhapTu1ThietBiKhacVuiLongDangNhapLaiDeTaiKichHoatChucNang:"此
 saiThongTinDangNhap:"您的 ID 或密碼錯誤",
 loiChuaXacDinh:"錯誤未確定",
 saiThongTinCaNhan:"個人資訊有誤",
-
+khongCoDuLieu:"沒有數據",
 
 }

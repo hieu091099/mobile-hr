@@ -258,7 +258,7 @@ export default function Salary() {
                                     style={{ width: 80, height: 80 }}
                                     source={require("../../assets/images/nodata_white.png")}
                                 />
-                                <Text style={{ color: "white" }}>No data</Text>
+                                <Text style={{ color: "white" }}>{multilang[lang].khongCoDuLieu}</Text>
                             </View>
                         )}
                     </View>
@@ -276,7 +276,7 @@ export default function Salary() {
                                 style={{ width: 80, height: 80, marginTop: 50 }}
                                 source={require("../../assets/images/nodata.png")}
                             />
-                            <Text>No data</Text>
+                            <Text>{multilang[lang].khongCoDuLieu}</Text>
                         </View>
                     ) : (
                         <SalaryDetail salary={salary} />

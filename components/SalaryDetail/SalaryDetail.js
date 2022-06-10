@@ -57,7 +57,9 @@ export default function SalaryDetail({ salary }) {
                                         paddingLeft: 20,
                                     },
                                 ]}>
-                                {section == 0 ? multilang[lang].khoanCong : multilang[lang].khoanTru }
+                                {section == 0
+                                    ? multilang[lang].khoanCong
+                                    : multilang[lang].khoanTru}
                             </Text>
                             <Text
                                 style={[
@@ -85,7 +87,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                          {multilang[lang].luongChinh}
+                                            {multilang[lang].luongChinh}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -95,7 +97,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].phuCapCongViec}
+                                            {multilang[lang].phuCapCongViec}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -110,7 +112,33 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].phuCapDocHai}
+                                            {multilang[lang].phuCapDocHai}
+                                        </ListItem.Title>
+                                    </ListItem.Content>
+                                    <ListItem.Title style={styles.font}>
+                                        0 VNĐ
+                                    </ListItem.Title>
+                                </ListItem>
+                                <ListItem bottomDivider>
+                                    <ListItem.Content>
+                                        <ListItem.Title style={styles.font}>
+                                            {
+                                                multilang[lang]
+                                                    .phuCapVeSinhMoiTruong
+                                            }
+                                        </ListItem.Title>
+                                    </ListItem.Content>
+                                    <ListItem.Title style={styles.font}>
+                                        {formatNum(
+                                            salary?.EnvironmentalSantation,
+                                        )}{" "}
+                                        VNĐ
+                                    </ListItem.Title>
+                                </ListItem>
+                                <ListItem bottomDivider>
+                                    <ListItem.Content>
+                                        <ListItem.Title style={styles.font}>
+                                            {multilang[lang].phuCapAnToanVien}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -120,27 +148,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].phuCapVeSinhMoiTruong}
-                                        </ListItem.Title>
-                                    </ListItem.Content>
-                                    <ListItem.Title style={styles.font}>
-                                        {formatNum(salary?.ATVSV_Allowance)} VNĐ
-                                    </ListItem.Title>
-                                </ListItem>
-                                <ListItem bottomDivider>
-                                    <ListItem.Content>
-                                        <ListItem.Title style={styles.font}>
-                                        {multilang[lang].phuCapAnToanVien}
-                                        </ListItem.Title>
-                                    </ListItem.Content>
-                                    <ListItem.Title style={styles.font}>
-                                        {formatNum(salary?.ATVSV_Allowance)} VNĐ
-                                    </ListItem.Title>
-                                </ListItem>
-                                <ListItem bottomDivider>
-                                    <ListItem.Content>
-                                        <ListItem.Title style={styles.font}>
-                                        {multilang[lang].pcQip}
+                                            {multilang[lang].pcQip}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -150,7 +158,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].pcPccc}
+                                            {multilang[lang].pcPccc}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -160,7 +168,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].luongPc}
+                                            {multilang[lang].luongPc}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -173,7 +181,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].luongThang}
+                                            {multilang[lang].luongThang}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -183,7 +191,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].tienLamThem}
+                                            {multilang[lang].tienLamThem}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -193,7 +201,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].pcCaDem}
+                                            {multilang[lang].pcCaDem}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -204,7 +212,8 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].tienNgungViec} (NV1){" "}
+                                            {multilang[lang].tienNgungViec}{" "}
+                                            (NV1){" "}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -214,7 +223,8 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].tienNgungViec} (NV2){" "}
+                                            {multilang[lang].tienNgungViec}{" "}
+                                            (NV2){" "}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -224,7 +234,8 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].tienNgungViec} (NV3){" "}
+                                            {multilang[lang].tienNgungViec}{" "}
+                                            (NV3){" "}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -234,7 +245,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].tienChuyenCan}
+                                            {multilang[lang].tienChuyenCan}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -244,7 +255,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].phiSinhHoat}
+                                            {multilang[lang].phiSinhHoat}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -254,7 +265,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].tienBinhBau}
+                                            {multilang[lang].tienBinhBau}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -264,7 +275,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].tienNghiPhep}
+                                            {multilang[lang].tienNghiPhep}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -274,7 +285,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].tienNghiLe}
+                                            {multilang[lang].tienNghiLe}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -284,7 +295,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].thuongBinhBauNam}
+                                            {multilang[lang].thuongBinhBauNam}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -294,7 +305,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].tienSld1}
+                                            {multilang[lang].tienSld1}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -304,7 +315,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].tienSld2}
+                                            {multilang[lang].tienSld2}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -314,7 +325,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].tienKhac}
+                                            {multilang[lang].tienKhac}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -324,7 +335,10 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].tienHoTroPhiSinhHoat}
+                                            {
+                                                multilang[lang]
+                                                    .tienHoTroPhiSinhHoat
+                                            }
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -342,7 +356,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].tamUng}
+                                            {multilang[lang].tamUng}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -352,7 +366,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].tienBhxh}
+                                            {multilang[lang].tienBhxh}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -363,7 +377,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].tienBhyt}
+                                            {multilang[lang].tienBhyt}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -374,7 +388,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].tienBhtn}
+                                            {multilang[lang].tienBhtn}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -387,7 +401,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].doanPhi}
+                                            {multilang[lang].doanPhi}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -397,7 +411,7 @@ export default function SalaryDetail({ salary }) {
                                 <ListItem bottomDivider>
                                     <ListItem.Content>
                                         <ListItem.Title style={styles.font}>
-                                        {multilang[lang].thueTncn}
+                                            {multilang[lang].thueTncn}
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
@@ -419,7 +433,5 @@ export default function SalaryDetail({ salary }) {
 }
 
 const styles = StyleSheet.create({
-    font: {
-        
-    },
+    font: {},
 });

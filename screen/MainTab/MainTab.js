@@ -6,13 +6,16 @@ import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import HeaderHomeScreen from "../../components/HeaderHomeScreen/HeaderHomeScreen";
-import { useNavigation } from "@react-navigation/native";
+import {
+    getFocusedRouteNameFromRoute,
+    useNavigation,
+} from "@react-navigation/native";
 import { WebView } from "react-native-webview";
 import OnLeave from "../OnLeave/OnLeave";
 import HomeStackScreen from "../RootStackScreen/HomeRoot";
 import Setting from "../Setting/Setting";
 import SettingStackScreen from "../RootStackScreen/SettingRoot";
-import {multilang} from '../../language/multilang';
+import { multilang } from "../../language/multilang";
 import Contact from "../Contact/Contact";
 
 const Tab = createBottomTabNavigator();
@@ -40,30 +43,19 @@ export const optionsHeader = (title) => {
                 </TouchableOpacity>
             );
         },
-        // headerRight: () => {
-        //     return (
-        //         <TouchableOpacity
-        //             // onPress={() => alert("Co gi dau ma click, qua ngu ngok haiz!")}
-        //             style={{
-        //                 marginRight: 20,
-        //                 padding: 6,
-        //                 // backgroundColor: '#F5F5F5',
-        //                 borderRadius: 10,
-        //                 borderColor: "#EEEEEE",
-        //                 borderWidth: 1,
-        //             }}>
-        //             <Ionicons name="person-circle" size={30} />
-        //         </TouchableOpacity>
-        //     );
-        // },
         headerTitleAlign: "center",
         headerTitle: title,
         tabBarLabel: title,
     };
 };
 
-const MainTab = () => {
-    const { lang } = useSelector(state => state.UserReducer);
+const MainTab = ({ route, navigation }) => {
+    const { lang } = useSelector((state) => state.UserReducer);
+    // navigation.setOptions({
+    //     tabBarStyle: { display: "none" },
+    // });
+    // const routeName = getFocusedRouteNameFromRoute(route) ?? "Feed";
+    // console.log(routeName);
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -81,6 +73,7 @@ const MainTab = () => {
                 },
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
+
                     color = focused ? "#0D4A85" : "gray";
                     if (route.name === "HomeM") {
                         iconName = focused ? "home" : "home-outline";
@@ -99,16 +92,34 @@ const MainTab = () => {
             })}
             screenListeners={{
                 state: (e) => {
-                    //// console.log(e.data.state)
+                    // console.log("test", e.data.state);
+                    let routes = e.data.state.routes;
+                    // console.log(routes[0]?.state.index);
+                    if (routes[0].state && routes[0].state.index > 0) {
+                        navigation.setOptions({
+                            tabBarStyle: { display: "none" },
+                        });
+                    }
                 },
             }}>
             <Tab.Screen
                 name="HomeM"
                 component={HomeStackScreen}
-                options={{
+                options={({ route }) => ({
                     headerShown: false,
-                    tabBarLabel:multilang[lang].trangChu
-                }}
+                    tabBarLabel: multilang[lang].trangChu,
+                    tabBarStyle: ((route) => {
+                        const routeName =
+                            getFocusedRouteNameFromRoute(route) ?? "";
+                        if (
+                            routeName == "Notify" ||
+                            routeName == "NotifyContent"
+                        ) {
+                            return { display: "none" };
+                        }
+                        return;
+                    })(route),
+                })}
             />
             <Tab.Screen
                 name="Salary"

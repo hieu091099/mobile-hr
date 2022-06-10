@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     Dimensions,
     ImageBackground,
+    ActivityIndicator,
 } from "react-native";
 import { TextInput } from "react-native-paper";
 import { PaperSelect } from "react-native-paper-select";
@@ -43,14 +44,21 @@ export default function LoginScreen() {
 
     const [showChooseLang, setShowChooseLang] = useState(false);
     /** global state get user info */
-    const { user, isLoggedIn, isVisibleLogin, messageLoginResponse, lang } =
-        useSelector((state) => state.UserReducer);
+    const {
+        user,
+        isLoggedIn,
+        isVisibleLogin,
+        messageLoginResponse,
+        isLoadingLogin,
+        lang,
+    } = useSelector((state) => state.UserReducer);
     /** state set when user type input */
     const [userLogin, setUserLogin] = useState({
         userId: "",
         password: "",
         factory: "",
     });
+
     /** state call dialog */
     const [isVisible, setIsVisible] = useState(false);
     /** state message dialog */
@@ -130,13 +138,6 @@ export default function LoginScreen() {
         error: "",
     });
 
-    //    const returnurl= async ()=>{
-    //         test:any =  require(`../../assets/images/flags/${lang}.png`);
-
-    //    // console.log(test);
-
-    //    }
-    //   // console.log();
     return (
         <PaperProvider>
             <SimpleDialog
@@ -231,7 +232,7 @@ export default function LoginScreen() {
                 </View>
                 <View style={styles.tieude}>
                     <Text style={[styles.td]}>
-                        {multilang[lang].chao}{" "}!!
+                        {multilang[lang].chao} !!
                         {/* <Text style={{ fontSize: 35 }}>!!</Text> */}
                     </Text>
                 </View>
@@ -244,7 +245,7 @@ export default function LoginScreen() {
                             },
                         }}
                         value={userLogin.userId}
-                        label= {multilang[lang].soThe}
+                        label={multilang[lang].soThe}
                         mode="outlined"
                         placeholder={multilang[lang].soThe}
                         style={[styles.inputlogin, { marginTop: 20 }]}
@@ -325,7 +326,10 @@ export default function LoginScreen() {
                                 { width: "100%", borderRadius: 5 },
                             ]}
                             onPress={() => login()}>
-                            <Text style={styles.textbtndn}>  {multilang[lang].dangNhap}</Text>
+                            <Text style={styles.textbtndn}>
+                                {" "}
+                                {multilang[lang].dangNhap}
+                            </Text>
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity
@@ -366,6 +370,19 @@ export default function LoginScreen() {
                     </View> */}
                 </View>
             </ImageBackground>
+            {isLoadingLogin && (
+                <View
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        position: "absolute",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "#00000021",
+                    }}>
+                    <ActivityIndicator size="large" color="#0D4A85" />
+                </View>
+            )}
         </PaperProvider>
     );
 }
@@ -411,7 +428,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: "white",
         fontWeight: "600",
-        textTransform: 'uppercase'
+        textTransform: "uppercase",
     },
     btnFinger: {
         marginTop: 30,

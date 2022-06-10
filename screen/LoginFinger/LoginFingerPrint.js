@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     Dimensions,
     ImageBackground,
+    ActivityIndicator,
 } from "react-native";
 import { TextInput } from "react-native-paper";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -37,8 +38,13 @@ export default function LoginFingerPrint() {
     const [factoryFromDevice, setFactoryFromDevice] = useState("");
     const [cancel, setCancel] = useState(false);
     /** global state get user info */
-    const { isLoggedIn, isVisibleLogin, messageLoginResponse, lang } =
-        useSelector((state) => state.UserReducer);
+    const {
+        isLoggedIn,
+        isVisibleLogin,
+        messageLoginResponse,
+        lang,
+        isLoadingLogin,
+    } = useSelector((state) => state.UserReducer);
     /** state set when user type input */
     const [userLogin, setUserLogin] = useState({
         userId: "",
@@ -107,7 +113,7 @@ export default function LoginFingerPrint() {
 
     const login = async () => {
         getExpoPushNoti().then((val) => {
-            console.log(factoryFromDevice);
+            // console.log(factoryFromDevice);
             let action = loginAction(
                 {
                     userId: userIdFromDevice,
@@ -297,6 +303,20 @@ export default function LoginFingerPrint() {
                             />
                         </TouchableOpacity>
                     </View>
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigation.navigate("ChangePassCMND");
+                        }}>
+                        <Text
+                            style={{
+                                color: "gray",
+                                marginTop: 10,
+                                textDecorationLine: "underline",
+                                textDecorationColor: "#0D4A85",
+                            }}>
+                            {multilang[lang].quenMatKhau}
+                        </Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.contact}>
                     {/* <View style={styles.contactItem}>
@@ -321,6 +341,19 @@ export default function LoginFingerPrint() {
                     </View> */}
                 </View>
             </ImageBackground>
+            {isLoadingLogin && (
+                <View
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        position: "absolute",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "#00000021",
+                    }}>
+                    <ActivityIndicator size="large" color="#0D4A85" />
+                </View>
+            )}
         </PaperProvider>
     );
 }

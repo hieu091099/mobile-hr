@@ -10,7 +10,7 @@ import {
     TouchableOpacity,
 } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
-import { getToken } from "../../config";
+import { axiosInstanceToken, getToken } from "../../config";
 import { useDispatch, useSelector } from "react-redux";
 import { getSalaryAction } from "../../redux/actions/UserAction";
 import DatePicker from "react-native-modern-datepicker";
@@ -22,18 +22,10 @@ import { usePreventScreenCapture } from "expo-screen-capture";
 export default function Salary() {
     usePreventScreenCapture();
     const { salary, lang } = useSelector((state) => state.UserReducer);
-    // console.log({ salary });
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
     const [showSalary, setShowSalary] = useState(false);
-    const [hideSalary, setHideSalary] = useState(false);
-    const [selectDate, setSelectDate] = useState(
-        new Date().getFullYear() +
-            " " +
-            (new Date().getDate() < 10
-                ? new Date().getMonth() - 1
-                : new Date().getMonth()),
-    );
+    const [selectDate, setSelectDate] = useState("");
 
     const formatNum = (num) => {
         if (typeof num == "number") {
@@ -42,36 +34,36 @@ export default function Salary() {
             return num;
         }
     };
-
+    const getLastYearMonthSalary = async (accessToken) => {
+        try {
+            let result = await axiosInstanceToken(
+                "GET",
+                "salary/getLastMonthConfirm",
+                accessToken,
+            );
+            return result.data.month;
+        } catch (e) {
+            console.log(e);
+        }
+    };
     const pad = (num) => (num.length == 1 ? "0" : "") + num;
     useEffect(() => {
-        let today = new Date();
-        let dd = String(today.getDate()).padStart(2, "0");
-        let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-        let yyyy = today.getFullYear();
-
-        if (selectDate.split(" ")[0] == yyyy) {
-            if (selectDate.split(" ")[1] == mm - 1 && dd < 9) {
-                setHideSalary(true);
-            } else if (selectDate.split(" ")[1] > mm - 1) {
-                setHideSalary(true);
-            } else {
-                setHideSalary(false);
-            }
-        }
         getToken("user").then((res) => {
             if (res != "" || res != undefined) {
                 res = JSON.parse(res);
                 let personId = res.userId;
                 getToken("accessToken").then((res) => {
                     if (res != "" || res != undefined) {
-                        dispatch(
-                            getSalaryAction(
-                                res,
-                                personId,
-                                selectDate.replace(" ", "-"),
-                            ),
-                        );
+                        getLastYearMonthSalary(res).then((mY) => {
+                            if (selectDate != "") {
+                                dispatch(
+                                    getSalaryAction(res, personId, selectDate),
+                                );
+                            } else {
+                                setSelectDate(mY);
+                                dispatch(getSalaryAction(res, personId, mY));
+                            }
+                        });
                     }
                 });
             }
@@ -104,10 +96,10 @@ export default function Salary() {
                             selectedTextColor: "white",
                             mainColor: "#0D4A85",
                         }}
-                        selected={selectDate}
+                        selected={selectDate.replace("-", " ")}
                         mode="monthYear"
                         onMonthYearChange={(selectedDate) => {
-                            setSelectDate(selectedDate);
+                            setSelectDate(selectedDate.replace(" ", "-"));
                             setModalVisible(false);
                         }}
                         current={selectDate}
@@ -136,8 +128,8 @@ export default function Salary() {
                                             textDecorationLine: "underline",
                                             color: "white",
                                         }}>
-                                        {pad(selectDate.split(" ")[1])} -{" "}
-                                        {selectDate.split(" ")[0]}
+                                        {selectDate.split("-")[1]} -{" "}
+                                        {selectDate.split("-")[0]}
                                     </Text>
                                 </Text>
                             </TouchableOpacity>

@@ -6,7 +6,7 @@ const stateDefault = {
     isLoggedIn: false,
     checkUndefined: true,
     salary: [],
-    // indexScreen: '',
+    isLoadingLogin: false,
     isVisibleLogin: false,
     isVisibleExpired: false,
     messageLoginResponse: "",
@@ -90,7 +90,10 @@ export const UserReducer = (state = stateDefault, action) => {
             state.lang = action.lang;
             return { ...state };
         }
-
+        case "SET_LODING_LOGIN": {
+            state.isLoadingLogin = action.isLoadingLogin;
+            return { ...state };
+        }
         // case 'CHANGE_SCREEN': {
         //     state.indexScreen = action.indexScreen;
         //     return { ...state };

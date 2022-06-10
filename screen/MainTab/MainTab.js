@@ -51,11 +51,6 @@ export const optionsHeader = (title) => {
 
 const MainTab = ({ route, navigation }) => {
     const { lang } = useSelector((state) => state.UserReducer);
-    // navigation.setOptions({
-    //     tabBarStyle: { display: "none" },
-    // });
-    // const routeName = getFocusedRouteNameFromRoute(route) ?? "Feed";
-    // console.log(routeName);
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -73,7 +68,6 @@ const MainTab = ({ route, navigation }) => {
                 },
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
-
                     color = focused ? "#0D4A85" : "gray";
                     if (route.name === "HomeM") {
                         iconName = focused ? "home" : "home-outline";
@@ -91,16 +85,7 @@ const MainTab = ({ route, navigation }) => {
                 },
             })}
             screenListeners={{
-                state: (e) => {
-                    // console.log("test", e.data.state);
-                    let routes = e.data.state.routes;
-                    // console.log(routes[0]?.state.index);
-                    if (routes[0].state && routes[0].state.index > 0) {
-                        navigation.setOptions({
-                            tabBarStyle: { display: "none" },
-                        });
-                    }
-                },
+                state: (e) => {},
             }}>
             <Tab.Screen
                 name="HomeM"
@@ -117,7 +102,12 @@ const MainTab = ({ route, navigation }) => {
                         ) {
                             return { display: "none" };
                         }
-                        return;
+                        return {
+                            borderTopLeftRadius: 10,
+                            borderTopRightRadius: 10,
+                            paddingBottom: 3,
+                            paddingTop: 5,
+                        };
                     })(route),
                 })}
             />

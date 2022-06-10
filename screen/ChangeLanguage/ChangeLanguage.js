@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckBox, withTheme } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
@@ -7,12 +7,15 @@ import { setToken } from "../../config";
 import { RadioButton } from "react-native-paper";
 import { multilang } from "../../language/multilang";
 
-export default function ChangeLanguage() {
-    const { lang } = useSelector((state) => state.UserReducer);
+export default function ChangeLanguage({ route, navigation }) {
+    let { lang } = route.params;
     const [checked, setChecked] = useState(lang);
     const dispatch = useDispatch();
-    const navigation = useNavigation();
-
+    useEffect(() => {
+        return navigation.addListener("focus", () => {
+            setChecked(lang);
+        });
+    }, [lang]);
     const changeLang = () => {
         dispatch({
             type: "CHANGE_LANG",

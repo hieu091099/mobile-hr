@@ -22,6 +22,7 @@ import * as Notifications from "expo-notifications";
 import UserDetail from "./screen/Setting/UserDetail";
 import { multilang } from "./language/multilang";
 import WithoutBotTabRoot from "./screen/RootStackScreen/WithoutBotTabRoot";
+import moment from "moment-timezone";
 
 export default function App() {
     const Stack = createNativeStackNavigator();
@@ -40,6 +41,21 @@ export default function App() {
             }
         });
     }, []);
+    useEffect(() => {
+        switch (lang) {
+            case "en":
+                moment.locale("en-gb");
+                break;
+            case "vi":
+                moment.locale("vi");
+                break;
+            case "tw":
+                moment.locale("zh-tw");
+                break;
+            default:
+                moment.locale("vi");
+        }
+    }, [lang]);
     const theme = {
         ...DefaultTheme,
         roundness: 2,

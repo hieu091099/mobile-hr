@@ -72,210 +72,231 @@ export default function Salary() {
     }, [selectDate]);
 
     return (
-        <ScrollView style={{flex:1}}  refreshControl={
-            <RefreshControl
-              refreshing={false}
-              onRefresh={()=>{
-                setSelectDate(selectDate);
-                // setSelectYear('2022');
-
-              }}
-            />
-          }>
-        <View style={styles.wrapper}>
-            {/* <View style={{flex:1,justifyContent: 'center', alignItems: 'center',height:100,width:100}}> */}
-            <Modal
-                animationType="fade"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                    Alert.alert("Modal has been closed.");
-                    setModalVisible(!modalVisible);
-                }}>
-                <Pressable
-                    style={{
-                        justifyContent: "center",
-                        alignItems: "center",
-                        flex: 1,
-                        backgroundColor: "#00000078",
+        <ScrollView
+            style={{ flex: 1 }}
+            refreshControl={
+                <RefreshControl
+                    refreshing={false}
+                    onRefresh={() => {
+                        setSelectDate(selectDate);
+                        // setSelectYear('2022');
                     }}
-                    onPress={() => {
-                        setModalVisible(false);
+                />
+            }>
+            <View style={styles.wrapper}>
+                {/* <View style={{flex:1,justifyContent: 'center', alignItems: 'center',height:100,width:100}}> */}
+                <Modal
+                    animationType="fade"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                        setModalVisible(!modalVisible);
                     }}>
-                    <DatePicker
-                        options={{
-                            selectedTextColor: "white",
-                            mainColor: "#0D4A85",
+                    <Pressable
+                        style={{
+                            justifyContent: "center",
+                            alignItems: "center",
+                            flex: 1,
+                            backgroundColor: "#00000078",
                         }}
-                        selected={selectDate.replace("-", " ")}
-                        mode="monthYear"
-                        onMonthYearChange={(selectedDate) => {
-                            setSelectDate(selectedDate.replace(" ", "-"));
+                        onPress={() => {
                             setModalVisible(false);
-                        }}
-                        current={selectDate}
-                        style={{ borderRadius: 10 }}
-                    />
-                </Pressable>
-            </Modal>
-            {salary == "" ? (
-                <View style={styles.wrapperLoading}>
-                    <ActivityIndicator
-                        style={{ marginTop: "25%" }}
-                        size={65}
-                        color="#0D4A85"
-                    />
-                </View>
-            ) : (
-                <View style={{ width: "93%", height: "100%", flex: 1 }}>
-                    <View style={styles.summary}>
-                        <View style={{ marginLeft: 10 }}>
-                            <TouchableOpacity
-                                onPress={() => setModalVisible(true)}>
-                                <Text style={styles.textTitle}>
-                                    {multilang[lang].tongLuongNhan}
-                                    <Text
-                                        style={{
-                                            textDecorationLine: "underline",
-                                            color: "white",
-                                        }}>
-                                        {selectDate.split("-")[1]} -{" "}
-                                        {selectDate.split("-")[0]}
-                                    </Text>
-                                </Text>
-                            </TouchableOpacity>
-                        </View>
-                        {salary?.Final_Salary != undefined ? (
-                            <View>
-                                <View style={{ marginLeft: 10 }}>
-                                    {showSalary ? (
+                        }}>
+                        <DatePicker
+                            options={{
+                                selectedTextColor: "white",
+                                mainColor: "#0D4A85",
+                            }}
+                            selected={selectDate?.replace("-", " ")}
+                            mode="monthYear"
+                            onMonthYearChange={(selectedDate) => {
+                                setSelectDate(selectedDate.replace(" ", "-"));
+                                setModalVisible(false);
+                            }}
+                            current={selectDate}
+                            style={{ borderRadius: 10 }}
+                        />
+                    </Pressable>
+                </Modal>
+                {salary == "" ? (
+                    <View style={styles.wrapperLoading}>
+                        <ActivityIndicator
+                            style={{ marginTop: "25%" }}
+                            size={65}
+                            color="#0D4A85"
+                        />
+                    </View>
+                ) : (
+                    <View style={{ width: "93%", height: "100%", flex: 1 }}>
+                        <View style={styles.summary}>
+                            <View style={{ marginLeft: 10 }}>
+                                <TouchableOpacity
+                                    onPress={() => setModalVisible(true)}>
+                                    <Text style={styles.textTitle}>
+                                        {multilang[lang].tongLuongNhan}
                                         <Text
-                                            style={styles.textSalary}
-                                            onPress={() => {
-                                                setShowSalary(false);
+                                            style={{
+                                                textDecorationLine: "underline",
+                                                color: "white",
                                             }}>
-                                            {salary?.Final_Salary != ""
-                                                ? formatNum(salary.Final_Salary)
-                                                : ""}{" "}
-                                            VNĐ{" "}
-                                            <FeatherIcon
-                                                name="eye"
-                                                size={20}
+                                            {selectDate.split("-")[1]} -{" "}
+                                            {selectDate.split("-")[0]}
+                                        </Text>
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                            {salary?.Final_Salary != undefined ? (
+                                <View>
+                                    <View style={{ marginLeft: 10 }}>
+                                        {showSalary ? (
+                                            <Text
+                                                style={styles.textSalary}
                                                 onPress={() => {
                                                     setShowSalary(false);
-                                                }}
-                                            />
-                                        </Text>
-                                    ) : (
-                                        <Text
-                                            style={styles.textSalary}
-                                            onPress={() => {
-                                                setShowSalary(true);
-                                            }}>
-                                            ***.***.*** VNĐ{" "}
-                                            <FeatherIcon
-                                                name="eye-off"
-                                                size={20}
+                                                }}>
+                                                {salary?.Final_Salary != ""
+                                                    ? formatNum(
+                                                          salary.Final_Salary,
+                                                      )
+                                                    : ""}{" "}
+                                                VNĐ{" "}
+                                                <FeatherIcon
+                                                    name="eye"
+                                                    size={20}
+                                                    onPress={() => {
+                                                        setShowSalary(false);
+                                                    }}
+                                                />
+                                            </Text>
+                                        ) : (
+                                            <Text
+                                                style={styles.textSalary}
                                                 onPress={() => {
                                                     setShowSalary(true);
-                                                }}
-                                            />
-                                        </Text>
-                                    )}
-                                </View>
-                                <View>
-                                    <View style={styles.row}>
-                                        <View style={styles.column}>
-                                            <Text style={styles.contentText}>
-                                                {salary?.Working_Days}
+                                                }}>
+                                                ***.***.*** VNĐ{" "}
+                                                <FeatherIcon
+                                                    name="eye-off"
+                                                    size={20}
+                                                    onPress={() => {
+                                                        setShowSalary(true);
+                                                    }}
+                                                />
                                             </Text>
-                                            <Text style={styles.titleText}>
-                                                {multilang[lang].congTt}
-                                            </Text>
+                                        )}
+                                    </View>
+                                    <View>
+                                        <View style={styles.row}>
+                                            <View style={styles.column}>
+                                                <Text
+                                                    style={styles.contentText}>
+                                                    {salary?.Working_Days}
+                                                </Text>
+                                                <Text style={styles.titleText}>
+                                                    {multilang[lang].congTt}
+                                                </Text>
+                                            </View>
+                                            <View style={styles.column}>
+                                                <Text
+                                                    style={styles.contentText}>
+                                                    {salary?.Overtime}
+                                                </Text>
+                                                <Text style={styles.titleText}>
+                                                    {multilang[lang].tCaLuyKe}
+                                                </Text>
+                                            </View>
+                                            <View style={styles.column}>
+                                                <Text
+                                                    style={styles.contentText}>
+                                                    {salary?.Rating_ID.trim()}
+                                                </Text>
+                                                <Text style={styles.titleText}>
+                                                    {
+                                                        multilang[lang]
+                                                            .loaiBinhBau
+                                                    }
+                                                </Text>
+                                            </View>
                                         </View>
-                                        <View style={styles.column}>
-                                            <Text style={styles.contentText}>
-                                                {salary?.Overtime}
-                                            </Text>
-                                            <Text style={styles.titleText}>
-                                                {multilang[lang].tCaLuyKe}
-                                            </Text>
-                                        </View>
-                                        <View style={styles.column}>
-                                            <Text style={styles.contentText}>
-                                                {salary?.Rating_ID.trim()}
-                                            </Text>
-                                            <Text style={styles.titleText}>
-                                                {multilang[lang].loaiBinhBau}
-                                            </Text>
+                                        <View
+                                            style={[
+                                                styles.row,
+                                                { marginTop: 15 },
+                                            ]}>
+                                            <View style={styles.column}>
+                                                <Text
+                                                    style={styles.contentText}>
+                                                    {salary?.Annual_Leave}
+                                                </Text>
+                                                <Text style={styles.titleText}>
+                                                    {multilang[lang].soPhepNam}
+                                                </Text>
+                                            </View>
+                                            <View style={styles.column}>
+                                                <Text
+                                                    style={styles.contentText}>
+                                                    {salary?.Leave_Days}
+                                                </Text>
+                                                <Text style={styles.titleText}>
+                                                    {multilang[lang].daNghi}
+                                                </Text>
+                                            </View>
+                                            <View style={styles.column}>
+                                                <Text
+                                                    style={styles.contentText}>
+                                                    {salary?.Annual_Leave -
+                                                        salary?.Leave_Days}
+                                                </Text>
+                                                <Text style={styles.titleText}>
+                                                    {multilang[lang].conLai}
+                                                </Text>
+                                            </View>
                                         </View>
                                     </View>
-                                    <View
-                                        style={[styles.row, { marginTop: 15 }]}>
-                                        <View style={styles.column}>
-                                            <Text style={styles.contentText}>
-                                                {salary?.Annual_Leave}
-                                            </Text>
-                                            <Text style={styles.titleText}>
-                                                {multilang[lang].soPhepNam}
-                                            </Text>
-                                        </View>
-                                        <View style={styles.column}>
-                                            <Text style={styles.contentText}>
-                                                {salary?.Leave_Days}
-                                            </Text>
-                                            <Text style={styles.titleText}>
-                                                {multilang[lang].daNghi}
-                                            </Text>
-                                        </View>
-                                        <View style={styles.column}>
-                                            <Text style={styles.contentText}>
-                                                {salary?.Annual_Leave -
-                                                    salary?.Leave_Days}
-                                            </Text>
-                                            <Text style={styles.titleText}>
-                                                {multilang[lang].conLai}
-                                            </Text>
-                                        </View>
-                                    </View>
                                 </View>
-                            </View>
-                        ) : (
+                            ) : (
+                                <View
+                                    style={{
+                                        alignItems: "center",
+                                        marginTop: 30,
+                                    }}>
+                                    <Image
+                                        style={{ width: 80, height: 80 }}
+                                        source={require("../../assets/images/nodata_white.png")}
+                                    />
+                                    <Text style={{ color: "white" }}>
+                                        {multilang[lang].khongCoDuLieu}
+                                    </Text>
+                                </View>
+                            )}
+                        </View>
+
+                        <Text style={styles.titleSalaryDetail}>
+                            {multilang[lang].luongChiTiet}
+                        </Text>
+                        {salary?.Final_Salary == undefined ? (
                             <View
                                 style={{
+                                    justifyContent: "center",
                                     alignItems: "center",
-                                    marginTop: 30,
                                 }}>
                                 <Image
-                                    style={{ width: 80, height: 80 }}
-                                    source={require("../../assets/images/nodata_white.png")}
+                                    style={{
+                                        width: 80,
+                                        height: 80,
+                                        marginTop: 50,
+                                    }}
+                                    source={require("../../assets/images/nodata.png")}
                                 />
-                                <Text style={{ color: "white" }}>{multilang[lang].khongCoDuLieu}</Text>
+                                <Text>{multilang[lang].khongCoDuLieu}</Text>
                             </View>
+                        ) : (
+                            <SalaryDetail salary={salary} />
                         )}
                     </View>
-
-                    <Text style={styles.titleSalaryDetail}>
-                        {multilang[lang].luongChiTiet}
-                    </Text>
-                    {salary?.Final_Salary == undefined ? (
-                        <View
-                            style={{
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}>
-                            <Image
-                                style={{ width: 80, height: 80, marginTop: 50 }}
-                                source={require("../../assets/images/nodata.png")}
-                            />
-                            <Text>{multilang[lang].khongCoDuLieu}</Text>
-                        </View>
-                    ) : (
-                        <SalaryDetail salary={salary} />
-                    )}
-                </View>
-            )}
-        </View>
+                )}
+            </View>
         </ScrollView>
     );
 }

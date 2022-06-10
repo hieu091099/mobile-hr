@@ -137,7 +137,9 @@ export default function Setting() {
                         <View
                             style={styles.menuItem}
                             onStartShouldSetResponder={() => {
-                                navigation.navigate("ChangeLanguage");
+                                navigation.navigate("ChangeLanguage", {
+                                    lang: lang,
+                                });
                             }}>
                             <View
                                 style={{

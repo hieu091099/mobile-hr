@@ -23,8 +23,7 @@ export default function ChangePasswordCMND() {
     const [visibleDialog, setVisibleDialog] = useState(false);
     const [messDialog, setMessDialog] = useState("");
     const [onLoad, setOnLoad] = useState(false);
-    const { lang } =
-    useSelector((state) => state.UserReducer);
+    const { lang } = useSelector((state) => state.UserReducer);
 
     const [showPassW, setShowPassW] = useState(true);
 
@@ -51,7 +50,9 @@ export default function ChangePasswordCMND() {
                     source={require("../../assets/images/logo_login.jpg")}
                 />
                 <View style={styles.tieude}>
-                    <Text style={[styles.td]}>{multilang[lang].quenMatKhau}</Text>
+                    <Text style={[styles.td]}>
+                        {multilang[lang].quenMatKhau}
+                    </Text>
                 </View>
                 <TextInput
                     theme={{
@@ -170,7 +171,7 @@ export default function ChangePasswordCMND() {
                                 },
                             );
                             setOnLoad(false);
-                            console.log(result.data);
+                            // console.log(result.data);
                             if (result?.status == 200) {
                                 if (result.data?.status) {
                                     setMessDialog(result.data?.message);
@@ -196,12 +197,16 @@ export default function ChangePasswordCMND() {
                             setOnLoad(false);
                         } else {
                             setOnLoad(false);
-                            setMessDialog(multilang[lang].vuiLongNhapDayDuThongTin);
+                            setMessDialog(
+                                multilang[lang].vuiLongNhapDayDuThongTin,
+                            );
                             setVisibleDialog(true);
                         }
                         // navigation.navigate("SuccessChangePass");
                     }}>
-                    <Text style={styles.textbtndn}>{multilang[lang].doiMatKhau}</Text>
+                    <Text style={styles.textbtndn}>
+                        {multilang[lang].doiMatKhau}
+                    </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => {

@@ -10,6 +10,10 @@ import {
 export const loginAction = (userLogin, navigation) => {
     return async (dispatch) => {
         try {
+            dispatch({
+                type: "SET_LODING_LOGIN",
+                isLoadingLogin: true,
+            });
             let result = await axiosInstance.post("user/login", userLogin);
             if (result.data.authenticated == true) {
                 await setToken("accessToken", result.data.accessToken);
@@ -21,11 +25,19 @@ export const loginAction = (userLogin, navigation) => {
                     user: result.data.user,
                     userToken: result.data.accessToken,
                 });
+                dispatch({
+                    type: "SET_LODING_LOGIN",
+                    isLoadingLogin: false,
+                });
             } else {
-                console.log(result.data.message);
+                // console.log(result.data.message);
                 dispatch({
                     type: "LOGIN_FAIL",
                     messageLoginResponse: result.data.message,
+                });
+                dispatch({
+                    type: "SET_LODING_LOGIN",
+                    isLoadingLogin: false,
                 });
             }
         } catch (e) {
@@ -59,6 +71,7 @@ export const getSalaryAction = (accessToken, personId, monthYear) => {
         }
     };
 };
+
 export const getOnLeave = (accessToken, userId, monthYear) => {
     return async (dispatch) => {
         try {
@@ -146,7 +159,7 @@ export const loginFingerAction = (lang) => {
     return async (dispatch) => {
         try {
             let checkLogin = await checkLoginFinger(lang);
-            console.log(checkLogin);
+            // console.log(checkLogin);
 
             if (checkLogin.status == true) {
                 let user = await getToken("user");

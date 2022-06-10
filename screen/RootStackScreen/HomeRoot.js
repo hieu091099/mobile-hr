@@ -16,10 +16,8 @@ import NotifyContent from "../NotifyContent/NotifyContent";
 
 const Stack = createNativeStackNavigator();
 
-const HomeStackScreen = () => {
+const HomeStackScreen = ({ navigation, route }) => {
     const { lang } = useSelector((state) => state.UserReducer);
-
-    const navigation = useNavigation();
     const dispatch = useDispatch();
     return (
         <Stack.Navigator
@@ -41,6 +39,7 @@ const HomeStackScreen = () => {
                 component={OnLeave}
                 options={{
                     headerTitle: multilang[lang].ngayNghi,
+                    tabBarStyle: { display: "none" },
                 }}
             />
             <Stack.Screen

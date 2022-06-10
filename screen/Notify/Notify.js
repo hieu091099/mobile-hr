@@ -19,13 +19,18 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 import moment from "moment-timezone";
 import "moment/locale/zh-cn";
-export default function Notify() {
+export default function Notify({ navigation }) {
+    // const navigation = useNavigation();
+
+    /** hide tab bar */
+    // navigation.setOptions({ tabBarStyle: { display: "none" } });
+    /** end hide tab bar */
     const { user } = useSelector((state) => state.UserReducer);
     const { listNotifications, idNotify } = useSelector(
         (state) => state.NotificationReducer,
     );
     const dispatch = useDispatch();
-    const navigation = useNavigation();
+    // console.log(moment.locale());
 
     useEffect(() => {
         getToken("accessToken").then((res) => {
@@ -93,13 +98,26 @@ export default function Notify() {
     };
     return (
         <View style={{ flex: 1, backgroundColor: "white" }}>
-            <ScrollView
-                contentContainerStyle={{
-                    alignItems: "center",
-                    paddingBottom: 100,
-                }}>
-                {renderNotify()}
-            </ScrollView>
+            {listNotifications != "" ? (
+                <ScrollView
+                    contentContainerStyle={{
+                        alignItems: "center",
+                        paddingBottom: 100,
+                    }}>
+                    {renderNotify()}
+                </ScrollView>
+            ) : (
+                <View
+                    style={{
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}>
+                    <Image
+                        style={{ width: "50%", height: "50%", marginTop: 50 }}
+                        source={require("../../assets/images/notification.png")}
+                    />
+                </View>
+            )}
         </View>
     );
 }

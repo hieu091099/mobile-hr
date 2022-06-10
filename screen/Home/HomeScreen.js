@@ -21,10 +21,9 @@ import { getNotifications } from "../../redux/actions/NotificationAction";
 
 export default function HomeScreen() {
     const dispatch = useDispatch();
-    const { user, isLoggedIn, lang } = useSelector(
+    const { user, isLoggedIn, lang, isLoadingLogin } = useSelector(
         (state) => state.UserReducer,
     );
-
     const [User, setUser] = useState();
     const navigation = useNavigation();
     let arrName = user?.fullName.split(" ");

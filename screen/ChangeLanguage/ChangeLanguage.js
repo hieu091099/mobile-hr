@@ -107,9 +107,9 @@ const styles = new StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        paddingVertical: 5,
+        paddingVertical: 8,
         borderBottomWidth: 1,
-        borderColor: "#ccc",
+        borderColor: "#EFEFEF",
     },
     item: {
         flexDirection: "row",
@@ -135,7 +135,7 @@ const styles = new StyleSheet.create({
         alignItems: "center",
     },
     styleTextButton: {
-        fontSize: 12,
+        fontSize: 13,
         color: "white",
         fontWeight: "600",
         textTransform: "uppercase",

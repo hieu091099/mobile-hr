@@ -5,6 +5,7 @@ import {
     ScrollView,
     TouchableOpacity,
     Pressable,
+    RefreshControl,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import SvgQRCode from "react-native-qrcode-svg";
@@ -19,8 +20,11 @@ export default function UserDetail() {
     const { user,lang } = useSelector((state) => state.UserReducer);
     const [infoUser, setInfoUser] = useState();
     const [showInput, setShowInput] = useState(true);
+    const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
+        setLoading(true);
         // http://192.168.18.172:8000/user/getUserInfo/29975
         getToken("user").then((res) => {
             if (res != "" || res != undefined) {
@@ -34,6 +38,7 @@ export default function UserDetail() {
                     );
                     //// console.log(result?.data?.userInfo);
                     setInfoUser(result?.data?.userInfo);
+                    setLoading(false);
                 });
             }
         });
@@ -43,7 +48,18 @@ export default function UserDetail() {
             style={{ flex: 1, position: "relative", backgroundColor: "white" }}>
             <ScrollView
                 style={{ flex: 1, width: "100%" }}
-                contentContainerStyle={{ alignItems: "center" }}>
+                contentContainerStyle={{ alignItems: "center" }}
+                refreshControl={
+                    <RefreshControl
+                      refreshing={loading}
+                    //   onRefresh={()=>{
+                    //     setSelectDate(selectDate);
+                    //     // setSelectYear('2022');
+        
+                    //   }}
+                    />
+                  }
+                >
                 <TouchableOpacity
                     onPress={() => {
                         setZoomQr(true);

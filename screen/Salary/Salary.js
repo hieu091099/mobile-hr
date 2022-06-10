@@ -8,6 +8,7 @@ import {
     Pressable,
     Image,
     TouchableOpacity,
+    RefreshControl,
 } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import { axiosInstanceToken, getToken } from "../../config";
@@ -71,6 +72,16 @@ export default function Salary() {
     }, [selectDate]);
 
     return (
+        <ScrollView style={{flex:1}}  refreshControl={
+            <RefreshControl
+              refreshing={false}
+              onRefresh={()=>{
+                setSelectDate(selectDate);
+                // setSelectYear('2022');
+
+              }}
+            />
+          }>
         <View style={styles.wrapper}>
             {/* <View style={{flex:1,justifyContent: 'center', alignItems: 'center',height:100,width:100}}> */}
             <Modal
@@ -239,7 +250,7 @@ export default function Salary() {
                                     style={{ width: 80, height: 80 }}
                                     source={require("../../assets/images/nodata_white.png")}
                                 />
-                                <Text style={{ color: "white" }}>No data</Text>
+                                <Text style={{ color: "white" }}>{multilang[lang].khongCoDuLieu}</Text>
                             </View>
                         )}
                     </View>
@@ -257,7 +268,7 @@ export default function Salary() {
                                 style={{ width: 80, height: 80, marginTop: 50 }}
                                 source={require("../../assets/images/nodata.png")}
                             />
-                            <Text>No data</Text>
+                            <Text>{multilang[lang].khongCoDuLieu}</Text>
                         </View>
                     ) : (
                         <SalaryDetail salary={salary} />
@@ -265,6 +276,7 @@ export default function Salary() {
                 </View>
             )}
         </View>
+        </ScrollView>
     );
 }
 

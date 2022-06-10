@@ -120,6 +120,7 @@ export const tw = {
     saiThongTinDangNhap: "您的 ID 或密碼錯誤",
     loiChuaXacDinh: "錯誤未確定",
     saiThongTinCaNhan: "個人資訊有誤",
+    khongCoDuLieu: "沒有數據",
     thongTin: "信息",
     thongTinCaNhan: "個人信息",
     luuThayDoi: "保存更改",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
     StyleSheet,
     Text,
@@ -20,7 +20,7 @@ import { deleteToken, getToken, setToken, getExpoPushNoti } from "../../config";
 import { Icon } from "react-native-elements";
 import SimpleDialog from "../../components/SimpleDialog/SimpleDialog";
 import { multilang } from "../../language/multilang";
-
+import * as Notifications from "expo-notifications";
 export default function LoginFingerPrint() {
     const imglang = {
         vi: { img: require("../../assets/images/flags/vi.png"), name: "vi" },

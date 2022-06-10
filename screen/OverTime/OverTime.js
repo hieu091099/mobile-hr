@@ -7,6 +7,7 @@ import {
     Pressable,
     Image,
     ActivityIndicator,
+    RefreshControl,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -132,7 +133,7 @@ export default function OverTime() {
             return (
                 <View style={styles.leaveItem}>
                     <View style={{ width: "100%", alignItems: "center" }}>
-                        <Text>NO DATA</Text>
+                        <Text>{multilang[lang].khongCoDuLieu}</Text>
                     </View>
                 </View>
             );
@@ -213,7 +214,17 @@ export default function OverTime() {
         return arr.sort();
     };
     return (
-        <>
+        <ScrollView style={{flex:1}}  refreshControl={
+            <RefreshControl
+              refreshing={false}
+              onRefresh={()=>{
+                //   setSelectYear(selectYear)
+                setSelectYear(selectYear)
+                // setSelectYear('2022');
+
+              }}
+            />
+          }>
             <View style={{ paddingHorizontal: 10, paddingTop: 10,flex:1 }}>
                 <View style={styles.summary}>
                     <View style={{ marginLeft: 10 }}>
@@ -282,7 +293,7 @@ export default function OverTime() {
                                 style={{ width: 80, height: 80 }}
                                 source={require("../../assets/images/nodata.png")}
                             />
-                            <Text style={{ color: "black" }}>No data</Text>
+                            <Text style={{ color: "black" }}>{multilang[lang].khongCoDuLieu}</Text>
                         </View>
                     )}
                 </ScrollView>
@@ -332,7 +343,7 @@ export default function OverTime() {
                     <ActivityIndicator size="large" color="#0D4A85" />
                 </View>
             )}
-        </>
+        </ScrollView>
     );
 }
 

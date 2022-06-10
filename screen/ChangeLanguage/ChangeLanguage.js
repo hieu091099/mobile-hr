@@ -7,12 +7,15 @@ import { setToken } from "../../config";
 import { RadioButton } from "react-native-paper";
 import { multilang } from "../../language/multilang";
 
-export default function ChangeLanguage() {
-    const { lang } = useSelector((state) => state.UserReducer);
+export default function ChangeLanguage({ route, navigation }) {
+    let { lang } = route.params;
     const [checked, setChecked] = useState(lang);
     const dispatch = useDispatch();
-    const navigation = useNavigation();
-    
+    useEffect(() => {
+        return navigation.addListener("focus", () => {
+            setChecked(lang);
+        });
+    }, [lang]);
     const changeLang = () => {
         dispatch({
             type: "CHANGE_LANG",

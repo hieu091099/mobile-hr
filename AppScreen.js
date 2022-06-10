@@ -56,6 +56,21 @@ export default function App() {
             }
         });
     }, []);
+    useEffect(() => {
+        switch (lang) {
+            case "en":
+                moment.locale("en-gb");
+                break;
+            case "vi":
+                moment.locale("vi");
+                break;
+            case "tw":
+                moment.locale("zh-tw");
+                break;
+            default:
+                moment.locale("vi");
+        }
+    }, [lang]);
     const theme = {
         ...DefaultTheme,
         roundness: 2,

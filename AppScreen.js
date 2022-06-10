@@ -22,13 +22,29 @@ import * as Notifications from "expo-notifications";
 import UserDetail from "./screen/Setting/UserDetail";
 import { multilang } from "./language/multilang";
 import WithoutBotTabRoot from "./screen/RootStackScreen/WithoutBotTabRoot";
-
+import moment from "moment";
 export default function App() {
+   
     const Stack = createNativeStackNavigator();
     const Drawer = createDrawerNavigator();
     const dispatch = useDispatch();
     const { isLoggedIn, lang } = useSelector((state) => state.UserReducer);
-
+    useEffect(() => {
+        switch (lang) {
+            case "vi":
+                moment.locale('vi');
+                break;
+            case "en":
+                moment.locale('en-gb');
+                break;
+            case "tw":
+                moment.locale('zh-cn');
+                break;
+                default :
+                moment.locale('vi');
+              break;
+        }
+        },[lang])
     useEffect(() => {
         getToken("lang").then((val) => {
             if (val != undefined) {

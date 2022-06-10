@@ -41,10 +41,9 @@ export default function Contact() {
     };
     return (
         <View style={{ flex: 1 }}>
-            {dataContact.length != 0 ? (
+            {dataContact?.length != 0 ? (
                 <ScrollView>
                     {dataContact?.map((vout, iout) => {
-                        console.log(vout.name);
                         return (
                             <View key={iout}>
                                 <Text style={styles.td}>{vout.name}</Text>

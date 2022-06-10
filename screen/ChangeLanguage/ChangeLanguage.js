@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckBox, withTheme } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
@@ -12,7 +12,7 @@ export default function ChangeLanguage() {
     const [checked, setChecked] = useState(lang);
     const dispatch = useDispatch();
     const navigation = useNavigation();
-
+    
     const changeLang = () => {
         dispatch({
             type: "CHANGE_LANG",

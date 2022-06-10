@@ -49,7 +49,7 @@ export default function HeaderHomeScreen() {
                 <TouchableOpacity
                     style={styles.iconRight}
                     onPress={() => {
-                        // navigation.navigate("Notify");
+                        navigation.navigate("Notify");
                     }}>
                     <Ionicons
                         name="md-notifications-circle-outline"

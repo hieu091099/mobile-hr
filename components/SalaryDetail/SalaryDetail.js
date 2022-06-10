@@ -101,7 +101,6 @@ export default function SalaryDetail({ salary }) {
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
-                                        {console.log(salary?.pc)}
                                         {
                                         formatNum(
                                                 salary?.Other_Pay +

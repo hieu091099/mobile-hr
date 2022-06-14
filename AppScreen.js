@@ -23,6 +23,9 @@ import UserDetail from "./screen/Setting/UserDetail";
 import { multilang } from "./language/multilang";
 import WithoutBotTabRoot from "./screen/RootStackScreen/WithoutBotTabRoot";
 import moment from "moment";
+import "moment/locale/zh-cn";
+import "moment/locale/vi";
+import "moment/locale/en-gb";
 export default function App() {
    
     const Stack = createNativeStackNavigator();
@@ -44,7 +47,7 @@ export default function App() {
                 moment.locale('vi');
               break;
         }
-        },[lang])
+        },[lang]);
     useEffect(() => {
         getToken("lang").then((val) => {
             if (val != undefined) {
@@ -56,21 +59,6 @@ export default function App() {
             }
         });
     }, []);
-    useEffect(() => {
-        switch (lang) {
-            case "en":
-                moment.locale("en-gb");
-                break;
-            case "vi":
-                moment.locale("vi");
-                break;
-            case "tw":
-                moment.locale("zh-tw");
-                break;
-            default:
-                moment.locale("vi");
-        }
-    }, [lang]);
     const theme = {
         ...DefaultTheme,
         roundness: 2,

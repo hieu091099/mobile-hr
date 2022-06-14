@@ -18,11 +18,6 @@ import Entypo from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 import moment from "moment";
-// // import "moment/locale/zh-cn";
-// // import "moment/locale/vi";
-// import "moment/locale/en-gb";
-
-
 
 export default function Notify({ navigation }) {    
     const { user } = useSelector((state) => state.UserReducer);

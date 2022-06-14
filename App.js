@@ -24,7 +24,7 @@ export default function App() {
     const unsubscribe = NetInfo.addEventListener((state) => {
         if (!state.isConnected) {
             ToastAndroid.show(
-                "Mạng yếu vui lòng thử lại !",
+                "Kết nối không ổn định !",
                 ToastAndroid.SHORT,
             );
         }

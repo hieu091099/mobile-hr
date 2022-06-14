@@ -43,7 +43,7 @@ export default function OnLeave() {
                 let personId = res.userId;
                 getToken("accessToken").then(async (res) => {
                     //  // console.log(res);
-                    p1 = new Promise(function (resolve, reject) {
+                   let p1 = new Promise(function (resolve, reject) {
                         dispatch(getOnLeave(res, personId, selectYear)).then(
                             (val) => {
                                 resolve();
@@ -51,7 +51,7 @@ export default function OnLeave() {
                         );
                     });
 
-                    p2 = new Promise(function (resolve, reject) {
+                   let p2 = new Promise(function (resolve, reject) {
                         dispatch(
                             getOnLeaveSummary(res, personId, selectYear),
                         ).then((val) => {
@@ -249,6 +249,7 @@ export default function OnLeave() {
         return arr.sort();
     };
     return (
+        <>
         <ScrollView style={{flex:1}}  refreshControl={
             <RefreshControl
               refreshing={false}
@@ -401,20 +402,22 @@ export default function OnLeave() {
                     </Pressable>
                 </Modal>
             </View>
-            {onLoad && (
-                <View
-                    style={{
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        backgroundColor: "#00000021",
-                    }}>
-                    <ActivityIndicator size="large" color="#0D4A85" />
-                </View>
-            )}
+           
         </ScrollView>
+         {onLoad && (
+            <View
+                style={{
+                    width: "100%",
+                    height: "100%",
+                    position: "absolute",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: "#00000021",
+                }}>
+                <ActivityIndicator size="large" color="#0D4A85" />
+            </View>
+        )}
+        </>
     );
 }
 

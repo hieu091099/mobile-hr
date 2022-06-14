@@ -17,16 +17,11 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Entypo from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
-import moment from "moment-timezone";
-import "moment/locale/zh-cn";
-export default function Notify({ navigation }) {
-    // const navigation = useNavigation();
+import moment from "moment";
 
-    /** hide tab bar */
-    // navigation.setOptions({ tabBarStyle: { display: "none" } });
-    /** end hide tab bar */
+export default function Notify({ navigation }) {    
     const { user } = useSelector((state) => state.UserReducer);
-    const { listNotifications, idNotify } = useSelector(
+    const { listNotifications, idNotify,lang } = useSelector(
         (state) => state.NotificationReducer,
     );
     const dispatch = useDispatch();

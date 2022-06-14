@@ -44,7 +44,7 @@ export default function Salary() {
             );
             return result.data.month;
         } catch (e) {
-            console.log(e);
+            // console.log(e);
         }
     };
     const pad = (num) => (num.length == 1 ? "0" : "") + num;

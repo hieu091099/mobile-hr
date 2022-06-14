@@ -10,8 +10,10 @@ import * as Notifications from "expo-notifications";
 import AppScreen from "./AppScreen";
 import { store } from "./redux/store";
 import { ToastAndroid } from "react-native";
+import moment from "moment";
 
 export default function App() {
+    
     Notifications.setNotificationHandler({
         handleNotification: async () => ({
             shouldShowAlert: true,
@@ -22,7 +24,7 @@ export default function App() {
     const unsubscribe = NetInfo.addEventListener((state) => {
         if (!state.isConnected) {
             ToastAndroid.show(
-                "Mạng yếu vui lòng thử lại !",
+                "Kết nối không ổn định !",
                 ToastAndroid.SHORT,
             );
         }

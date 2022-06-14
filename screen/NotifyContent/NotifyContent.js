@@ -6,7 +6,6 @@ import And from "react-native-vector-icons/AntDesign";
 export default function NotifyContent({ route }) {
     let { item } = route.params;
 
-    console.log({ item });
     return (
         <View style={{ flex: 1, backgroundColor: "white", padding: 10 }}>
             {/* <Text>{item?.Content}</Text> */}

@@ -197,9 +197,7 @@ export default function ChangePasswordCMND() {
                             setOnLoad(false);
                         } else {
                             setOnLoad(false);
-                            setMessDialog(
-                                multilang[lang].vuiLongNhapDayDuThongTin,
-                            );
+                            setMessDialog("vuiLongNhapDayDuThongTin");
                             setVisibleDialog(true);
                         }
                         // navigation.navigate("SuccessChangePass");

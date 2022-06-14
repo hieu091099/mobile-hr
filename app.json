@@ -16,7 +16,8 @@
         "assetBundlePatterns": ["**/*"],
         "ios": {
             "supportsTablet": true,
-            "bundleIdentifier": "com.lactydev.mobilehr"
+            "bundleIdentifier": "com.lactydev.mobilehr",
+            "buildNumber":"2"
         },
         "android": {
             "useNextNotificationsApi": true,
@@ -26,7 +27,7 @@
             },
             "package": "com.lactydev.mobilehr",
             "googleServicesFile": "./google-services.json",
-            "versionCode": 8,
+            "versionCode": 10,
             "permissions": ["USE_FINGERPRINT"]
         },
         "web": {

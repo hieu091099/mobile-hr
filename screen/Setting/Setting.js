@@ -5,6 +5,7 @@ import {
     ScrollView,
     Linking,
     TouchableOpacity,
+    Image,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import AntIcon from "react-native-vector-icons/AntDesign";
@@ -20,7 +21,51 @@ export default function Setting() {
     const [infoUser, setInfoUser] = useState();
     const navigation = useNavigation();
     const dispatch = useDispatch();
-    const { lang } = useSelector((state) => state.UserReducer);
+    const { lang,user } = useSelector((state) => state.UserReducer);
+    const imglang = {
+        vi: { img: require("../../assets/images/flags/vi.png"), name: "Tiếng Việt" },
+        // mm: { img: require("../../assets/images/flags/mm.png"), name: "mm" },
+        en: { img: require("../../assets/images/flags/en.png"), name: "English" },
+        tw: { img: require("../../assets/images/flags/tw.png"), name: "台湾" },
+    };
+    const renderLangBox = () => {
+        return <View
+                style={styles.menuItem}
+                onStartShouldSetResponder={() => {
+                    navigation.navigate("ChangeLanguage", {
+                        lang: lang,
+                    });
+                }}>
+                <View
+                    style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                    }}>
+                    <Image
+                        style={{
+                            width: 15,
+                            height: 15,
+                            borderRadius: 100,
+                        }}
+                        source={imglang[lang].img}
+                        resizeMode="contain"
+                    />
+                    <Text style={styles.textMenu}>
+                        {/* {multilang[lang].thayDoiNgonNgu} */}
+                 {imglang[lang].name}
+                    </Text>
+                </View>
+
+                <View>
+                    <AntIcon
+                        color={"black"}
+                        name="right"
+                        size={15}
+                    />
+                </View>
+            </View>
+    };
+
     useEffect(() => {
         // http://192.168.18.172:8000/user/getUserInfo/29975
         getToken("user").then((res) => {
@@ -70,7 +115,7 @@ export default function Setting() {
                         </View>
                         <View style={{ width: "80%" }}>
                             <Text style={{ fontWeight: "bold", fontSize: 20 }}>
-                                {infoUser?.Person_Name}
+                                {user?.fullName}
                             </Text>
                             <Text style={{ fontSize: 16 }}>
                                 {infoUser?.Department_Name}
@@ -134,32 +179,8 @@ export default function Setting() {
                                 {multilang[lang].caiDat}
                             </Text>
                         </View>
-                        <View
-                            style={styles.menuItem}
-                            onStartShouldSetResponder={() => {
-                                navigation.navigate("ChangeLanguage", {
-                                    lang: lang,
-                                });
-                            }}>
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                }}>
-                                <FontAwesome name="language" size={15} />
-                                <Text style={styles.textMenu}>
-                                    {multilang[lang].thayDoiNgonNgu}
-                                </Text>
-                            </View>
-
-                            <View>
-                                <AntIcon
-                                    color={"black"}
-                                    name="right"
-                                    size={15}
-                                />
-                            </View>
-                        </View>
+                        {renderLangBox()}
+                        
 
                         <View
                             style={[styles.menuItem, { borderBottomWidth: 0 }]}

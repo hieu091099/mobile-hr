@@ -124,4 +124,5 @@ export const en = {
     thongTin: "Infomation",
     thongTinCaNhan: "Personal information",
     luuThayDoi: "Save Change",
+    ngayCap: "ID Card Date",
 };

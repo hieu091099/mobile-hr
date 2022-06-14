@@ -124,4 +124,5 @@ export const tw = {
     thongTin: "信息",
     thongTinCaNhan: "個人信息",
     luuThayDoi: "保存更改",
+    ngayCap: "身份證簽發日期",
 };

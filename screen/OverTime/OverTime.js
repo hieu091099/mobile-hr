@@ -29,7 +29,7 @@ export default function OverTime() {
     const [sumHour, setSumHour] = useState(0);
     const [onLoad, setOnLoad] = useState(false);
 
-    const { listOverTime,lang } = useSelector((state) => state.UserReducer);
+    const { listOverTime, lang } = useSelector((state) => state.UserReducer);
     const [modalVisible, setModalVisible] = useState(false);
 
     const [selectYear, setSelectYear] = useState(new Date().getFullYear());
@@ -93,7 +93,7 @@ export default function OverTime() {
                             },
                         ]}>
                         {/* Tháng {section} */}
-                        {renderMonth3Lang(lang,section)}
+                        {renderMonth3Lang(lang, section)}
                     </Text>
                     <Text
                         style={[
@@ -106,7 +106,8 @@ export default function OverTime() {
                             },
                         ]}>
                         <Ionicons name="ios-time-outline" size={15} />{" "}
-                        {tongGioThang(section)}{" "+multilang[lang].gio}
+                        {tongGioThang(section)}
+                        {" " + multilang[lang].gio}
                     </Text>
                 </View>
                 <Text
@@ -153,7 +154,9 @@ export default function OverTime() {
                                         "DD/MM/YYYY",
                                     )}`}
                                 </Text>
-                                <Text>{item.Overtime}  {multilang[lang].gio}</Text>
+                                <Text>
+                                    {item.Overtime} {multilang[lang].gio}
+                                </Text>
                             </View>
                             <View style={{ maxWidth: "30%" }}>
                                 {/* <Text>213</Text> */}
@@ -178,7 +181,7 @@ export default function OverTime() {
 
     const renderYear = () => {
         let arr = [];
-        for (let i = 2000; i <= new Date().getFullYear(); i++) {
+        for (let i = 2010; i <= new Date().getFullYear(); i++) {
             arr.push(
                 <TouchableOpacity
                     key={i}
@@ -214,58 +217,65 @@ export default function OverTime() {
         return arr.sort();
     };
     return (
-        <ScrollView style={{flex:1}}  refreshControl={
-            <RefreshControl
-              refreshing={false}
-              onRefresh={()=>{
-                //   setSelectYear(selectYear)
-                setSelectYear(selectYear)
-                // setSelectYear('2022');
-
-              }}
-            />
-          }>
-            <View style={{ paddingHorizontal: 10, paddingTop: 10,flex:1 }}>
+        <ScrollView
+            style={{ flex: 1 }}
+            refreshControl={
+                <RefreshControl
+                    refreshing={false}
+                    onRefresh={() => {
+                        //   setSelectYear(selectYear)
+                        setSelectYear(selectYear);
+                        // setSelectYear('2022');
+                    }}
+                />
+            }>
+            <View style={{ paddingHorizontal: 10, paddingTop: 10, flex: 1 }}>
                 <View style={styles.summary}>
                     <View style={{ marginLeft: 10 }}>
                         <TouchableOpacity
                             onPress={() => {
                                 setModalVisible(true);
                             }}>
-                            <Text style={styles.textTitle}>
-                              {multilang[lang].chiTietLamThemGio} {selectYear}
+                            <Text
+                                style={{
+                                    color: "#B5B9CA",
+                                    fontWeight: "300",
+                                    fontSize: 16,
+                                }}>
+                                {multilang[lang].chiTietLamThemGio}{" "}
+                                <Text style={styles.textTitle}>
+                                    {selectYear}
+                                </Text>
                             </Text>
                         </TouchableOpacity>
                     </View>
                     <View>
                         <View>
-                            <View style={[styles.row,{marginTop:10}]}>
+                            <View style={[styles.row, { marginTop: 10 }]}>
                                 <View style={styles.column}>
-                                <Text style={styles.contentText}>
-                                        300{" "+multilang[lang].gio}
+                                    <Text style={styles.contentText}>
+                                        300{" " + multilang[lang].gio}
                                     </Text>
                                     <Text style={styles.titleText}>
-                                    {multilang[lang].lamThemToiDa}
+                                        {multilang[lang].lamThemToiDa}
                                     </Text>
-                                  
                                 </View>
                                 <View style={styles.column}>
-                                <Text style={styles.contentText}>
+                                    <Text style={styles.contentText}>
                                         {listOverTime?.length}
                                     </Text>
                                     <Text style={styles.titleText}>
-                                    {multilang[lang].soNgayTangCa}
+                                        {multilang[lang].soNgayTangCa}
                                     </Text>
-                                    
                                 </View>
                                 <View style={styles.column}>
-                                <Text style={styles.contentText}>
-                                        {tongNgay()}{" "+multilang[lang].gio}
+                                    <Text style={styles.contentText}>
+                                        {tongNgay()}
+                                        {" " + multilang[lang].gio}
                                     </Text>
                                     <Text style={styles.titleText}>
-                                    {multilang[lang].soGioTangCa}
+                                        {multilang[lang].soGioTangCa}
                                     </Text>
-                                   
                                 </View>
                             </View>
                         </View>
@@ -293,7 +303,9 @@ export default function OverTime() {
                                 style={{ width: 80, height: 80 }}
                                 source={require("../../assets/images/nodata.png")}
                             />
-                            <Text style={{ color: "black" }}>{multilang[lang].khongCoDuLieu}</Text>
+                            <Text style={{ color: "black" }}>
+                                {multilang[lang].khongCoDuLieu}
+                            </Text>
                         </View>
                     )}
                 </ScrollView>
@@ -348,9 +360,7 @@ export default function OverTime() {
 }
 
 const styles = StyleSheet.create({
-    font: {
-        
-    },
+    font: {},
     titleSalaryDetail: {
         marginTop: 10,
         marginLeft: 10,
@@ -389,7 +399,7 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         fontSize: 19,
         marginBottom: 10,
-        textDecorationLine:"underline"
+        textDecorationLine: "underline",
     },
     contentText: {
         textAlign: "center",

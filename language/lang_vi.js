@@ -124,4 +124,5 @@ export const vi = {
     thongTin: "Thông tin",
     thongTinCaNhan: "Thông tin cá nhân",
     luuThayDoi: "Lưu Thay Đổi",
+    ngayCap: "Ngày Cấp",
 };

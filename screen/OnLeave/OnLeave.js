@@ -21,12 +21,12 @@ import { getOnLeave, getOnLeaveSummary } from "../../redux/actions/UserAction";
 import moment from "moment";
 import DatePicker from "react-native-modern-datepicker";
 import { color } from "react-native-reanimated";
-import {multilang} from '../../language/multilang';
+import { multilang } from "../../language/multilang";
 
 export default function OnLeave() {
     const [activeSections, setActiveSections] = useState([]);
 
-    const { listOnLeave, listOnLeaveSummary,lang } = useSelector(
+    const { listOnLeave, listOnLeaveSummary, lang } = useSelector(
         (state) => state.UserReducer,
     );
     const [modalVisible, setModalVisible] = useState(false);
@@ -129,7 +129,7 @@ export default function OnLeave() {
                         },
                     ]}>
                     {/* Tháng {section} */}
-                    {renderMonth3Lang(lang,section)}
+                    {renderMonth3Lang(lang, section)}
                 </Text>
                 <Text
                     style={[
@@ -193,10 +193,14 @@ export default function OnLeave() {
                                     }}>
                                     <Text>
                                         {item.Vacation_Day >= 1
-                                            ? item.Vacation_Day + " "+multilang[lang].ngay
+                                            ? item.Vacation_Day +
+                                              " " +
+                                              multilang[lang].ngay
                                             : (
                                                   item.Vacation_Day * 8
-                                              ).toFixed() + " "+multilang[lang].gio}
+                                              ).toFixed() +
+                                              " " +
+                                              multilang[lang].gio}
                                     </Text>
                                 </View>
                             </View>
@@ -209,7 +213,7 @@ export default function OnLeave() {
 
     const renderYear = () => {
         let arr = [];
-        for (let i = 2000; i <= new Date().getFullYear(); i++) {
+        for (let i = 2010; i <= new Date().getFullYear(); i++) {
             //// console.log(i);
 
             arr.push(
@@ -249,25 +253,34 @@ export default function OnLeave() {
         return arr.sort();
     };
     return (
-        <ScrollView style={{flex:1}}  refreshControl={
-            <RefreshControl
-              refreshing={false}
-              onRefresh={()=>{
-                  setSelectYear(selectYear)
-                // setSelectYear('2022');
-
-              }}
-            />
-          }>
-            <View style={{ paddingHorizontal: 10, paddingTop: 10,flex:1 }}>
+        <ScrollView
+            style={{ flex: 1 }}
+            refreshControl={
+                <RefreshControl
+                    refreshing={false}
+                    onRefresh={() => {
+                        setSelectYear(selectYear);
+                        // setSelectYear('2022');
+                    }}
+                />
+            }>
+            <View style={{ paddingHorizontal: 10, paddingTop: 10, flex: 1 }}>
                 <View style={styles.summary}>
                     <View style={{ marginLeft: 10 }}>
                         <TouchableOpacity
                             onPress={() => {
                                 setModalVisible(true);
                             }}>
-                            <Text style={styles.textTitle}>
-                                {multilang[lang].chiTietPhepNam} {selectYear}
+                            <Text
+                                style={{
+                                    color: "#B5B9CA",
+                                    fontWeight: "300",
+                                    fontSize: 16,
+                                }}>
+                                {multilang[lang].chiTietPhepNam}{" "}
+                                <Text style={styles.textTitle}>
+                                    {selectYear}
+                                </Text>
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -275,68 +288,62 @@ export default function OnLeave() {
                         <View>
                             <View style={styles.row}>
                                 <View style={styles.column}>
-                                <Text style={styles.contentText}>
+                                    <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
                                             listOnLeaveSummary[0]
                                                 ?.TONGPHEPTAMTINH}
                                     </Text>
                                     <Text style={styles.titleText}>
-                                    {multilang[lang].tongPhep}
+                                        {multilang[lang].tongPhep}
                                     </Text>
-                                    
                                 </View>
                                 <View style={styles.column}>
-                                <Text style={styles.contentText}>
+                                    <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
                                             listOnLeaveSummary[0]?.DANGHI}
                                     </Text>
                                     <Text style={styles.titleText}>
-                                    {multilang[lang].phepDaNghi}
+                                        {multilang[lang].phepDaNghi}
                                     </Text>
-                                   
                                 </View>
                                 <View style={styles.column}>
-                                <Text style={styles.contentText}>
+                                    <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
                                             listOnLeaveSummary[0]?.CONLAI}
                                     </Text>
                                     <Text style={styles.titleText}>
-                                    {multilang[lang].phepConLai}
+                                        {multilang[lang].phepConLai}
                                     </Text>
-                                   
                                 </View>
                             </View>
-                            <View style={[styles.row,{marginTop:15}]}>
+                            <View style={[styles.row, { marginTop: 15 }]}>
                                 <View style={styles.column}>
-                                <Text style={styles.contentText}>
+                                    <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
                                             listOnLeaveSummary[0]
                                                 ?.TONPHEPNAMTRUOC}
                                     </Text>
                                     <Text style={styles.titleText}>
-                                    {multilang[lang].phepTon}
+                                        {multilang[lang].phepTon}
                                     </Text>
-                                  
                                 </View>
                                 <View style={styles.column}>
-                                <Text style={styles.contentText}>
+                                    <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
                                             listOnLeaveSummary[0]?.DANGHIPTT}
                                     </Text>
                                     <Text style={styles.titleText}>
-                                    {multilang[lang].daNghiPtt}
+                                        {multilang[lang].daNghiPtt}
                                     </Text>
-                                  
                                 </View>
                                 <View style={styles.column}>
-                                <Text style={styles.contentText}>
+                                    <Text style={styles.contentText}>
                                         {listOnLeaveSummary.length != 0 &&
                                             listOnLeaveSummary[0]?.CONLAIPTT}
                                     </Text>
                                     <Text style={styles.titleText}>
-                                    {multilang[lang].conLaiPtt}
+                                        {multilang[lang].conLaiPtt}
                                     </Text>
-                                   
                                 </View>
                             </View>
                         </View>
@@ -364,7 +371,9 @@ export default function OnLeave() {
                                 style={{ width: 80, height: 80 }}
                                 source={require("../../assets/images/nodata.png")}
                             />
-                            <Text style={{ color: "black" }}>{multilang[lang].khongCoDuLieu}</Text>
+                            <Text style={{ color: "black" }}>
+                                {multilang[lang].khongCoDuLieu}
+                            </Text>
                         </View>
                     )}
                 </ScrollView>
@@ -419,9 +428,7 @@ export default function OnLeave() {
 }
 
 const styles = StyleSheet.create({
-    font: {
-        
-    },
+    font: {},
     titleSalaryDetail: {
         marginTop: 10,
         marginLeft: 10,
@@ -460,7 +467,7 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         fontSize: 19,
         marginBottom: 10,
-        textDecorationLine:"underline"
+        textDecorationLine: "underline",
     },
     contentText: {
         textAlign: "center",

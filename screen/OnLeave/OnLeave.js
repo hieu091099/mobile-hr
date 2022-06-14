@@ -253,6 +253,7 @@ export default function OnLeave() {
         return arr.sort();
     };
     return (
+        <>
         <ScrollView
             style={{ flex: 1 }}
             refreshControl={

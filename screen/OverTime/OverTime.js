@@ -217,6 +217,7 @@ export default function OverTime() {
         return arr.sort();
     };
     return (
+        <>
         <ScrollView
             style={{ flex: 1 }}
             refreshControl={

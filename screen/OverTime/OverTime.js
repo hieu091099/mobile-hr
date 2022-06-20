@@ -34,6 +34,8 @@ export default function OverTime() {
 
     const [selectYear, setSelectYear] = useState(new Date().getFullYear());
     const dispatch = useDispatch();
+    // console.log(listOverTime);
+
     useEffect(() => {
         setOnLoad(true);
         getToken("user").then((res) => {
@@ -57,12 +59,24 @@ export default function OverTime() {
         );
         return sumOvertime;
     };
-    const tongNgay = () => {
-        let tong = 0;
+    const tongNgayGio = (act) => {
+        // act = 0 => tổng giờ tăng ca
+        // act = 1 => tổng ngày tăng ca
+        let tongngay = 0;
+        let tonggio = 0;
+
         listOverTime?.forEach((element) => {
-            tong += Number(element.Overtime);
+            if(element.YN == 5){
+                tonggio += Number(element.Overtime);
+                tongngay += 1;
+
+            }
         });
-        return tong;
+        switch (act) {
+            case 0: return tonggio;
+            case 1: return tongngay;
+        }
+  
     };
     const setSections = (sections) => {
         //setting up a active section state
@@ -181,7 +195,7 @@ export default function OverTime() {
 
     const renderYear = () => {
         let arr = [];
-        for (let i = 2010; i <= new Date().getFullYear(); i++) {
+        for (let i = new Date().getFullYear() - 14; i <= new Date().getFullYear(); i++) {
             arr.push(
                 <TouchableOpacity
                     key={i}
@@ -210,7 +224,7 @@ export default function OverTime() {
         objectArray.forEach((element) => {
             let index = arr.indexOf(moment(element?.Check_Day).format("MM"));
 
-            if (index == -1) {
+            if (index == -1 && element.YN != null) {
                 arr.push(moment(element?.Check_Day).format("MM"));
             }
         });
@@ -226,7 +240,7 @@ export default function OverTime() {
                     onRefresh={() => {
                         //   setSelectYear(selectYear)
                         setSelectYear(selectYear);
-                        // setSelectYear('2022');
+                        // setSelectYear('2021');
                     }}
                 />
             }>
@@ -263,7 +277,9 @@ export default function OverTime() {
                                 </View>
                                 <View style={styles.column}>
                                     <Text style={styles.contentText}>
-                                        {listOverTime?.length}
+                                        {tongNgayGio(1)}
+                                        {" " + multilang[lang].ngay}
+
                                     </Text>
                                     <Text style={styles.titleText}>
                                         {multilang[lang].soNgayTangCa}
@@ -271,7 +287,7 @@ export default function OverTime() {
                                 </View>
                                 <View style={styles.column}>
                                     <Text style={styles.contentText}>
-                                        {tongNgay()}
+                                        {tongNgayGio(0)}
                                         {" " + multilang[lang].gio}
                                     </Text>
                                     <Text style={styles.titleText}>
@@ -283,7 +299,7 @@ export default function OverTime() {
                     </View>
                 </View>
                 <ScrollView>
-                    {listOverTime.length != 0 ? (
+                    {(listOverTime.length != 0 && groupByMonth(listOverTime).length != 0) ? (
                         <Accordion
                             activeSections={activeSections}
                             sections={groupByMonth(listOverTime)}

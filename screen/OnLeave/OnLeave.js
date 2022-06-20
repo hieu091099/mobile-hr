@@ -34,6 +34,7 @@ export default function OnLeave() {
 
     const [selectYear, setSelectYear] = useState(new Date().getFullYear());
     const dispatch = useDispatch();
+
     //// console.log(listOnLeave);
     useEffect(() => {
         setOnLoad(true);
@@ -213,7 +214,7 @@ export default function OnLeave() {
 
     const renderYear = () => {
         let arr = [];
-        for (let i = 2010; i <= new Date().getFullYear(); i++) {
+        for (let i = new Date().getFullYear() - 14; i <= new Date().getFullYear(); i++) {
             //// console.log(i);
 
             arr.push(

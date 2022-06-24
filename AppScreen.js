@@ -21,17 +21,25 @@ import { getExpoPushNoti, getToken, setToken } from "./config";
 import * as Notifications from "expo-notifications";
 import UserDetail from "./screen/Setting/UserDetail";
 import { multilang } from "./language/multilang";
-import WithoutBotTabRoot from "./screen/RootStackScreen/WithoutBotTabRoot";
+import NetInfo from "@react-native-community/netinfo";
+
 import moment from "moment";
 import "moment/locale/zh-cn";
 import "moment/locale/vi";
 import "moment/locale/en-gb";
+import { Text, View } from "react-native";
 export default function App() {
    
     const Stack = createNativeStackNavigator();
     const Drawer = createDrawerNavigator();
     const dispatch = useDispatch();
     const { isLoggedIn, lang } = useSelector((state) => state.UserReducer);
+    const [isInternet, setIsInternet] = useState(true);
+    const unsubscribe = NetInfo.addEventListener((state) => {
+        if (state.isConnected != isInternet) {
+            setIsInternet(state.isConnected);
+        }
+    });
     useEffect(() => {
         switch (lang) {
             case "vi":
@@ -73,7 +81,7 @@ export default function App() {
         <SafeAreaView style={{ flex: 1 }}>
             <PaperProvider theme={theme}>
                 <NavigationContainer>
-                    <StatusBar />
+                    <StatusBar  />
                     {isLoggedIn ? (
                         <>
                             <Drawer.Navigator
@@ -168,6 +176,19 @@ export default function App() {
                     )}
                 </NavigationContainer>
             </PaperProvider>
+            {!isInternet && 
+                    <View
+                    style={{
+                        width: "100%",
+                        height: 30,
+                        position: "absolute",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "#B00020",
+                    }}>
+                       <Text style={{color:'white',fontWeight:'bold'}} >{multilang[lang].khongCoKetNoiMang}</Text>
+                </View>
+        }
         </SafeAreaView>
     );
 }

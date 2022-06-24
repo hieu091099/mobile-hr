@@ -129,7 +129,7 @@ export const getOnLeaveSummary = (accessToken, userId, year) => {
             });
             // }
         } catch (e) {
-            // console.log(e);
+            console.log(e);
         }
     };
 };

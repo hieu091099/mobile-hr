@@ -125,4 +125,6 @@ export const vi = {
     thongTinCaNhan: "Thông tin cá nhân",
     luuThayDoi: "Lưu Thay Đổi",
     ngayCap: "Ngày Cấp",
+    khongCoKetNoiMang:"Không có kết nối mạng",
+
 };

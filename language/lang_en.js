@@ -125,4 +125,6 @@ export const en = {
     thongTinCaNhan: "Personal information",
     luuThayDoi: "Save Change",
     ngayCap: "ID Card Date",
+    khongCoKetNoiMang:"No network connection",
+
 };

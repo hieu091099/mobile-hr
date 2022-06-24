@@ -13,7 +13,6 @@ import { ToastAndroid } from "react-native";
 import moment from "moment";
 
 export default function App() {
-    
     Notifications.setNotificationHandler({
         handleNotification: async () => ({
             shouldShowAlert: true,
@@ -23,10 +22,7 @@ export default function App() {
     });
     const unsubscribe = NetInfo.addEventListener((state) => {
         if (!state.isConnected) {
-            ToastAndroid.show(
-                "Kết nối không ổn định !",
-                ToastAndroid.SHORT,
-            );
+            ToastAndroid.show("Kết nối không ổn định !", ToastAndroid.SHORT);
         }
     });
 

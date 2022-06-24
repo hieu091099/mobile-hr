@@ -16,7 +16,7 @@
         "assetBundlePatterns": ["**/*"],
         "ios": {
             "supportsTablet": true,
-            "bundleIdentifier": "com.lactydev.mobilehr",
+            "bundleIdentifier": "com.lactydev.mobilehr2",
             "buildNumber": "2"
         },
         "android": {

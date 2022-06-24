@@ -34,6 +34,8 @@ export default function OverTime() {
 
     const [selectYear, setSelectYear] = useState(new Date().getFullYear());
     const dispatch = useDispatch();
+    // console.log(listOverTime);
+
     useEffect(() => {
         setOnLoad(true);
         getToken("user").then((res) => {
@@ -57,12 +59,25 @@ export default function OverTime() {
         );
         return sumOvertime;
     };
-    const tongNgay = () => {
-        let tong = 0;
+    const tongNgayGio = (act) => {
+        // act = 0 => tổng giờ tăng ca
+        // act = 1 => tổng ngày tăng ca
+        let tongngay = 0;
+        let tonggio = 0;
+
         listOverTime?.forEach((element) => {
-            tong += Number(element.Overtime);
+            console.log({ element });
+            if (element.YN == 5) {
+                tonggio += Number(element.Overtime);
+                tongngay += 1;
+            }
         });
-        return tong;
+        switch (act) {
+            case 0:
+                return tonggio;
+            case 1:
+                return tongngay;
+        }
     };
     const setSections = (sections) => {
         //setting up a active section state
@@ -181,7 +196,11 @@ export default function OverTime() {
 
     const renderYear = () => {
         let arr = [];
-        for (let i = 2010; i <= new Date().getFullYear(); i++) {
+        for (
+            let i = new Date().getFullYear() - 14;
+            i <= new Date().getFullYear();
+            i++
+        ) {
             arr.push(
                 <TouchableOpacity
                     key={i}
@@ -210,7 +229,7 @@ export default function OverTime() {
         objectArray.forEach((element) => {
             let index = arr.indexOf(moment(element?.Check_Day).format("MM"));
 
-            if (index == -1) {
+            if (index == -1 && element.YN != null) {
                 arr.push(moment(element?.Check_Day).format("MM"));
             }
         });
@@ -218,146 +237,149 @@ export default function OverTime() {
     };
     return (
         <>
-        <ScrollView
-            style={{ flex: 1 }}
-            refreshControl={
-                <RefreshControl
-                    refreshing={false}
-                    onRefresh={() => {
-                        //   setSelectYear(selectYear)
-                        setSelectYear(selectYear);
-                        // setSelectYear('2022');
-                    }}
-                />
-            }>
-            <View style={{ paddingHorizontal: 10, paddingTop: 10, flex: 1 }}>
-                <View style={styles.summary}>
-                    <View style={{ marginLeft: 10 }}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setModalVisible(true);
-                            }}>
-                            <Text
-                                style={{
-                                    color: "#B5B9CA",
-                                    fontWeight: "300",
-                                    fontSize: 16,
+            <ScrollView
+                style={{ flex: 1 }}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={false}
+                        onRefresh={() => {
+                            //   setSelectYear(selectYear)
+                            setSelectYear(selectYear);
+                            // setSelectYear('2021');
+                        }}
+                    />
+                }>
+                <View
+                    style={{ paddingHorizontal: 10, paddingTop: 10, flex: 1 }}>
+                    <View style={styles.summary}>
+                        <View style={{ marginLeft: 10 }}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setModalVisible(true);
                                 }}>
-                                {multilang[lang].chiTietLamThemGio}{" "}
-                                <Text style={styles.textTitle}>
-                                    {selectYear}
+                                <Text
+                                    style={{
+                                        color: "#B5B9CA",
+                                        fontWeight: "300",
+                                        fontSize: 16,
+                                    }}>
+                                    {multilang[lang].chiTietLamThemGio}{" "}
+                                    <Text style={styles.textTitle}>
+                                        {selectYear}
+                                    </Text>
                                 </Text>
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View>
+                            </TouchableOpacity>
+                        </View>
                         <View>
-                            <View style={[styles.row, { marginTop: 10 }]}>
-                                <View style={styles.column}>
-                                    <Text style={styles.contentText}>
-                                        300{" " + multilang[lang].gio}
-                                    </Text>
-                                    <Text style={styles.titleText}>
-                                        {multilang[lang].lamThemToiDa}
-                                    </Text>
-                                </View>
-                                <View style={styles.column}>
-                                    <Text style={styles.contentText}>
-                                        {listOverTime?.length}
-                                    </Text>
-                                    <Text style={styles.titleText}>
-                                        {multilang[lang].soNgayTangCa}
-                                    </Text>
-                                </View>
-                                <View style={styles.column}>
-                                    <Text style={styles.contentText}>
-                                        {tongNgay()}
-                                        {" " + multilang[lang].gio}
-                                    </Text>
-                                    <Text style={styles.titleText}>
-                                        {multilang[lang].soGioTangCa}
-                                    </Text>
+                            <View>
+                                <View style={[styles.row, { marginTop: 10 }]}>
+                                    <View style={styles.column}>
+                                        <Text style={styles.contentText}>
+                                            300{" " + multilang[lang].gio}
+                                        </Text>
+                                        <Text style={styles.titleText}>
+                                            {multilang[lang].lamThemToiDa}
+                                        </Text>
+                                    </View>
+                                    <View style={styles.column}>
+                                        <Text style={styles.contentText}>
+                                            {tongNgayGio(1)}
+                                            {" " + multilang[lang].ngay}
+                                        </Text>
+                                        <Text style={styles.titleText}>
+                                            {multilang[lang].soNgayTangCa}
+                                        </Text>
+                                    </View>
+                                    <View style={styles.column}>
+                                        <Text style={styles.contentText}>
+                                            {tongNgayGio(0)}
+                                            {" " + multilang[lang].gio}
+                                        </Text>
+                                        <Text style={styles.titleText}>
+                                            {multilang[lang].soGioTangCa}
+                                        </Text>
+                                    </View>
                                 </View>
                             </View>
                         </View>
                     </View>
-                </View>
-                <ScrollView>
-                    {listOverTime.length != 0 ? (
-                        <Accordion
-                            activeSections={activeSections}
-                            sections={groupByMonth(listOverTime)}
-                            touchableComponent={TouchableOpacity}
-                            expandMultiple={false}
-                            renderHeader={renderHeaderMonth}
-                            renderContent={renderContentMonth}
-                            duration={400}
-                            onChange={setSections}
-                        />
-                    ) : (
-                        <View
-                            style={{
-                                alignItems: "center",
-                                marginTop: 30,
-                            }}>
-                            <Image
-                                style={{ width: 80, height: 80 }}
-                                source={require("../../assets/images/nodata.png")}
+                    <ScrollView>
+                        {listOverTime.length != 0 &&
+                        groupByMonth(listOverTime).length != 0 ? (
+                            <Accordion
+                                activeSections={activeSections}
+                                sections={groupByMonth(listOverTime)}
+                                touchableComponent={TouchableOpacity}
+                                expandMultiple={false}
+                                renderHeader={renderHeaderMonth}
+                                renderContent={renderContentMonth}
+                                duration={400}
+                                onChange={setSections}
                             />
-                            <Text style={{ color: "black" }}>
-                                {multilang[lang].khongCoDuLieu}
-                            </Text>
-                        </View>
-                    )}
-                </ScrollView>
-                <Modal
-                    propagateSwipe={true}
-                    animationType="fade"
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                        Alert.alert("Modal has been closed.");
-                        setModalVisible(!modalVisible);
-                    }}>
-                    <Pressable
-                        style={{
-                            justifyContent: "center",
-                            alignItems: "center",
-                            flex: 1,
-                            backgroundColor: "#00000078",
-                        }}
-                        onPress={() => {
-                            setModalVisible(false);
+                        ) : (
+                            <View
+                                style={{
+                                    alignItems: "center",
+                                    marginTop: 30,
+                                }}>
+                                <Image
+                                    style={{ width: 80, height: 80 }}
+                                    source={require("../../assets/images/nodata.png")}
+                                />
+                                <Text style={{ color: "black" }}>
+                                    {multilang[lang].khongCoDuLieu}
+                                </Text>
+                            </View>
+                        )}
+                    </ScrollView>
+                    <Modal
+                        propagateSwipe={true}
+                        animationType="fade"
+                        transparent={true}
+                        visible={modalVisible}
+                        onRequestClose={() => {
+                            Alert.alert("Modal has been closed.");
+                            setModalVisible(!modalVisible);
                         }}>
-                        <View style={styles.pickYear}>
-                            <ScrollView style={{ height: 300, width: "100%" }}>
-                                <Pressable
-                                    style={[
-                                        styles.pickYear,
-                                        { width: "100%", padding: 10 },
-                                    ]}>
-                                    {renderYear()}
-                                </Pressable>
-                            </ScrollView>
-                        </View>
-                    </Pressable>
-                </Modal>
-            </View>
-          
-        </ScrollView>
-          {onLoad && (
-            <View
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    position: "absolute",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "#00000021"
-                }}>
-                <ActivityIndicator size="large" color="#0D4A85" />
-            </View>
-        )}
+                        <Pressable
+                            style={{
+                                justifyContent: "center",
+                                alignItems: "center",
+                                flex: 1,
+                                backgroundColor: "#00000078",
+                            }}
+                            onPress={() => {
+                                setModalVisible(false);
+                            }}>
+                            <View style={styles.pickYear}>
+                                <ScrollView
+                                    style={{ height: 300, width: "100%" }}>
+                                    <Pressable
+                                        style={[
+                                            styles.pickYear,
+                                            { width: "100%", padding: 10 },
+                                        ]}>
+                                        {renderYear()}
+                                    </Pressable>
+                                </ScrollView>
+                            </View>
+                        </Pressable>
+                    </Modal>
+                </View>
+            </ScrollView>
+            {onLoad && (
+                <View
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        position: "absolute",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "#00000021",
+                    }}>
+                    <ActivityIndicator size="large" color="#0D4A85" />
+                </View>
+            )}
         </>
     );
 }

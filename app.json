@@ -17,13 +17,14 @@
         "ios": {
             "supportsTablet": true,
             "bundleIdentifier": "com.lactydev.mobilehr2",
+            "googleServicesFile": "./GoogleService-Info.plist",
             "buildNumber":"2"
         },
         "android": {
             "useNextNotificationsApi": true,
             "adaptiveIcon": {
                 "foregroundImage": "./assets/adaptive-icon.jpg",
-                "backgroundColor": "#000000"
+                "backgroundColor": "#ffffff"
             },
             "package": "com.lactydev.mobilehr",
             "googleServicesFile": "./google-services.json",

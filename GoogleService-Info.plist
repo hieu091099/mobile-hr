@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>744061605445-jqlnlu1aafgbq59chl0k6dkss3ilgsot.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.744061605445-jqlnlu1aafgbq59chl0k6dkss3ilgsot</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA_88yf0vPwzI1qIjwFRqCIYd8e_CgGc_c</string>
+	<key>GCM_SENDER_ID</key>
+	<string>744061605445</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.lactydev.mobilehr2</string>
+	<key>PROJECT_ID</key>
+	<string>noti-mobile-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>noti-mobile-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:744061605445:ios:7d6f12b3e86df157b5b52c</string>
+</dict>
+</plist>

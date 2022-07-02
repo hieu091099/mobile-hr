@@ -37,7 +37,14 @@ export default function OverTime() {
     // console.log(listOverTime);
 
     useEffect(() => {
+        funcEff();
+    }, [selectYear]);
+    const funcEff = () => {
         setOnLoad(true);
+        dispatch({
+            type: "GET_ONLEAVE",
+            onLeave: [],
+        });
         getToken("user").then((res) => {
             if (res != "" || res != undefined) {
                 res = JSON.parse(res);
@@ -49,7 +56,7 @@ export default function OverTime() {
                 });
             }
         });
-    }, [selectYear]);
+    };
     const tongGioThang = (thang) => {
         let sumOvertime = 0;
         listOverTime.filter((v) =>
@@ -243,9 +250,7 @@ export default function OverTime() {
                     <RefreshControl
                         refreshing={false}
                         onRefresh={() => {
-                            //   setSelectYear(selectYear)
-                            setSelectYear(selectYear);
-                            // setSelectYear('2021');
+                            funcEff();
                         }}
                     />
                 }>
@@ -263,9 +268,16 @@ export default function OverTime() {
                                         fontWeight: "300",
                                         fontSize: 16,
                                     }}>
-                                    {multilang[lang].chiTietLamThemGio}{" "}
-                                    <Text style={styles.textTitle}>
-                                        {selectYear}
+                                    <Text
+                                        style={{
+                                            color: "#B5B9CA",
+                                            fontWeight: "300",
+                                            fontSize: 16,
+                                        }}>
+                                        {multilang[lang].chiTietLamThemGio}{" "}
+                                        <Text style={styles.textTitle}>
+                                            {selectYear}
+                                        </Text>
                                     </Text>
                                 </Text>
                             </TouchableOpacity>

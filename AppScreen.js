@@ -21,33 +21,41 @@ import { getExpoPushNoti, getToken, setToken } from "./config";
 import * as Notifications from "expo-notifications";
 import UserDetail from "./screen/Setting/UserDetail";
 import { multilang } from "./language/multilang";
-import WithoutBotTabRoot from "./screen/RootStackScreen/WithoutBotTabRoot";
+import NetInfo from "@react-native-community/netinfo";
+
 import moment from "moment";
 import "moment/locale/zh-cn";
 import "moment/locale/vi";
 import "moment/locale/en-gb";
+import { Text, View } from "react-native";
+import { Easing } from "react-native-reanimated";
 export default function App() {
-   
     const Stack = createNativeStackNavigator();
     const Drawer = createDrawerNavigator();
     const dispatch = useDispatch();
     const { isLoggedIn, lang } = useSelector((state) => state.UserReducer);
+    const [isInternet, setIsInternet] = useState(true);
+    const unsubscribe = NetInfo.addEventListener((state) => {
+        if (state.isConnected != isInternet) {
+            setIsInternet(state.isConnected);
+        }
+    });
     useEffect(() => {
         switch (lang) {
             case "vi":
-                moment.locale('vi');
+                moment.locale("vi");
                 break;
             case "en":
-                moment.locale('en-gb');
+                moment.locale("en-gb");
                 break;
             case "tw":
-                moment.locale('zh-cn');
+                moment.locale("zh-cn");
                 break;
-                default :
-                moment.locale('vi');
-              break;
+            default:
+                moment.locale("vi");
+                break;
         }
-        },[lang]);
+    }, [lang]);
     useEffect(() => {
         getToken("lang").then((val) => {
             if (val != undefined) {
@@ -79,6 +87,22 @@ export default function App() {
                             <Drawer.Navigator
                                 screenOptions={{
                                     animation: "slide_from_right",
+                                    gestureEnabled: true,
+                                    gestureDirection: "horizontal",
+                                    transitionSpec: {
+                                        open: {
+                                            animation: "timing",
+                                            duration: 300,
+                                            easing: Easing,
+                                        },
+                                        close: {
+                                            animation: "timing",
+                                            duration: 300,
+                                            easing: Easing,
+                                        },
+                                    },
+                                    // cardStyleInterpolator:
+                                    //     cardStyleInterpolator.forHorizontalIOS,
                                     drawerStyle: {
                                         width: "75%",
                                     },
@@ -140,6 +164,7 @@ export default function App() {
                                     screenOptions={{ headerShown: true }}
                                     options={{
                                         headerTitle: multilang[lang].taiKhoan,
+                                        unmountOnBlur: true,
                                         headerLeft: () => {
                                             const navigation = useNavigation();
                                             return (
@@ -168,6 +193,21 @@ export default function App() {
                     )}
                 </NavigationContainer>
             </PaperProvider>
+            {!isInternet && (
+                <View
+                    style={{
+                        width: "100%",
+                        height: 30,
+                        position: "absolute",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "#B00020",
+                    }}>
+                    <Text style={{ color: "white", fontWeight: "bold" }}>
+                        {multilang[lang].khongCoKetNoiMang}
+                    </Text>
+                </View>
+            )}
         </SafeAreaView>
     );
 }

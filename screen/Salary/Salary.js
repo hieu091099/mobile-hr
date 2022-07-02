@@ -22,6 +22,8 @@ import { usePreventScreenCapture } from "expo-screen-capture";
 
 export default function Salary() {
     usePreventScreenCapture();
+    const [onLoad, setOnLoad] = useState(false);
+
     const { salary, lang } = useSelector((state) => state.UserReducer);
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
@@ -49,6 +51,14 @@ export default function Salary() {
     };
     const pad = (num) => (num.length == 1 ? "0" : "") + num;
     useEffect(() => {
+        funcEff();
+    }, [selectDate]);
+    const funcEff= ()=>{
+        setOnLoad(true);
+        dispatch({
+            type: "GET_SALARY",
+            salary: [],
+        });
         getToken("user").then((res) => {
             if (res != "" || res != undefined) {
                 res = JSON.parse(res);
@@ -64,21 +74,22 @@ export default function Salary() {
                                 setSelectDate(mY);
                                 dispatch(getSalaryAction(res, personId, mY));
                             }
+                             setOnLoad(false);
                         });
                     }
                 });
             }
         });
-    }, [selectDate]);
-
+    }
     return (
+        <>
         <ScrollView
             style={{ flex: 1 }}
             refreshControl={
                 <RefreshControl
                     refreshing={false}
                     onRefresh={() => {
-                        setSelectDate(selectDate);
+                        funcEff();
                         // setSelectYear('2022');
                     }}
                 />
@@ -119,7 +130,7 @@ export default function Salary() {
                         />
                     </Pressable>
                 </Modal>
-                {salary == "" ? (
+                {/* {salary == "" ? (
                     <View style={styles.wrapperLoading}>
                         <ActivityIndicator
                             style={{ marginTop: "25%" }}
@@ -127,7 +138,7 @@ export default function Salary() {
                             color="#0D4A85"
                         />
                     </View>
-                ) : (
+                ) : ( */}
                     <View style={{ width: "93%", height: "100%", flex: 1 }}>
                         <View style={styles.summary}>
                             <View style={{ marginLeft: 10 }}>
@@ -295,9 +306,23 @@ export default function Salary() {
                             <SalaryDetail salary={salary} />
                         )}
                     </View>
-                )}
+              
             </View>
         </ScrollView>
+         {onLoad && (
+            <View
+                style={{
+                    width: "100%",
+                    height: "100%",
+                    position: "absolute",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: "#00000021",
+                }}>
+                <ActivityIndicator size="large" color="#0D4A85" />
+            </View>
+        )}
+        </>
     );
 }
 

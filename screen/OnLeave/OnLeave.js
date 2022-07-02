@@ -37,14 +37,25 @@ export default function OnLeave() {
 
     //// console.log(listOnLeave);
     useEffect(() => {
+        funcEff();
+    }, [selectYear]);
+    const funcEff = () => {
         setOnLoad(true);
+        dispatch({
+            type: "GET_ONLEAVE_SUMMARY",
+            onLeaveSummary: [],
+        });
+        dispatch({
+            type: "GET_ONLEAVE",
+            onLeave: [],
+        });
         getToken("user").then((res) => {
             if (res != "" || res != undefined) {
                 res = JSON.parse(res);
                 let personId = res.userId;
                 getToken("accessToken").then(async (res) => {
                     //  // console.log(res);
-                   let p1 = new Promise(function (resolve, reject) {
+                    let p1 = new Promise(function (resolve, reject) {
                         dispatch(getOnLeave(res, personId, selectYear)).then(
                             (val) => {
                                 resolve();
@@ -52,7 +63,7 @@ export default function OnLeave() {
                         );
                     });
 
-                   let p2 = new Promise(function (resolve, reject) {
+                    let p2 = new Promise(function (resolve, reject) {
                         dispatch(
                             getOnLeaveSummary(res, personId, selectYear),
                         ).then((val) => {
@@ -65,7 +76,7 @@ export default function OnLeave() {
                 });
             }
         });
-    }, [selectYear]);
+    };
     const setSections = (sections) => {
         //setting up a active section state
         setActiveSections(sections.includes(undefined) ? [] : sections);
@@ -214,7 +225,11 @@ export default function OnLeave() {
 
     const renderYear = () => {
         let arr = [];
-        for (let i = new Date().getFullYear() - 14; i <= new Date().getFullYear(); i++) {
+        for (
+            let i = new Date().getFullYear() - 14;
+            i <= new Date().getFullYear();
+            i++
+        ) {
             //// console.log(i);
 
             arr.push(
@@ -255,178 +270,182 @@ export default function OnLeave() {
     };
     return (
         <>
-        <ScrollView
-            style={{ flex: 1 }}
-            refreshControl={
-                <RefreshControl
-                    refreshing={false}
-                    onRefresh={() => {
-                        setSelectYear(selectYear);
-                        // setSelectYear('2022');
-                    }}
-                />
-            }>
-            <View style={{ paddingHorizontal: 10, paddingTop: 10, flex: 1 }}>
-                <View style={styles.summary}>
-                    <View style={{ marginLeft: 10 }}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setModalVisible(true);
-                            }}>
-                            <Text
-                                style={{
-                                    color: "#B5B9CA",
-                                    fontWeight: "300",
-                                    fontSize: 16,
-                                }}>
-                                {multilang[lang].chiTietPhepNam}{" "}
-                                <Text style={styles.textTitle}>
-                                    {selectYear}
-                                </Text>
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View>
-                        <View>
-                            <View style={styles.row}>
-                                <View style={styles.column}>
-                                    <Text style={styles.contentText}>
-                                        {listOnLeaveSummary.length != 0 &&
-                                            listOnLeaveSummary[0]
-                                                ?.TONGPHEPTAMTINH}
-                                    </Text>
-                                    <Text style={styles.titleText}>
-                                        {multilang[lang].tongPhep}
-                                    </Text>
-                                </View>
-                                <View style={styles.column}>
-                                    <Text style={styles.contentText}>
-                                        {listOnLeaveSummary.length != 0 &&
-                                            listOnLeaveSummary[0]?.DANGHI}
-                                    </Text>
-                                    <Text style={styles.titleText}>
-                                        {multilang[lang].phepDaNghi}
-                                    </Text>
-                                </View>
-                                <View style={styles.column}>
-                                    <Text style={styles.contentText}>
-                                        {listOnLeaveSummary.length != 0 &&
-                                            listOnLeaveSummary[0]?.CONLAI}
-                                    </Text>
-                                    <Text style={styles.titleText}>
-                                        {multilang[lang].phepConLai}
-                                    </Text>
-                                </View>
-                            </View>
-                            <View style={[styles.row, { marginTop: 15 }]}>
-                                <View style={styles.column}>
-                                    <Text style={styles.contentText}>
-                                        {listOnLeaveSummary.length != 0 &&
-                                            listOnLeaveSummary[0]
-                                                ?.TONPHEPNAMTRUOC}
-                                    </Text>
-                                    <Text style={styles.titleText}>
-                                        {multilang[lang].phepTon}
-                                    </Text>
-                                </View>
-                                <View style={styles.column}>
-                                    <Text style={styles.contentText}>
-                                        {listOnLeaveSummary.length != 0 &&
-                                            listOnLeaveSummary[0]?.DANGHIPTT}
-                                    </Text>
-                                    <Text style={styles.titleText}>
-                                        {multilang[lang].daNghiPtt}
-                                    </Text>
-                                </View>
-                                <View style={styles.column}>
-                                    <Text style={styles.contentText}>
-                                        {listOnLeaveSummary.length != 0 &&
-                                            listOnLeaveSummary[0]?.CONLAIPTT}
-                                    </Text>
-                                    <Text style={styles.titleText}>
-                                        {multilang[lang].conLaiPtt}
-                                    </Text>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-                </View>
-                <ScrollView>
-                    {listOnLeave.length != 0 ? (
-                        <Accordion
-                            activeSections={activeSections}
-                            sections={groupByMonth(listOnLeave)}
-                            touchableComponent={TouchableOpacity}
-                            expandMultiple={false}
-                            renderHeader={renderHeaderMonth}
-                            renderContent={renderContentMonth}
-                            duration={400}
-                            onChange={setSections}
-                        />
-                    ) : (
-                        <View
-                            style={{
-                                alignItems: "center",
-                                marginTop: 30,
-                            }}>
-                            <Image
-                                style={{ width: 80, height: 80 }}
-                                source={require("../../assets/images/nodata.png")}
-                            />
-                            <Text style={{ color: "black" }}>
-                                {multilang[lang].khongCoDuLieu}
-                            </Text>
-                        </View>
-                    )}
-                </ScrollView>
-                <Modal
-                    propagateSwipe={true}
-                    animationType="fade"
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                        Alert.alert("Modal has been closed.");
-                        setModalVisible(!modalVisible);
-                    }}>
-                    <Pressable
-                        style={{
-                            justifyContent: "center",
-                            alignItems: "center",
-                            flex: 1,
-                            backgroundColor: "#00000078",
+            <ScrollView
+                style={{ flex: 1 }}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={false}
+                        onRefresh={() => {
+                            // setSelectYear(selectYear);
+                            funcEff();
+                            // setSelectYear('2021');
                         }}
-                        onPress={() => {
-                            setModalVisible(false);
-                        }}>
-                        <View style={styles.pickYear}>
-                            <ScrollView style={{ height: 300, width: "100%" }}>
-                                <Pressable
-                                    style={[
-                                        styles.pickYear,
-                                        { width: "100%", padding: 10 },
-                                    ]}>
-                                    {renderYear()}
-                                </Pressable>
-                            </ScrollView>
+                    />
+                }>
+                <View
+                    style={{ paddingHorizontal: 10, paddingTop: 10, flex: 1 }}>
+                    <View style={styles.summary}>
+                        <View style={{ marginLeft: 10 }}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setModalVisible(true);
+                                }}>
+                                <Text
+                                    style={{
+                                        color: "#B5B9CA",
+                                        fontWeight: "300",
+                                        fontSize: 16,
+                                    }}>
+                                    {multilang[lang].chiTietPhepNam}{" "}
+                                    <Text style={styles.textTitle}>
+                                        {selectYear}
+                                    </Text>
+                                </Text>
+                            </TouchableOpacity>
                         </View>
-                    </Pressable>
-                </Modal>
-            </View>
-           
-        </ScrollView>
-         {onLoad && (
-            <View
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    position: "absolute",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "#00000021",
-                }}>
-                <ActivityIndicator size="large" color="#0D4A85" />
-            </View>
-        )}
+                        <View>
+                            <View>
+                                <View style={styles.row}>
+                                    <View style={styles.column}>
+                                        <Text style={styles.contentText}>
+                                            {listOnLeaveSummary.length != 0 &&
+                                                listOnLeaveSummary[0]
+                                                    ?.TONGPHEPTAMTINH}
+                                        </Text>
+                                        <Text style={styles.titleText}>
+                                            {multilang[lang].tongPhep}
+                                        </Text>
+                                    </View>
+                                    <View style={styles.column}>
+                                        <Text style={styles.contentText}>
+                                            {listOnLeaveSummary.length != 0 &&
+                                                listOnLeaveSummary[0]?.DANGHI}
+                                        </Text>
+                                        <Text style={styles.titleText}>
+                                            {multilang[lang].phepDaNghi}
+                                        </Text>
+                                    </View>
+                                    <View style={styles.column}>
+                                        <Text style={styles.contentText}>
+                                            {listOnLeaveSummary.length != 0 &&
+                                                listOnLeaveSummary[0]?.CONLAI}
+                                        </Text>
+                                        <Text style={styles.titleText}>
+                                            {multilang[lang].phepConLai}
+                                        </Text>
+                                    </View>
+                                </View>
+                                <View style={[styles.row, { marginTop: 15 }]}>
+                                    <View style={styles.column}>
+                                        <Text style={styles.contentText}>
+                                            {listOnLeaveSummary.length != 0 &&
+                                                listOnLeaveSummary[0]
+                                                    ?.TONPHEPNAMTRUOC}
+                                        </Text>
+                                        <Text style={styles.titleText}>
+                                            {multilang[lang].phepTon}
+                                        </Text>
+                                    </View>
+                                    <View style={styles.column}>
+                                        <Text style={styles.contentText}>
+                                            {listOnLeaveSummary.length != 0 &&
+                                                listOnLeaveSummary[0]
+                                                    ?.DANGHIPTT}
+                                        </Text>
+                                        <Text style={styles.titleText}>
+                                            {multilang[lang].daNghiPtt}
+                                        </Text>
+                                    </View>
+                                    <View style={styles.column}>
+                                        <Text style={styles.contentText}>
+                                            {listOnLeaveSummary.length != 0 &&
+                                                listOnLeaveSummary[0]
+                                                    ?.CONLAIPTT}
+                                        </Text>
+                                        <Text style={styles.titleText}>
+                                            {multilang[lang].conLaiPtt}
+                                        </Text>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                    <ScrollView>
+                        {listOnLeave.length != 0 ? (
+                            <Accordion
+                                activeSections={activeSections}
+                                sections={groupByMonth(listOnLeave)}
+                                touchableComponent={TouchableOpacity}
+                                expandMultiple={false}
+                                renderHeader={renderHeaderMonth}
+                                renderContent={renderContentMonth}
+                                duration={400}
+                                onChange={setSections}
+                            />
+                        ) : (
+                            <View
+                                style={{
+                                    alignItems: "center",
+                                    marginTop: 30,
+                                }}>
+                                <Image
+                                    style={{ width: 80, height: 80 }}
+                                    source={require("../../assets/images/nodata.png")}
+                                />
+                                <Text style={{ color: "black" }}>
+                                    {multilang[lang].khongCoDuLieu}
+                                </Text>
+                            </View>
+                        )}
+                    </ScrollView>
+                    <Modal
+                        propagateSwipe={true}
+                        animationType="fade"
+                        transparent={true}
+                        visible={modalVisible}
+                        onRequestClose={() => {
+                            Alert.alert("Modal has been closed.");
+                            setModalVisible(!modalVisible);
+                        }}>
+                        <Pressable
+                            style={{
+                                justifyContent: "center",
+                                alignItems: "center",
+                                flex: 1,
+                                backgroundColor: "#00000078",
+                            }}
+                            onPress={() => {
+                                setModalVisible(false);
+                            }}>
+                            <View style={styles.pickYear}>
+                                <ScrollView
+                                    style={{ height: 300, width: "100%" }}>
+                                    <Pressable
+                                        style={[
+                                            styles.pickYear,
+                                            { width: "100%", padding: 10 },
+                                        ]}>
+                                        {renderYear()}
+                                    </Pressable>
+                                </ScrollView>
+                            </View>
+                        </Pressable>
+                    </Modal>
+                </View>
+            </ScrollView>
+            {onLoad && (
+                <View
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        position: "absolute",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "#00000021",
+                    }}>
+                    <ActivityIndicator size="large" color="#0D4A85" />
+                </View>
+            )}
         </>
     );
 }

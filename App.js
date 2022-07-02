@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Provider, useDispatch } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import * as Font from "expo-font";
 import { setCustomText } from "react-native-global-props";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getToken, setToken } from "./config";
 // import OnLeave from "./screen/OnLeave/OnLeave"
-import NetInfo from "@react-native-community/netinfo";
 import * as Notifications from "expo-notifications";
 import AppScreen from "./AppScreen";
 import { store } from "./redux/store";
-import { ToastAndroid } from "react-native";
+import { ActivityIndicator, ToastAndroid, View } from "react-native";
 import moment from "moment";
+import { Text } from "react-native";
 
 export default function App() {
     Notifications.setNotificationHandler({
@@ -20,12 +20,6 @@ export default function App() {
             shouldSetBadge: false,
         }),
     });
-    const unsubscribe = NetInfo.addEventListener((state) => {
-        if (!state.isConnected) {
-            ToastAndroid.show("Kết nối không ổn định !", ToastAndroid.SHORT);
-        }
-    });
-
     return (
         <Provider store={store}>
             <AppScreen />

@@ -29,7 +29,7 @@
             "package": "com.lactydev.mobilehr",
             "googleServicesFile": "./google-services.json",
             "versionCode": 10,
-            "permissions": ["USE_FINGERPRINT"]
+            "permissions": ["USE_FINGERPRINT", "ACCESS_NETWORK_STATE"]
         },
         "web": {
             "favicon": "./assets/favicon.png"

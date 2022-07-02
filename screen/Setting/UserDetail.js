@@ -20,7 +20,7 @@ import Feather from "react-native-vector-icons/Feather";
 import MaskInput, { Masks } from "react-native-mask-input";
 import SimpleDialog from "../../components/SimpleDialog/SimpleDialog";
 
-export default function UserDetail() {
+export default function UserDetail({ navigation }) {
     const [zoomQr, setZoomQr] = useState(false);
     const { user, lang } = useSelector((state) => state.UserReducer);
     const [infoUser, setInfoUser] = useState();
@@ -80,6 +80,15 @@ export default function UserDetail() {
         }
     }, [update]);
     useEffect(() => {
+        const unsubscribe = navigation.addListener("focus", () => {
+            setIsShowUpdate(false);
+            setShowInput(true);
+        });
+
+        // Return the function to unsubscribe from the event so it gets removed on unmount
+        return unsubscribe;
+    }, [navigation]);
+    useEffect(() => {
         setLoading(true);
         // http://192.168.18.172:8000/user/getUserInfo/29975
         getToken("user").then((res) => {
@@ -111,7 +120,12 @@ export default function UserDetail() {
     }, [visible]);
     return (
         <View
-            style={{ flex: 1, position: "relative", backgroundColor: "white" }}>
+            style={{
+                flex: 1,
+                position: "relative",
+                backgroundColor: "white",
+                justifyContent: "space-between",
+            }}>
             <ScrollView
                 style={{ flex: 1, width: "100%" }}
                 contentContainerStyle={{ alignItems: "center" }}
@@ -209,6 +223,7 @@ export default function UserDetail() {
                             <MaskInput
                                 style={styles.infoContent}
                                 keyboardType="numeric"
+                                editable={!showInput}
                                 value={update?.birthday}
                                 onChangeText={(masked, unmasked) => {
                                     console.log(masked);
@@ -229,6 +244,7 @@ export default function UserDetail() {
                             </Text>
                             <TextInput
                                 style={styles.infoContent}
+                                editable={!showInput}
                                 onChangeText={(value) => {
                                     setUpdate({ ...update, phone: value });
                                 }}
@@ -248,6 +264,7 @@ export default function UserDetail() {
                             </Text>
                             <TextInput
                                 style={styles.infoContent}
+                                editable={!showInput}
                                 onChangeText={(value) => {
                                     setUpdate({ ...update, idCard: value });
                                 }}
@@ -270,6 +287,7 @@ export default function UserDetail() {
                                 style={styles.infoContent}
                                 keyboardType="numeric"
                                 value={update?.idDate}
+                                editable={!showInput}
                                 onChangeText={(masked, unmasked) => {
                                     console.log(masked);
                                     setUpdate({ ...update, idDate: masked });
@@ -295,23 +313,25 @@ export default function UserDetail() {
                             <Feather name="edit-2" />
                         </TouchableOpacity> */}
                     </View>
-                    {isShowUpdate ? (
-                        <TouchableOpacity
-                            onPress={() => updateInfo()}
-                            style={[
-                                styles.button,
-                                { width: "100%", borderRadius: 5 },
-                            ]}>
-                            <Text style={styles.buttonText}>
-                                {" "}
-                                {multilang[lang].luuThayDoi}
-                            </Text>
-                        </TouchableOpacity>
-                    ) : (
-                        <></>
-                    )}
                 </View>
             </ScrollView>
+            {isShowUpdate ? (
+                <View style={{ padding: 10 }}>
+                    <TouchableOpacity
+                        onPress={() => updateInfo()}
+                        style={[
+                            styles.button,
+                            { width: "100%", borderRadius: 5 },
+                        ]}>
+                        <Text style={styles.buttonText}>
+                            {" "}
+                            {multilang[lang].luuThayDoi}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+            ) : (
+                <></>
+            )}
             {zoomQr && (
                 <Pressable
                     style={styles.zoomqr}
@@ -386,8 +406,8 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 10,
-        width: "80%",
-        height: 55,
+        // width: "80%",
+        height: 50,
         backgroundColor: "#0D4A85",
         borderTopLeftRadius: 5,
         borderBottomLeftRadius: 5,

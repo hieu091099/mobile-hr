@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HeaderHomeScreen from "../../components/HeaderHomeScreen/HeaderHomeScreen";
@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { multilang } from "../../language/multilang";
 import Notify from "../Notify/Notify";
 import NotifyContent from "../NotifyContent/NotifyContent";
+import Icon from "../../components/Icon/Icon";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Stack = createNativeStackNavigator();
 
@@ -61,6 +63,18 @@ const HomeStackScreen = ({ navigation, route }) => {
                 component={Notify}
                 options={{
                     headerTitle: multilang[lang].thongBao,
+                    headerLeft: () => {
+                        const navigation = useNavigation();
+                        return (
+                            <TouchableOpacity
+                                onPress={() => navigation.goBack()}
+                                style={{
+                                    marginRight: 20,
+                                }}>
+                                <Ionicons name="arrow-back" size={30} />
+                            </TouchableOpacity>
+                        );
+                    },
                 }}
             />
             <Stack.Screen
@@ -68,6 +82,18 @@ const HomeStackScreen = ({ navigation, route }) => {
                 component={NotifyContent}
                 options={{
                     headerTitle: multilang[lang].thongBao,
+                    headerLeft: () => {
+                        const navigation = useNavigation();
+                        return (
+                            <TouchableOpacity
+                                onPress={() => navigation.goBack()}
+                                style={{
+                                    marginRight: 20,
+                                }}>
+                                <Ionicons name="arrow-back" size={30} />
+                            </TouchableOpacity>
+                        );
+                    },
                 }}
             />
             {/* <Stack.Screen name="Notifications" component={Notifications} /> */}

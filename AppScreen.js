@@ -28,8 +28,8 @@ import "moment/locale/zh-cn";
 import "moment/locale/vi";
 import "moment/locale/en-gb";
 import { Text, View } from "react-native";
+import { Easing } from "react-native-reanimated";
 export default function App() {
-   
     const Stack = createNativeStackNavigator();
     const Drawer = createDrawerNavigator();
     const dispatch = useDispatch();
@@ -43,19 +43,19 @@ export default function App() {
     useEffect(() => {
         switch (lang) {
             case "vi":
-                moment.locale('vi');
+                moment.locale("vi");
                 break;
             case "en":
-                moment.locale('en-gb');
+                moment.locale("en-gb");
                 break;
             case "tw":
-                moment.locale('zh-cn');
+                moment.locale("zh-cn");
                 break;
-                default :
-                moment.locale('vi');
-              break;
+            default:
+                moment.locale("vi");
+                break;
         }
-        },[lang]);
+    }, [lang]);
     useEffect(() => {
         getToken("lang").then((val) => {
             if (val != undefined) {
@@ -81,12 +81,28 @@ export default function App() {
         <SafeAreaView style={{ flex: 1 }}>
             <PaperProvider theme={theme}>
                 <NavigationContainer>
-                    <StatusBar  />
+                    <StatusBar />
                     {isLoggedIn ? (
                         <>
                             <Drawer.Navigator
                                 screenOptions={{
                                     animation: "slide_from_right",
+                                    gestureEnabled: true,
+                                    gestureDirection: "horizontal",
+                                    transitionSpec: {
+                                        open: {
+                                            animation: "timing",
+                                            duration: 300,
+                                            easing: Easing,
+                                        },
+                                        close: {
+                                            animation: "timing",
+                                            duration: 300,
+                                            easing: Easing,
+                                        },
+                                    },
+                                    // cardStyleInterpolator:
+                                    //     cardStyleInterpolator.forHorizontalIOS,
                                     drawerStyle: {
                                         width: "75%",
                                     },
@@ -148,6 +164,7 @@ export default function App() {
                                     screenOptions={{ headerShown: true }}
                                     options={{
                                         headerTitle: multilang[lang].taiKhoan,
+                                        unmountOnBlur: true,
                                         headerLeft: () => {
                                             const navigation = useNavigation();
                                             return (
@@ -176,8 +193,8 @@ export default function App() {
                     )}
                 </NavigationContainer>
             </PaperProvider>
-            {!isInternet && 
-                    <View
+            {!isInternet && (
+                <View
                     style={{
                         width: "100%",
                         height: 30,
@@ -186,9 +203,11 @@ export default function App() {
                         justifyContent: "center",
                         backgroundColor: "#B00020",
                     }}>
-                       <Text style={{color:'white',fontWeight:'bold'}} >{multilang[lang].khongCoKetNoiMang}</Text>
+                    <Text style={{ color: "white", fontWeight: "bold" }}>
+                        {multilang[lang].khongCoKetNoiMang}
+                    </Text>
                 </View>
-        }
+            )}
         </SafeAreaView>
     );
 }

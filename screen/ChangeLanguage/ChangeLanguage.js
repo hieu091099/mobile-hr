@@ -95,7 +95,7 @@ export default function ChangeLanguage({ route, navigation }) {
                 onPress={() => changeLang()}>
                 <Text style={styles.styleTextButton}>
                     {" "}
-                    {multilang[lang].luuThayDoi}
+                    {multilang[checked].luuThayDoi}
                 </Text>
             </TouchableOpacity>
         </View>

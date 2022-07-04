@@ -23,7 +23,6 @@ import { usePreventScreenCapture } from "expo-screen-capture";
 export default function Salary() {
     usePreventScreenCapture();
     const [onLoad, setOnLoad] = useState(false);
-
     const { salary, lang } = useSelector((state) => state.UserReducer);
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
@@ -151,8 +150,8 @@ export default function Salary() {
                                                 textDecorationLine: "underline",
                                                 color: "white",
                                             }}>
-                                            {selectDate.split("-")[1]} -{" "}
-                                            {selectDate.split("-")[0]}
+                                            {selectDate?.split("-")[1]} -{" "}
+                                            {selectDate?.split("-")[0]}
                                         </Text>
                                     </Text>
                                 </TouchableOpacity>

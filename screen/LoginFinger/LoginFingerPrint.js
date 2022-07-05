@@ -9,7 +9,7 @@ import {
     ImageBackground,
     ActivityIndicator,
 } from "react-native";
-import { TextInput } from "react-native-paper";
+import { DefaultTheme, TextInput } from "react-native-paper";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import * as LocalAuthentication from "expo-local-authentication";
 import { Provider as PaperProvider } from "react-native-paper";
@@ -254,12 +254,15 @@ export default function LoginFingerPrint() {
                 </View>
                 <View style={styles.form}>
                     <TextInput
-                        theme={{
-                            colors: {
-                                primary: "#0D4A85",
-                                underlineColor: "transparent",
-                            },
-                        }}
+                            theme={{
+                                roundness: 2,
+                                mode:'exact',
+                                colors: {
+                                    ...DefaultTheme.colors,
+                                    primary: "#0D4A85",
+                                    underlineColor: "transparent",
+                                },
+                            }}
                         value={userLogin.password}
                         label={multilang[lang].matKhau}
                         mode="outlined"

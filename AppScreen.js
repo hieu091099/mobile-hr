@@ -67,7 +67,9 @@ export default function App() {
     }, []);
     const theme = {
         ...DefaultTheme,
+        dark:false,
         roundness: 2,
+        mode:'exact',
         colors: {
             ...DefaultTheme.colors,
             primary: "#0D4A85",

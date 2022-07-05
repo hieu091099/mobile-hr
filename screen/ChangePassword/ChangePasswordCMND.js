@@ -106,6 +106,7 @@ export default function ChangePasswordCMND() {
                             }}
                             mask={Masks.DATE_DDMMYYYY}
                             placeholder={multilang[lang].ngaySinh}
+                            placeholderTextColor="gray"
                             style={{
                                 width: "100%",
                                 height: 55,

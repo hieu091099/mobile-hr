@@ -9,7 +9,7 @@ import {
     ImageBackground,
     ActivityIndicator,
 } from "react-native";
-import { TextInput } from "react-native-paper";
+import { DefaultTheme, TextInput } from "react-native-paper";
 import { PaperSelect } from "react-native-paper-select";
 import { Provider as PaperProvider } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
@@ -238,8 +238,11 @@ export default function LoginScreen() {
                 </View>
                 <View style={styles.form}>
                     <TextInput
-                        theme={{
+                          theme={{
+                            roundness: 2,
+                            mode:'exact',
                             colors: {
+                                ...DefaultTheme.colors,
                                 primary: "#0D4A85",
                                 underlineColor: "transparent",
                             },
@@ -254,12 +257,16 @@ export default function LoginScreen() {
                         }}
                     />
                     <TextInput
-                        theme={{
-                            colors: {
-                                primary: "#0D4A85",
-                                underlineColor: "transparent",
-                            },
-                        }}
+                       theme={{
+                        roundness: 2,
+                        mode:'exact',
+                        colors: {
+                            ...DefaultTheme.colors,
+                            primary: "#0D4A85",
+                            underlineColor: "transparent",
+                        },
+                    }}
+                        
                         value={userLogin.password}
                         label={multilang[lang].matKhau}
                         mode="outlined"
@@ -281,6 +288,17 @@ export default function LoginScreen() {
                     />
 
                     <PaperSelect
+                      theme={{
+                        dark:false,
+                        roundness: 2,
+                        mode:'exact',
+                        colors: {
+                            color:'gray',
+                            ...DefaultTheme.colors,
+                            primary: "#0D4A85",
+                            underlineColor: "transparent",
+                        },
+                    }}
                         label={multilang[lang].nhaMay}
                         value={factory.value}
                         outlineColor="gray"
@@ -312,7 +330,8 @@ export default function LoginScreen() {
                             fontWeight: "700",
                         }}
                         textInputBackgroundColor="white"
-                        textInputColor="#0D4A85"
+                        textInputColor="red"
+                        textInputMode='outlined'
                     />
 
                     <View

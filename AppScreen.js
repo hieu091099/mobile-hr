@@ -10,7 +10,6 @@ import DrawerContent from "./screen/Drawer/Drawer";
 import * as Font from "expo-font";
 import { setCustomText } from "react-native-global-props";
 import LoginRoot from "./screen/RootStackScreen/LoginRoot";
-import { SafeAreaView } from "react-native-safe-area-context";
 import ChangePassword from "./screen/ChangePassword/ChangePassword";
 import SuccessChangePass from "./screen/ChangePassword/SuccessChangePass";
 import HeaderHomeScreen from "./components/HeaderHomeScreen/HeaderHomeScreen";
@@ -22,12 +21,11 @@ import * as Notifications from "expo-notifications";
 import UserDetail from "./screen/Setting/UserDetail";
 import { multilang } from "./language/multilang";
 import NetInfo from "@react-native-community/netinfo";
-
 import moment from "moment";
 import "moment/locale/zh-cn";
 import "moment/locale/vi";
 import "moment/locale/en-gb";
-import { Text, View } from "react-native";
+import { Text, View,SafeAreaView } from "react-native";
 import { Easing } from "react-native-reanimated";
 export default function App() {
     const Stack = createNativeStackNavigator();
@@ -69,7 +67,9 @@ export default function App() {
     }, []);
     const theme = {
         ...DefaultTheme,
+        dark:false,
         roundness: 2,
+        mode:'exact',
         colors: {
             ...DefaultTheme.colors,
             primary: "#0D4A85",
@@ -79,9 +79,24 @@ export default function App() {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
+                 {!isInternet && (
+                <View
+                    style={{
+                        width: "100%",
+                        height: 30,
+                        // position: "absolute",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "#B00020"
+                    }}>
+                    <Text style={{ color: "white", fontWeight: "bold" }}>
+                        {multilang[lang].khongCoKetNoiMang}
+                    </Text>
+                </View>
+            )}
             <PaperProvider theme={theme}>
                 <NavigationContainer>
-                    <StatusBar />
+                    <StatusBar hidden/>
                     {isLoggedIn ? (
                         <>
                             <Drawer.Navigator
@@ -191,23 +206,10 @@ export default function App() {
                     ) : (
                         <LoginRoot />
                     )}
+                      
                 </NavigationContainer>
             </PaperProvider>
-            {!isInternet && (
-                <View
-                    style={{
-                        width: "100%",
-                        height: 30,
-                        position: "absolute",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        backgroundColor: "#B00020",
-                    }}>
-                    <Text style={{ color: "white", fontWeight: "bold" }}>
-                        {multilang[lang].khongCoKetNoiMang}
-                    </Text>
-                </View>
-            )}
+           
         </SafeAreaView>
     );
 }

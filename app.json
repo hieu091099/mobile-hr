@@ -2,7 +2,7 @@
     "expo": {
         "name": "LYG APP",
         "slug": "mobile-hr",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "orientation": "portrait",
         "icon": "./assets/icon.jpg",
         "splash": {
@@ -17,17 +17,21 @@
         "ios": {
             "supportsTablet": true,
             "bundleIdentifier": "com.lactydev.mobilehr2",
-            "buildNumber": "2"
+            "googleServicesFile": "./GoogleService-Info1.plist",
+            "buildNumber":"5",
+            "infoPlist": {
+                "NSFaceIDUsageDescription": "This app will optionally use Face ID or Touch ID to login"
+              }
         },
         "android": {
             "useNextNotificationsApi": true,
             "adaptiveIcon": {
                 "foregroundImage": "./assets/adaptive-icon.jpg",
-                "backgroundColor": "#000000"
+                "backgroundColor": "#ffffff"
             },
             "package": "com.lactydev.mobilehr",
             "googleServicesFile": "./google-services.json",
-            "versionCode": 10,
+            "versionCode": 12,
             "permissions": ["USE_FINGERPRINT", "ACCESS_NETWORK_STATE"]
         },
         "web": {

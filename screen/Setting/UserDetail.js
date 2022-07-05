@@ -39,7 +39,7 @@ export default function UserDetail({ navigation }) {
         //a is value want to update, b is default value
         if (
             a.phone == b.mobilePhoneNumber &&
-            a.birthday == moment(b.Birthday).format("DD/MM/YYYY") &&
+            a.birthday == moment(b.birthday).format("DD/MM/YYYY") &&
             a.idCard == b.ID &&
             a.idDate == moment(b.ID_Day).format("DD/MM/YYYY")
         ) {
@@ -104,7 +104,7 @@ export default function UserDetail({ navigation }) {
                     //// console.log(result?.data?.userInfo);
                     setInfoUser(result?.data?.userInfo);
                     setUpdate({
-                        birthday: moment(result.data.userInfo.Birthday).format(
+                        birthday: moment(result.data.userInfo.birthday).format(
                             "DD/MM/YYYY",
                         ),
                         phone: result.data.userInfo.mobilePhoneNumber,

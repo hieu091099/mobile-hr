@@ -281,6 +281,7 @@ export default function LoginScreen() {
                     />
 
                     <PaperSelect
+                        placeholderTextColor="red"
                         label={multilang[lang].nhaMay}
                         value={factory.value}
                         outlineColor="gray"

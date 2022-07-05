@@ -38,7 +38,7 @@ export default function UserDetail({ navigation }) {
     const compare = (a, b) => {
         //a is value want to update, b is default value
         if (
-            a.phone == b.Mobilephone_Number &&
+            a.phone == b.mobilePhoneNumber &&
             a.birthday == moment(b.Birthday).format("DD/MM/YYYY") &&
             a.idCard == b.ID &&
             a.idDate == moment(b.ID_Day).format("DD/MM/YYYY")
@@ -107,12 +107,13 @@ export default function UserDetail({ navigation }) {
                         birthday: moment(result.data.userInfo.Birthday).format(
                             "DD/MM/YYYY",
                         ),
-                        phone: result.data.userInfo.Mobilephone_Number,
+                        phone: result.data.userInfo.mobilePhoneNumber,
                         idCard: result.data.userInfo.ID,
                         idDate: moment(result.data.userInfo.ID_Day).format(
                             "DD/MM/YYYY",
                         ),
                     });
+                    setIsShowUpdate(false);
                     setLoading(false);
                 });
             }

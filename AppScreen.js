@@ -25,17 +25,25 @@ import moment from "moment";
 import "moment/locale/zh-cn";
 import "moment/locale/vi";
 import "moment/locale/en-gb";
-import { Text, View,SafeAreaView } from "react-native";
+import { Text, View, SafeAreaView } from "react-native";
 import { Easing } from "react-native-reanimated";
 export default function App() {
     const Stack = createNativeStackNavigator();
     const Drawer = createDrawerNavigator();
     const dispatch = useDispatch();
     const { isLoggedIn, lang } = useSelector((state) => state.UserReducer);
+    const { internetStatus } = useSelector(
+        (state) => state.NotificationReducer,
+    );
+
     const [isInternet, setIsInternet] = useState(true);
     const unsubscribe = NetInfo.addEventListener((state) => {
         if (state.isConnected != isInternet) {
             setIsInternet(state.isConnected);
+            // dispatch({
+            //     type: "CHANGE_STATUS_INTERNET",
+            //     isConnect: state.isConnected,
+            // });
         }
     });
     useEffect(() => {
@@ -67,9 +75,9 @@ export default function App() {
     }, []);
     const theme = {
         ...DefaultTheme,
-        dark:false,
+        dark: false,
         roundness: 2,
-        mode:'exact',
+        mode: "exact",
         colors: {
             ...DefaultTheme.colors,
             primary: "#0D4A85",
@@ -79,7 +87,7 @@ export default function App() {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-                 {!isInternet && (
+            {!isInternet && (
                 <View
                     style={{
                         width: "100%",
@@ -87,7 +95,7 @@ export default function App() {
                         // position: "absolute",
                         alignItems: "center",
                         justifyContent: "center",
-                        backgroundColor: "#B00020"
+                        backgroundColor: "#B00020",
                     }}>
                     <Text style={{ color: "white", fontWeight: "bold" }}>
                         {multilang[lang].khongCoKetNoiMang}
@@ -96,7 +104,7 @@ export default function App() {
             )}
             <PaperProvider theme={theme}>
                 <NavigationContainer>
-                    <StatusBar hidden/>
+                    <StatusBar hidden />
                     {isLoggedIn ? (
                         <>
                             <Drawer.Navigator
@@ -206,10 +214,8 @@ export default function App() {
                     ) : (
                         <LoginRoot />
                     )}
-                      
                 </NavigationContainer>
             </PaperProvider>
-           
         </SafeAreaView>
     );
 }

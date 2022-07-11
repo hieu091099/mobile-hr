@@ -52,12 +52,8 @@ export default function Salary() {
     useEffect(() => {
         funcEff();
     }, [selectDate]);
-    const funcEff= ()=>{
+    const funcEff = () => {
         setOnLoad(true);
-        dispatch({
-            type: "GET_SALARY",
-            salary: [],
-        });
         getToken("user").then((res) => {
             if (res != "" || res != undefined) {
                 res = JSON.parse(res);
@@ -73,63 +69,67 @@ export default function Salary() {
                                 setSelectDate(mY);
                                 dispatch(getSalaryAction(res, personId, mY));
                             }
-                             setOnLoad(false);
+                            setTimeout(() => {
+                                setOnLoad(false);
+                            }, 1000);
                         });
                     }
                 });
             }
         });
-    }
+    };
     return (
         <>
-        <ScrollView
-            style={{ flex: 1 }}
-            refreshControl={
-                <RefreshControl
-                    refreshing={false}
-                    onRefresh={() => {
-                        funcEff();
-                        // setSelectYear('2022');
-                    }}
-                />
-            }>
-            <View style={styles.wrapper}>
-                {/* <View style={{flex:1,justifyContent: 'center', alignItems: 'center',height:100,width:100}}> */}
-                <Modal
-                    animationType="fade"
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                        Alert.alert("Modal has been closed.");
-                        setModalVisible(!modalVisible);
-                    }}>
-                    <Pressable
-                        style={{
-                            justifyContent: "center",
-                            alignItems: "center",
-                            flex: 1,
-                            backgroundColor: "#00000078",
+            <ScrollView
+                style={{ flex: 1 }}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={false}
+                        onRefresh={() => {
+                            funcEff();
+                            // setSelectYear('2022');
                         }}
-                        onPress={() => {
-                            setModalVisible(false);
+                    />
+                }>
+                <View style={styles.wrapper}>
+                    {/* <View style={{flex:1,justifyContent: 'center', alignItems: 'center',height:100,width:100}}> */}
+                    <Modal
+                        animationType="fade"
+                        transparent={true}
+                        visible={modalVisible}
+                        onRequestClose={() => {
+                            Alert.alert("Modal has been closed.");
+                            setModalVisible(!modalVisible);
                         }}>
-                        <DatePicker
-                            options={{
-                                selectedTextColor: "white",
-                                mainColor: "#0D4A85",
+                        <Pressable
+                            style={{
+                                justifyContent: "center",
+                                alignItems: "center",
+                                flex: 1,
+                                backgroundColor: "#00000078",
                             }}
-                            selected={selectDate?.replace("-", " ")}
-                            mode="monthYear"
-                            onMonthYearChange={(selectedDate) => {
-                                setSelectDate(selectedDate.replace(" ", "-"));
+                            onPress={() => {
                                 setModalVisible(false);
-                            }}
-                            current={selectDate}
-                            style={{ borderRadius: 10 }}
-                        />
-                    </Pressable>
-                </Modal>
-                {/* {salary == "" ? (
+                            }}>
+                            <DatePicker
+                                options={{
+                                    selectedTextColor: "white",
+                                    mainColor: "#0D4A85",
+                                }}
+                                selected={selectDate?.replace("-", " ")}
+                                mode="monthYear"
+                                onMonthYearChange={(selectedDate) => {
+                                    setSelectDate(
+                                        selectedDate.replace(" ", "-"),
+                                    );
+                                    setModalVisible(false);
+                                }}
+                                current={selectDate}
+                                style={{ borderRadius: 10 }}
+                            />
+                        </Pressable>
+                    </Modal>
+                    {/* {salary == "" ? (
                     <View style={styles.wrapperLoading}>
                         <ActivityIndicator
                             style={{ marginTop: "25%" }}
@@ -305,22 +305,21 @@ export default function Salary() {
                             <SalaryDetail salary={salary} />
                         )}
                     </View>
-              
-            </View>
-        </ScrollView>
-         {onLoad && (
-            <View
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    position: "absolute",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "#00000021",
-                }}>
-                <ActivityIndicator size="large" color="#0D4A85" />
-            </View>
-        )}
+                </View>
+            </ScrollView>
+            {onLoad && (
+                <View
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        position: "absolute",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "#00000021",
+                    }}>
+                    <ActivityIndicator size="large" color="#0D4A85" />
+                </View>
+            )}
         </>
     );
 }

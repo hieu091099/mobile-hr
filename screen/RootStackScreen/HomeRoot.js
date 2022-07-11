@@ -42,6 +42,18 @@ const HomeStackScreen = ({ navigation, route }) => {
                 options={{
                     headerTitle: multilang[lang].ngayNghi,
                     tabBarStyle: { display: "none" },
+                    headerLeft: () => {
+                        const navigation = useNavigation();
+                        return (
+                            <TouchableOpacity
+                                onPress={() => navigation.goBack()}
+                                style={{
+                                    marginRight: 20,
+                                }}>
+                                <Ionicons name="arrow-back" size={30} />
+                            </TouchableOpacity>
+                        );
+                    },
                 }}
             />
             <Stack.Screen
@@ -49,6 +61,18 @@ const HomeStackScreen = ({ navigation, route }) => {
                 component={OverTime}
                 options={{
                     headerTitle: multilang[lang].tangCa,
+                    headerLeft: () => {
+                        const navigation = useNavigation();
+                        return (
+                            <TouchableOpacity
+                                onPress={() => navigation.goBack()}
+                                style={{
+                                    marginRight: 20,
+                                }}>
+                                <Ionicons name="arrow-back" size={30} />
+                            </TouchableOpacity>
+                        );
+                    },
                 }}
             />
             <Stack.Screen
@@ -56,6 +80,18 @@ const HomeStackScreen = ({ navigation, route }) => {
                 component={SoTayLaoDong}
                 options={{
                     headerTitle: multilang[lang].soTay,
+                    headerLeft: () => {
+                        const navigation = useNavigation();
+                        return (
+                            <TouchableOpacity
+                                onPress={() => navigation.goBack()}
+                                style={{
+                                    marginRight: 20,
+                                }}>
+                                <Ionicons name="arrow-back" size={30} />
+                            </TouchableOpacity>
+                        );
+                    },
                 }}
             />
             <Stack.Screen

@@ -54,10 +54,6 @@ export default function Salary() {
     }, [selectDate]);
     const funcEff= ()=>{
         setOnLoad(true);
-        dispatch({
-            type: "GET_SALARY",
-            salary: [],
-        });
         getToken("user").then((res) => {
             if (res != "" || res != undefined) {
                 res = JSON.parse(res);

@@ -115,7 +115,7 @@ export default function Setting() {
                         </View>
                         <View style={{ width: "80%" }}>
                             <Text style={{ fontWeight: "bold", fontSize: 20 }}>
-                                {user?.fullName}
+                             {user?.fullName}
                             </Text>
                             <Text style={{ fontSize: 16 }}>
                                 {infoUser?.Department_Name}

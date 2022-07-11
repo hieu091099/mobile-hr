@@ -41,10 +41,10 @@ export default function OverTime() {
     }, [selectYear]);
     const funcEff = () => {
         setOnLoad(true);
-        dispatch({
-            type: "GET_ONLEAVE",
-            onLeave: [],
-        });
+        // dispatch({
+        //     type: "GET_ONLEAVE",
+        //     onLeave: [],
+        // });
         getToken("user").then((res) => {
             if (res != "" || res != undefined) {
                 res = JSON.parse(res);

@@ -53,9 +53,8 @@ export const getSalaryAction = (accessToken, personId, monthYear) => {
                 "POST",
                 `salary/${personId}/${monthYear}`,
                 accessToken,
-            );
-            //// console.log(result.data);
-            if (result.data != "") {
+            );   
+            if (typeof result?.data !== 'undefined' && Object.keys(result?.data).length != 1) {
                 dispatch({
                     type: "GET_SALARY",
                     salary: result.data,
@@ -63,11 +62,11 @@ export const getSalaryAction = (accessToken, personId, monthYear) => {
             } else {
                 dispatch({
                     type: "GET_SALARY",
-                    salary: { Salary: null },
+                    salary:[],
                 });
             }
         } catch (e) {
-            // console.log(e);
+            alert(e);
         }
     };
 };
@@ -80,12 +79,18 @@ export const getOnLeave = (accessToken, userId, monthYear) => {
                 `user/onLeave/${userId}/${monthYear}`,
                 accessToken,
             );
-            //// console.log("tene", result.data);
-            // if (result.data != "") {
+            if (typeof result?.data !== 'undefined' && Object.keys(result?.data).length != 0) {
+
             dispatch({
                 type: "GET_ONLEAVE",
                 onLeave: result.data,
             });
+        }else{
+            dispatch({
+                type: "GET_ONLEAVE",
+                onLeave:[],
+            });
+        }
             // }
         } catch (e) {
             // console.log(e);
@@ -100,13 +105,18 @@ export const getOverTime = (accessToken, userId, monthYear) => {
                 `user/overTime/${userId}/${monthYear}`,
                 accessToken,
             );
-            //// console.log("tene", result.data);
-            // if (result.data != "")
+            if (typeof result?.data !== 'undefined' && Object.keys(result?.data).length != 0) {
+
             dispatch({
                 type: "GET_OVERTIME",
                 overTime: result.data,
             });
-            // }
+        }else{
+            dispatch({
+                type: "GET_OVERTIME",
+                overTime: [],
+            });
+        }
         } catch (e) {
             // console.log(e);
         }
@@ -121,13 +131,18 @@ export const getOnLeaveSummary = (accessToken, userId, year) => {
                 `user/onLeaveSummary/${userId}/${year}`,
                 accessToken,
             );
-            //// console.log("tene", result.data);
-            // if (result.data != "") {
+            // alert(Object.keys(result?.data).length);
+            if (typeof result?.data !== 'undefined' && Object.keys(result?.data).length != 0) {
             dispatch({
                 type: "GET_ONLEAVE_SUMMARY",
                 onLeaveSummary: result.data,
             });
-            // }
+        }else{
+            dispatch({
+                type: "GET_ONLEAVE_SUMMARY",
+                onLeaveSummary: [],
+            });
+        }
         } catch (e) {
             console.log(e);
         }

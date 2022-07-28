@@ -56,6 +56,7 @@ export default function LoginFingerPrint() {
     const [isVisible, setIsVisible] = useState(false);
     /** state message dialog */
     const [dialogMessage, setDialogMessage] = useState("");
+    const [isFaceID, setIsFaceID] = useState(2);
 
     const navigation = useNavigation();
     const dispatch = useDispatch();
@@ -91,14 +92,20 @@ export default function LoginFingerPrint() {
         return () => {};
     }, [isLoggedIn]);
     const checkDeviceForHardware = async () => {
+        let support =
+            await LocalAuthentication.supportedAuthenticationTypesAsync();
+        // console.log(support.length);
+        if (support.length == 2) {
+            setIsFaceID(0);
+        }else{
+            setIsFaceID(support[0]);
+        }
         let compatible = await LocalAuthentication.hasHardwareAsync();
-        // alert("compatible : "+compatible);
         isCompatible(compatible);
     };
 
     const checkForFingerprints = async () => {
         let fingerprints = await LocalAuthentication.isEnrolledAsync();
-        // alert("fingerprints : " + fingerprints);
         setFingerPrints(fingerprints);
     };
 
@@ -254,15 +261,15 @@ export default function LoginFingerPrint() {
                 </View>
                 <View style={styles.form}>
                     <TextInput
-                            theme={{
-                                roundness: 2,
-                                mode:'exact',
-                                colors: {
-                                    ...DefaultTheme.colors,
-                                    primary: "#0D4A85",
-                                    underlineColor: "transparent",
-                                },
-                            }}
+                        theme={{
+                            roundness: 2,
+                            mode: "exact",
+                            colors: {
+                                ...DefaultTheme.colors,
+                                primary: "#0D4A85",
+                                underlineColor: "transparent",
+                            },
+                        }}
                         value={userLogin.password}
                         label={multilang[lang].matKhau}
                         mode="outlined"
@@ -295,15 +302,26 @@ export default function LoginFingerPrint() {
                                 {multilang[lang].dangNhap}
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.btnFinger}>
-                            <Ionicons
-                                name="finger-print-outline"
-                                size={35}
-                                color="white"
-                                onPress={() => {
-                                    scanFingerprint();
-                                }}
-                            />
+                        <TouchableOpacity
+                            style={styles.btnFinger}
+                            onPress={() => {
+                                scanFingerprint();
+                            }}>
+                            {isFaceID == 0 ? (
+                                <Image
+                                    source={require("../../assets/images/faceid_touchid.png")}
+                                    style={{ width: 35, height: 35 }}
+                                />
+                            ) : isFaceID == 1 ? (
+                                <Ionicons
+                                    name="finger-print-outline"
+                                    size={35}
+                                    color="white"
+                                />
+                            ) : (  <Image
+                                source={require("../../assets/images/icon_faceid.png")}
+                                style={{ width: 35, height: 35 }}
+                            />) }
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity

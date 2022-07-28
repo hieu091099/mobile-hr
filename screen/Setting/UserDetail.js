@@ -7,8 +7,9 @@ import {
     Pressable,
     TextInput,
     RefreshControl,
+    KeyboardAvoidingView,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SvgQRCode from "react-native-qrcode-svg";
 import { useDispatch, useSelector } from "react-redux";
 // import { TextInput } from "react-native-paper";
@@ -34,6 +35,11 @@ export default function UserDetail({ navigation }) {
         idCard: "",
         idDate: "",
     });
+    const inputBirthDay = useRef();
+    const inputPhone = useRef();
+    const inputCard = useRef();
+    const inputCardDate = useRef();
+
     const [isShowUpdate, setIsShowUpdate] = useState(false);
     const compare = (a, b) => {
         //a is value want to update, b is default value
@@ -120,7 +126,12 @@ export default function UserDetail({ navigation }) {
         });
     }, [visible]);
     return (
-        <View
+        // <KeyboardAvoidingView
+        // behavior={Platform.OS === "ios" ? "padding" : "height"}
+        // style={styles.container}
+    //   >
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={{
                 flex: 1,
                 position: "relative",
@@ -232,10 +243,18 @@ export default function UserDetail({ navigation }) {
                                 }}
                                 mask={Masks.DATE_DDMMYYYY}
                                 secureTextEntry={showInput}
+                                ref={inputBirthDay}
                             />
                         </View>
                         <TouchableOpacity>
-                            <Feather name="edit-2" size={16} color="#0D4A85" />
+                            <Feather
+                                name="edit-2"
+                                size={16}
+                                color="#0D4A85"
+                                onPress={() => {
+                                    inputBirthDay.current.focus();
+                                }}
+                            />
                         </TouchableOpacity>
                     </View>
                     <View style={styles.boxInfoItem}>
@@ -252,10 +271,13 @@ export default function UserDetail({ navigation }) {
                                 keyboardType="numeric"
                                 value={update?.phone}
                                 secureTextEntry={showInput}
+                                ref={inputPhone}
                             />
                         </View>
                         <TouchableOpacity>
-                            <Feather name="edit-2" size={16} color="#0D4A85" />
+                            <Feather name="edit-2" size={16} color="#0D4A85"  onPress={() => {
+                                    inputPhone.current.focus();
+                                }}/>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.boxInfoItem}>
@@ -272,10 +294,13 @@ export default function UserDetail({ navigation }) {
                                 keyboardType="numeric"
                                 value={update?.idCard}
                                 secureTextEntry={showInput}
+                                ref={inputCard}
                             />
                         </View>
                         <TouchableOpacity>
-                            <Feather name="edit-2" size={16} color="#0D4A85" />
+                            <Feather name="edit-2" size={16} color="#0D4A85"  onPress={() => {
+                                    inputCard.current.focus();
+                                }}/>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.boxInfoItem}>
@@ -295,10 +320,13 @@ export default function UserDetail({ navigation }) {
                                 }}
                                 secureTextEntry={showInput}
                                 mask={Masks.DATE_DDMMYYYY}
+                                ref={inputCardDate}
                             />
                         </View>
                         <TouchableOpacity>
-                            <Feather name="edit-2" size={16} color="#0D4A85" />
+                            <Feather name="edit-2" size={16} color="#0D4A85" onPress={() => {
+                                    inputCardDate.current.focus();
+                                }}/>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.boxInfoItem}>
@@ -349,7 +377,8 @@ export default function UserDetail({ navigation }) {
                     </View>
                 </Pressable>
             )}
-        </View>
+        {/* </View> */}
+       </KeyboardAvoidingView>
     );
 }
 

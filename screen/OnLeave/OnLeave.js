@@ -41,14 +41,14 @@ export default function OnLeave() {
     }, [selectYear]);
     const funcEff = () => {
         setOnLoad(true);
-        dispatch({
-            type: "GET_ONLEAVE_SUMMARY",
-            onLeaveSummary: [],
-        });
-        dispatch({
-            type: "GET_ONLEAVE",
-            onLeave: [],
-        });
+        // dispatch({
+        //     type: "GET_ONLEAVE_SUMMARY",
+        //     onLeaveSummary: [],
+        // });
+        // dispatch({
+        //     type: "GET_ONLEAVE",
+        //     onLeave: [],
+        // });
         getToken("user").then((res) => {
             if (res != "" || res != undefined) {
                 res = JSON.parse(res);
@@ -308,9 +308,9 @@ export default function OnLeave() {
                                 <View style={styles.row}>
                                     <View style={styles.column}>
                                         <Text style={styles.contentText}>
-                                            {listOnLeaveSummary.length != 0 &&
+                                            {listOnLeaveSummary.length ?
                                                 listOnLeaveSummary[0]
-                                                    ?.TONGPHEPTAMTINH}
+                                                    ?.TONGPHEPTAMTINH : "-"}
                                         </Text>
                                         <Text style={styles.titleText}>
                                             {multilang[lang].tongPhep}
@@ -318,8 +318,8 @@ export default function OnLeave() {
                                     </View>
                                     <View style={styles.column}>
                                         <Text style={styles.contentText}>
-                                            {listOnLeaveSummary.length != 0 &&
-                                                listOnLeaveSummary[0]?.DANGHI}
+                                            {listOnLeaveSummary.length != 0 ?
+                                                listOnLeaveSummary[0]?.DANGHI : '-'}
                                         </Text>
                                         <Text style={styles.titleText}>
                                             {multilang[lang].phepDaNghi}
@@ -327,8 +327,8 @@ export default function OnLeave() {
                                     </View>
                                     <View style={styles.column}>
                                         <Text style={styles.contentText}>
-                                            {listOnLeaveSummary.length != 0 &&
-                                                listOnLeaveSummary[0]?.CONLAI}
+                                            {listOnLeaveSummary.length != 0 ? 
+                                                listOnLeaveSummary[0]?.CONLAI : '-'}
                                         </Text>
                                         <Text style={styles.titleText}>
                                             {multilang[lang].phepConLai}
@@ -338,9 +338,9 @@ export default function OnLeave() {
                                 <View style={[styles.row, { marginTop: 15 }]}>
                                     <View style={styles.column}>
                                         <Text style={styles.contentText}>
-                                            {listOnLeaveSummary.length != 0 &&
+                                            {listOnLeaveSummary.length != 0 ?
                                                 listOnLeaveSummary[0]
-                                                    ?.TONPHEPNAMTRUOC}
+                                                    ?.TONPHEPNAMTRUOC : '-'}
                                         </Text>
                                         <Text style={styles.titleText}>
                                             {multilang[lang].phepTon}
@@ -348,9 +348,9 @@ export default function OnLeave() {
                                     </View>
                                     <View style={styles.column}>
                                         <Text style={styles.contentText}>
-                                            {listOnLeaveSummary.length != 0 &&
+                                            {listOnLeaveSummary.length != 0 ?
                                                 listOnLeaveSummary[0]
-                                                    ?.DANGHIPTT}
+                                                    ?.DANGHIPTT : '-'}
                                         </Text>
                                         <Text style={styles.titleText}>
                                             {multilang[lang].daNghiPtt}
@@ -358,9 +358,9 @@ export default function OnLeave() {
                                     </View>
                                     <View style={styles.column}>
                                         <Text style={styles.contentText}>
-                                            {listOnLeaveSummary.length != 0 &&
+                                            {listOnLeaveSummary.length != 0 ?
                                                 listOnLeaveSummary[0]
-                                                    ?.CONLAIPTT}
+                                                    ?.CONLAIPTT : '-'}
                                         </Text>
                                         <Text style={styles.titleText}>
                                             {multilang[lang].conLaiPtt}

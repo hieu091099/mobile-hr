@@ -28,7 +28,11 @@ export const setToken = async (key, value) => {
     }
 };
 export const getExpoPushNoti = async () => {
-    let token = await (await Notifications.getExpoPushTokenAsync()).data;
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    if (existingStatus !== 'granted') {
+   const { status } = await Notifications.requestPermissionsAsync();
+    } 
+   let token = await (await Notifications.getExpoPushTokenAsync()).data;
     await setToken("expoPushToken", token);
     return token;
 };

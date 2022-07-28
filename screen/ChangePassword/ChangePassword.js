@@ -130,18 +130,14 @@ export default function ChangePassword() {
                         justifyContent: "center",
                         alignItems: "center",
                     }}>
-                    <View style={styles.btn}>
-                        <TouchableOpacity
-                            style={styles.textBtn}
-                            onPress={() => {
-                                alert("test");
-                                changePassword();
-                            }}
-                            onStartShouldSetResponder={() => {
-                                alert("test");
-                            }}>
-                            <Text>{multilang[lang].doiMatKhau}</Text>
-                        </TouchableOpacity>
+                    <View
+                        style={styles.btn}
+                        onStartShouldSetResponder={() => {
+                            changePassword();
+                        }}>
+                        <Text style={styles.textBtn}>
+                            {multilang[lang].doiMatKhau}
+                        </Text>
                     </View>
                 </View>
             </View>

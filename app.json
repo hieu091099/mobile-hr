@@ -17,8 +17,8 @@
         "ios": {
             "supportsTablet": true,
             "bundleIdentifier": "com.lactydev.mobilehr2",
-            "googleServicesFile": "./GoogleService-Info1.plist",
-            "buildNumber":"5",
+            "googleServicesFile": "./GoogleService-Info.plist",
+            "buildNumber":"10",
             "infoPlist": {
                 "NSFaceIDUsageDescription": "This app will optionally use Face ID or Touch ID to login"
               }
@@ -31,7 +31,7 @@
             },
             "package": "com.lactydev.mobilehr",
             "googleServicesFile": "./google-services.json",
-            "versionCode": 12,
+            "versionCode": 15,
             "permissions": ["USE_FINGERPRINT", "ACCESS_NETWORK_STATE"]
         },
         "web": {

@@ -4,6 +4,7 @@ import {
     StyleSheet,
     ImageBackground,
     ActivityIndicator,
+    TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
 import { TextInput } from "react-native-paper";
@@ -16,9 +17,7 @@ import { multilang } from "../../language/multilang";
 
 export default function ChangePassword() {
     const dispatch = useDispatch();
-    const { lang } = useSelector(
-        (state) => state.UserReducer,
-    );
+    const { lang } = useSelector((state) => state.UserReducer);
     const navigation = useNavigation();
     const [oldPass, setOldPass] = useState("");
     const [newPass, setNewPass] = useState("");
@@ -74,7 +73,7 @@ export default function ChangePassword() {
             }
         } else {
             if (newPass != newPassCf) {
-                setMsgChangePass({ message: "matKhauXacNhanKhongKhop"});
+                setMsgChangePass({ message: "matKhauXacNhanKhongKhop" });
                 setVisibleMsg(true);
             } else {
                 setMsgChangePass({ message: "vuiLongNhapDayDuThongTin" });
@@ -132,13 +131,17 @@ export default function ChangePassword() {
                         alignItems: "center",
                     }}>
                     <View style={styles.btn}>
-                        <Text
+                        <TouchableOpacity
                             style={styles.textBtn}
-                            onStartShouldSetResponder={() => {
+                            onPress={() => {
+                                alert("test");
                                 changePassword();
+                            }}
+                            onStartShouldSetResponder={() => {
+                                alert("test");
                             }}>
-                          {multilang[lang].doiMatKhau}
-                        </Text>
+                            <Text>{multilang[lang].doiMatKhau}</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>

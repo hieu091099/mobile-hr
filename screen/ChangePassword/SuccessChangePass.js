@@ -4,8 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { multilang } from "../../language/multilang";
 import { useSelector } from "react-redux";
 export default function SuccessChangePass() {
-    const { lang } =
-    useSelector((state) => state.UserReducer);
+    const { lang } = useSelector((state) => state.UserReducer);
     const navigation = useNavigation();
     return (
         <View
@@ -26,16 +25,14 @@ export default function SuccessChangePass() {
             </View>
             <Text style={styles.title}>{multilang[lang].capNhatThanhCong}</Text>
             <Text style={styles.titleSmall}>
-            {multilang[lang].matKhauDaDuocThayDoiThanhCong}
+                {multilang[lang].matKhauDaDuocThayDoiThanhCong}
             </Text>
-            <View style={styles.btn}>
-                <Text
-                    style={styles.textBtn}
-                    onStartShouldSetResponder={() => {
-                        navigation.navigate("MainTab");
-                    }}>
-                     {multilang[lang].veTrangChu}
-                </Text>
+            <View
+                style={styles.btn}
+                onStartShouldSetResponder={() => {
+                    navigation.navigate("MainTab");
+                }}>
+                <Text style={styles.textBtn}>{multilang[lang].veTrangChu}</Text>
             </View>
         </View>
     );

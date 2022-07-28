@@ -16,9 +16,7 @@ import { multilang } from "../../language/multilang";
 
 export default function ChangePassword() {
     const dispatch = useDispatch();
-    const { lang } = useSelector(
-        (state) => state.UserReducer,
-    );
+    const { lang } = useSelector((state) => state.UserReducer);
     const navigation = useNavigation();
     const [oldPass, setOldPass] = useState("");
     const [newPass, setNewPass] = useState("");
@@ -74,7 +72,7 @@ export default function ChangePassword() {
             }
         } else {
             if (newPass != newPassCf) {
-                setMsgChangePass({ message: "matKhauXacNhanKhongKhop"});
+                setMsgChangePass({ message: "matKhauXacNhanKhongKhop" });
                 setVisibleMsg(true);
             } else {
                 setMsgChangePass({ message: "vuiLongNhapDayDuThongTin" });
@@ -131,13 +129,13 @@ export default function ChangePassword() {
                         justifyContent: "center",
                         alignItems: "center",
                     }}>
-                    <View style={styles.btn}>
-                        <Text
-                            style={styles.textBtn}
-                            onStartShouldSetResponder={() => {
-                                changePassword();
-                            }}>
-                          {multilang[lang].doiMatKhau}
+                    <View
+                        style={styles.btn}
+                        onStartShouldSetResponder={() => {
+                            changePassword();
+                        }}>
+                        <Text style={styles.textBtn}>
+                            {multilang[lang].doiMatKhau}
                         </Text>
                     </View>
                 </View>

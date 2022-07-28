@@ -28,12 +28,13 @@ export default function SuccessChangePass() {
             <Text style={styles.titleSmall}>
             {multilang[lang].matKhauDaDuocThayDoiThanhCong}
             </Text>
-            <View style={styles.btn}>
-                <Text
-                    style={styles.textBtn}
-                    onStartShouldSetResponder={() => {
+            <View style={styles.btn} 
+            onStartShouldSetResponder={() => {
                         navigation.navigate("MainTab");
                     }}>
+                <Text
+                    style={styles.textBtn}
+                   >
                      {multilang[lang].veTrangChu}
                 </Text>
             </View>

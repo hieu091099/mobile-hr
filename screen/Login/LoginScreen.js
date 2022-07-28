@@ -238,9 +238,9 @@ export default function LoginScreen() {
                 </View>
                 <View style={styles.form}>
                     <TextInput
-                          theme={{
+                        theme={{
                             roundness: 2,
-                            mode:'exact',
+                            mode: "exact",
                             colors: {
                                 ...DefaultTheme.colors,
                                 primary: "#0D4A85",
@@ -257,16 +257,15 @@ export default function LoginScreen() {
                         }}
                     />
                     <TextInput
-                       theme={{
-                        roundness: 2,
-                        mode:'exact',
-                        colors: {
-                            ...DefaultTheme.colors,
-                            primary: "#0D4A85",
-                            underlineColor: "transparent",
-                        },
-                    }}
-                        
+                        theme={{
+                            roundness: 2,
+                            mode: "exact",
+                            colors: {
+                                ...DefaultTheme.colors,
+                                primary: "#0D4A85",
+                                underlineColor: "transparent",
+                            },
+                        }}
                         value={userLogin.password}
                         label={multilang[lang].matKhau}
                         mode="outlined"
@@ -288,17 +287,17 @@ export default function LoginScreen() {
                     />
 
                     <PaperSelect
-                      theme={{
-                        dark:false,
-                        roundness: 2,
-                        mode:'exact',
-                        colors: {
-                            color:'gray',
-                            ...DefaultTheme.colors,
-                            primary: "#0D4A85",
-                            underlineColor: "transparent",
-                        },
-                    }}
+                        theme={{
+                            dark: false,
+                            roundness: 2,
+                            mode: "exact",
+                            colors: {
+                                color: "gray",
+                                ...DefaultTheme.colors,
+                                primary: "#0D4A85",
+                                underlineColor: "transparent",
+                            },
+                        }}
                         label={multilang[lang].nhaMay}
                         value={factory.value}
                         outlineColor="gray"
@@ -331,7 +330,7 @@ export default function LoginScreen() {
                         }}
                         textInputBackgroundColor="white"
                         textInputColor="red"
-                        textInputMode='outlined'
+                        textInputMode="outlined"
                     />
 
                     <View

@@ -1,6 +1,7 @@
 const stateDefault = {
     listNotifications: [],
     idNotify: "",
+    internetStatus: true,
 };
 
 export const NotificationReducer = (state = stateDefault, action) => {
@@ -11,6 +12,10 @@ export const NotificationReducer = (state = stateDefault, action) => {
         }
         case "CHOOSE_ID_NOTI": {
             state.idNotify = action.idNotify;
+            return { ...state };
+        }
+        case "CHANGE_STATUS_INTERNET": {
+            state.internetStatus = action.isConnect;
             return { ...state };
         }
         default:

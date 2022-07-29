@@ -101,19 +101,13 @@ export default function SalaryDetail({ salary }) {
                                         </ListItem.Title>
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
-                                        {
-                                        formatNum(
-                                                salary?.Other_Pay +
-                                                salary?.Woman_Allowance +
-                                                salary?.Allowance_For_Baby +
-                                                salary?.Meal_Allowance +
-                                                salary?.Good_News_Allowance +
-                                                salary?.Manager_Allowance + 
+                                        {formatNum(
+                                            salary?.Job_Allowance +
                                                 salary?.Responsibility_Allowance +
                                                 salary?.Language_Allowance +
-                                                salary?.Other_Allowance
-                                        )
-                                        } VNĐ
+                                                salary?.Other_Allowance,
+                                        )}{" "}
+                                        VNĐ
                                     </ListItem.Title>
                                 </ListItem>
                                 <ListItem bottomDivider>
@@ -137,7 +131,7 @@ export default function SalaryDetail({ salary }) {
                                     </ListItem.Content>
                                     <ListItem.Title style={styles.font}>
                                         {formatNum(
-                                            salary?.Environmental_Sanitation
+                                            salary?.Environmental_Sanitation,
                                         )}{" "}
                                         VNĐ
                                     </ListItem.Title>
@@ -338,7 +332,11 @@ export default function SalaryDetail({ salary }) {
                                     <ListItem.Title style={styles.font}>
                                         {formatNum(
                                             salary?.Other_Pay +
-                                                salary?.Woman_Allowance,
+                                                salary?.Woman_Allowance +
+                                                salary?.Allowance_For_Baby +
+                                                salary?.Meal_Allowance +
+                                                salary?.Good_News_Allowance +
+                                                salary?.Manager_Allowance,
                                         )}{" "}
                                         VNĐ
                                     </ListItem.Title>

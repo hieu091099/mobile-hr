@@ -7,6 +7,7 @@ import {
     Image,
     TouchableOpacity,
     Animated,
+    Dimensions,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,12 +19,37 @@ import { useFonts } from "expo-font";
 import { color } from "react-native-reanimated";
 import { multilang } from "../../language/multilang";
 import { getNotifications } from "../../redux/actions/NotificationAction";
+import Carousel from "react-native-snap-carousel";
 
 export default function HomeScreen() {
     const dispatch = useDispatch();
     const { user, isLoggedIn, lang, isLoadingLogin } = useSelector(
         (state) => state.UserReducer,
     );
+    const { height, width } = Dimensions.get("window");
+    const [carouselItem, setCarouselItem] = useState([
+        {
+            title: "Item 1",
+            text: "Text 1",
+        },
+        {
+            title: "Item 2",
+            text: "Text 2",
+        },
+        {
+            title: "Item 3",
+            text: "Text 3",
+        },
+        {
+            title: "Item 4",
+            text: "Text 4",
+        },
+        {
+            title: "Item 5",
+            text: "Text 5",
+        },
+    ]);
+    const [activeIndex, setActiveIndex] = useState(0);
     const [User, setUser] = useState();
     const navigation = useNavigation();
     let arrName = user?.fullName.split(" ");
@@ -62,6 +88,32 @@ export default function HomeScreen() {
             useNativeDriver: true,
         }).start();
     };
+    const renderItem = ({ item, index }) => {
+        return (
+            <View style={styles.menuContainItem}>
+                <View style={styles.menuContainItemLeft}>
+                    <View style={styles.boxIcon}>
+                        <Ionicons
+                            name="logo-electron"
+                            color="#0D4A85"
+                            size={30}
+                        />
+                    </View>
+                    <View>
+                        <Text style={styles.contentItem}>Sale</Text>
+                        <Text style={styles.titleDetail}>View details</Text>
+                    </View>
+                </View>
+                <View style={{ marginRight: 5 }}>
+                    <Ionicons
+                        name="ios-chevron-forward"
+                        color="#0D4A85"
+                        size={30}
+                    />
+                </View>
+            </View>
+        );
+    };
     return (
         <View style={styles.home}>
             <Animated.View style={[styles.titleHome, { opacity: fadeAnim }]}>
@@ -77,9 +129,9 @@ export default function HomeScreen() {
             </Animated.View>
             <View style={styles.mainMenu}>
                 <View>
-                    {/* <Text style={styles.titleMenu}>
-                    {multilang[lang].chucNang}
-                    </Text> */}
+                    <Text style={styles.titleMenu}>
+                        {multilang[lang].tieuDe1}
+                    </Text>
                 </View>
                 <View style={styles.menuWrapper}>
                     <TouchableOpacity
@@ -166,66 +218,93 @@ export default function HomeScreen() {
             {/* <View style={styles.menuProg}>
                 <View>
                     <Text style={[styles.titleMenu, { marginTop: 10 }]}>
-                        Your Programs
+                        {multilang[lang].tieuDe2}
                     </Text>
                 </View>
                 <View style={styles.menuWrapperProg}>
-                    <ScrollView style={{ height: '62%' }}>
-                        <View style={styles.menuContainItem}>
+                    <ScrollView style={{ height: "62%" }}>
+                        <Carousel
+                            layout={"default"}
+                            // ref={(ref) => (this.carousel = ref)}
+                            data={carouselItem}
+                            sliderWidth={width - 60}
+                            itemWidth={width - 60}
+                            renderItem={renderItem}
+                            onSnapToItem={(index) => setActiveIndex(index)}
+                        /> */}
+            {/* <View style={styles.menuContainItem}>
                             <View style={styles.menuContainItemLeft}>
                                 <View style={styles.boxIcon}>
-                                    <Ionicons name="logo-electron" color="#0D4A85" size={30} />
+                                    <Ionicons
+                                        name="logo-electron"
+                                        color="#0D4A85"
+                                        size={30}
+                                    />
                                 </View>
-                                <View >
-                                    <Text style={styles.contentItem}>
-                                        Sale
-                                    </Text>
+                                <View>
+                                    <Text style={styles.contentItem}>Sale</Text>
                                     <Text style={styles.titleDetail}>
                                         View details
                                     </Text>
                                 </View>
                             </View>
                             <View style={{ marginRight: 5 }}>
-                                <Ionicons name="ios-chevron-forward" color="#0D4A85" size={30} />
+                                <Ionicons
+                                    name="ios-chevron-forward"
+                                    color="#0D4A85"
+                                    size={30}
+                                />
                             </View>
                         </View>
                         <View style={styles.menuContainItem}>
                             <View style={styles.menuContainItemLeft}>
                                 <View style={styles.boxIcon}>
-                                    <Ionicons name="logo-electron" color="#0D4A85" size={30} />
+                                    <Ionicons
+                                        name="logo-electron"
+                                        color="#0D4A85"
+                                        size={30}
+                                    />
                                 </View>
-                                <View >
-                                    <Text style={styles.contentItem}>
-                                        Sale
-                                    </Text>
+                                <View>
+                                    <Text style={styles.contentItem}>Sale</Text>
                                     <Text style={styles.titleDetail}>
                                         View details
                                     </Text>
                                 </View>
                             </View>
                             <View style={{ marginRight: 5 }}>
-                                <Ionicons name="ios-chevron-forward" color="#0D4A85" size={30} />
+                                <Ionicons
+                                    name="ios-chevron-forward"
+                                    color="#0D4A85"
+                                    size={30}
+                                />
                             </View>
                         </View>
                         <View style={styles.menuContainItem}>
                             <View style={styles.menuContainItemLeft}>
                                 <View style={styles.boxIcon}>
-                                    <Ionicons name="logo-electron" color="#0D4A85" size={30} />
+                                    <Ionicons
+                                        name="logo-electron"
+                                        color="#0D4A85"
+                                        size={30}
+                                    />
                                 </View>
-                                <View >
-                                    <Text style={styles.contentItem}>
-                                        Sale
-                                    </Text>
+                                <View>
+                                    <Text style={styles.contentItem}>Sale</Text>
                                     <Text style={styles.titleDetail}>
                                         View details
                                     </Text>
                                 </View>
                             </View>
                             <View style={{ marginRight: 5 }}>
-                                <Ionicons name="ios-chevron-forward" color="#0D4A85" size={30} />
+                                <Ionicons
+                                    name="ios-chevron-forward"
+                                    color="#0D4A85"
+                                    size={30}
+                                />
                             </View>
-                        </View>
-                    </ScrollView>
+                        </View> */}
+            {/* </ScrollView>
                 </View>
             </View> */}
         </View>

@@ -125,6 +125,7 @@ export const vi = {
     thongTinCaNhan: "Thông tin cá nhân",
     luuThayDoi: "Lưu Thay Đổi",
     ngayCap: "Ngày Cấp",
-    khongCoKetNoiMang:"Không có kết nối mạng",
-
+    khongCoKetNoiMang: "Không có kết nối mạng",
+    tieuDe1: "Nhân Viên",
+    tieuDe2: "Quản Lý",
 };

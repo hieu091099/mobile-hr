@@ -125,6 +125,7 @@ export const en = {
     thongTinCaNhan: "Personal information",
     luuThayDoi: "Save Change",
     ngayCap: "ID Card Date",
-    khongCoKetNoiMang:"No network connection",
-
+    khongCoKetNoiMang: "No network connection",
+    tieuDe1: "Employee",
+    tieuDe2: "Higher Manager",
 };

@@ -14,6 +14,10 @@ import { axiosInstanceToken, getToken, stringToHslColor } from "../../config";
 
 export default function Contact() {
     const [dataContact, setDataContact] = useState();
+    const [showBtn, setShowBtn] = useState({});
+    const [rf, setRf] = useState(true);
+
+
     useEffect(() => {
         getToken("accessToken").then(async (res) => {
             if (res != "" || res != undefined) {
@@ -26,6 +30,9 @@ export default function Contact() {
             }
         });
     }, []);
+    useEffect(() => {
+    }, [rf])
+    
 
     const getFirstChar = (str) => {
         let stringOut = "";
@@ -42,14 +49,18 @@ export default function Contact() {
     return (
         <View style={{ flex: 1 }}>
             {dataContact?.length != 0 ? (
-                <ScrollView>
+                <ScrollView contentContainerStyle={{paddingHorizontal:10,paddingTop:20}}>
                     {dataContact?.map((vout, iout) => {
                         return (
                             <View key={iout}>
                                 <Text style={styles.td}>{vout.name}</Text>
                                 {vout.value?.map((v, i) => {
                                     return (
-                                        <View style={styles.CCbox} key={i}>
+                                        <View style={styles.CCbox} key={i} onStartShouldSetResponder={() => {
+                                            showBtn[`${i}-${iout}`] = !showBtn[`${i}-${iout}`];
+                                            setRf(!rf);
+                                        }}>
+                                            <View style={{justifyContent:'space-around',width:'100%',flexDirection: "row"}}>
                                             <View
                                                 style={{
                                                     width: 50,
@@ -98,7 +109,8 @@ export default function Contact() {
                                                     {v.Phone_Number}
                                                 </Text>
                                             </View>
-                                            <View style={styles.CCcall}>
+                                            </View>
+                                           {showBtn[`${i}-${iout}`] && <View style={styles.CCcall}>
                                                 <View
                                                     style={[
                                                         styles.iconCall,
@@ -106,31 +118,30 @@ export default function Contact() {
                                                             backgroundColor:
                                                                 "#2DC15F",
                                                         },
-                                                    ]}>
+                                                    ]}
+                                                    onStartShouldSetResponder={() => {
+                                                        Linking.openURL(
+                                                            `sms:${v.Phone_Number}`,
+                                                        );
+                                                    }}>
                                                     <Aweicon
                                                         name="sms"
                                                         size={25}
                                                         color={"white"}
-                                                        onPress={() => {
-                                                            Linking.openURL(
-                                                                `sms:${v.Phone_Number}`,
-                                                            );
-                                                        }}
                                                     />
                                                 </View>
-                                                <View style={styles.iconCall}>
+                                                <View style={styles.iconCall}   onStartShouldSetResponder={() => {
+                                                        Linking.openURL(
+                                                            `tel:${v.Phone_Number}`,
+                                                        );
+                                                    }}>
                                                     <Enticons
                                                         name="phone"
                                                         size={25}
                                                         color={"white"}
-                                                        onPress={() => {
-                                                            Linking.openURL(
-                                                                `tel:${v.Phone_Number}`,
-                                                            );
-                                                        }}
                                                     />
                                                 </View>
-                                            </View>
+                                            </View>}
                                         </View>
                                     );
                                 })}
@@ -156,33 +167,34 @@ export default function Contact() {
 
 const styles = new StyleSheet.create({
     CCbox: {
-        height: 70,
+        flex:1,
         backgroundColor: "white",
-        marginBottom: 4,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
+        marginBottom: 10,
+        paddingTop:15,
+        paddingBottom:15
+
     },
     CCtt: {
-        width: "45%",
+        width: "75%",
         height: "100%",
         backgroundColor: "white",
-        justifyContent: "center",
     },
     CCcall: {
-        width: "30%",
-        height: "100%",
+        width: "100%",
+        height: 50,
         flexDirection: "row",
         justifyContent: "space-evenly",
         alignItems: "center",
+        marginTop:10,
+        overflow:'hidden'
     },
     iconCall: {
         backgroundColor: "#017BFF",
-        width: 40,
+        width: '40%',
         height: 40,
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: 15,
+        borderRadius: 10,
     },
     boxText: {
         width: "100%",
@@ -193,5 +205,8 @@ const styles = new StyleSheet.create({
         fontSize: 17,
         fontWeight: "bold",
         padding: 10,
+        backgroundColor:'#0D4A85',
+        color:'white',
+        marginBottom:10
     },
 });

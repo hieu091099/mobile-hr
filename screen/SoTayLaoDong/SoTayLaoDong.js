@@ -17,7 +17,7 @@ export default function SoTayLaoDong() {
                     setvisible(!syntheticEvent.nativeEvent);
                 }}
                 source={{
-                    uri: "http://b2b.lacty.com.vn/webview/pdfjs.html?url=http://b2b.lacty.com.vn/webview/lyv/lyv.pdf",
+                    uri: "http://b2b.lacty.com.vn/webview/pdfjs.html?url=http://b2b.lacty.com.vn/webview/lyv/STLD01_Scan_So_tay_lao_dong.pdf",
                 }}
                 style={{ width: "100%", height: "100%" }}
             />

@@ -51,7 +51,7 @@ export default function OverTime() {
                 let personId = res.userId;
                 getToken("accessToken").then(async (res) => {
                     //  // console.log(res);
-                    await dispatch(getOverTime(res, "24751", selectYear));
+                    await dispatch(getOverTime(res, personId, selectYear));
                     setOnLoad(false);
                 });
             }
@@ -236,7 +236,7 @@ export default function OverTime() {
         objectArray.forEach((element) => {
             let index = arr.indexOf(moment(element?.Check_Day).format("MM"));
 
-            if (index == -1 && element.YN != 0) {
+            if (index == -1 && element.YN != null) {
                 arr.push(moment(element?.Check_Day).format("MM"));
             }
         });

@@ -340,26 +340,32 @@ export default function LoginFingerPrint() {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.contact}>
-                    {/* <View style={styles.contactItem}>
+                    <View style={styles.contactItem}>
                         <Icon
-                            name="phone-call"
-                            type="feather"
+                            name="phone"
+                            type="entypo"
                             color="#517fa4"
                             size={20}
                         />
-                        <Text style={styles.contactText}>028 3875 4536</Text>
+                        <Text style={styles.contactText}>Số nội bộ IT : 135</Text>
                     </View>
-                    <View style={styles.contactItem}>
+                    <View style={styles.contactItem}
+                    onStartShouldSetResponder={() => {
+                        Linking.openURL(
+                            `tel:0902590113`,
+                        );
+                    }}
+                    >
                         <Icon
-                            name="mail"
-                            type="feather"
+                               name="old-phone"
+                            type="entypo"
                             color="#517fa4"
                             size={20}
                         />
                         <Text style={styles.contactText}>
-                            lactycom@lacty.com.vn
+                          090.259.0113 ( Nhân sự )
                         </Text>
-                    </View> */}
+                    </View>
                 </View>
             </ImageBackground>
             {isLoadingLogin && (

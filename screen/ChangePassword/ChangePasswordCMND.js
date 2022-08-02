@@ -5,6 +5,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     Image,
+    Linking,
 } from "react-native";
 import { ActivityIndicator, TextInput } from "react-native-paper";
 import React, { useState } from "react";
@@ -15,6 +16,7 @@ import { axiosInstance } from "../../config";
 import { useNavigation } from "@react-navigation/native";
 import { multilang } from "../../language/multilang";
 import { useSelector } from "react-redux";
+import { Icon } from "react-native-elements";
 export default function ChangePasswordCMND() {
     const [soThe, setsoThe] = useState("");
     const [cmnd, setCmnd] = useState("");
@@ -124,10 +126,10 @@ export default function ChangePasswordCMND() {
                         },
                     }}
                     value={matKhau}
-                    label={multilang[lang].matKhau}
+                    label={multilang[lang].matKhauMoi}
                     mode="outlined"
                     secureTextEntry={showPassW}
-                    placeholder={multilang[lang].matKhau}
+                    placeholder={multilang[lang].matKhauMoi}
                     style={[styles.inputlogin]}
                     right={
                         <TextInput.Icon
@@ -222,6 +224,34 @@ export default function ChangePasswordCMND() {
                         {multilang[lang].dangNhap} ?
                     </Text>
                 </TouchableOpacity>
+                <View style={styles.contact}>
+                    <View style={styles.contactItem}>
+                        <Icon
+                            name="phone"
+                            type="entypo"
+                            color="#517fa4"
+                            size={20}
+                        />
+                        <Text style={styles.contactText}>Số nội bộ IT : 135</Text>
+                    </View>
+                    <View style={styles.contactItem}
+                    onStartShouldSetResponder={() => {
+                        Linking.openURL(
+                            `tel:0902590113`,
+                        );
+                    }}
+                    >
+                        <Icon
+                               name="old-phone"
+                            type="entypo"
+                            color="#517fa4"
+                            size={20}
+                        />
+                        <Text style={styles.contactText}>
+                          090.259.0113 ( Nhân sự )
+                        </Text>
+                    </View>
+                </View>
             </ImageBackground>
             {onLoad && (
                 <View
@@ -280,5 +310,19 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontWeight: "bold",
         marginTop: 30,
+    },
+    contact: {
+        marginTop: 60,
+        alignItems: "center",
+    },
+    contactItem: {
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        marginBottom: 20,
+    },
+    contactText: {
+        marginLeft: 10,
+        color: "#0D4A85",
+        fontWeight: "600",
     },
 });

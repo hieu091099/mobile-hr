@@ -14,7 +14,6 @@ import { axiosInstanceToken, getToken, stringToHslColor } from "../../config";
 
 export default function Contact() {
     const [dataContact, setDataContact] = useState();
-    const [showBtn, setShowBtn] = useState({});
     const [rf, setRf] = useState(true);
 
 
@@ -30,8 +29,6 @@ export default function Contact() {
             }
         });
     }, []);
-    useEffect(() => {
-    }, [rf])
     
 
     const getFirstChar = (str) => {
@@ -56,10 +53,7 @@ export default function Contact() {
                                 <Text style={styles.td}>{vout.name}</Text>
                                 {vout.value?.map((v, i) => {
                                     return (
-                                        <View style={styles.CCbox} key={i} onStartShouldSetResponder={() => {
-                                            showBtn[`${i}-${iout}`] = !showBtn[`${i}-${iout}`];
-                                            setRf(!rf);
-                                        }}>
+                                        <View style={styles.CCbox} key={i}>
                                             <View style={{justifyContent:'space-around',width:'100%',flexDirection: "row"}}>
                                             <View
                                                 style={{
@@ -110,7 +104,7 @@ export default function Contact() {
                                                 </Text>
                                             </View>
                                             </View>
-                                           {showBtn[`${i}-${iout}`] && <View style={styles.CCcall}>
+                                            <View style={styles.CCcall}>
                                                 <View
                                                     style={[
                                                         styles.iconCall,
@@ -141,7 +135,7 @@ export default function Contact() {
                                                         color={"white"}
                                                     />
                                                 </View>
-                                            </View>}
+                                            </View>
                                         </View>
                                     );
                                 })}

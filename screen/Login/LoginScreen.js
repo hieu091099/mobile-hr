@@ -8,6 +8,7 @@ import {
     Dimensions,
     ImageBackground,
     ActivityIndicator,
+    Linking,
 } from "react-native";
 import { DefaultTheme, TextInput } from "react-native-paper";
 import { PaperSelect } from "react-native-paper-select";
@@ -366,26 +367,32 @@ export default function LoginScreen() {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.contact}>
-                    {/* <View style={styles.contactItem}>
+                    <View style={styles.contactItem}>
                         <Icon
-                            name="phone-call"
-                            type="feather"
+                            name="phone"
+                            type="entypo"
                             color="#517fa4"
                             size={20}
                         />
-                        <Text style={styles.contactText}>028 3875 4536</Text>
+                        <Text style={styles.contactText}>Số nội bộ IT : 135</Text>
                     </View>
-                    <View style={styles.contactItem}>
+                    <View style={styles.contactItem}
+                    onStartShouldSetResponder={() => {
+                        Linking.openURL(
+                            `tel:0902590113`,
+                        );
+                    }}
+                    >
                         <Icon
-                            name="mail"
-                            type="feather"
+                               name="old-phone"
+                            type="entypo"
                             color="#517fa4"
                             size={20}
                         />
                         <Text style={styles.contactText}>
-                            lactycom@lacty.com.vn
+                          090.259.0113 ( Nhân sự )
                         </Text>
-                    </View> */}
+                    </View>
                 </View>
             </ImageBackground>
             {isLoadingLogin && (
@@ -401,6 +408,19 @@ export default function LoginScreen() {
                     <ActivityIndicator size="large" color="#0D4A85" />
                 </View>
             )}
+            {/* <View 
+                    style={{
+                        width: "100%",
+                        flex:1,
+                        position: "absolute",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "red",
+                    }}>
+                        <Text st>Liên hệ hổ trợ :</Text>
+                        <Text>Số nội bộ : 135</Text>
+
+                    </View> */}
         </PaperProvider>
     );
 }

@@ -369,7 +369,7 @@ export default function LoginScreen() {
                 <View style={styles.contact}>
                     <View style={styles.contactItem}>
                         <Icon
-                            name="phone"
+                            name="old-phone"
                             type="entypo"
                             color="#517fa4"
                             size={20}
@@ -384,7 +384,7 @@ export default function LoginScreen() {
                     }}
                     >
                         <Icon
-                               name="old-phone"
+                               name="phone"
                             type="entypo"
                             color="#517fa4"
                             size={20}

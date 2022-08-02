@@ -19,7 +19,7 @@ import { useFonts } from "expo-font";
 import { color } from "react-native-reanimated";
 import { multilang } from "../../language/multilang";
 import { getNotifications } from "../../redux/actions/NotificationAction";
-import Carousel from "react-native-snap-carousel";
+// import Carousel from "react-native-snap-carousel";
 
 export default function HomeScreen() {
     const dispatch = useDispatch();

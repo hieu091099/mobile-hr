@@ -342,7 +342,7 @@ export default function LoginFingerPrint() {
                 <View style={styles.contact}>
                     <View style={styles.contactItem}>
                         <Icon
-                            name="phone"
+                            name="old-phone"
                             type="entypo"
                             color="#517fa4"
                             size={20}
@@ -357,7 +357,7 @@ export default function LoginFingerPrint() {
                     }}
                     >
                         <Icon
-                               name="old-phone"
+                               name="phone"
                             type="entypo"
                             color="#517fa4"
                             size={20}

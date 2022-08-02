@@ -8,10 +8,6 @@ import { getToken, setToken } from "./config";
 import * as Notifications from "expo-notifications";
 import AppScreen from "./AppScreen";
 import { store } from "./redux/store";
-import { ActivityIndicator, ToastAndroid, View } from "react-native";
-import moment from "moment";
-import { Text } from "react-native";
-
 export default function App() {
     Notifications.setNotificationHandler({
         handleNotification: async () => ({

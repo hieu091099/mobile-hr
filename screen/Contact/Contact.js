@@ -6,6 +6,7 @@ import {
     StyleSheet,
     Linking,
     ScrollView,
+    RefreshControl,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Enticons from "react-native-vector-icons/Entypo";
@@ -16,7 +17,7 @@ export default function Contact() {
     const [dataContact, setDataContact] = useState();
     const [rf, setRf] = useState(true);
 
-
+    
     useEffect(() => {
         getToken("accessToken").then(async (res) => {
             if (res != "" || res != undefined) {
@@ -28,8 +29,7 @@ export default function Contact() {
                 setDataContact(result.data);
             }
         });
-    }, []);
-    
+    }, [rf]);
 
     const getFirstChar = (str) => {
         let stringOut = "";
@@ -46,7 +46,16 @@ export default function Contact() {
     return (
         <View style={{ flex: 1 }}>
             {dataContact?.length != 0 ? (
-                <ScrollView contentContainerStyle={{paddingHorizontal:10,paddingTop:20}}>
+                <ScrollView contentContainerStyle={{paddingHorizontal:10,paddingTop:20}} 
+                refreshControl={
+                    <RefreshControl
+                        refreshing={false}
+                        onRefresh={() => {
+                            setRf(!rf);
+                        }}
+                    />
+                }
+                >
                     {dataContact?.map((vout, iout) => {
                         return (
                             <View key={iout}>
